@@ -1,0 +1,67 @@
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||||  Input Field  ||||||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
+
+.form_input_container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+}
+
+.form_input_label span {
+      color: #FF8190;
+}
+
+
+.form_input_field {
+      display: flex;
+      padding: 12px 21px;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 10px;
+      border: 1px solid #D1D1D1;
+      background: #FFF;
+      font-size: 20px;
+         
+}
+
+.form_input_field::placeholder {
+      color: #D1D1D1;
+  }
+
+  .form_input_field:focus-visible {
+      border: 1px solid;
+      border-color: #29ABE2;
+      outline: none;
+      background-color: #29aae21e;
+      
+  
+  }
+
+.form_input_notice {
+      font-size: 14px;
+      color: #FF8190;
+}
+
+
+
+
+
+
+
+/* 2xl 	@media (min-width: 1536px) {  } */
+
+/* xl  */
+@media (min-width: 1280px) {}
+
+/* lg  */
+@media (min-width: 1024px) {}
+
+/* md  */
+@media (min-width: 768px) {}
+
+/* sm  */
+@media (min-width: 640px) {}
