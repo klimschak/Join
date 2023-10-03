@@ -1,25 +1,92 @@
 body {
       font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-y: hidden;
+      overflow-x: scroll;
 }
+
+h1 {
+      font-size: 61px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 120%;
+      /* 73.2px */
+      color: #000000;
+      margin: 0;
+}
+
+h4 {
+      color: #2A3647;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 120%;
+      margin: 0;
+}
+
+p {
+      margin: 0;
+}
+
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||||    Components   ||||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
+
+.form_input_container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+}
+
+.form_input_label span {
+      color: #FF8190;
+}
+
+
+.form_input_field {
+      display: flex;
+      padding: 12px 21px;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
+      border-radius: 10px;
+      border: 1px solid #D1D1D1;
+      background: #FFF;
+      font-size: 20px;
+         
+}
+
+.form_input_field::placeholder {
+      color: #D1D1D1;
+  }
+
+  .form_input_field:focus-visible {
+      border-color: #29ABE2;
+      border-width: 2px;
+      outline: none;
+  
+  }
+
+.form_input_notice {
+      font-size: 14px;
+      color: #FF8190;
+}
+
+
+
 
 
 /* 2xl 	@media (min-width: 1536px) {  } */
 
-/* xl  */	@media (min-width: 1280px) {  
+/* xl  */
+@media (min-width: 1280px) {}
 
-}
+/* lg  */
+@media (min-width: 1024px) {}
 
-/* lg  */	@media (min-width: 1024px) {  
+/* md  */
+@media (min-width: 768px) {}
 
-}
-
-/* md  */	@media (min-width: 768px)  {  
-
-}
-
-/* sm  */	@media (min-width: 640px)  {  
-      
-}
-
-
-
+/* sm  */
+@media (min-width: 640px) {}
