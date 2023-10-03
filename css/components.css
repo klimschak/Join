@@ -7,7 +7,7 @@
 .form_input_container {
       display: flex;
       flex-direction: column;
-      gap: 10px
+      
 }
 
 .form_input_label span {
@@ -17,7 +17,8 @@
 
 .form_input_field {
       display: flex;
-      padding: 12px 21px;
+      padding: 0px 21px;
+      height: 48px;
       align-items: center;
       gap: 10px;
       align-self: stretch;
@@ -25,11 +26,23 @@
       border: 1px solid #D1D1D1;
       background: #FFF;
       font-size: 20px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      transition: 125ms ease-in;
          
 }
 
+
+
 .form_input_field::placeholder {
       color: #D1D1D1;
+      
+  }
+
+  .form_input_field:hover {
+      border: 1px solid;
+      border-color: #29ABE2;
+      transition: 125ms ease-out;
   }
 
   .form_input_field:focus-visible {
@@ -37,11 +50,16 @@
       border-color: #29ABE2;
       outline: none;
       background-color: #29aae21e;
+      transition: 125ms ease-out;
       
   
   }
 
 .form_input_notice {
+      height: 18px;
+}
+
+.form_input_notice p {
       font-size: 14px;
       color: #FF8190;
 }

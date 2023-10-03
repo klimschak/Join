@@ -27,6 +27,9 @@ p {
       margin: 0;
 }
 
+.d-none {
+      display: none;
+}
 
 /* 2xl 	@media (min-width: 1536px) {  } */
 
