@@ -3,6 +3,7 @@ body {
       margin: 0;
       overflow-y: hidden;
       overflow-x: scroll;
+      background-color: #F6F7F8;
 }
 
 h1 {
