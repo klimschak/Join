@@ -11,14 +11,18 @@
       <link rel="stylesheet" href="./css/basic.css" />
       <link rel="stylesheet" href="./css/addtask.css" />
       <link rel="stylesheet" href="./css/components.css" />
+      <script src="./js/add_task.js"></script>
       <title>Document</title>
 </head>
 
 <body>
       <div class="addtask_header">
-            <h1>Add Task</h1><img src="./assets/img/Close.svg" alt="">
+            <h1>Add Task</h1>
+            <img src="./assets/img/Close.svg" alt="">
       </div>
+
       <div class="addtask_left_form">
+
             <div class="form_input_container">
                   <div class="form_input_label">
                         <h4>Title<span class="required">*</span></h4>
@@ -28,6 +32,42 @@
                         <p class="d-none">This field is required</p>
                   </div>
             </div>
+
+            <div class="form_textarea_container">
+                  <div class="form_textarea_label">
+                        <h4>Description<span class="required">*</span></h4>
+                  </div>
+                  <textarea class="form_textarea_field" name="addtask_description" placeholder="Enter a Description"></textarea>
+                  <div class="form_textarea_notice">
+                        <p class="d-none">This field is required</p>
+                  </div>
+            </div>
+
+
+            <div class="form_assign_container">
+                  <div class="form_assign_label">
+                        <h4>Assigned to<span class="required">*</span></h4>
+                  </div>
+                  <div class="form_assign_field_container">
+                        <input class="form_assign_field" name="assign_title" placeholder="Select contacts to assign"><img src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
+                        
+                  </div>
+                  <div class="form_assign_notice">
+                        <p class="d-none">This field is required</p>
+                  </div>
+
+            </div>
+
+            <ul class="form_assign_dropdown">
+                  <li><div class="form_assign_badge">SM</div><div class="form_assign_name">Siham El-Maimouni</div><img src="./assets/img/checkbutton_default.svg" alt=""></li>
+                  <li><div class="form_assign_badge">SM</div><div class="form_assign_name">Siham El-Maimouni</div><img src="./assets/img/checkbutton_default.svg" alt=""></li>
+                  <li><div class="form_assign_badge">SM</div><div class="form_assign_name">Siham El-Maimouni</div><img src="./assets/img/checkbutton_default.svg" alt=""></li>
+            </ul>
+
+
+              
+              
+
       </div>
 </body>
 
