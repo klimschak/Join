@@ -1,35 +1,61 @@
-const selectedContacts = document.getElementById('selected-contacts');
-const dropdownButton = document.getElementById('dropdown-button');
-const contactList = document.getElementById('contact-list');
-const contacts = document.querySelectorAll('.contact-list li');
+let accounts = [
+      {
+            id: 1,
+            name: 'Siham El-Maimouni',
+            initials: 'SE',
 
-let selectedContactIds = [];
+      },
 
-function updateSelectedContacts() {
-    selectedContacts.innerHTML = selectedContactIds.map(id => {
-        const contact = document.querySelector(`.contact-list li[data-id="${id}"]`);
-        return contact.textContent;
-    }).join(', ');
+      {
+            id: 2,
+            name: 'Pedro Göntürk ',
+            initials: 'PG',
+
+      },
+
+      {
+            id: 3,
+            name: 'Thorsten Puccini',
+            initials: 'TP',
+
+      },
+];
+
+let tasks = [
+      {
+            assigned: [],
+            id: [],
+      }
+];
+
+
+
+
+function displayAccountsInAssignDropdown() {
+      let assign = document.getElementById(`assign_list`);
+      assign.innerHTML = "";
+      for (let i = 0; i < accounts.length; i++) {
+            assign.innerHTML += /*html*/`
+            <li id="assignaccount${i}" onclick="assignAccountToTask(${i}), checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>
+            `;
+            
+
+      }
 }
 
-function toggleContactSelection(id) {
-    const index = selectedContactIds.indexOf(id);
-    if (index === -1) {
-        selectedContactIds.push(id);
-    } else {
-        selectedContactIds.splice(index, 1);
-    }
-    updateSelectedContacts();
+function checkIfAssigned(i){
+      document.getElementById(`assigncheck${i}`).src = './assets/img/checkbutton_checked.svg';
+
 }
 
-dropdownButton.addEventListener('click', () => {
-    contactList.style.display = contactList.style.display === 'block' ? 'none' : 'block';
-});
+function assignAccountToTask(i) {
+      const accountId = accounts[i]['id'];
+      const assignedIds = tasks[0]['id'];
 
-contacts.forEach(contact => {
-    contact.addEventListener('click', () => {
-        const id = contact.getAttribute('data-id');
-        toggleContactSelection(id);
-        contact.classList.toggle('selected');
-    });
-});
+      if (!assignedIds.includes(accountId)) {
+            tasks[0]['assigned'].push(accounts[i]['name']);
+            tasks[0]['id'].push(accountId);
+      } else {
+            alert('Die ID ist bereits zugewiesen.');
+      }
+}

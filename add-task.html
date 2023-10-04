@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="./css/basic.css" />
       <link rel="stylesheet" href="./css/addtask.css" />
       <link rel="stylesheet" href="./css/components.css" />
-      <script src="./js/add_task.js"></script>
+      
       <title>Document</title>
 </head>
 
@@ -48,27 +48,27 @@
                   <div class="form_assign_label">
                         <h4>Assigned to<span class="required">*</span></h4>
                   </div>
-                  <div class="form_assign_field_container">
+                  <div class="form_assign_field_container" onclick="displayAccountsInAssignDropdown()">
                         <input class="form_assign_field" name="assign_title" placeholder="Select contacts to assign"><img src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
-                        
                   </div>
+                  <ul id="assign_list" class="form_assign_dropdown">
+                        
+                  </ul>
                   <div class="form_assign_notice">
                         <p class="d-none">This field is required</p>
                   </div>
+                  
 
             </div>
 
-            <ul class="form_assign_dropdown">
-                  <li><div class="form_assign_badge">SM</div><div class="form_assign_name">Siham El-Maimouni</div><img src="./assets/img/checkbutton_default.svg" alt=""></li>
-                  <li><div class="form_assign_badge">SM</div><div class="form_assign_name">Siham El-Maimouni</div><img src="./assets/img/checkbutton_default.svg" alt=""></li>
-                  <li><div class="form_assign_badge">SM</div><div class="form_assign_name">Siham El-Maimouni</div><img src="./assets/img/checkbutton_default.svg" alt=""></li>
-            </ul>
+            
 
 
               
               
 
       </div>
+      <script src="./js/add_task.js"></script>
 </body>
 
 </html>

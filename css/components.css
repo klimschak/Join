@@ -73,6 +73,7 @@
 .form_textarea_container {
       display: flex;
       flex-direction: column;
+      transition: 125ms ease-in;
       
 }
 
@@ -218,14 +219,27 @@
       margin-bottom: 5px;
       transition: 125ms ease-in;
       justify-content: space-between;
-      padding: 12px 21px;
+      padding: 12px 15px 12px 21px;
+      background-color: #fff;
+      z-index: 1;
       
 }
 
 .form_assign_dropdown{
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
+      background-color: #FFF;
+      margin: 0;
+      margin-top: -10px;
+     
+      flex-grow: 1;
+      padding: 0;
+      padding-left: 21px;
+      padding-right: 21px;
+
+
+      
       
 
 }
@@ -240,15 +254,20 @@
 
 }
 
-.form_assign_dropdown {
-      display: flex;
-      padding:0;
-      flex-grow: 1;
+.form_assign_dropdown li:first-child {
+      padding-top: 20px;
 }
+
+.form_assign_dropdown li:last-child {
+      padding-bottom: 20px;
+}
+
+
 
 .form_assign_name {
       flex-grow: 1;
       display: flex;
+      
       
 }
 
@@ -265,6 +284,7 @@
       align-items: center;
       color: #fff;
 }
+
 
 
 
