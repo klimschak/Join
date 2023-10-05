@@ -298,6 +298,7 @@
 .form_assign_badge_container {
       display: flex;
       gap: 15px;
+      margin-top:10px;
 }
 
 
