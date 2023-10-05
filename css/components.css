@@ -48,7 +48,7 @@
       border: 1px solid;
       border-color: #29ABE2;
       outline: none;
-      background-color: #29aae21e;
+      background-color: #DEECF4;
       transition: 125ms ease-out;
       
   
@@ -115,7 +115,7 @@
       border: 1px solid;
       border-color: #29ABE2;
       outline: none;
-      background-color: #29aae21e;
+      background-color: #DEECF4;
       transition: 125ms ease-out;
       
   
@@ -156,6 +156,7 @@
       font-size: 20px;
       transition: 125ms ease-in;
       flex-grow: 1;
+      z-index: 2;
       
 }
 
@@ -175,7 +176,7 @@
       border: 1px solid;
       border-color: #29ABE2;
       outline: none;
-      background-color: #29aae21e;
+      background-color: #DEECF4;
       transition: 125ms ease-out;
  
   }
@@ -184,7 +185,7 @@
       border: 1px solid;
       border-color: #29ABE2;
       outline: none;
-      background-color: #29aae21e;
+      background-color: #DEECF4;
       transition: 125ms ease-out;
  
   }
@@ -211,6 +212,10 @@
       color: #FF8190;
 }
 
+.form_assign_field_list_container {
+      position: relative;
+}
+
 .form_assign_field_container {
       display: flex;
       border-radius: 10px;
@@ -221,25 +226,30 @@
       justify-content: space-between;
       padding: 12px 15px 12px 21px;
       background-color: #fff;
-      z-index: 1;
+      z-index: 2 !important;
+      position: relative;
+      
       
 }
 
 .form_assign_dropdown{
+      
       display: flex;
+      position: absolute;
       flex-direction: column;
       gap: 20px;
       background-color: #FFF;
       margin: 0;
       margin-top: -10px;
-     
+      width: 100%;
+      z-index: 1 !important;
       flex-grow: 1;
       padding: 0;
       padding-left: 21px;
       padding-right: 21px;
+      box-sizing: border-box;
 
-
-      
+    
       
 
 }
@@ -285,7 +295,10 @@
       color: #fff;
 }
 
-
+.form_assign_badge_container {
+      display: flex;
+      gap: 15px;
+}
 
 
 
