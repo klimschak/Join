@@ -277,8 +277,13 @@
 .form_assign_name {
       flex-grow: 1;
       display: flex;
-      
-      
+         
+}
+
+.form_assign_error {
+      color: #FF8190;
+      text-align: left;
+      font-weight: 500;
 }
 
 .form_assign_badge {

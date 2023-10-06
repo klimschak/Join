@@ -48,12 +48,12 @@
 
             <div class="form_assign_container">
                   <div class="form_assign_label">
-                        <h4>Assigned to<span class="required">*</span></h4>
+                        <h4>Assigned to</h4>
                   </div>
                   
                   <div class="form_assign_field_list_container">
-                        <div class="form_assign_field_container" onclick="displayAccountsInAssignDropdown()" >
-                              <input class="form_assign_field" name="assign_title" placeholder="Select contacts to assign"><img src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
+                        <div class="form_assign_field_container" onclick="filterAccountsToAssign()" >
+                              <input class="form_assign_field" name="assign_title" id="search_accounts_to_assign" placeholder="Select contacts to assign" oninput="filterAccountsToAssign()"><img src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
                         </div>
                         <ul id="assign_list" class="form_assign_dropdown"></ul>
                   </div>
