@@ -1,0 +1,108 @@
+.formLogIn {
+  display: inline-flex;
+  padding: 48px 115px;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  border-radius: 30px;
+  background: var(--white, #fff);
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+.headLogIn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headSignUp {
+  display: inline-flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.textNau {
+  color: #000;
+  /* Version 2/t6 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 24px */
+}
+
+.btnSignUp {
+  display: flex;
+  padding: 15px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #2a3647;
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.btnFormLogIn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 35px;
+}
+
+.btnLogIn {
+  display: flex;
+  height: 48px;
+  padding: 15px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #2a3647;
+  color: #fff;
+  font-family: Inter;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 25.2px */
+}
+
+.btnGuestLogIn {
+  display: flex;
+  height: 48px;
+  padding: 15px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--version-2-main-color, #2a3647);
+  background: var(--white, #fff);
+  color: var(--version-2-main-color, #2a3647);
+  font-family: Inter;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 25.2px */
+}
+
+.headerText {
+  width: 315px;
+  color: #000;
+  text-align: center;
+  /* Version 2/t1 */
+  font-family: Inter;
+  font-size: 61px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 73.2px */
+}
+
+.checkboxLogIn {
+  display: flex;
+  padding: 0px 241px 0px 39px;
+  align-items: center;
+  align-self: stretch;
+}

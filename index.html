@@ -3,26 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/logIn.css" />
     <title>Join</title>
   </head>
   <body>
-    <form onsubmit="">
-      <h2>Log in</h2>
+    <div class="headLogIn">
+      <img src="assets/img/JoinLogo.svg" alt="" />
+      <div class="headSignUp">
+        <p class="textNau">Not a Join user?</p>
+        <button class="btnSignUp">Sign up</button>
+      </div>
+    </div>
+    <form onsubmit="" class="formLogIn">
+      <h2 class="headerText">Log in</h2>
 
       <div>
         <div>
-          <input type="email" id="emailLogIn" placeholder="email" />
+          <input type="email" id="emailLogIn" placeholder="Email" />
         </div>
       </div>
-
       <div>
         <div>
-          <input type="password" id="passwordLogIn" placeholder="password" />
+          <input type="password" id="passwordLogIn" placeholder="Password" />
         </div>
       </div>
-      <div>
-        <button>Log in</button>
-        <button>Guest Log in</button>
+      <div class="checkboxLogIn">
+      <input type="checkbox"> 
+      <p>Remember me</p>
+    </div>
+      <div class="btnFormLogIn">
+        <button class="btnLogIn">Log in</button>
+        <button class="btnGuestLogIn">Guest Log in</button>
       </div>
     </form>
   </body>
