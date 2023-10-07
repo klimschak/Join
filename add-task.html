@@ -10,63 +10,126 @@
             rel="stylesheet">
       <link rel="stylesheet" href="./css/basic.css" />
       <link rel="stylesheet" href="./css/addtask.css" />
-      <link rel="stylesheet" href="./css/components.css" />
+
       <script src="./js/add_task.js"></script>
       <script src="./js/arrays.js"></script>
+
       <title>Document</title>
 </head>
 
-<body >
+<body>
       <button onclick="closeAccountsinAssignDropdown()">Schließen</button>
       <div class="addtask_header">
             <h1>Add Task</h1>
             <img src="./assets/img/Close.svg" alt="">
       </div>
 
-      <div class="addtask_left_form">
+      <div class="form_container">
 
-            <div class="form_input_container">
-                  <div class="form_input_label">
-                        <h4>Title<span class="required">*</span></h4>
-                  </div>
-                  <input class="form_input_field" name="addtask_title" placeholder="Enter a Title" required="required">
-                  <div class="form_input_notice">
-                        <p class="d-none">This field is required</p>
-                  </div>
-            </div>
-
-            <div class="form_textarea_container">
-                  <div class="form_textarea_label">
-                        <h4>Description<span class="required">*</span></h4>
-                  </div>
-                  <textarea class="form_textarea_field" name="addtask_description" placeholder="Enter a Description"></textarea>
-                  <div class="form_textarea_notice">
-                        <p class="d-none">This field is required</p>
-                  </div>
-            </div>
-
-
-            <div class="form_assign_container">
-                  <div class="form_assign_label">
-                        <h4>Assigned to</h4>
-                  </div>
-                  
-                  <div class="form_assign_field_list_container">
-                        <div class="form_assign_field_container" onclick="filterAccountsToAssign()" >
-                              <input class="form_assign_field" name="assign_title" id="search_accounts_to_assign" placeholder="Select contacts to assign" oninput="filterAccountsToAssign()"><img src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
+            <div class="addtask_left_form">
+                  <div class="form_input_container">
+                        <div class="form_input_label">
+                              <h4>Title<span class="required">*</span></h4>
                         </div>
-                        <ul id="assign_list" class="form_assign_dropdown"></ul>
+                        <input class="form_input_field" name="addtask_title" placeholder="Enter a Title"
+                              required="required">
+                        <div class="form_input_notice">
+                              <p class="d-none">This field is required</p>
+                        </div>
                   </div>
 
-                  <div id="form_assign_badge" class="form_assign_badge_container"></div>
-
-                  <div class="form_assign_notice">
-                        <p class="d-none">This field is required</p>
+                  <div class="form_textarea_container">
+                        <div class="form_textarea_label">
+                              <h4>Description<span class="required">*</span></h4>
+                        </div>
+                        <textarea class="form_textarea_field" name="addtask_description"
+                              placeholder="Enter a Description"></textarea>
+                        <div class="form_textarea_notice">
+                              <p class="d-none">This field is required</p>
+                        </div>
                   </div>
+
+
+                  <div class="form_assign_container">
+                        <div class="form_assign_label">
+                              <h4>Assigned to</h4>
+                        </div>
+
+                        <div class="form_assign_field_list_container">
+                              <div class="form_assign_field_container" onclick="filterAccountsToAssign()">
+                                    <input class="form_assign_field" name="assign_title" id="search_accounts_to_assign"
+                                          placeholder="Select contacs" oninput="filterAccountsToAssign()"><img
+                                          src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
+                              </div>
+                              <ul id="assign_list" class="form_assign_dropdown"></ul>
+                        </div>
+
+                        <div id="form_assign_badge" class="form_assign_badge_container"></div>
+
+                        <div class="form_assign_notice">
+                              <p class="d-none">This field is required</p>
+                        </div>
+                  </div>
+
+            </div>
+            <div>
+                  <hr class="hr_line">
             </div>
 
+            <div class="addtask_right_form">
+                  <div class="form_input_container">
+                        <div class="form_input_label">
+                              <h4>Due date<span class="required">*</span></h4>
+                        </div>
+
+                        <input class="form_input_field date_field" type="date" id="date-picker" name="geburtstag"
+                              required="required">
+
+                        <div class="form_input_notice">
+                              <p class="d-none">This field is required</p>
+                        </div>
+                  </div>
+
+                  <div class="prio_container">
+                        <div class="prio_label">
+                              <h4>Priority</h4>
+                        </div>
+                        <div class="prio_button_container">
+                              <button class="prio_button" id="urgent" onclick="setPriority(1)">
+                                    <p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">
+                              </button>
+                              <button class="prio_button" id="medium" onclick="setPriority(2)">
+                                    <p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">
+                              </button>
+                              <button class="prio_button" id="low" onclick="setPriority(3)">
+                                    <p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">
+                              </button>
+
+                        </div>
+                  </div>
+
+                  <div class="category_container">
+                        <div class="category_label">
+                              <h4>Category<span class="required">*</span></h4>
+                        </div>
+
+                        <div class="category_field_dropdown_container">
+                              <div class="category_field" onclick="openCategoryDropdown()">
+                                    <p id="category_field_title" class="category_field_title">Select task category</p> 
+                                    <img src="./assets/img/arrow_drop_downaa.svg" alt="">
+                              </div>
+                              <ul id="category_dropdown" class="category_dropdown">
+
+                              </ul>
+                        </div>
+
+                        <div class="form_input_notice">
+                              <p class="d-none">This field is required</p>
+                        </div>
+                  </div>
+
+            </div>
       </div>
-      
 </body>
 
 </html>

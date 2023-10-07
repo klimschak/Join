@@ -44,6 +44,8 @@ function setStateOfAccountInAssignDropdown (assign, i, accountId, assignedIds){
 function closeAccountsinAssignDropdown() {
       let assign = document.getElementById(`assign_list`);
       assign.innerHTML = "";
+      let category = document.getElementById('category_dropdown');
+      category.innerHTML = "";
 }
 
 function checkIfAssigned(i) {
@@ -79,3 +81,64 @@ function  ifAccountIsAssigned (i, index, assignbadge) {
 }
 
 
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||||| Priorities ||||||||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
+function setPriority(prio) {
+      let urgent = document.getElementById('urgent');
+      let medium = document.getElementById('medium');
+      let low = document.getElementById('low');
+      if (prio === 1) {
+            activatePrioUrgent(urgent, medium, low)
+      }
+      if (prio === 2) {
+            activatePrioMedium(urgent, medium, low)
+      }
+      if (prio === 3) {
+            activatePrioLow(urgent, medium, low)
+      }
+}
+
+function activatePrioUrgent(urgent, medium, low) {
+      urgent.classList.add("urgent-checked");
+      medium.classList.remove("medium-checked");
+      low.classList.remove("low-checked");
+
+}
+
+function activatePrioMedium(urgent, medium, low) {
+      urgent.classList.remove("urgent-checked");
+      medium.classList.add("medium-checked");
+      low.classList.remove("low-checked");
+}
+
+function activatePrioLow(urgent, medium, low) {
+      urgent.classList.remove("urgent-checked");
+      medium.classList.remove("medium-checked");
+      low.classList.add("low-checked");
+}
+
+
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||||| Categories ||||||||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
+
+function openCategoryDropdown (){
+      let category = document.getElementById('category_dropdown');
+      category.innerHTML = "";
+      category.innerHTML =/*html*/ `
+            <li class="category-list" onclick="setTaskCategory('Technical Task')">Technical Task</li>
+            <li class="category-list" onclick="setTaskCategory('User Story')">User Story</li>
+            `;
+}
+
+function setTaskCategory(category){
+ let title = document.getElementById('category_field_title');
+ title.innerHTML = /*html*/ `
+      ${category}
+ `
+}
