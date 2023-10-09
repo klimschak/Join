@@ -31,6 +31,7 @@
 }
 
 .btnSignUp {
+  cursor: pointer;
   display: flex;
   padding: 15px 16px;
   justify-content: center;
@@ -54,6 +55,7 @@
 }
 
 .btnLogIn {
+  cursor: pointer;
   display: flex;
   height: 48px;
   padding: 15px 24px;
@@ -71,6 +73,7 @@
 }
 
 .btnGuestLogIn {
+  cursor: pointer;
   display: flex;
   height: 48px;
   padding: 15px 24px;
@@ -105,18 +108,56 @@
   padding: 0px 241px 0px 39px;
   align-items: center;
   align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.logInField {
+  display: flex;
+  height: 152px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.inputLogIn {
+  display: flex;
+  width: 422px;
+  padding: 12px 21px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--Style, #d1d1d1);
+  background: #fff;
+  display: flex;
+  width: 380px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--Style, #d1d1d1);
+  /* Version 2/t6 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 24px */
 }
 
 /* 2xl 	@media (min-width: 1536px) {  } */
 
 /* xl  */
-@media (min-width: 1280px) {}
+@media (min-width: 1280px) {
+}
 
 /* lg  */
-@media (min-width: 1024px) {}
+@media (min-width: 1024px) {
+}
 
 /* md  */
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+}
 
 /* sm  */
-@media (min-width: 640px) {}
+@media (min-width: 640px) {
+}
