@@ -393,13 +393,13 @@ margin-right: 10%
       box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
       background-color: #fff;
       border: none;
-      transition: 100ms ease-out;
+      transition: 75ms ease-out;
       font-weight: 400;
 }
 
 .prio_button:hover {
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      transition: 100ms ease-in;
+      transition: 75ms ease-in;
 } 
 
 .prio_button p {
@@ -417,18 +417,21 @@ margin-right: 10%
       color: #fff;
       background-color: #FF3D00;
       font-weight: 400;
+      transition: 75ms;
 }
 
 .medium-checked {
       color: #fff;
       background-color: #FFA800;
       font-weight: 400;
+      transition: 75ms;
 }
 
 .low-checked {
       color: #fff;
       background-color: #7AE229;
       font-weight: 400;
+      transition: 75ms;
 }
 
 
@@ -526,7 +529,156 @@ margin-right: 10%
 }
 
 
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+|||||||||||||| Subtask Input ||||||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
+.subtask_container {
+      display: flex;
+      flex-direction: column;
+      
+}
 
+.subtask_input {
+      display: flex;
+      background-color: #00000000;
+      align-items: center;
+      align-self: stretch;
+      border: none;
+      font-size: 20px;
+      transition: 125ms ease-in;
+      flex-grow: 1;
+      z-index: 2;
+      
+}
+
+.subtask_input::placeholder {
+      color: #D1D1D1;
+      
+  }
+
+  .subtask_input:focus-visible {
+      border: none;
+      outline: none;
+      background-color: rgba(41, 170, 226, 0);
+  }
+  
+  .subtask_input:focus-within {
+      border: none;
+      outline: none;
+      background-color: rgba(41, 170, 226, 0);
+  }
+
+  .subtask_input_container {
+      display: flex;
+      border-radius: 10px;
+      border: 1px solid #D1D1D1;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      transition: 125ms ease-in;
+      justify-content: space-between;
+      padding: 12px 15px 12px 21px;
+      background-color: #fff;
+      z-index: 2 !important;
+      position: relative;
+}
+
+.subtask_input_container:hover {
+      border: 1px solid;
+      border-color: #29ABE2;
+      transition: 125ms ease-out;
+  }
+
+  .subtask_input_container:focus-visible {
+      border: 1px solid;
+      border-color: #29ABE2;
+      outline: none;
+      background-color: #DEECF4;
+      transition: 125ms ease-out;
+ 
+  }
+
+  .subtask_input_container:focus-within {
+      border: 1px solid;
+      border-color: #29ABE2;
+      outline: none;
+      background-color: #DEECF4;
+      transition: 125ms ease-out;
+ 
+  }
+
+  .ul_subtask_task {
+      list-style-type: none;
+      font-size: 16px;
+      margin-top:12px;
+      padding-left: 0px;
+      display: flex;
+      flex-direction: column;
+     
+  }
+
+
+  .li_subtask_task {
+      padding: 0;
+      display: flex;
+      
+      align-items: center;
+      gap: 8px;
+      padding-left: 16px;
+      height: 44px;
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: #bcbcbc;
+      transition: 150ms ease-out;
+  }
+
+  .li_subtask_task span {
+      flex-grow: 1;
+  }
+
+  .li_subtask_task img {
+      width: 8px;
+  }
+
+  .li_subtask_task:last-child{
+      border-style: none;
+  }
+
+  .li_subtask_task:hover {
+      background-color: #eee;
+      transition: 150ms ease-in;
+  }
+
+  .li_subtask_icon{
+      display: flex;
+      gap: 2px;
+ }
+
+
+ .li_subtask_icon img{
+      width: 24px;
+      height: 24px;
+      padding: 4px;
+      transition: 150ms ease-out;
+ }
+
+ .li_subtask_icon img:hover{
+      background-color: #bcbcbc;
+      border-radius: 500px;
+      transition: 150ms ease-in;
+ }
+
+ .li_subtask_icon hr {
+      margin: 0;
+      border-style: solid;
+      border-color: #bcbcbc;
+      border-radius: 500px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      
+ }
+ 
 
 
 /* 2xl 	@media (min-width: 1536px) {  } */
@@ -542,3 +694,7 @@ margin-right: 10%
 
 /* sm  */
 @media (min-width: 640px) {}
+
+
+
+
