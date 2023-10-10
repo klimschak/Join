@@ -7,6 +7,7 @@
   border-radius: 30px;
   background: var(--white, #fff);
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  margin-left: 20%;
 }
 
 .headLogIn {
@@ -144,6 +145,27 @@
   line-height: 120%; /* 24px */
 }
 
+.footLogIn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  margin-left: 40%;
+  margin-top: 130px;
+}
+
+.footLogInText {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  color: var(--icon, #a8a8a8);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
 /* 2xl 	@media (min-width: 1536px) {  } */
 
 /* xl  */
