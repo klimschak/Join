@@ -4,7 +4,7 @@ function filterAccountsToAssign() {
       console.log(search)
       let assign = document.getElementById(`assign_list`);
       assign.innerHTML = "";
-      displayAccountsInAssignDropdown(search, assign) 
+      displayAccountsInAssignDropdown(search, assign)
 }
 
 function displayAccountsInAssignDropdown(search, assign) {
@@ -16,21 +16,21 @@ function displayAccountsInAssignDropdown(search, assign) {
                   document.getElementById("form_assign_error").remove();
             }
             if (accountName.toLowerCase().includes(search)) {
-                  setStateOfAccountInAssignDropdown (assign, i, accountId, assignedIds);
+                  setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds);
             }
-            if (search.length >= 1 && assign.childElementCount === 0 && !accountName.toLowerCase().includes(search)){
-                  displayErrorIfNoResultsInAccountsToAssign (assign);
+            if (search.length >= 1 && assign.childElementCount === 0 && !accountName.toLowerCase().includes(search)) {
+                  displayErrorIfNoResultsInAccountsToAssign(assign);
             }
       }
 }
 
-function displayErrorIfNoResultsInAccountsToAssign (assign){
+function displayErrorIfNoResultsInAccountsToAssign(assign) {
       assign.innerHTML = /*html*/`
       <li id="form_assign_error"><div class="form_assign_name form_assign_error">No results. Please modify your search. </div></li>
       `;
 }
 
-function setStateOfAccountInAssignDropdown (assign, i, accountId, assignedIds){
+function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       if (!assignedIds.includes(accountId)) { //Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden
             assign.innerHTML += /*html*/`
             <li id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
@@ -38,7 +38,7 @@ function setStateOfAccountInAssignDropdown (assign, i, accountId, assignedIds){
       if (assignedIds.includes(accountId)) { //Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden
             assign.innerHTML += /*html*/`
             <li id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
-            }
+      }
 }
 
 
@@ -49,12 +49,12 @@ function checkIfAssigned(i) {
       const index = tasks[0]['assigned'].indexOf(accountName);
       let badge = document.getElementById('form_assign_badge')
       let assignbadge = document.getElementById(`assign_badge${i}`);
-      ifAccountIsNotAssigned (i,accountId, assignedIds, badge)
-      ifAccountIsAssigned (i, index, assignbadge)
-            
+      ifAccountIsNotAssigned(i, accountId, assignedIds, badge)
+      ifAccountIsAssigned(i, index, assignbadge)
+
 }
 
-function ifAccountIsNotAssigned (i, accountId, assignedIds , badge){
+function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       if (!assignedIds.includes(accountId)) {
             tasks[0]['assigned'].push(accounts[i]['name']);
             tasks[0]['id'].push(accountId);
@@ -65,7 +65,7 @@ function ifAccountIsNotAssigned (i, accountId, assignedIds , badge){
       }
 }
 
-function  ifAccountIsAssigned (i, index, assignbadge) {
+function ifAccountIsAssigned(i, index, assignbadge) {
       if (index !== -1) {
             tasks[0]['assigned'].splice(index, 1);
             tasks[0]['id'].splice(index, 1);
@@ -130,7 +130,7 @@ function activatePrioLow(urgent, medium, low) {
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
-function openCategoryDropdown (){
+function openCategoryDropdown() {
       let category = document.getElementById('category_dropdown');
       category.innerHTML = "";
       category.innerHTML =/*html*/ `
@@ -139,12 +139,12 @@ function openCategoryDropdown (){
             `;
 }
 
-function setTaskCategory(category){
- let title = document.getElementById('category_field_title');
- title.innerHTML = /*html*/ `
+function setTaskCategory(category) {
+      let title = document.getElementById('category_field_title');
+      title.innerHTML = /*html*/ `
       ${category}`;
-let categoryDropdown = document.getElementById('category_dropdown');
-categoryDropdown.innerHTML = "";
+      let categoryDropdown = document.getElementById('category_dropdown');
+      categoryDropdown.innerHTML = "";
 }
 
 
@@ -155,3 +155,78 @@ function closeAccountsinAssignDropdown() {
       let category = document.getElementById('category_dropdown');
       category.innerHTML = "";
 }
+
+
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||||||| Subtasks ||||||||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
+
+
+document.addEventListener('DOMContentLoaded', function () {
+      // Das Element außerhalb der Event-Listener erstellen
+      let subtaskInput = document.getElementById('subtask_input');
+
+      if (subtaskInput) {
+            subtaskInput.addEventListener('focus', function () {
+                  let subtaskInputIcon = document.getElementById('subtask_input_icon');
+                  showSubtaskInputIcons()
+            });
+
+            subtaskInput.addEventListener('blur', function () {
+                  let subtaskInputIcon = document.getElementById('subtask_input_icon');
+                  hideSubtaskInputIcons()
+            });
+      }
+});
+
+function showSubtaskInputIcons() {
+      let subtaskInputIcon = document.getElementById('subtask_input_icon');
+      subtaskInputIcon.innerHTML =
+      /*html*/`                              
+   
+              <img src="./assets/img/subtask_abort.svg" alt="" onclick="hideSubtaskInputIcons()">
+              <hr>
+              <img src="./assets/img/subtask_save.svg" alt="" onclick="saveSubtaskInLi() ">
+        
+      `;
+}
+
+function hideSubtaskInputIcons() {
+      let subtaskInputIcon = document.getElementById('subtask_input_icon');
+      subtaskInputIcon.innerHTML =
+      /*html*/`                              
+              <img src="./assets/img/subtask_add.svg" alt="">
+      `;
+}
+
+
+function saveSubtaskInLi() {
+      let ul_subtask = document.getElementById('ul_subtask_task');
+      // Schritt 1: Hol dir den Wert aus dem Input-Feld
+      let subtaskInput = document.getElementById('subtask_input');
+      let subtaskValue = subtaskInput.value;
+
+      if (subtaskValue.trim() !== '') {
+            // Schritt 2: Erstelle ein neues LI-Element und füge den Wert ein
+            let newLi = document.createElement('li');
+            newLi.textContent = subtaskValue;
+
+            // Schritt 3: Hänge das LI-Element an die UL-Liste an
+            let ulSubtask = document.getElementById('ul_subtask_task');
+            ulSubtask.appendChild(newLi);
+
+            // Leere das Input-Feld nach dem Hinzufügen
+            subtaskInput.value = '';
+      }
+}
+
+
+
+
+function setToFocus(element) {
+      const focusElement = document.getElementById(element);
+      focusElement.focus();
+}
+
