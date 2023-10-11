@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/logIn.css" />
-    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/fonts.css" />
     <title>Join</title>
-
   </head>
   <body>
     <div class="headLogIn">
@@ -16,17 +15,19 @@
         <button class="btnSignUp">Sign up</button>
       </div>
     </div>
-    <form onsubmit="" class="formLogIn">
+    <form onsubmit="register(); return false;" class="formLogIn">
       <h2 class="headerText">Log in</h2>
 
       <div class="logInField">
         <input
+          required
           type="email"
           id="emailLogIn"
           placeholder="Email"
           class="inputLogIn"
         />
         <input
+          required
           type="password"
           id="passwordLogIn"
           placeholder="Password"
@@ -46,6 +47,7 @@
       <p class="footLogInText">Privacy Policy</p>
       <p class="footLogInText">Legal notice</p>
     </footer>
+    <script src="js/storage.js"></script>
     <script src="js/logIn.js"></script>
   </body>
 </html>
