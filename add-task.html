@@ -11,8 +11,8 @@
       <link rel="stylesheet" href="./css/basic.css" />
       <link rel="stylesheet" href="./css/addtask.css" />
 
-      <script src="./js/add_task.js"></script>
-      <script src="./js/arrays.js"></script>
+      <script defer src="./js/add_task.js"></script>
+      <script defer src="./js/arrays.js"></script>
 
       <title>Document</title>
 </head>
@@ -133,31 +133,37 @@
                         <div class="subtask_label">
                               <h4>Subtasks</h4>
                         </div>
+
                         <div class="subtask_input_container" id="subtask_input_container">
-                              <input  class="subtask_input" name="subtaskt_title" placeholder="Add subtask" id="subtask_input"
-                                    required="required" >
+                              <input class="subtask_input" name="subtaskt_title" placeholder="Add subtask" id="subtask_input" required="required">
                               <div id="subtask_input_icon" class="subtask_input_icon">
                                     <img src="./assets/img/subtask_add.svg" alt="">
-                              </div>            
+                              </div>
                         </div>
+
                         <ul class="ul_subtask_task" id="ul_subtask_task">
                               <li class="li_subtask_task">
-                                    <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint"><span>Task 1</span>                              
+                                    <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint"><span>Task
+                                          1</span>
                                     <div class="li_subtask_icon">
                                           <img src="./assets/img/delete.svg" alt="">
                                           <hr>
                                           <img src="./assets/img/subtask_edit.svg" alt="">
                                     </div>
                               </li>
-                              <li class="li_subtask_task"><img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint"><span>Task 1</span></li>
-                              <li class="li_subtask_task"><img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint"><span>Task 1</span></li>
-                  </div>
-                  <div class="subtask_notice">
-                        <p class="d-none">This field is required</p>
+                              <li class="li_subtask_task"><img src="./assets/img/bulletpoint.svg" alt=""
+                                          class="bulletpoint"><span>Task 1</span></li>
+                              <li class="li_subtask_task"><img src="./assets/img/bulletpoint.svg" alt=""
+                                          class="bulletpoint"><span>Task 1</span></li>
+                        </ul>
+
+                        <div class="subtask_notice">
+                              <p class="d-none">This field is required</p>
+                        </div>
                   </div>
             </div>
 
-      </div>
+
       </div>
 </body>
 

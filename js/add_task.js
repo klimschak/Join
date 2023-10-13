@@ -164,45 +164,42 @@ function closeAccountsinAssignDropdown() {
 */
 
 
-document.addEventListener('DOMContentLoaded', function () {
-      // Das Element außerhalb der Event-Listener erstellen
-      let subtaskInput = document.getElementById('subtask_input');
 
-      if (subtaskInput) {
-            subtaskInput.addEventListener('focus', function () {
-                  let subtaskInputIcon = document.getElementById('subtask_input_icon');
-                  showSubtaskInputIcons()
-            });
+let subtaskInput = document.getElementById('subtask_input');
 
-            subtaskInput.addEventListener('blur', function () {
-                  let subtaskInputIcon = document.getElementById('subtask_input_icon');
-                  hideSubtaskInputIcons()
-            });
-      }
-});
+      
+              
+      
+      
+ 
+subtaskInput.addEventListener('focus', showSubtaskInputIcons);
 
 function showSubtaskInputIcons() {
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
       subtaskInputIcon.innerHTML =
       /*html*/`                              
    
-              <img src="./assets/img/subtask_abort.svg" alt="" onclick="hideSubtaskInputIcons()">
+              <img src="./assets/img/subtask_abort.svg" alt="" onclick="resetSubtaskInput()">
               <hr>
               <img src="./assets/img/subtask_save.svg" alt="" onclick="saveSubtaskInLi() ">
         
       `;
 }
 
+subtaskInput.addEventListener('blur', hideSubtaskInputIcons);
+
 function hideSubtaskInputIcons() {
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
       subtaskInputIcon.innerHTML =
-      /*html*/`                              
+      html`                              
               <img src="./assets/img/subtask_add.svg" alt="">
       `;
 }
 
 
+
 function saveSubtaskInLi() {
+      
       let ul_subtask = document.getElementById('ul_subtask_task');
       // Schritt 1: Hol dir den Wert aus dem Input-Feld
       let subtaskInput = document.getElementById('subtask_input');
@@ -220,6 +217,20 @@ function saveSubtaskInLi() {
             // Leere das Input-Feld nach dem Hinzufügen
             subtaskInput.value = '';
       }
+     resetSubtaskInput()
+      
+      
+}
+
+function resetSubtaskInput(){
+      let subtaskInputIcon = document.getElementById('subtask_input_icon');
+      subtaskInputIcon.innerHTML =
+      /*html*/`                              
+   
+            <img src="./assets/img/subtask_add.svg" alt="">
+        
+      `;
+      subtaskInput.value = '';
 }
 
 
