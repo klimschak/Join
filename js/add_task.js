@@ -163,18 +163,12 @@ function closeAccountsinAssignDropdown() {
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
-
-
 let subtaskInput = document.getElementById('subtask_input');
-
-      
-              
-      
-      
  
 subtaskInput.addEventListener('focus', showSubtaskInputIcons);
 
 function showSubtaskInputIcons() {
+      
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
       subtaskInputIcon.innerHTML =
       /*html*/`                              
@@ -184,45 +178,52 @@ function showSubtaskInputIcons() {
               <img src="./assets/img/subtask_save.svg" alt="" onclick="saveSubtaskInLi() ">
         
       `;
+      subtaskInput.focus();
 }
 
-subtaskInput.addEventListener('blur', hideSubtaskInputIcons);
-
-function hideSubtaskInputIcons() {
-      let subtaskInputIcon = document.getElementById('subtask_input_icon');
-      subtaskInputIcon.innerHTML =
-      html`                              
-              <img src="./assets/img/subtask_add.svg" alt="">
-      `;
-}
+let subtaskCounter = 0;
 
 
 
 function saveSubtaskInLi() {
-      
-      let ul_subtask = document.getElementById('ul_subtask_task');
-      // Schritt 1: Hol dir den Wert aus dem Input-Feld
-      let subtaskInput = document.getElementById('subtask_input');
-      let subtaskValue = subtaskInput.value;
+  let ul_subtask = document.getElementById('ul_subtask_task');
+  let subtaskInput = document.getElementById('subtask_input');
+  let subtaskValue = subtaskInput.value;
 
-      if (subtaskValue.trim() !== '') {
-            // Schritt 2: Erstelle ein neues LI-Element und füge den Wert ein
-            let newLi = document.createElement('li');
-            newLi.textContent = subtaskValue;
-
-            // Schritt 3: Hänge das LI-Element an die UL-Liste an
-            let ulSubtask = document.getElementById('ul_subtask_task');
-            ulSubtask.appendChild(newLi);
-
-            // Leere das Input-Feld nach dem Hinzufügen
-            subtaskInput.value = '';
-      }
-     resetSubtaskInput()
-      
-      
+  if (subtaskValue.trim() !== '') {
+    ul_subtask.innerHTML += /* html */`
+    <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${subtaskCounter})" onmouseleave="hideSubtaskEditIcons(${subtaskCounter})" >
+      <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
+      <span>${subtaskValue}</span>
+      <div class="li_subtask_icon d-none" id="li${subtaskCounter}">
+        <img src="./assets/img/delete.svg" alt="">
+        <hr>
+        <img src="./assets/img/subtask_edit.svg" alt="">
+      </div>
+    </li>`;
+    
+    saveSubtaskToArray (subtaskValue);
+    resetSubtaskInput();
+  }
 }
 
+
+function showSubtaskEditIcons(i){
+      let subtask = document.getElementById(`li${i}`);
+      subtask.classList.remove("d-none")
+}
+
+
+function hideSubtaskEditIcons(i){
+      let subtask = document.getElementById(`li${i}`);
+      subtask.classList.add("d-none")
+}
+
+
+
 function resetSubtaskInput(){
+      subtaskInput.blur();
+      subtaskInput.value = '';
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
       subtaskInputIcon.innerHTML =
       /*html*/`                              
@@ -230,9 +231,15 @@ function resetSubtaskInput(){
             <img src="./assets/img/subtask_add.svg" alt="">
         
       `;
-      subtaskInput.value = '';
+      
 }
 
+
+function saveSubtaskToArray (subtaskValue){
+      tasks[0]['subtasks'].subtask.push(subtaskValue);
+      tasks[0]['subtasks'].subtask_id.push(subtaskCounter);
+      subtaskCounter++;
+}
 
 
 
@@ -240,4 +247,6 @@ function setToFocus(element) {
       const focusElement = document.getElementById(element);
       focusElement.focus();
 }
+
+
 

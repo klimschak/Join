@@ -701,6 +701,9 @@ margin-right: 10%
       
  }
  
+ .d-none{
+      display: none;
+ }
 
 
 /* 2xl 	@media (min-width: 1536px) {  } */
