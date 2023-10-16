@@ -550,7 +550,6 @@ margin-right: 10%
       justify-content: space-between;
       padding: 12px 15px 12px 21px;
       background-color: #fff;
-      z-index: 2 !important;
       position: relative;
 }
 
@@ -581,7 +580,7 @@ margin-right: 10%
       font-size: 20px;
       transition: 125ms ease-in;
       flex-grow: 1;
-      z-index: 2;
+      z-index: 0;
       
 }
 

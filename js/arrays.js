@@ -22,9 +22,14 @@ let accounts = [
 ];
 
 let tasks = [
-      {
-        assigned: [],
+      { 
+        title: [],
         id: [],
+        description: [],
+        assigned: [],
+        date: [],
+        priority: [],
+        category: [],
         subtasks: {
           subtask: [],
           subtask_id: [], 
