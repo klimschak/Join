@@ -27,7 +27,7 @@ let tasks = [
         id: [],
         description: [],
         assigned: [],
-        date: [],
+        date: ["2023-10-12"],
         priority: [],
         category: [],
         subtasks: {

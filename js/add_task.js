@@ -110,7 +110,7 @@ function activatePrioUrgent(urgent, medium, low) {
       urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta_white.svg" alt="">`;
       medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
-      savePriorityToArray("urgentPrio")
+      savePriorityToArray("Urgent")
 }
 
 
@@ -121,7 +121,7 @@ function activatePrioMedium(urgent, medium, low) {
       urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
       medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media_white.svg" alt="">`;
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
-      savePriorityToArray("mediumPrio")
+      savePriorityToArray("Medium")
 }     
 
 
@@ -132,7 +132,7 @@ function activatePrioLow(urgent, medium, low) {
       urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
       medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja_white.svg" alt="">`;
-      savePriorityToArray("lowPrio")
+      savePriorityToArray("Low")
 }  
 
 
@@ -151,23 +151,14 @@ function openCategoryDropdown() {
             `;
 }
 
-
 function setTaskCategory(category) {
       let title = document.getElementById('category_field_title');
       title.innerHTML = /*html*/ `
       ${category}`;
-      let categoryDropdown = document.getElementById('category_dropdown');
-      categoryDropdown.innerHTML = "";
+      let wipeCategoryDropdown = document.getElementById('category_dropdown');
+      wipeCategoryDropdown.innerHTML = "";
+      saveCategoryToArray(category);
 }
-
-
-function closeAccountsinAssignDropdown() {
-      let assign = document.getElementById(`assign_list`);
-      assign.innerHTML = "";
-      let category = document.getElementById('category_dropdown');
-      category.innerHTML = "";
-}
-
 
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
@@ -308,6 +299,8 @@ function setToFocus(element) {
 function createTask(){
       saveFormInputToArray();
       saveTextareaInputToArray();
+      saveTheDateToArray();
+      
       
 }
 
@@ -324,5 +317,32 @@ function saveTextareaInputToArray(){
 }
 
 function savePriorityToArray(Prio){
+      tasks[0].priority.splice(0, 1)
       tasks[0].priority.push(Prio);
+}
+
+function saveCategoryToArray(category) {
+      tasks[0].category.splice(0, 1)
+      tasks[0].category.push(category)
+
+}
+
+function saveTheDateToArray(){
+      let dueDate = document.getElementById("date-picker").value
+      tasks[0].date.push(dueDate);
+}
+
+function loadTheDateFromArray(){
+      const dateArray = tasks[0].date;
+      const dateValue = dateArray[0];
+      const dateInput = document.getElementById('date-picker');
+      dateInput.value = dateValue;
+}
+
+
+function closeAccountsinAssignDropdown() {
+      let assign = document.getElementById(`assign_list`);
+      assign.innerHTML = "";
+      let category = document.getElementById('category_dropdown');
+      category.innerHTML = "";
 }
