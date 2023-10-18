@@ -1,3 +1,6 @@
+:root {
+      --form-field-focus-background: #DEECF4;
+}
 .addtask_header {
       display: flex;
       justify-content: space-between;
@@ -201,7 +204,7 @@ margin-right: 10%
       border: 1px solid;
       border-color: #29ABE2;
       outline: none;
-      background-color: #DEECF4;
+      background-color:var(--form-field-focus-background);
       transition: 125ms ease-out;
  
   }
@@ -210,7 +213,7 @@ margin-right: 10%
       border: 1px solid;
       border-color: #29ABE2;
       outline: none;
-      background-color: #DEECF4;
+      background-color:var(--form-field-focus-background);
       transition: 125ms ease-out;
  
   }
@@ -253,30 +256,29 @@ margin-right: 10%
       background-color: #fff;
       z-index: 2 !important;
       position: relative;
+     
       
       
 }
 
 .form_assign_dropdown{
-      
-      display: flex;
-      position: absolute;
-      flex-direction: column;
-      gap: 20px;
       background-color: #FFF;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04); 
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 4px;
       margin: 0;
       margin-top: -10px;
+      padding: 0px 0px 0px 0px;
+     
+      position: absolute;
       width: 100%;
       z-index: 1 !important;
-      flex-grow: 1;
-      padding: 0;
-      padding-left: 21px;
-      padding-right: 21px;
-      box-sizing: border-box;
-
-    
-      
-
+      overflow: hidden;
 }
 
 .form_assign_dropdown li {
@@ -286,15 +288,31 @@ margin-right: 10%
       justify-content: space-between;
       gap:16px;
       align-items: center;
-
+      padding: 0px 16px 0px 16px;
+      height: 64px;
+      transition: 125ms ease-out;
 }
+
 
 .form_assign_dropdown li:first-child {
-      padding-top: 20px;
+      margin-top: 16px;
+      
+
 }
 
-.form_assign_dropdown li:last-child {
-      padding-bottom: 20px;
+.form_assign_dropdown li:hover {
+      background-color:var(--form-field-focus-background);
+      transition: 125ms ease-in;
+      
+}
+
+.selected {
+      background-color:#2A3647;
+      color: #fff;
+}
+
+.selected:hover {
+      background-color: #091931!important;
 }
 
 
@@ -312,9 +330,12 @@ margin-right: 10%
 }
 
 .form_assign_badge {
-      height: 45px;
-      width: 45px;
+      height: 42px;
+      width: 42px;
       border-radius: 200px;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #fff;
       fill: #00BEE8;
       stroke-width: 2px;
       stroke: #FFF;
@@ -521,6 +542,7 @@ margin-right: 10%
       align-items: center;
       height: 64px;
       font-size: 20px;
+      
 }
 
 

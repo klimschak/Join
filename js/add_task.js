@@ -28,7 +28,7 @@ function displayAccountsInAssignDropdown(search, assign) {
 
 function displayErrorIfNoResultsInAccountsToAssign(assign) {
       assign.innerHTML = /*html*/`
-      <li id="form_assign_error"><div class="form_assign_name form_assign_error">No results. Please modify your search. </div></li>
+      <li class="assign_li" id="form_assign_error"><div class="form_assign_name form_assign_error">No results. Please modify your search. </div></li>
       `;
 }
 
@@ -37,12 +37,12 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden */
       if (!assignedIds.includes(accountId)) { 
             assign.innerHTML += /*html*/`
-            <li id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+            <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
       }
       /* Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden */
       if (assignedIds.includes(accountId)) { 
             assign.innerHTML += /*html*/`
-            <li id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
+            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
       }
 }
 
@@ -61,13 +61,14 @@ function checkIfAssigned(i) {
 
 
 function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
+      let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
             tasks[0]['assigned'].push(accounts[i]['name']);
             tasks[0]['id'].push(accountId);
-            document.getElementById(`assigncheck${i}`).src = './assets/img/checkbutton_checked.svg';
             badge.innerHTML += /*html*/`
                   <div id="assign_badge${i}" class="form_assign_badge">${accounts[i]['initials']}</div>
-                  `
+                  `;
+            filterAccountsToAssign()
       }
 }
 
@@ -76,9 +77,23 @@ function ifAccountIsAssigned(i, index, assignbadge) {
       if (index !== -1) {
             tasks[0]['assigned'].splice(index, 1);
             tasks[0]['id'].splice(index, 1);
-            document.getElementById(`assigncheck${i}`).src = './assets/img/checkbutton_default.svg';
             assignbadge.remove();
+            filterAccountsToAssign()
       }
+}
+
+let isDropdownOpen = false;
+
+function toggleDropdown(){
+const dropdown = document.getElementById('assign_list');
+  
+  if (isDropdownOpen) {
+    dropdown.classList.add('d-none');
+  } else {
+    dropdown.classList.remove('d-none');
+  }
+  
+  isDropdownOpen = !isDropdownOpen;
 }
 
 
@@ -203,22 +218,25 @@ function saveSubtaskInLi() {
       let subtaskValue = subtaskInput.value;
 
       if (subtaskValue.trim() !== '') {
-            ul_subtask.innerHTML += /* html */`
-                  <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${subtaskCounter})" onmouseleave="hideSubtaskEditIcons(${subtaskCounter})" >
-                        <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
-                        <span>${subtaskValue}</span>
-                        <div class="li_subtask_icon d-none" id="li${subtaskCounter}">
-                        <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskCounter})">
-                        <hr>
-                        <img src="./assets/img/subtask_edit.svg" alt="">
-                        </div>
-                  </li>`;
+            ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue);
             saveSubtaskToArray(subtaskValue);
             resetSubtaskInput();
             subtaskInput.focus();
       }
 }
 
+function htmlTemplateSaveSubtaskInLi(subtaskValue){
+      return /* html */`
+      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${subtaskCounter})" onmouseleave="hideSubtaskEditIcons(${subtaskCounter})" >
+            <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
+            <span>${subtaskValue}</span>
+            <div class="li_subtask_icon d-none" id="li${subtaskCounter}">
+            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskCounter})">
+            <hr>
+            <img src="./assets/img/subtask_edit.svg" alt="">
+            </div>
+      </li>`;
+}
 
 function showSubtaskEditIcons(i) {
       let subtask = document.getElementById(`li${i}`);
@@ -332,12 +350,7 @@ function saveTheDateToArray(){
       tasks[0].date.push(dueDate);
 }
 
-function loadTheDateFromArray(){
-      const dateArray = tasks[0].date;
-      const dateValue = dateArray[0];
-      const dateInput = document.getElementById('date-picker');
-      dateInput.value = dateValue;
-}
+
 
 
 function closeAccountsinAssignDropdown() {
@@ -346,3 +359,12 @@ function closeAccountsinAssignDropdown() {
       let category = document.getElementById('category_dropdown');
       category.innerHTML = "";
 }
+
+
+/* Datum aus Array ins date feld laden
+function loadTheDateFromArray(){
+      const dateArray = tasks[0].date;
+      const dateValue = dateArray[0];
+      const dateInput = document.getElementById('date-picker');
+      dateInput.value = dateValue;
+} */

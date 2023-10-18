@@ -24,8 +24,8 @@
             <img src="./assets/img/Close.svg" alt="">
       </div>
 
-      <div class="form_container">
-
+      <form class="form_container">
+            
             <div class="addtask_left_form">
                   <div class="form_input_container">
                         <div class="form_input_label">
@@ -56,12 +56,12 @@
                         </div>
 
                         <div class="form_assign_field_list_container">
-                              <div class="form_assign_field_container" onclick="filterAccountsToAssign()">
-                                    <input class="form_assign_field" name="assign_title" id="search_accounts_to_assign"
+                              <div class="form_assign_field_container" onclick="toggleDropdown(), filterAccountsToAssign()">
+                                    <input class="form_assign_field " name="assign_title" id="search_accounts_to_assign"
                                           placeholder="Select contacs" oninput="filterAccountsToAssign()"><img
                                           src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
                               </div>
-                              <ul id="assign_list" class="form_assign_dropdown"></ul>
+                              <ul id="assign_list" class="form_assign_dropdown "></ul>
                         </div>
 
                         <div id="form_assign_badge" class="form_assign_badge_container"></div>
@@ -149,12 +149,14 @@
                               <p class="d-none">This field is required</p>
                         </div>
                   </div>
+                  <button onclick="createTask()">Clear</button>
+                  <button onclick="createTask()">Create Task</button>
             </div>
 
+            
+      </form>
 
-      </div>
-
-      <button onclick="createTask()">Create Task</button>
+      
 </body>
 
 </html>
