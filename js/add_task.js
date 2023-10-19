@@ -199,7 +199,38 @@ function openCategoryDropdown() {
             <li class="category-list" onclick="setTaskCategory('Technical Task')">Technical Task</li>
             <li class="category-list" onclick="setTaskCategory('User Story')">User Story</li>
             `;
+      
 }
+
+function closeCategoryDropdownOnClickOutside(event) {
+      const category = document.getElementById('category_dropdown');
+      const container = document.getElementById('category_field_dropdown_container');
+        
+    
+      if (!container.contains(event.target)) {
+        
+        // Entfernen des "Klick außerhalb" Ereignisses
+        document.removeEventListener('click', closeCategoryDropdownOnClickOutside);
+        isDropdownOpen = false;
+        category.innerHTML = "";
+      }
+    }
+
+    let isCategoryDropdownOpen = false;
+
+    function toggleCategoryDropdown(){
+    const dropdown = document.getElementById('category_dropdwon');
+      
+      if (isDropdownOpen) {
+        dropdown.innerHTML = "";
+        isDropdownOpen = false;
+      } else {
+        document.addEventListener('click', closeCategoryDropdownOnClickOutside);
+        openCategoryDropdown();
+        isDropdownOpen = true;
+      }
+    }
+
 
 function setTaskCategory(category) {
       let title = document.getElementById('category_field_title');
