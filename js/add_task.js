@@ -1,3 +1,5 @@
+
+
 function filterAccountsToAssign() {
       let search = document.getElementById("search_accounts_to_assign").value
       search = search.toLowerCase();
@@ -37,12 +39,12 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden */
       if (!assignedIds.includes(accountId)) { 
             assign.innerHTML += /*html*/`
-            <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+            <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
       }
       /* Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden */
       if (assignedIds.includes(accountId)) { 
             assign.innerHTML += /*html*/`
-            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i})"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
+            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
       }
 }
 
@@ -89,12 +91,45 @@ const dropdown = document.getElementById('assign_list');
   
   if (isDropdownOpen) {
     dropdown.classList.add('d-none');
+    isDropdownOpen = false;
   } else {
     dropdown.classList.remove('d-none');
+    isDropdownOpen = true;
+    document.addEventListener('click', closeDropdownOnClickOutside);
   }
-  
-  isDropdownOpen = !isDropdownOpen;
 }
+
+function closeDropdownOnClickOutside(event) {
+      const dropdown = document.getElementById('assign_list');
+      const container = document.getElementById('form_assign_container');
+    
+      if (!container.contains(event.target)) {
+        // Klicken außerhalb des "form_assign_container" erkannt, schließe das Dropdown
+        dropdown.classList.add('d-none');
+        isDropdownOpen = false;
+        // Entfernen des "Klick außerhalb" Ereignisses
+        document.removeEventListener('click', closeDropdownOnClickOutside);
+      }
+    }
+
+// Funktion, um das Klicken am <li> zu stoppen
+function stopClickPropagation(event) {
+      event.stopPropagation();
+    }
+
+
+function openDropdownOnInput (){
+      const dropdown = document.getElementById('assign_list');
+      dropdown.classList.remove('d-none');
+      isDropdownOpen = true;
+}
+
+
+
+subtaskInput.addEventListener('blur', showSubtaskInputIcons);
+
+
+
 
 
 /* 
@@ -174,6 +209,10 @@ function setTaskCategory(category) {
       wipeCategoryDropdown.innerHTML = "";
       saveCategoryToArray(category);
 }
+
+
+
+
 
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||

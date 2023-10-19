@@ -50,15 +50,15 @@
                   </div>
 
 
-                  <div class="form_assign_container">
+                  <div class="form_assign_container"  >
                         <div class="form_assign_label">
                               <h4>Assigned to</h4>
                         </div>
 
-                        <div class="form_assign_field_list_container">
+                        <div class="form_assign_field_list_container" id="form_assign_container">
                               <div class="form_assign_field_container" onclick="toggleDropdown(), filterAccountsToAssign()">
                                     <input class="form_assign_field " name="assign_title" id="search_accounts_to_assign"
-                                          placeholder="Select contacs" oninput="filterAccountsToAssign()"><img
+                                          placeholder="Select contacs" oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
                                           src="./assets/img/arrow_drop_downaa.svg" alt=""></input>
                               </div>
                               <ul id="assign_list" class="form_assign_dropdown "></ul>
@@ -95,13 +95,13 @@
                               <h4>Priority</h4>
                         </div>
                         <div class="prio_button_container">
-                              <button class="prio_button" id="urgent" onclick="setPriority(1)">
+                              <button class="prio_button" type="button" id="urgent" onclick="setPriority(1)">
                                     <p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">
                               </button>
-                              <button class="prio_button" id="medium" onclick="setPriority(2)">
+                              <button class="prio_button" type="button" id="medium" onclick="setPriority(2)">
                                     <p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">
                               </button>
-                              <button class="prio_button" id="low" onclick="setPriority(3)">
+                              <button class="prio_button" type="button" id="low" onclick="setPriority(3)">
                                     <p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">
                               </button>
 
@@ -149,8 +149,8 @@
                               <p class="d-none">This field is required</p>
                         </div>
                   </div>
-                  <button onclick="createTask()">Clear</button>
-                  <button onclick="createTask()">Create Task</button>
+                  <button type="button" onclick="createTask()">Clear</button>
+                  <button type="submit" onclick="createTask()">Create Task</button>
             </div>
 
             
