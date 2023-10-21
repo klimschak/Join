@@ -126,7 +126,7 @@ function openDropdownOnInput (){
 
 
 
-subtaskInput.addEventListener('blur', showSubtaskInputIcons);
+//subtaskInput.addEventListener('blur', showSubtaskInputIcons);
 
 
 
@@ -137,22 +137,54 @@ subtaskInput.addEventListener('blur', showSubtaskInputIcons);
 ||||||||||||||| Priorities ||||||||||||||||||
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
+
+let currentPriority = 0;
+
 function setPriority(prio) {
       let urgent = document.getElementById('urgent');
       let medium = document.getElementById('medium');
       let low = document.getElementById('low');
-      let selectedPriority;
+      
+
+      if (prio === 1 && prio != currentPriority || prio === 2 && prio != currentPriority  || prio === 3 && prio != currentPriority){
+            checkPriority(urgent, medium, low, prio)
+      }
+            
+      else {
+            
+            deletePriorityFromArray(urgent, medium, low)
+      }
+
+            
+}
+
+function checkPriority (urgent, medium, low, prio){
       if (prio === 1) {
+            
             activatePrioUrgent(urgent, medium, low)
       }
+      
       if (prio === 2) {
+           
             activatePrioMedium(urgent, medium, low)
       }
       if (prio === 3) {
+            
             activatePrioLow(urgent, medium, low)
       }
 }
 
+function deletePriorityFromArray(urgent, medium, low){
+      tasks[0].priority.splice(0, 1);
+      urgent.classList.remove("urgent-checked");
+      medium.classList.remove("medium-checked");
+      low.classList.remove("low-checked");
+      urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
+      medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
+      low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
+      currentPriority = 0;
+      
+}
 function activatePrioUrgent(urgent, medium, low) {
       urgent.classList.add("urgent-checked");
       medium.classList.remove("medium-checked");
@@ -161,6 +193,7 @@ function activatePrioUrgent(urgent, medium, low) {
       medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
       savePriorityToArray("Urgent")
+      currentPriority = 1;
 }
 
 
@@ -172,6 +205,7 @@ function activatePrioMedium(urgent, medium, low) {
       medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media_white.svg" alt="">`;
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
       savePriorityToArray("Medium")
+      currentPriority = 2;
 }     
 
 
@@ -183,6 +217,7 @@ function activatePrioLow(urgent, medium, low) {
       medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja_white.svg" alt="">`;
       savePriorityToArray("Low")
+      currentPriority = 3;
 }  
 
 
@@ -219,10 +254,10 @@ function closeCategoryDropdownOnClickOutside(event) {
     let isCategoryDropdownOpen = false;
 
     function toggleCategoryDropdown(){
-    const dropdown = document.getElementById('category_dropdwon');
+    const category = document.getElementById('category_dropdown');
       
       if (isDropdownOpen) {
-        dropdown.innerHTML = "";
+        category.innerHTML = "";
         isDropdownOpen = false;
       } else {
         document.addEventListener('click', closeCategoryDropdownOnClickOutside);
