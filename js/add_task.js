@@ -154,8 +154,6 @@ function setPriority(prio) {
             
             deletePriorityFromArray(urgent, medium, low)
       }
-
-            
 }
 
 function checkPriority (urgent, medium, low, prio){
@@ -196,7 +194,6 @@ function activatePrioUrgent(urgent, medium, low) {
       currentPriority = 1;
 }
 
-
 function activatePrioMedium(urgent, medium, low) {
       urgent.classList.remove("urgent-checked");
       medium.classList.add("medium-checked");
@@ -208,7 +205,6 @@ function activatePrioMedium(urgent, medium, low) {
       currentPriority = 2;
 }     
 
-
 function activatePrioLow(urgent, medium, low) {
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
@@ -219,7 +215,6 @@ function activatePrioLow(urgent, medium, low) {
       savePriorityToArray("Low")
       currentPriority = 3;
 }  
-
 
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
@@ -234,14 +229,11 @@ function openCategoryDropdown() {
             <li class="category-list" onclick="setTaskCategory('Technical Task')">Technical Task</li>
             <li class="category-list" onclick="setTaskCategory('User Story')">User Story</li>
             `;
-      
 }
 
 function closeCategoryDropdownOnClickOutside(event) {
       const category = document.getElementById('category_dropdown');
       const container = document.getElementById('category_field_dropdown_container');
-        
-    
       if (!container.contains(event.target)) {
         
         // Entfernen des "Klick außerhalb" Ereignisses
@@ -266,7 +258,6 @@ function closeCategoryDropdownOnClickOutside(event) {
       }
     }
 
-
 function setTaskCategory(category) {
       let title = document.getElementById('category_field_title');
       title.innerHTML = /*html*/ `
@@ -275,10 +266,6 @@ function setTaskCategory(category) {
       wipeCategoryDropdown.innerHTML = "";
       saveCategoryToArray(category);
 }
-
-
-
-
 
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
@@ -298,10 +285,7 @@ function showSubtaskInputIcons() {
               <img src="./assets/img/subtask_abort.svg" alt="" onclick="resetSubtaskInput()">
               <hr>
               <img src="./assets/img/subtask_save.svg" alt="" onclick="saveSubtaskInLi()" >
-        
       `;
-      
-
       subtaskInput.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                   saveSubtaskInLi();
@@ -313,7 +297,6 @@ function showSubtaskInputIcons() {
                   resetSubtaskInput();
             }
           });
-          
 }
 
 
@@ -336,9 +319,9 @@ function htmlTemplateSaveSubtaskInLi(subtaskValue){
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskValue}</span>
             <div class="li_subtask_icon d-none" id="li${subtaskCounter}">
-            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskCounter})">
-            <hr>
-            <img src="./assets/img/subtask_edit.svg" alt="">
+                  <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskCounter})">
+                  <hr>
+                  <img src="./assets/img/subtask_edit.svg" alt="">
             </div>
       </li>`;
 }
@@ -364,7 +347,6 @@ function resetSubtaskInput() {
             <img src="./assets/img/subtask_add.svg" alt="">
       `;
 }
-
 
 function deleteSubtask(i){
       const subtaskIndexToDelete = tasks[0].subtasks.subtask_id.indexOf(i);
@@ -412,7 +394,6 @@ function setToFocus(element) {
       focusElement.focus();
 }
 
-
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||| Save Tasks to Arrays|||||||||||
@@ -423,8 +404,6 @@ function createTask(){
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
-      
-      
 }
 
 function saveFormInputToArray(){

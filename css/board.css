@@ -1,0 +1,35 @@
+:root {
+      --form-field-focus-background: #DEECF4;
+}
+
+body {
+      margin: 0;
+      margin-left: 10%;
+      margin-right: 10%;
+      }
+
+#kanban-container {
+      display: flex;
+      gap:24px;
+      
+}
+
+#kanban-container > * {
+      flex-grow: 1;
+      background-color: aqua;
+      flex-shrink: 1;
+      width: 100%
+}
+
+.column-title {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      
+      
+}
+
+.kanban-column {
+      height:40vh;
+      background-color: bisque;
+}
