@@ -12,55 +12,74 @@
       <link rel="stylesheet" href="./css/board.css" />
 
       <script defer src="./js/add_task.js"></script>
+      <script defer src="./js/board.js"></script>
       <script defer src="./js/arrays.js"></script>
 
       <title>Document</title>
 </head>
 
-<body>
+<body onload="renderTasksOnKanban()">
 
       <section id="kanban-container">
 
-            <div id="to-do-column">
+            <div class="column">
                   <div class="column-title">
                         <h3>To-Do</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-column">
+                  <div class="kanban-area" id="to-do-column">
                         <div id="kanban-card" class="kanban-card">
-                              <div class"kanban-status">
+
+                              <div class="kanban-category">
                                     User Story
                               </div>
+
                               <div class="kanban-title">
                                     Kochwelt Page & Recipe Recommender
                               </div>
-                              
+
+                              <div class="kanban-description">
+                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr
+                              </div>
+
+                              <div class="kanban-subtask">
+                                    1/2 Subtaks
+                              </div>
+
+                              <div class="kanban-assign-prio-container">
+                                    <div class="kanban-assign-to">
+
+                                    </div>
+                                    <div class="kanban-prio">
+
+                                    </div>
+                              </div>
                         </div>
                   </div>
             </div>
 
-            <div id="in-progress-column">
+            <div id="in-progress-column" class="column">
                   <div class="column-title">
                         <h3>In Progress</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-column">
+                  <div class="kanban-area">
 
                   </div>
             </div>
 
-            <div id="await-feedback-column">
+            <div id="await-feedback-column" class="column">
                   <div class="column-title">
                         <h3>Await Feedback</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-column">
+                  <div class="kanban-area">
 
                   </div>
             </div>
 
-            <div id="done-column">
+            <div id="done-column" class="column">
                   <div class="column-title">
                         <h3>Done</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-column">
+                  <div class="kanban-area">
 
                   </div>
             </div>

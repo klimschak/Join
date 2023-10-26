@@ -6,30 +6,105 @@ body {
       margin: 0;
       margin-left: 10%;
       margin-right: 10%;
-      }
+      -moz-hyphens: auto;
+      -ms-hyphens: auto;
+      -o-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
 
-#kanban-container {
-      display: flex;
-      gap:24px;
-      
 }
 
-#kanban-container > * {
-      flex-grow: 1;
+div {
+      -moz-hyphens: auto;
+      -ms-hyphens: auto;
+      -o-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+}
+
+
+.column {
       background-color: aqua;
       flex-shrink: 1;
+      flex-grow: 0;
+      flex-basis: 1;
       width: 100%
 }
+#kanban-container {
+      display: flex;
+      gap: 24px;
+
+
+}
+
+
 
 .column-title {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      
+
+
+}
+
+.kanban-area {
+      height: 40vh;
+      background-color: bisque;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .kanban-card {
+      display: flex;
+      padding: 16px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 24px;
+      background-color: #fff;
+      border-radius: 24px;
+      box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+      max-width: 100%; /* Hier wird die maximale Breite auf 100% des Elternelements (die Spalte) gesetzt */
+    }
+
+.kanban-category-user-story {
+      display: flex;
+      padding: 4px 16px;
+      align-items: flex-start;
+      gap: 10px;
+      border-radius: 8px;
+      background: #0038FF;
+      color: #FFF;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%;
       
 }
 
-.kanban-column {
-      height:40vh;
-      background-color: bisque;
+.kanban-title {
+      color: var(--version-2-main-color, #2A3647);
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 120%; /* 19.2px */
+overflow-wrap: break-word;
+max-width: 100%;
+
+}
+
+.kanban-description {
+
+      height: 50px;
+      width: 300px;
+
+      line-height: 1.2;
+      margin: 0;
+      height: 100%;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-wrap: wrap;
 }

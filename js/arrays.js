@@ -23,17 +23,18 @@ let accounts = [
 
 let tasks = [
       { 
-        title: [],
-        id: [],
-        description: [],
         assigned: [],
+        category: ["user-story"],
+        status: ["To Do"],
         date: [],
+        description: [],
+        id: [],
         priority: [],
-        category: [],
         subtasks: {
           subtask: [],
           subtask_id: [], 
-        }
+        },
+        title: [],
       }
     ];
     
