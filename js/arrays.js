@@ -8,7 +8,7 @@ let accounts = [
 
       {
             id: 2,
-            name: 'Pedro Göntürk ',
+            name: 'Pedro Göntürk',
             initials: 'PG',
 
       },
@@ -23,18 +23,20 @@ let accounts = [
 
 let tasks = [
       { 
-        assigned: [],
+        assigned: ['Pedro Göntürk', 'Thorsten Puccini'],
         category: ["user-story"],
-        status: ["To Do"],
         date: [],
-        description: [],
+        description: ["Lorem ipsum dolor sit amet, consetetur sadipscing elitr"],
         id: [],
-        priority: [],
+        initials: ['PG', 'TP'],
+        priority: ["Urgent"],
+        status: ["To Do"],
         subtasks: {
-          subtask: [],
-          subtask_id: [], 
+          subtask: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"],
+          subtask_id: [0, 1, 2, 3, 4], 
+          completed: [false, true, true, false, false]
         },
-        title: [],
+        title: ["This is a Task Title"],
       }
     ];
     

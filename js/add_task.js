@@ -304,6 +304,7 @@ function saveSubtaskInLi() {
       let ul_subtask = document.getElementById('ul_subtask_task');
       let subtaskInput = document.getElementById('subtask_input');
       let subtaskValue = subtaskInput.value;
+      
 
       if (subtaskValue.trim() !== '') {
             ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue);
