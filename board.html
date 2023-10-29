@@ -18,68 +18,42 @@
       <title>Document</title>
 </head>
 
-<body onload="renderTasksOnKanban()">
+<body onload="renderAllTasksOnKanban()">
 
       <section id="kanban-container">
 
-            <div id="todo-column" class="column">
+            <div class="column">
                   <div class="column-title">
                         <h3>To-Do</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
                   <div class="kanban-area" id="to-do-column">
-                        <div id="kanban-card" class="kanban-card">
 
-                              <div class="kanban-category">
-                                    Error
-                              </div>
-
-                              <div class="kanban-title">
-                                    Error
-                              </div>
-
-                              <div class="kanban-description">
-                                    Error
-                              </div>
-
-                              <div class="kanban-subtask">
-                                    Error
-                              </div>
-
-                              <div class="kanban-assign-prio-container">
-                                    <div class="kanban-assign-to">
-
-                                    </div>
-                                    <div class="kanban-prio">
-
-                                    </div>
-                              </div>
-                        </div>
                   </div>
             </div>
 
-            <div id="in-progress-column" class="column">
+            <div class="column">
                   <div class="column-title">
                         <h3>In Progress</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-area">
+                  <div class="kanban-area" id="in-progress-column" >
 
                   </div>
             </div>
 
-            <div id="await-feedback-column" class="column">
+            <div class="column">
                   <div class="column-title">
                         <h3>Await Feedback</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-area">
+                  <div class="kanban-area"  id="await-feedback-column" >
 
                   </div>
             </div>
 
-            <div id="done-column" class="column">
+            <div class="column">
                   <div class="column-title">
                         <h3>Done</h3>
                         <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-area">
+                  <div class="kanban-area"  id="done-column">
 
                   </div>
             </div>

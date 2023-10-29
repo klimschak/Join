@@ -1,97 +1,136 @@
-function renderTasksOnKanban(){
+function renderAllTasksOnKanban(){
   let ToDo = document.getElementById('to-do-column');
-  let category = tasks[0].category
-  let category_display = category
-  if (category == "user-story"){
-    category_display = "User Story"
-  }
-  let title = tasks[0].title;
-  let description = tasks[0].description
-
-
-  let subtasks = getLengthOfSubtasks();
-  let completed = getCompletedTasks();
-
-  
-
   ToDo.innerHTML = "";
-  ToDo.innerHTML = /*html*/`
-        <div id="kanban-card" class="kanban-card">
-
-          <div class="kanban-category-${category}">
-            ${category_display}
-          </div>
-
-          <div class="kanban-title">
-            ${title}
-          </div>
-
-          <div class="kanban-description">
-            ${description}
-          </div>
-
-          <div class="kanban-subtask">
-            <div class="kanban-subtask-progress-container">
-              <div class="kanban-subtask-progress-bar" id="kanban-subtask-progress-bar">
-            
-            </div>
-            </div>
-
-            <div class="kanban-subtask-completed">${completed}/${subtasks} Subtasks</div>
-          </div>
-
-          <div class="kanban-badge-prio-container">
-            <div class="kanban-assign-prio-container">
-              <div class="kanban-assign-badge-container" id="kanban-assign-to"></div>
-              <div class="kanban-prio"></div>
-            </div>
-
-            <div class="kanban-prio" id="kanban-prio"></div>
-
-          </div>
-        </div>
-  `
-  let progressBar = document.getElementById(`kanban-subtask-progress-bar`);
-  progressBar.style.width = `${100 / subtasks * completed}%`;
-  getAssignedToInitials();
-  getPrioToKanban();
-  
-}
-
-//Rendern der Initialien
-function getAssignedToInitials(){
-  let initials = tasks[0].initials;
-  let assignedTo = document.getElementById('kanban-assign-to');
-  assignedTo.innerHTML = ``;
-  for (let i = 0; i < initials.length; i++) {
-    const initial = initials[i];
-    assignedTo.innerHTML += /*html*/`
-    <div class="kanban-assign-badge">${initial}</div> 
-    `
-    
+  for (let i = 0; i < tasks.length; i++) {
+    renderTaskCardOnKanban(i);
   }
 }
 
-function getPrioToKanban(){
-  let container = document.getElementById(`kanban-prio`);
-  let prio = tasks[0].priority;
+function renderTaskCardOnKanban(i){
+  let ToDo = document.getElementById('to-do-column');
+  let category = getKanbanTaskCategory(i);
+  let categoryclass = getKanbanTaskCategoryCSSClass(i);
+  let title = getKanbanTaskTitle(i);
+  let description = getKanbanTaskDescription(i);
+  let subtasks = getLengthOfSubtasks(i);
+  let subtaskprogress = getKanbanSubtaskBar(i);
+  let subtaskscompleted = getCompletedTasks(i);
+  let prio = getPrioForKanban(i);
+  ToDo.innerHTML += htmlTemplateRenderTaskCardOnKanban(i, title, description, category, categoryclass, subtasks, subtaskscompleted, subtaskprogress, prio);
+  getAssignBadgesInitials(i)
+}
 
-  if (prio == "Urgent") {
-    container.innerHTML =  `<img src="./assets/img/Prio_alta.svg" alt="">`
+function getKanbanTaskCategory(i) {
+  let category = tasks[i].category;
+  return category
+}
+
+function getKanbanTaskCategoryCSSClass(i){
+  let category = tasks[i].category;
+  let categoryclass;
+  if (category == "User Story"){
+    categoryclass = "user-story"
   }
+  if (category == "Technical Task"){
+    categoryclass = "technical-task"
+  }
+  return categoryclass
+}
+
+function getKanbanTaskTitle(i){ 
+  let title = tasks[i].title;
+  return title
+}
+
+function getKanbanTaskDescription(i){
+  let description = tasks[i].description;
+  return description
 }
 
 //Anzahl der Subtasks zurückgeben
-function getLengthOfSubtasks(){
-  let task = tasks[0].subtasks.subtask
+function getLengthOfSubtasks(i){
+  let task = tasks[i].subtasks.subtask;
   let numberOfTasks = task.length;
-  
-  return numberOfTasks;
-  
+  return numberOfTasks
 }
- //Anzahl der abgeschlossenen Subtasks zurückgeben
-function getCompletedTasks(){
-  let completedArray = tasks[0].subtasks.completed;
+
+//Anzahl der abgeschlossenen Subtasks zurückgeben
+function getCompletedTasks(i){
+  let completedArray = tasks[i].subtasks.completed;
   let numberOfTrueValues = completedArray.filter(entity => entity === true).length;
   return numberOfTrueValues
 }
+
+function getKanbanSubtaskBar(i){
+  let subtasks = getLengthOfSubtasks(i);
+  let completed = getCompletedTasks(i);
+  let subtaskProgress = `${100 / subtasks * completed}%`;
+  return subtaskProgress
+}
+
+function getPrioForKanban(i){
+  let prio = tasks[i].priority;
+  let prioIcon;
+  if (prio == "Urgent") {
+    prioIcon =  `<img src="./assets/img/Prio_alta.svg" alt="">`
+  }
+  if (prio == "Medium") {
+    prioIcon =  `<img src="./assets/img/Prio_media.svg" alt="">`
+  }
+  if (prio == "Low") {
+    prioIcon =  `<img src="./assets/img/Prio_baja.svg" alt="">`
+  }
+  return prioIcon
+}
+
+//Rendern der Initialien
+function getAssignBadgesInitials(i){
+  let initials = tasks[i].initials;
+  let assignedTo = document.getElementById(`kanban-assign-to-${i}`);
+  assignedTo.innerHTML = ``;
+  for (let j = 0; j < initials.length; j++) {
+    const initial = initials[j];
+    assignedTo.innerHTML += /*html*/`
+    <div class="kanban-assign-badge">${initial}</div> 
+    `
+  }
+}
+
+function htmlTemplateRenderTaskCardOnKanban (i, title, description, category, categoryclass, subtasks, subtaskscompleted, subtaskprogress,prio){
+  return /*html*/`
+  <div id="kanban-card-${i}" class="kanban-card">
+ 
+    <div class="kanban-category-${categoryclass}">
+      ${category}
+    </div>
+ 
+    <div class="kanban-title">
+    ${title}
+    </div>
+ 
+    <div class="kanban-description">
+      ${description}      
+    </div>
+ 
+    <div class="kanban-subtask">
+      <div class="kanban-subtask-progress-container">
+        <div class="kanban-subtask-progress-bar" style="width: ${subtaskprogress}">
+      
+      </div>
+      </div>
+ 
+      <div class="kanban-subtask-counter">${subtaskscompleted}/${subtasks} Subtasks</div>
+    </div>
+ 
+    <div class="kanban-badge-prio-container">
+      <div class="kanban-assign-prio-container">
+        <div class="kanban-assign-badge-container" id="kanban-assign-to-${i}"></div>
+        <div class="kanban-prio"></div>
+      </div>
+ 
+      <div class="kanban-prio">${prio}</div>
+ 
+    </div>
+  </div>
+ `
+ }

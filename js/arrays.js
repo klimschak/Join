@@ -24,7 +24,7 @@ let accounts = [
 let tasks = [
       { 
         assigned: ['Pedro Göntürk', 'Thorsten Puccini'],
-        category: ["user-story"],
+        category: ["User Story"],
         date: [],
         description: ["Lorem ipsum dolor sit amet, consetetur sadipscing elitr"],
         id: [],
@@ -37,6 +37,25 @@ let tasks = [
           completed: [false, true, true, false, false]
         },
         title: ["This is a Task Title"],
-      }
+        kanban: ["To-Do"],
+      },
+
+      { 
+            assigned: ['Pedro Göntürk', 'Thorsten Puccini'],
+            category: ["User Story"],
+            date: [],
+            description: ["Lorem ipsum dolor sit amet, consetetur sadipscing elitr"],
+            id: [],
+            initials: ['PG', 'TP'],
+            priority: ["Medium"],
+            status: ["To Do"],
+            subtasks: {
+              subtask: ["Task 1", "Task 2", "Task 3", "Task 4"],
+              subtask_id: [0, 1, 2, 3, 4], 
+              completed: [false, true, true, true,]
+            },
+            title: ["This is another Task"],
+            kanban: ["To-Do"]
+          },
     ];
     
