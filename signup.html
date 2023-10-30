@@ -4,15 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="css/signup.css" />
+    <title>Sign up</title>
   </head>
 
   <body onload="init()">
-    <form onsubmit="register(); return false;">
-      <input required type="text" id="username" placeholder="Name" />
-      <input required type="email" id="email" placeholder="Email" />
-      <input required type="password" id="password" placeholder="Password" />
-      <button id="registerBtn">Sign up</button>
+    <form onsubmit="register(); return false;" class="sign-up">
+      <input
+        required
+        type="text"
+        id="username"
+        placeholder="Name"
+        class="inut-signup"
+      />
+      <input
+        required
+        type="email"
+        id="email"
+        placeholder="Email"
+        class="inut-signup"
+      />
+      <input
+        required
+        type="password"
+        id="password"
+        placeholder="Password"
+        class="inut-signup"
+      />
+      <div><input type="checkbox" />I accept the Privacy policy</div>
+      <button id="registerBtn" class="signup-btn">Sign up</button>
     </form>
 
     <script src="js/storage.js"></script>
