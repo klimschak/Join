@@ -21,6 +21,7 @@ async function register() {
   });
   await setItem("users", JSON.stringify(users));
   resetForm();
+  window.location.href = 'index.html?msg=Erfolgreich Registriert';
 }
 
 function resetForm() {
@@ -29,3 +30,5 @@ function resetForm() {
   password.value = "";
   registerBtn.disabled = false;
 }
+
+export { users};

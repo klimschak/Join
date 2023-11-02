@@ -15,38 +15,40 @@
         <button class="btnSignUp">Sign up</button>
       </div>
     </div>
-    <form onsubmit="register(); return false;" class="formLogIn">
-      <h2 class="headerText">Log in</h2>
-
-      <div class="logInField">
-        <input
-          required
-          type="email"
-          id="emailLogIn"
-          placeholder="Email"
-          class="inputLogIn"
-        />
-        <input
-          required
-          type="password"
-          id="passwordLogIn"
-          placeholder="Password"
-          class="inputLogIn"
-        />
-      </div>
-      <div class="checkboxLogIn">
-        <input type="checkbox" />
-        <p>Remember me</p>
-      </div>
-      <div class="btnFormLogIn">
-        <button class="btnLogIn">Log in</button>
-        <button class="btnGuestLogIn">Guest Log in</button>
-      </div>
-    </form>
-    <footer class="footLogIn">
-      <p class="footLogInText">Privacy Policy</p>
-      <p class="footLogInText">Legal notice</p>
-    </footer>
+    <div class="logIN-Center">
+      <form onsubmit="logIn(); return false;" class="formLogIn">
+        <h2 class="headerText">Log in</h2>
+        <div class="logInField">
+          <input
+            required
+            type="email"
+            id="emailLogIn"
+            placeholder="Email"
+            class="inputLogIn"
+          />
+          <input
+            required
+            type="password"
+            id="passwordLogIn"
+            placeholder="Password"
+            class="inputLogIn"
+          />
+        </div>
+        <div class="checkboxLogIn">
+          <input type="checkbox" />
+          <p>Remember me</p>
+        </div>
+        <div class="btnFormLogIn">
+          <button class="btnLogIn">Log in</button>
+          <button class="btnGuestLogIn">Guest Log in</button>
+        </div>
+      </form>
+      <div id="msgBox"></div>
+      <footer class="footLogIn">
+        <p class="footLogInText">Privacy Policy</p>
+        <p class="footLogInText">Legal notice</p>
+      </footer>
+    </div>
     <script src="js/storage.js"></script>
     <script src="js/logIn.js"></script>
   </body>

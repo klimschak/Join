@@ -21,6 +21,9 @@
   padding: 12px 21px;
   align-items: center;
   gap: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--Style, #d1d1d1);
+  background: #fff;
 }
 
 .signup-btn {
@@ -37,4 +40,40 @@
   font-style: normal;
   font-weight: 700;
   line-height: 120%; /* 25.2px */
+}
+
+.signUP-center {
+  display: flex;
+  justify-content: center;
+  padding: 48px 88px;
+}
+
+.header-signup {
+  width: 315px;
+  color: #000;
+  text-align: center;
+  /* Version 2/t1 */
+  font-family: Inter;
+  font-size: 61px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 73.2px */
+}
+
+.input-Text {
+  color: var(--Style, #d1d1d1);
+
+  /* Version 2/t6 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 24px */
+}
+
+.inputs-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
 }
