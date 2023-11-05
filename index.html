@@ -12,11 +12,11 @@
       <img src="assets/img/JoinLogo.svg" alt="" />
       <div class="headSignUp">
         <p class="textNau">Not a Join user?</p>
-        <button class="btnSignUp">Sign up</button>
+        <button onclick="goToSignUp()" class="btnSignUp">Sign up</button>
       </div>
     </div>
     <div class="logIN-Center">
-      <form onsubmit="logIn(); return false;" class="formLogIn">
+      <form onsubmit="login(); return false;" class="formLogIn">
         <h2 class="headerText">Log in</h2>
         <div class="logInField">
           <input
@@ -50,6 +50,7 @@
       </footer>
     </div>
     <script src="js/storage.js"></script>
+    <script src="js/register.js"></script>
     <script src="js/logIn.js"></script>
   </body>
 </html>
