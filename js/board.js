@@ -1,13 +1,14 @@
 function renderAllTasksOnKanban() {
-  let ToDo = document.getElementById("to-do-column");
-  ToDo.innerHTML = "";
+  let status = document.getElementById("to-do-column");
+  status.innerHTML = "";
   for (let i = 0; i < tasks.length; i++) {
     renderTaskCardOnKanban(i);
   }
 }
 
 function renderTaskCardOnKanban(i) {
-  let ToDo = document.getElementById("to-do-column");
+  let status = getTaskStatus(i);
+  status = document.getElementById(`${status}-column`);
   let category = getKanbanTaskCategory(i);
   let categoryclass = getKanbanTaskCategoryCSSClass(i);
   let title = getKanbanTaskTitle(i);
@@ -16,7 +17,7 @@ function renderTaskCardOnKanban(i) {
   let subtaskprogress = getKanbanSubtaskBar(i);
   let subtaskscompleted = getCompletedTasks(i);
   let prio = getPrioForKanban(i);
-  ToDo.innerHTML += htmlTemplateRenderTaskCardOnKanban(
+  status.innerHTML += htmlTemplateRenderTaskCardOnKanban(
     i,
     title,
     description,
@@ -28,6 +29,12 @@ function renderTaskCardOnKanban(i) {
     prio
   );
   getAssignBadgesInitials(i);
+}
+
+function getTaskStatus(i){
+  let taskStatus = tasks[i].status;
+  return taskStatus
+
 }
 
 function getKanbanTaskCategory(i) {

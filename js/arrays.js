@@ -27,14 +27,14 @@ let tasks = [
     id: [],
     initials: ["PG", "TP"],
     priority: ["Urgent"],
-    status: ["To Do"],
+    status: ["to-do"],
     subtasks: {
       subtask: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"],
       subtask_id: [0, 1, 2, 3, 4],
       completed: [false, true, true, false, false],
     },
     title: ["This is a Task Title"],
-    kanban: ["To-Do"],
+    
   },
 
   {
@@ -45,13 +45,13 @@ let tasks = [
     id: [],
     initials: ["PG", "TP"],
     priority: ["Medium"],
-    status: ["To Do"],
+    status: ["done"],
     subtasks: {
       subtask: ["Task 1", "Task 2", "Task 3", "Task 4"],
       subtask_id: [0, 1, 2, 3, 4],
       completed: [false, true, true, true],
     },
     title: ["This is another Task"],
-    kanban: ["To-Do"],
-  },
+   
+      },
 ];
