@@ -176,7 +176,7 @@ function dropIntoColumn(ev, columnId) {
   }
 }
 
-function moveTo(category) {
-  tasks[currentDraggedElement].category = category; // Ändere "status" zu "category", falls es die richtige Eigenschaft ist.
+function moveTo(status) {
+  tasks[currentDraggedElement].status = status; // Ändere "status" zu "category", falls es die richtige Eigenschaft ist.
   renderAllTasksOnKanban();
 }
