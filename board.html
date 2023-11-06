@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/basic.css" />
+    <link rel="stylesheet" href="./css/board.css" />
+    <script src="js/dragndrop.js"></script>
+    <script defer src="./js/arrays.js"></script>
+    <script defer src="./js/board.js"></script>
 
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            rel="stylesheet">
-      <link rel="stylesheet" href="./css/basic.css" />
-      <link rel="stylesheet" href="./css/board.css" />
+    <title>Board</title>
+  </head>
+  <body onload="renderAllTasksOnKanban()">
+    <section id="kanban-container">
+      <div class="column">
+        <div class="column-title">
+          <h3>To-Do</h3>
+          <img src="./assets/img/plus-button.svg" alt="" />
+        </div>
+        <div
+          ondrop="dropIntoColumn(event, 'in-progress-column')"
+          ondragover="allowDrop(event)"
+          class="kanban-area"
+          id="to-do-column"
+        ></div>
+      </div>
 
-      <script defer src="./js/arrays.js"></script>
-      <script defer src="./js/board.js"></script>
-     
+      <div class="column">
+        <div class="column-title">
+          <h3>In Progress</h3>
+          <img src="./assets/img/plus-button.svg" alt="" />
+        </div>
+        <div
+          ondrop="dropIntoColumn(event, 'in-progress-column')"
+          ondragover="allowDrop(event)"
+          class="kanban-area"
+          id="in-progress-column"
+        ></div>
+      </div>
 
-      <title>Document</title>
-</head>
+      <div class="column">
+        <div class="column-title">
+          <h3>Await Feedback</h3>
+          <img src="./assets/img/plus-button.svg" alt="" />
+        </div>
+        <div
+          ondrop="dropIntoColumn(event, 'await-feedback-column')"
+          ondragover="allowDrop(event)"
+          class="kanban-area"
+          id="await-feedback-column"
+        ></div>
+      </div>
 
-<body onload="renderAllTasksOnKanban()">
-
-      <section id="kanban-container">
-
-            <div class="column">
-                  <div class="column-title">
-                        <h3>To-Do</h3>
-                        <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-area" id="to-do-column">
-
-                  </div>
-            </div>
-
-            <div class="column">
-                  <div class="column-title">
-                        <h3>In Progress</h3>
-                        <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-area" id="in-progress-column" >
-
-                  </div>
-            </div>
-
-            <div class="column">
-                  <div class="column-title">
-                        <h3>Await Feedback</h3>
-                        <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-area"  id="await-feedback-column" >
-
-                  </div>
-            </div>
-
-            <div class="column">
-                  <div class="column-title">
-                        <h3>Done</h3>
-                        <img src="./assets/img/plus-button.svg" alt=""></div>
-                  <div class="kanban-area"  id="done-column">
-
-                  </div>
-            </div>
-
-      </section>
-
-</body>
-
+      <div class="column">
+        <div class="column-title">
+          <h3>Done</h3>
+          <img src="./assets/img/plus-button.svg" alt="" />
+        </div>
+        <div
+          ondrop="dropIntoColumn(event, 'done-column')"
+          ondragover="allowDrop(event)"
+          class="kanban-area"
+          id="done-column"
+        ></div>
+      </div>
+    </section>
+  </body>
 </html>
