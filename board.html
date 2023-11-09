@@ -18,6 +18,22 @@
     <title>Board</title>
   </head>
   <body onload="renderAllTasksOnKanban()">
+
+    <section id="header-container">
+    <div id="board-title"><h1>Board</h1></div>
+    <div class="search-addTask-container">
+      <div class="board-search-container" id="board-search-container">
+        <input class="search-input" id="search-input" name="search-input" placeholder="Find Task">
+        <hr>
+        <img src="./assets/img/search.svg" alt="">
+      </div>
+      <div class="board-add-button-container">
+        <button class="board-add-button"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+      </div>
+    </div>
+  </div>
+    </section>
+
     <section id="kanban-container">
       <div class="column">
         <div class="column-title">

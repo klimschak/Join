@@ -21,15 +21,103 @@ div {
   hyphens: auto;
 }
 
+/*||||||||||||||||||||||||||||||||||||
+  |||||||||  Kanban-Header |||||||||||
+  ||||||||||||||||||||||||||||||||||||*/
+
+#header-container {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-addTask-container{
+  display: flex;
+  gap: 32px;
+}
+.board-search-container{
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid var(--icon, #A8A8A8);
+  border-radius: 10px;
+  width: 20vw;
+ 
+ 
+  
+}
+
+.board-search-container hr{
+ border-color: #2a3647;
+ height: 28px;
+ stroke-width: 1px;
+ stroke: var(--Style, #D1D1D1);
+ border: none;
+ width: 2px;
+ background-color: #d1d1d1;
+ 
+}
+
+.board-search-container img{
+  margin-left: 16px;
+ }
+
+.search-input{
+  border: none;
+  font-size: 20px;
+  background-color: none;
+  flex-grow: 1;
+  
+   
+}
+
+.search-input:focus-visible{
+  outline: none;
+}
+
+.search-input::placeholder{
+  color: #d1d1d1;
+   
+}
+
+.board-add-button {
+  color:#ffffff;
+  background-color: #2A3647;
+  border-color: #2A3647;
+  border-style: solid;
+  border-radius: 10px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-size: 21px;
+font-style: normal;
+font-weight: 700;
+line-height: 120%; /* 25.2px */
+width: 160px;
+height: 48px;
+gap: 4px;
+}
+
+
+
+/*||||||||||||||||||||||||||||||||||||
+  |||||||||  Kanban-Area |||||||||||||
+  ||||||||||||||||||||||||||||||||||||*/
+
+
 .column {
   background-color: aqua;
   flex-shrink: 1;
   flex-grow: 0;
   flex-basis: 1;
   height: 80vh;
-  width: 300px;
+  width: 100%;
 }
-
+  
+  
 #kanban-container {
   display: flex;
   gap: 24px;
