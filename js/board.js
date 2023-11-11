@@ -180,3 +180,27 @@ function moveTo(status) {
   tasks[currentDraggedElement].status = status; // Ändere "status" zu "category", falls es die richtige Eigenschaft ist.
   renderAllTasksOnKanban();
 }
+
+
+
+//Filterfunktion
+function filterTasks(){
+  let search = document.getElementById('search-input').value;
+  search = search.toLowerCase();
+  console.log(search);
+  
+  for (let j = 0; j < tasks.length; j++) {
+    let kanbanCard = document.getElementById(`kanban-card-${j}`);
+    let taskTitle = tasks[j].title.toString();
+    let taskDescription = tasks[j].description.toString();
+    if (taskTitle.toLowerCase().includes(search) || taskDescription.toLowerCase().includes(search)){
+      kanbanCard.classList.remove('d-none')
+    }
+    
+  
+  else {
+    kanbanCard.classList.add('d-none');
+  } 
+}
+}
+
