@@ -19,21 +19,23 @@
 
 <body onload="renderAllTasksOnKanban()">
 
-  <section id="header-container">
-    <div id="board-title">
-      <h1>Board</h1>
-    </div>
-    <div class="search-addTask-container">
-      <div class="board-search-container" id="board-search-container">
-        <input class="search-input" id="search-input" name="search-input" placeholder="Find Task" oninput="filterTasks()">
-        <hr>
-        <img src="./assets/img/search.svg" alt="">
+  <div id="header-kanban-container">
+    <section id="header-container">
+      <div id="board-title">
+        <h1>Board</h1>
       </div>
-      <div class="board-add-button-container">
-        <button class="board-add-button"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+      <div class="search-addTask-container">
+        <div class="board-search-container" id="board-search-container">
+          <input class="search-input" id="search-input" name="search-input" placeholder="Find Task"
+            oninput="filterTasks()">
+          <hr>
+          <img src="./assets/img/search.svg" alt="">
+        </div>
+        <div class="board-add-button-container">
+          <button class="board-add-button"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+        </div>
       </div>
-    </div>
-    </div>
+  
   </section>
 
   <section id="kanban-container">
@@ -42,7 +44,7 @@
         <h3>To-Do</h3>
         <img src="./assets/img/plus-button.svg" alt="" />
       </div>
-      <div ondrop="dropIntoColumn(event, 'in-progress-column')" ondragover="allowDrop(event)" class="kanban-area"
+      <div ondrop="dropIntoColumn(event, 'to-do-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="to-do-column"></div>
     </div>
 
@@ -73,6 +75,7 @@
         id="done-column"></div>
     </div>
   </section>
+  </div>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 function renderAllTasksOnKanban() {
-  let status = document.getElementById("to-do-column");
-  status.innerHTML = "";
+
   for (let i = 0; i < tasks.length; i++) {
     renderTaskCardOnKanban(i);
   }
@@ -188,7 +187,6 @@ function filterTasks(){
   let search = document.getElementById('search-input').value;
   search = search.toLowerCase();
   console.log(search);
-  
   for (let j = 0; j < tasks.length; j++) {
     let kanbanCard = document.getElementById(`kanban-card-${j}`);
     let taskTitle = tasks[j].title.toString();
@@ -196,11 +194,8 @@ function filterTasks(){
     if (taskTitle.toLowerCase().includes(search) || taskDescription.toLowerCase().includes(search)){
       kanbanCard.classList.remove('d-none')
     }
-    
-  
-  else {
+    else {
     kanbanCard.classList.add('d-none');
-  } 
-}
+  }}
 }
 
