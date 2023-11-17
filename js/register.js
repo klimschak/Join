@@ -13,6 +13,7 @@ async function loadUsers() {
 }
 
 async function register() {
+  let registerBtn = document.getElementById("registerBtn");
   registerBtn.disabled = true;
   users.push({
     username: username.value,
@@ -25,6 +26,7 @@ async function register() {
 }
 
 function resetForm() {
+  let registerBtn = document.getElementById("registerBtn");
   username.value = "";
   email.value = "";
   password.value = "";

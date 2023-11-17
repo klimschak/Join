@@ -20,6 +20,30 @@ let accounts = [
 
 let tasks = [
   {
+    assigned: [],
+    category: [],
+    date: [],
+    description: [],
+    id: [],
+    initials: [],
+    priority: [],
+    status: [],
+    subtasks: {
+      subtask: [],
+      subtask_id: [],
+      completed: [],
+    },
+    title: [],
+    
+  }
+
+ 
+];
+
+
+/*
+let tasks = [
+  {
     assigned: ["Pedro Göntürk", "Thorsten Puccini"],
     category: ["User Story"],
     date: [],
@@ -55,3 +79,4 @@ let tasks = [
    
       },
 ];
+*/

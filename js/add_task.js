@@ -1,4 +1,4 @@
-
+let o = 0;
 
 function filterAccountsToAssign() {
       let search = document.getElementById("search_accounts_to_assign").value
@@ -10,10 +10,12 @@ function filterAccountsToAssign() {
 }
 
 
+
+
 function displayAccountsInAssignDropdown(search, assign) {
       for (let i = 0; i < accounts.length; i++) {
             const accountId = accounts[i]['id'];
-            const assignedIds = tasks[0]['id'];
+            const assignedIds = tasks[o]['id'];
             const accountName = accounts[i]['name'];
             if (document.getElementById("form_assign_error")) {
                   document.getElementById("form_assign_error").remove();
@@ -51,13 +53,13 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
 
 function checkIfAssigned(i) {
       const accountId = accounts[i]['id'];
-      const assignedIds = tasks[0]['id'];
+      const assignedIds = tasks[o]['id'];
       const accountName = `${accounts[i]['name']}`;
-      const index = tasks[0]['assigned'].indexOf(accountName);
+      const index = tasks[o]['assigned'].indexOf(accountName);
       let badge = document.getElementById('form_assign_badge')
       let assignbadge = document.getElementById(`assign_badge${i}`);
       ifAccountIsNotAssigned(i, accountId, assignedIds, badge)
-      ifAccountIsAssigned(i, index, assignbadge)
+      ifAccountIsAssigned(i, index)
 
 }
 
@@ -65,8 +67,8 @@ function checkIfAssigned(i) {
 function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
-            tasks[0]['assigned'].push(accounts[i]['name']);
-            tasks[0]['id'].push(accountId);
+            tasks[o]['assigned'].push(accounts[i]['name']);
+            tasks[o]['id'].push(accountId);
             badge.innerHTML += /*html*/`
                   <div id="assign_badge${i}" class="form_assign_badge">${accounts[i]['initials']}</div>
                   `;
@@ -75,10 +77,11 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
 }
 
 
-function ifAccountIsAssigned(i, index, assignbadge) {
+function ifAccountIsAssigned(i, index) {
+      let assignbadge = document.getElementById(`assign_badge${i}`);
       if (index !== -1) {
-            tasks[0]['assigned'].splice(index, 1);
-            tasks[0]['id'].splice(index, 1);
+            tasks[o]['assigned'].splice(index, 1);
+            tasks[o]['id'].splice(index, 1);
             assignbadge.remove();
             filterAccountsToAssign()
       }
@@ -173,7 +176,7 @@ function checkPriority (urgent, medium, low, prio){
 }
 
 function deletePriorityFromArray(urgent, medium, low){
-      tasks[0].priority.splice(0, 1);
+      tasks[o].priority.splice(0, 1);
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
       low.classList.remove("low-checked");
@@ -350,10 +353,10 @@ function resetSubtaskInput() {
 }
 
 function deleteSubtask(i){
-      const subtaskIndexToDelete = tasks[0].subtasks.subtask_id.indexOf(i);
+      const subtaskIndexToDelete = tasks[o].subtasks.subtask_id.indexOf(i);
       if (subtaskIndexToDelete !== -1) {
-            tasks[0].subtasks.subtask.splice(subtaskIndexToDelete, 1); // Lösche den Subtask
-            tasks[0].subtasks.subtask_id.splice(subtaskIndexToDelete, 1); // Lösche die subtask_id
+            tasks[o].subtasks.subtask.splice(subtaskIndexToDelete, 1); // Lösche den Subtask
+            tasks[o].subtasks.subtask_id.splice(subtaskIndexToDelete, 1); // Lösche die subtask_id
           }
           renderSubtasks()
 }
@@ -361,10 +364,10 @@ function deleteSubtask(i){
 function renderSubtasks(){
       let liSubtask = document.getElementById('ul_subtask_task');
       liSubtask.innerHTML = "";
-      const subtasks = tasks[0].subtasks.subtask;
+      const subtasks = tasks[o].subtasks.subtask;
       for (let i = 0; i < subtasks.length; i++) {
-            const subtaskenktry = tasks[0].subtasks.subtask[i];
-            const subtaskId = tasks[0].subtasks.subtask_id[i];
+            const subtaskenktry = tasks[o].subtasks.subtask[i];
+            const subtaskId = tasks[o].subtasks.subtask_id[i];
             liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, subtaskId)
             
       }
@@ -384,8 +387,8 @@ function renderSubtasksHtmlTemplate(subtaskentry, subtaskId){
 }
 
 function saveSubtaskToArray(subtaskValue) {
-      tasks[0]['subtasks'].subtask.push(subtaskValue);
-      tasks[0]['subtasks'].subtask_id.push(subtaskCounter);
+      tasks[o]['subtasks'].subtask.push(subtaskValue);
+      tasks[o]['subtasks'].subtask_id.push(subtaskCounter);
       subtaskCounter++;
 }
 
@@ -405,40 +408,41 @@ function createTask(){
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
+      saveTaskToRemoteStorage();
 }
 
 function saveFormInputToArray(){
       let input = document.getElementById('input_title')
       let inputValue = input.value;
-      tasks[0].title.push(inputValue);
+      tasks[o].title.push(inputValue);
 }
 
 function saveTextareaInputToArray(){
       let input = document.getElementById('textarea_description')
       let inputValue = input.value;
-      tasks[0].description.push(inputValue);
+      tasks[o].description.push(inputValue);
 }
 
 function savePriorityToArray(Prio){
-      tasks[0].priority.splice(0, 1)
-      tasks[0].priority.push(Prio);
+      tasks[o].priority.splice(0, 1)
+      tasks[o].priority.push(Prio);
 }
 
 function saveCategoryToArray(category) {
-      tasks[0].category.splice(0, 1)
-      tasks[0].category.push(category)
+      tasks[o].category.splice(0, 1)
+      tasks[o].category.push(category)
 
 }
 
 function saveTheDateToArray(){
       let dueDate = document.getElementById("date-picker").value
-      tasks[0].date.push(dueDate);
+      tasks[o].date.push(dueDate);
 }
 
 
 
 
-function closeAccountsinAssignDropdown() {
+function closeAccountsInAssignDropdown() {
       let assign = document.getElementById(`assign_list`);
       assign.innerHTML = "";
       let category = document.getElementById('category_dropdown');
@@ -446,9 +450,13 @@ function closeAccountsinAssignDropdown() {
 }
 
 
+async function saveTaskToRemoteStorage(){
+      await setItem('tasks', (JSON.stringify(tasks)))
+}
+
 /* Datum aus Array ins date feld laden
 function loadTheDateFromArray(){
-      const dateArray = tasks[0].date;
+      const dateArray = tasks[o].date;
       const dateValue = dateArray[0];
       const dateInput = document.getElementById('date-picker');
       dateInput.value = dateValue;
