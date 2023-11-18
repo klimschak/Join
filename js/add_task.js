@@ -1,4 +1,50 @@
+
 let o = 0;
+
+
+    
+
+
+async function initAddTask(){
+      await loadTasksToAddTasksFromRemoteStorage();
+      o = await getItem('o', (JSON.parse(o)))
+      addToTasks();
+      
+}
+
+async function loadTasksToAddTasksFromRemoteStorage() {
+      try {
+        tasks = JSON.parse(await getItem("tasks"));
+      } catch (e) {
+        console.error("Loading error:", e);
+      }
+    }
+
+
+function addToTasks() {
+      tasks.push({
+        assigned: [],
+        category: [],
+        date: [],
+        description: [],
+        id: [],
+        initials: [],
+        priority: [],
+        status: [],
+        subtasks: {
+          subtask: [],
+          subtask_id: [],
+          completed: [],
+        },
+        title: [],
+      });
+      
+      }
+
+    
+
+
+
 
 function filterAccountsToAssign() {
       let search = document.getElementById("search_accounts_to_assign").value
@@ -404,17 +450,20 @@ function setToFocus(element) {
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
-function createTask(){
+async function createTask() {
+      
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
       setTaskStatus();
-      saveTaskToRemoteStorage();
-      
-}
+      await saveTaskToRemoteStorage();
+}    
+
+
+
 
 function setTaskStatus(){
-      let taskStatus = "to-do"
+      let taskStatus = "to-do-column"
       tasks[o].status.push(taskStatus);
 
 }
@@ -460,8 +509,17 @@ function closeAccountsInAssignDropdown() {
 
 async function saveTaskToRemoteStorage(){
       await setItem('tasks', (JSON.stringify(tasks)))
-      tasks = JSON.parse(await getItem('tasks'));
+      o++;
+      await setItem('o', (JSON.stringify(o)))
+
+      await getItem('o', (JSON.parse(o)))
+     
+      
+      
 }
+
+
+
 
 /* Datum aus Array ins date feld laden
 function loadTheDateFromArray(){
@@ -469,4 +527,4 @@ function loadTheDateFromArray(){
       const dateValue = dateArray[0];
       const dateInput = document.getElementById('date-picker');
       dateInput.value = dateValue;
-} */s
+} */

@@ -1,9 +1,26 @@
 
 
-async function renderAllTasksOnKanban() {
-  await loadTaskFromRemoteStorage();
 
+async function initRenderAllTasksOnKanban() {
+  
+  await loadTaskFromRemoteStorageToBoard();
+  resetBoard();
   for (let i = 0; i < tasks.length; i++) {
+    renderTaskCardOnKanban(i);
+  }
+}
+
+async function loadTaskFromRemoteStorageToBoard(){
+  tasks = JSON.parse(await getItem('tasks'));
+}
+
+async function saveTaskToRemoteStorageFromBoard(){
+  await setItem('tasks', (JSON.stringify(tasks)))
+  
+}
+
+function renderAllTasksOnKanban() {
+   for (let i = 0; i < tasks.length; i++) {
     renderTaskCardOnKanban(i);
   }
 }
@@ -12,9 +29,16 @@ async function loadTaskFromRemoteStorage(){
   tasks = JSON.parse(await getItem('tasks'));
 }
 
+function resetBoard(){
+  document.getElementById("to-do-column").innerHTML = "";
+  document.getElementById("in-progress-column").innerHTML = "";
+  document.getElementById("await-feedback-column").innerHTML = "";
+  document.getElementById("done-column").innerHTML = "";
+}
+
 function renderTaskCardOnKanban(i) {
   let status = getTaskStatus(i);
-  status = document.getElementById(`${status}-column`);
+  status = document.getElementById(`${status}`);
   let category = getKanbanTaskCategory(i);
   let categoryclass = getKanbanTaskCategoryCSSClass(i);
   let title = getKanbanTaskTitle(i);
@@ -182,9 +206,10 @@ function dropIntoColumn(ev, columnId) {
   }
 }
 
-function moveTo(status) {
+async function moveTo(status) {
   tasks[currentDraggedElement].status = status; // Ändere "status" zu "category", falls es die richtige Eigenschaft ist.
-  renderAllTasksOnKanban();
+  await saveTaskToRemoteStorageFromBoard();
+  await initRenderAllTasksOnKanban();
 }
 
 

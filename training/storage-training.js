@@ -25,3 +25,12 @@ async function getItem(key) {
       throw `Could not find data with key "${key}".`;
     });
 }
+
+let tasks = [];
+let o = 0;
+async function deleteTasksFromRS(){
+  await setItem('tasks', (JSON.stringify(tasks)))
+  await setItem('o', (JSON.stringify(o)))
+  
+}
+
