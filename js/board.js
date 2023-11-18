@@ -1,8 +1,15 @@
-function renderAllTasksOnKanban() {
+
+
+async function renderAllTasksOnKanban() {
+  await loadTaskFromRemoteStorage();
 
   for (let i = 0; i < tasks.length; i++) {
     renderTaskCardOnKanban(i);
   }
+}
+
+async function loadTaskFromRemoteStorage(){
+  tasks = JSON.parse(await getItem('tasks'));
 }
 
 function renderTaskCardOnKanban(i) {

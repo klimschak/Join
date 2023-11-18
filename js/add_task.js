@@ -408,7 +408,15 @@ function createTask(){
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
+      setTaskStatus();
       saveTaskToRemoteStorage();
+      
+}
+
+function setTaskStatus(){
+      let taskStatus = "to-do"
+      tasks[o].status.push(taskStatus);
+
 }
 
 function saveFormInputToArray(){
@@ -452,6 +460,7 @@ function closeAccountsInAssignDropdown() {
 
 async function saveTaskToRemoteStorage(){
       await setItem('tasks', (JSON.stringify(tasks)))
+      tasks = JSON.parse(await getItem('tasks'));
 }
 
 /* Datum aus Array ins date feld laden
@@ -460,4 +469,4 @@ function loadTheDateFromArray(){
       const dateValue = dateArray[0];
       const dateInput = document.getElementById('date-picker');
       dateInput.value = dateValue;
-} */
+} */s
