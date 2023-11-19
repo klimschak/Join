@@ -1,9 +1,5 @@
-
+// o ist der Taskcounter
 let o = 0;
-
-
-    
-
 
 async function initAddTask(){
       await loadTasksToAddTasksFromRemoteStorage();
@@ -19,7 +15,6 @@ async function loadTasksToAddTasksFromRemoteStorage() {
         console.error("Loading error:", e);
       }
     }
-
 
 function addToTasks() {
       tasks.push({
@@ -41,11 +36,6 @@ function addToTasks() {
       
       }
 
-    
-
-
-
-
 function filterAccountsToAssign() {
       let search = document.getElementById("search_accounts_to_assign").value
       search = search.toLowerCase();
@@ -54,9 +44,6 @@ function filterAccountsToAssign() {
       assign.innerHTML = "";
       displayAccountsInAssignDropdown(search, assign)
 }
-
-
-
 
 function displayAccountsInAssignDropdown(search, assign) {
       for (let i = 0; i < accounts.length; i++) {
@@ -75,13 +62,11 @@ function displayAccountsInAssignDropdown(search, assign) {
       }
 }
 
-
 function displayErrorIfNoResultsInAccountsToAssign(assign) {
       assign.innerHTML = /*html*/`
       <li class="assign_li" id="form_assign_error"><div class="form_assign_name form_assign_error">No results. Please modify your search. </div></li>
       `;
 }
-
 
 function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden */
@@ -96,7 +81,6 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       }
 }
 
-
 function checkIfAssigned(i) {
       const accountId = accounts[i]['id'];
       const assignedIds = tasks[o]['id'];
@@ -109,7 +93,6 @@ function checkIfAssigned(i) {
 
 }
 
-
 function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
@@ -121,7 +104,6 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
             filterAccountsToAssign()
       }
 }
-
 
 function ifAccountIsAssigned(i, index) {
       let assignbadge = document.getElementById(`assign_badge${i}`);
@@ -173,14 +155,7 @@ function openDropdownOnInput (){
       isDropdownOpen = true;
 }
 
-
-
 //subtaskInput.addEventListener('blur', showSubtaskInputIcons);
-
-
-
-
-
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||| Priorities ||||||||||||||||||
@@ -198,9 +173,7 @@ function setPriority(prio) {
       if (prio === 1 && prio != currentPriority || prio === 2 && prio != currentPriority  || prio === 3 && prio != currentPriority){
             checkPriority(urgent, medium, low, prio)
       }
-            
       else {
-            
             deletePriorityFromArray(urgent, medium, low)
       }
 }
@@ -210,7 +183,6 @@ function checkPriority (urgent, medium, low, prio){
             
             activatePrioUrgent(urgent, medium, low)
       }
-      
       if (prio === 2) {
            
             activatePrioMedium(urgent, medium, low)
@@ -459,9 +431,6 @@ async function createTask() {
       await saveTaskToRemoteStorage();
 }    
 
-
-
-
 function setTaskStatus(){
       let taskStatus = "to-do-column"
       tasks[o].status.push(taskStatus);
@@ -496,16 +465,12 @@ function saveTheDateToArray(){
       tasks[o].date.push(dueDate);
 }
 
-
-
-
 function closeAccountsInAssignDropdown() {
       let assign = document.getElementById(`assign_list`);
       assign.innerHTML = "";
       let category = document.getElementById('category_dropdown');
       category.innerHTML = "";
 }
-
 
 async function saveTaskToRemoteStorage(){
       await setItem('tasks', (JSON.stringify(tasks)))
@@ -519,7 +484,18 @@ async function saveTaskToRemoteStorage(){
 }
 
 
-
+async function openAddTaskOverlay() {
+      
+      let overlay = document.getElementById('add-task-overlay');
+      overlay.innerHTML =`
+      <div id="add-task-overlay-background">
+            <div w3-include-html="add-task.html">
+            </div>
+      </div>`;
+      await includeHTML();
+    
+    
+    }
 
 /* Datum aus Array ins date feld laden
 function loadTheDateFromArray(){
@@ -528,3 +504,10 @@ function loadTheDateFromArray(){
       const dateInput = document.getElementById('date-picker');
       dateInput.value = dateValue;
 } */
+/*
+async function openAddTaskOverlay() {
+      
+      
+    
+    }
+    */

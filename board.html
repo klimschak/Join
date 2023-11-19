@@ -15,11 +15,14 @@
   <script defer src="./js/board.js"></script>
   <script defer src="./js/storage.js"></script>
   <script defer src="./js/register.js"></script>
+  <script defer src="./js/html_templates.js"></script>
+  
 
   <title>Board</title>
 </head>
 
-<body onload="initRenderAllTasksOnKanban()">
+<body id="body" onload="initRenderAllTasksOnKanban()">
+  <div id="add-task-overlay"></div>
 
   <div id="header-kanban-container">
     <section id="header-container">
@@ -34,7 +37,7 @@
           <img src="./assets/img/search.svg" alt="">
         </div>
         <div class="board-add-button-container">
-          <button class="board-add-button"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+          <button class="board-add-button" onclick="openAddTaskOverlay()" ><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
         </div>
       </div>
   
