@@ -288,14 +288,40 @@ function setTaskCategory(category) {
       saveCategoryToArray(category);
 }
 
+
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||| Subtasks ||||||||||||||||||
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
-let subtaskCounter = 0;
-let subtaskInput = document.getElementById('subtask_input');
-subtaskInput.addEventListener('focus', showSubtaskInputIcons);
+
+let subtaskCounter;
+let subtaskInput;
+async function openAddTaskOverlay() {
+      let overlay = document.getElementById('add-task-overlay');
+      overlay.innerHTML = getAddTaskTemplate ();
+      await includeHTML();
+      addEventlistenerToSubtaskField ()
+    }
+    
+function addEventlistenerToSubtaskField (){
+      subtaskCounter = 0;
+      subtaskInput = document.getElementById('subtask_input');
+      subtaskInput.addEventListener('focus', showSubtaskInputIcons);
+}
+
+function getAddTaskTemplate (){
+      return /*html*/`
+      <div id="add-task-overlay-background">
+        <div id="add-task-overlay-container" w3-include-html="add-task.html">
+        </div>
+      </div>`;
+}
+
+
+
+
+
 
 function showSubtaskInputIcons() {
 
@@ -323,7 +349,7 @@ function showSubtaskInputIcons() {
 
 function saveSubtaskInLi() {
       let ul_subtask = document.getElementById('ul_subtask_task');
-      let subtaskInput = document.getElementById('subtask_input');
+      subtaskInput = document.getElementById('subtask_input');
       let subtaskValue = subtaskInput.value;
       
 
@@ -484,18 +510,6 @@ async function saveTaskToRemoteStorage(){
 }
 
 
-async function openAddTaskOverlay() {
-      
-      let overlay = document.getElementById('add-task-overlay');
-      overlay.innerHTML =`
-      <div id="add-task-overlay-background">
-            <div w3-include-html="add-task.html">
-            </div>
-      </div>`;
-      await includeHTML();
-    
-    
-    }
 
 /* Datum aus Array ins date feld laden
 function loadTheDateFromArray(){

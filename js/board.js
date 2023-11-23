@@ -231,15 +231,4 @@ function filterTasks(){
   }}
 }
 
-async function openAddTaskOverlay() {
-      
-  let overlay = document.getElementById('add-task-overlay');
-  overlay.innerHTML = /*html*/`
-  <div id="add-task-overlay-background">
-    <div id="add-task-overlay-container" w3-include-html="add-task.html">
-    </div>
-  </div>`;
-  await includeHTML();
 
-
-}
