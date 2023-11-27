@@ -722,30 +722,28 @@ margin-right: 10%
       display: none;
  }
 
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-|||||||||||||| AddTask-Overlay ||||||||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-<div id="add-task-overlay-background">
-        <div w3-include-html="add-task.html">
-        </div>
-  </div>`;
-*/
 
-#add-task-overlay-background {
-      position: absolute;
-      top:0;
-      right: 0;
-      background-color: #091931ee;
-      width: 100dvw;
-      height: 100dvh;
+.add-task-overlay {
       display: flex;
       justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+      background-color: #575757d1;
+      position:fixed;
+      width: 100%;
+      height: 100%;
+      
 
+      
 }
+
+
 
 #add-task-overlay-container {
       width: 80%;
+      background-color: #ffffffee;
+      padding: 48px;
+      border-radius: 20px;
 }
 
 
@@ -769,3 +767,6 @@ margin-right: 10%
 
 
 
+.d-none {
+      display: none;
+}

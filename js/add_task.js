@@ -1,6 +1,9 @@
 // o ist der Taskcounter
 let o = 0;
 
+// Die Variable soll den status auf dem Taskboard mitgeben, je nach dem welcher AddTask Button betätigt wird, wird der Task einem anderem Status zugeordnet
+let statusVar;
+
 async function initAddTask(){
       await loadTasksToAddTasksFromRemoteStorage();
       o = await getItem('o', (JSON.parse(o)))
@@ -281,11 +284,10 @@ function closeCategoryDropdownOnClickOutside(event) {
 
 function setTaskCategory(category) {
       let title = document.getElementById('category_field_title');
-      title.innerHTML = /*html*/ `
-      ${category}`;
+      title.innerHTML = /*html*/ `${category}`;
       let wipeCategoryDropdown = document.getElementById('category_dropdown');
       wipeCategoryDropdown.innerHTML = "";
-      saveCategoryToArray(category);
+      
 }
 
 
@@ -297,11 +299,14 @@ function setTaskCategory(category) {
 
 let subtaskCounter;
 let subtaskInput;
-async function openAddTaskOverlay() {
+async function openAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
+      overlay.classList.remove('d-none');
       overlay.innerHTML = getAddTaskTemplate ();
+      statusVar = status;
       await includeHTML();
       addEventlistenerToSubtaskField ()
+
     }
     
 function addEventlistenerToSubtaskField (){
@@ -312,14 +317,10 @@ function addEventlistenerToSubtaskField (){
 
 function getAddTaskTemplate (){
       return /*html*/`
-      <div id="add-task-overlay-background">
+      
         <div id="add-task-overlay-container" w3-include-html="add-task.html">
-        </div>
       </div>`;
 }
-
-
-
 
 
 
@@ -328,11 +329,11 @@ function showSubtaskInputIcons() {
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
       subtaskInputIcon.innerHTML =
       /*html*/`                              
-   
               <img src="./assets/img/subtask_abort.svg" alt="" onclick="resetSubtaskInput()">
               <hr>
               <img src="./assets/img/subtask_save.svg" alt="" onclick="saveSubtaskInLi()" >
       `;
+      
       subtaskInput.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                   saveSubtaskInLi();
@@ -454,13 +455,12 @@ async function createTask() {
       saveTextareaInputToArray();
       saveTheDateToArray();
       setTaskStatus();
+      saveCategoryToArray(category);
       await saveTaskToRemoteStorage();
 }    
 
 function setTaskStatus(){
-      let taskStatus = "to-do-column"
-      tasks[o].status.push(taskStatus);
-
+      tasks[o].status.push(statusVar);
 }
 
 function saveFormInputToArray(){
@@ -508,6 +508,7 @@ async function saveTaskToRemoteStorage(){
       
       
 }
+
 
 
 
