@@ -14,16 +14,33 @@ margin-right: 10%
 }
   
 
+ 
+
 .form_container {
       display: flex;
       gap:32px;
       justify-content: center;
+      margin-top: 32px;
 }
 
 .addtask_left_form,
 .addtask_right_form {
       flex-grow: 1;
 } 
+
+.addtask_header h1 {
+      font-size: 48px;
+}
+
+.addtask_header img {
+      height: 48px;
+      width: 48px;
+}
+
+
+
+
+
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||  Input Field  ||||||||||||||||
@@ -741,9 +758,11 @@ margin-right: 10%
 
 #add-task-overlay-container {
       width: 80%;
-      background-color: #ffffffee;
-      padding: 48px;
-      border-radius: 20px;
+      max-width: 988px !important;
+      
+      background-color: #f4f4f4;
+      padding: 64px;
+      border-radius: 30px;
 }
 
 

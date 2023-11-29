@@ -4,10 +4,13 @@ let o = 0;
 // Die Variable soll den status auf dem Taskboard mitgeben, je nach dem welcher AddTask Button betätigt wird, wird der Task einem anderem Status zugeordnet
 let statusVar;
 
+
+
 async function initAddTask(){
       await loadTasksToAddTasksFromRemoteStorage();
       o = await getItem('o', (JSON.parse(o)))
       addToTasks();
+      addEventlistenerToSubtaskField ();
       
 }
 
@@ -253,6 +256,7 @@ function openCategoryDropdown() {
             <li class="category-list" onclick="setTaskCategory('Technical Task')">Technical Task</li>
             <li class="category-list" onclick="setTaskCategory('User Story')">User Story</li>
             `;
+      
 }
 
 function closeCategoryDropdownOnClickOutside(event) {
@@ -285,8 +289,10 @@ function closeCategoryDropdownOnClickOutside(event) {
 function setTaskCategory(category) {
       let title = document.getElementById('category_field_title');
       title.innerHTML = /*html*/ `${category}`;
+      saveCategoryToArray(category);
       let wipeCategoryDropdown = document.getElementById('category_dropdown');
       wipeCategoryDropdown.innerHTML = "";
+      
       
 }
 
@@ -306,6 +312,7 @@ async function openAddTaskOverlay(status) {
       statusVar = status;
       await includeHTML();
       addEventlistenerToSubtaskField ()
+      await initAddTask()
 
     }
     
@@ -455,7 +462,7 @@ async function createTask() {
       saveTextareaInputToArray();
       saveTheDateToArray();
       setTaskStatus();
-      saveCategoryToArray(category);
+      
       await saveTaskToRemoteStorage();
 }    
 

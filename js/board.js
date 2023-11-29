@@ -6,7 +6,7 @@ async function initRenderAllTasksOnKanban() {
   await loadTaskFromRemoteStorageToBoard();
   resetBoard();
   for (let i = 0; i < tasks.length; i++) {
-    renderTaskCardOnKanban(i);
+    await renderTaskCardOnKanban(i);
   }
 }
 
@@ -36,7 +36,7 @@ function resetBoard(){
   document.getElementById("done-column").innerHTML = "";
 }
 
-function renderTaskCardOnKanban(i) {
+async function renderTaskCardOnKanban(i) {
   let status = getTaskStatus(i);
   status = document.getElementById(`${status}`);
   let category = getKanbanTaskCategory(i);
@@ -47,7 +47,7 @@ function renderTaskCardOnKanban(i) {
   let subtaskprogress = getKanbanSubtaskBar(i);
   let subtaskscompleted = getCompletedTasks(i);
   let prio = getPrioForKanban(i);
-  status.innerHTML += htmlTemplateRenderTaskCardOnKanban(
+  status.innerHTML += await htmlTemplateRenderTaskCardOnKanban(
     i,
     title,
     description,
@@ -142,7 +142,7 @@ function getAssignBadgesInitials(i) {
   }
 }
 
-function htmlTemplateRenderTaskCardOnKanban(
+async function htmlTemplateRenderTaskCardOnKanban(
   i,
   title,
   description,
