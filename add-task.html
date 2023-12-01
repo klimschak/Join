@@ -31,6 +31,7 @@
       </div>
 
       <form class="form_container">
+      <div class="form-elements-container">
             
             <div class="addtask_left_form">
                   <div class="form_input_container">
@@ -155,13 +156,18 @@
                               <p class="d-none">This field is required</p>
                         </div>
                   </div>
-                  <button type="button" onclick="createTask()">Clear</button>
-                  <button type="button" onclick="createTask()">Create Task</button>
+
             </div>
+      </div>
 
-            
+      <div class="container-create-clear">
+            <p><span class="required">*</span>This field is required.
+      <div class="button-container-create-clear">
+            <button type="button" class="secondary-button" onclick="createTask()">Clear</button>
+            <button type="button" class="primary-button" onclick="createTask()">Create Task</button>
+      </div>
+      </div>
       </form>
-
       
 </body>
 
