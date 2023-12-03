@@ -11,6 +11,7 @@ async function initAddTask(){
       o = await getItem('o', (JSON.parse(o)))
       addToTasks();
       addEventlistenerToSubtaskField ();
+      createInitialsFromName()
       
 }
 
@@ -110,6 +111,28 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
             filterAccountsToAssign()
       }
 }
+
+
+/*function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
+      let assign = document.getElementById(`assign_list`);
+      if (!assignedIds.includes(accountId)) {
+            tasks[o]['assigned'].push(accounts[i]['name']);
+            tasks[o]['id'].push(accountId);
+            let fullname = accounts[i]['name'];
+            initials = getInitials(fullname);
+            let initialsArray = tasks[o]['initials'];
+            initialsArray.push(initials);
+            badge.innerHTML =''; 
+
+            for (let indexOfInitials = 0; indexOfInitials < initialsArray.length; indexOfInitials++) {
+                  let initialsIndex = initialsArray[indexOfInitials];
+                  badge.innerHTML += `
+                  <div id="assign_badge${i}" class="form_assign_badge">${initialsIndex}</div>
+                  `;
+            }
+            filterAccountsToAssign()
+      }
+} */
 
 function ifAccountIsAssigned(i, index) {
       let assignbadge = document.getElementById(`assign_badge${i}`);

@@ -2,7 +2,7 @@
 
 
 async function initRenderAllTasksOnKanban() {
-  
+
   await loadTaskFromRemoteStorageToBoard();
   resetBoard();
   for (let i = 0; i < tasks.length; i++) {
@@ -10,26 +10,26 @@ async function initRenderAllTasksOnKanban() {
   }
 }
 
-async function loadTaskFromRemoteStorageToBoard(){
+async function loadTaskFromRemoteStorageToBoard() {
   tasks = JSON.parse(await getItem('tasks'));
 }
 
-async function saveTaskToRemoteStorageFromBoard(){
+async function saveTaskToRemoteStorageFromBoard() {
   await setItem('tasks', (JSON.stringify(tasks)))
-  
+
 }
 
 function renderAllTasksOnKanban() {
-   for (let i = 0; i < tasks.length; i++) {
+  for (let i = 0; i < tasks.length; i++) {
     renderTaskCardOnKanban(i);
   }
 }
 
-async function loadTaskFromRemoteStorage(){
+async function loadTaskFromRemoteStorage() {
   tasks = JSON.parse(await getItem('tasks'));
 }
 
-function resetBoard(){
+function resetBoard() {
   document.getElementById("to-do-column").innerHTML = "";
   document.getElementById("in-progress-column").innerHTML = "";
   document.getElementById("await-feedback-column").innerHTML = "";
@@ -61,7 +61,7 @@ async function renderTaskCardOnKanban(i) {
   getAssignBadgesInitials(i);
 }
 
-function getTaskStatus(i){
+function getTaskStatus(i) {
   let taskStatus = tasks[i].status;
   return taskStatus
 
@@ -215,7 +215,7 @@ async function moveTo(status) {
 
 
 //Filterfunktion
-function filterTasks(){
+function filterTasks() {
   let search = document.getElementById('search-input').value;
   search = search.toLowerCase();
   console.log(search);
@@ -223,12 +223,13 @@ function filterTasks(){
     let kanbanCard = document.getElementById(`kanban-card-${j}`);
     let taskTitle = tasks[j].title.toString();
     let taskDescription = tasks[j].description.toString();
-    if (taskTitle.toLowerCase().includes(search) || taskDescription.toLowerCase().includes(search)){
+    if (taskTitle.toLowerCase().includes(search) || taskDescription.toLowerCase().includes(search)) {
       kanbanCard.classList.remove('d-none')
     }
     else {
-    kanbanCard.classList.add('d-none');
-  }}
+      kanbanCard.classList.add('d-none');
+    }
+  }
 }
 
 
