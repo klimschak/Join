@@ -104,6 +104,7 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
             tasks[o]['assigned'].push(accounts[i]['name']);
+            tasks[o]['initials'].push(accounts[i]['initials']);
             tasks[o]['id'].push(accountId);
             badge.innerHTML += /*html*/`
                   <div id="assign_badge${i}" class="form_assign_badge">${accounts[i]['initials']}</div>
@@ -139,6 +140,7 @@ function ifAccountIsAssigned(i, index) {
       if (index !== -1) {
             tasks[o]['assigned'].splice(index, 1);
             tasks[o]['id'].splice(index, 1);
+            tasks[o]['initials'].splice(index, 1);
             assignbadge.remove();
             filterAccountsToAssign()
       }
