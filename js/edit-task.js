@@ -38,7 +38,6 @@ function addToTasks() {
           subtask_id: [],
           completed: [],
         },
-        taskID: "",
         title: [],
       });
       
@@ -532,7 +531,6 @@ function closeAccountsInAssignDropdown() {
 }
 
 async function saveTaskToRemoteStorage(){
-      tasks[o].taskID = o;
       await setItem('tasks', (JSON.stringify(tasks)))
       o++;
       await setItem('o', (JSON.stringify(o)))

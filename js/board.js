@@ -39,6 +39,8 @@ function resetBoard() {
 async function renderTaskCardOnKanban(i) {
   let status = getTaskStatus(i);
   status = document.getElementById(`${status}`);
+  let taskID = getTaskID(i);
+  
   let category = getKanbanTaskCategory(i);
   let categoryclass = getKanbanTaskCategoryCSSClass(i);
   let title = getKanbanTaskTitle(i);
@@ -56,9 +58,16 @@ async function renderTaskCardOnKanban(i) {
     subtasks,
     subtaskscompleted,
     subtaskprogress,
-    prio
+    prio,
+    taskID
   );
   getAssignBadgesInitials(i);
+  
+}
+
+function getTaskID(i){
+  let currentTaskID = tasks[i].taskID;
+  return currentTaskID
 }
 
 function getTaskStatus(i) {
@@ -151,10 +160,13 @@ async function htmlTemplateRenderTaskCardOnKanban(
   subtasks,
   subtaskscompleted,
   subtaskprogress,
-  prio
+  prio,
+  taskID
+  
+
 ) {
   return /*html*/ `
-  <div draggable="true" ondragstart="startDragging(${i})" id="kanban-card-${i}" class="kanban-card">
+  <div draggable="true" ondragstart="startDragging(${i})" id="kanban-card-${taskID}" class="kanban-card" onclick="loadTaskOverview(${taskID})">
     <div class="kanban-category-${categoryclass}">
       ${category}
     </div>
