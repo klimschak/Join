@@ -23,7 +23,7 @@ async function loadTasksToAddTasksFromRemoteStorage() {
       }
     }
 
-function addToTasks() {
+    function addToTasks() {
       tasks.push({
         assigned: [],
         category: [],
@@ -33,16 +33,18 @@ function addToTasks() {
         initials: [],
         priority: [],
         status: [],
-        subtasks: {
-          subtask: [],
-          subtask_id: [],
-          completed: [],
-        },
+        subtasks: [
+          {
+            subtask: "",
+            completed: "",
+            counter: ""
+          }
+        ],
         taskID: "",
-        title: [],
+        title: []
       });
-      
-      }
+    }
+    
 
 function filterAccountsToAssign() {
       let search = document.getElementById("search_accounts_to_assign").value
@@ -397,7 +399,7 @@ function saveSubtaskInLi() {
 
 function htmlTemplateSaveSubtaskInLi(subtaskValue){
       return /* html */`
-      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${subtaskCounter})" onmouseleave="hideSubtaskEditIcons(${subtaskCounter})" >
+      <li class="li_subtask_task" id="li_subtask_task_${subtaskCounter}" onmouseenter="showSubtaskEditIcons(${subtaskCounter})" onmouseleave="hideSubtaskEditIcons(${subtaskCounter})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskValue}</span>
             <div class="li_subtask_icon d-none" id="li${subtaskCounter}">
@@ -430,34 +432,44 @@ function resetSubtaskInput() {
       `;
 }
 
-function deleteSubtask(i){
-      const subtaskIndexToDelete = tasks[o].subtasks.subtask_id.indexOf(i);
-      if (subtaskIndexToDelete !== -1) {
-            tasks[o].subtasks.subtask.splice(subtaskIndexToDelete, 1); // Lösche den Subtask
-            tasks[o].subtasks.subtask_id.splice(subtaskIndexToDelete, 1); // Lösche die subtask_id
-          }
-          renderSubtasks()
-}
-
+function deleteSubtask(i) {
+      if (o < 0 || o >= tasks.length) {
+        // Überprüfe, ob o gültig ist
+        return;
+      }
+    
+      const subtasks = tasks[o].subtasks;
+    
+      if (i < 0 || i >= subtasks.length) {
+        // Überprüfe, ob i gültig ist
+        return;
+      }
+    
+      // Verwende splice(), um das Subtask-Objekt zu löschen
+      subtasks.splice(i, 1);
+      
+      // Rufe renderSubtasks() auf, um die Ansicht zu aktualisieren
+      renderSubtasks();
+    }
 function renderSubtasks(){
       let liSubtask = document.getElementById('ul_subtask_task');
       liSubtask.innerHTML = "";
-      const subtasks = tasks[o].subtasks.subtask;
-      for (let i = 0; i < subtasks.length; i++) {
-            const subtaskenktry = tasks[o].subtasks.subtask[i];
-            const subtaskId = tasks[o].subtasks.subtask_id[i];
-            liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, subtaskId)
+      const subtasks = tasks[o].subtasks;
+      for (let i = 0; i < subtaskCounter.length; i++) {
+            const subtaskenktry = tasks[o].subtasks[i];
+            const counter = tasks[o].subtasks[i].counter;
+            liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, counter)
             
       }
 }
 
-function renderSubtasksHtmlTemplate(subtaskentry, subtaskId){
+function renderSubtasksHtmlTemplate(subtaskentry, counter ){
       return /* html */  `
-      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${subtaskId})" onmouseleave="hideSubtaskEditIcons(${subtaskId})" >
+      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${counter})" onmouseleave="hideSubtaskEditIcons(${counter})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskentry}</span>
-            <div class="li_subtask_icon d-none" id="li${subtaskId}">
-            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskId})">
+            <div class="li_subtask_icon d-none" id="li${counter}">
+            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${counter})">
             <hr>
             <img src="./assets/img/subtask_edit.svg" alt="">
             </div>
@@ -465,8 +477,10 @@ function renderSubtasksHtmlTemplate(subtaskentry, subtaskId){
 }
 
 function saveSubtaskToArray(subtaskValue) {
-      tasks[o]['subtasks'].subtask.push(subtaskValue);
-      tasks[o]['subtasks'].subtask_id.push(subtaskCounter);
+      tasks[o].subtasks[subtaskCounter].counter = subtaskCounter;
+      tasks[o].subtasks[subtaskCounter].subtask = subtaskValue;
+      tasks[o].subtasks[subtaskCounter].completed = false;
+      
       subtaskCounter++;
 }
 

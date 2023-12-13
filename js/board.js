@@ -104,17 +104,20 @@ function getKanbanTaskDescription(i) {
 }
 
 function getLengthOfSubtasks(i) {
-  let task = tasks[i].subtasks.subtask;
+  let task = tasks[i].subtasks;
   let numberOfTasks = task.length;
   return numberOfTasks;
 }
 
 function getCompletedTasks(i) {
-  let completedArray = tasks[i].subtasks.completed;
-  let numberOfTrueValues = completedArray.filter(
-    (entity) => entity === true
-  ).length;
-  return numberOfTrueValues;
+  let subtasks = tasks[i].subtasks;
+  let completed = 0;
+  for (let j = 0; j < subtasks.length; j++) {
+    if (subtasks[j].complete === true) {
+      completed++;
+    }
+  }
+  return completed;
 }
 
 function getKanbanSubtaskBar(i) {

@@ -27,7 +27,10 @@ async function htmlTemplateLoadTaskOverview(task) {
                   <div class="overview-description">${task.description}</div>
                   <div class="overview-date"><div>Due Date:</div><div>${task.date}</div></div>
                   <div class="overview-priority"><div>Priority:</div><div>${task.priority}</div></div>
-                  <div id="overview-assigned" class="overview-assigned" onload=""><div>Assigned to:</div></div>
+                  <div id="overview-assigned" class="overview-assigned" onload="">
+                        <div class="overview-assigned-label">Assigned to:</div>
+                        <div id="overview-assigned-label-badge-container" class="overview-assigned-label-badge-container"></div>
+                  </div>
             </div>
       
       `
@@ -36,7 +39,7 @@ async function htmlTemplateLoadTaskOverview(task) {
 }
 
 async function loadOverviewAssigned(task){
-      let div = document.getElementById('overview-assigned');
+      let div = document.getElementById('overview-assigned-label-badge-container');
       assigned = task.assigned;
       for (let i = 0; i < assigned.length; i++) {
             const initials = task.initials[i];
@@ -44,11 +47,6 @@ async function loadOverviewAssigned(task){
             div.innerHTML += /*html*/`
             <div class="overview-assign-badge-container"><div class="overview-assign-badge">${initials}</div> <div>${name}</div></div>
             `
-
-
-
-            
-            
       }
 }
 
