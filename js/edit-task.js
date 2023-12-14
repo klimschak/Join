@@ -328,7 +328,7 @@ function setTaskCategory(category) {
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
-let subtaskCounter;
+
 let subtaskInput;
 async function openAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
@@ -342,7 +342,7 @@ async function openAddTaskOverlay(status) {
     }
     
 function addEventlistenerToSubtaskField (){
-      subtaskCounter = 0;
+
       subtaskInput = document.getElementById('subtask_input');
       subtaskInput.addEventListener('focus', showSubtaskInputIcons);
 }
@@ -396,11 +396,11 @@ function saveSubtaskInLi() {
 
 function htmlTemplateSaveSubtaskInLi(subtaskValue){
       return /* html */`
-      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${subtaskCounter})" onmouseleave="hideSubtaskEditIcons(${subtaskCounter})" >
+      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${taskIndex})" onmouseleave="hideSubtaskEditIcons(${taskIndex})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskValue}</span>
-            <div class="li_subtask_icon d-none" id="li${subtaskCounter}">
-                  <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskCounter})">
+            <div class="li_subtask_icon d-none" id="li${taskIndexr}">
+                  <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${taskIndex})">
                   <hr>
                   <img src="./assets/img/subtask_edit.svg" alt="">
             </div>

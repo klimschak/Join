@@ -1,17 +1,21 @@
-// o ist der Taskcounter
-let o = 0;
+// taskieLength ist der Taskcounter
+
 
 // Die Variable soll den status auf dem Taskboard mitgeben, je nach dem welcher AddTask Button betätigt wird, wird der Task einem anderem Status zugeordnet
 let statusVar;
-
+let taskieLength;
 
 
 async function initAddTask(){
       await loadTasksToAddTasksFromRemoteStorage();
-      o = await getItem('o', (JSON.parse(o)))
+      
       addToTasks();
       addEventlistenerToSubtaskField ();
       createInitialsFromName()
+      console.log("Hello world!:", tasks.length);
+      taskieLength = tasks.length - 1;
+      
+      
       
 }
 
@@ -21,6 +25,7 @@ async function loadTasksToAddTasksFromRemoteStorage() {
       } catch (e) {
         console.error("Loading error:", e);
       }
+      
     }
 
     function addToTasks() {
@@ -34,11 +39,7 @@ async function loadTasksToAddTasksFromRemoteStorage() {
         priority: [],
         status: [],
         subtasks: [
-          {
-            subtask: "",
-            completed: "",
-            counter: ""
-          }
+        
         ],
         taskID: "",
         title: []
@@ -58,7 +59,7 @@ function filterAccountsToAssign() {
 function displayAccountsInAssignDropdown(search, assign) {
       for (let i = 0; i < accounts.length; i++) {
             const accountId = accounts[i]['id'];
-            const assignedIds = tasks[o]['id'];
+            const assignedIds = tasks[taskieLength]['id'];
             const accountName = accounts[i]['name'];
             if (document.getElementById("form_assign_error")) {
                   document.getElementById("form_assign_error").remove();
@@ -93,9 +94,9 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
 
 function checkIfAssigned(i) {
       const accountId = accounts[i]['id'];
-      const assignedIds = tasks[o]['id'];
+      const assignedIds = tasks[taskieLength]['id'];
       const accountName = `${accounts[i]['name']}`;
-      const index = tasks[o]['assigned'].indexOf(accountName);
+      const index = tasks[taskieLength]['assigned'].indexOf(accountName);
       let badge = document.getElementById('form_assign_badge')
       let assignbadge = document.getElementById(`assign_badge${i}`);
       ifAccountIsNotAssigned(i, accountId, assignedIds, badge)
@@ -106,9 +107,9 @@ function checkIfAssigned(i) {
 function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
-            tasks[o]['assigned'].push(accounts[i]['name']);
-            tasks[o]['initials'].push(accounts[i]['initials']);
-            tasks[o]['id'].push(accountId);
+            tasks[taskieLength]['assigned'].push(accounts[i]['name']);
+            tasks[taskieLength]['initials'].push(accounts[i]['initials']);
+            tasks[taskieLength]['id'].push(accountId);
             badge.innerHTML += /*html*/`
                   <div id="assign_badge${i}" class="form_assign_badge">${accounts[i]['initials']}</div>
                   `;
@@ -120,11 +121,11 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
 /*function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
-            tasks[o]['assigned'].push(accounts[i]['name']);
-            tasks[o]['id'].push(accountId);
+            tasks[taskieLength]['assigned'].push(accounts[i]['name']);
+            tasks[taskieLength]['id'].push(accountId);
             let fullname = accounts[i]['name'];
             initials = getInitials(fullname);
-            let initialsArray = tasks[o]['initials'];
+            let initialsArray = tasks[taskieLength]['initials'];
             initialsArray.push(initials);
             badge.innerHTML =''; 
 
@@ -141,9 +142,9 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
 function ifAccountIsAssigned(i, index) {
       let assignbadge = document.getElementById(`assign_badge${i}`);
       if (index !== -1) {
-            tasks[o]['assigned'].splice(index, 1);
-            tasks[o]['id'].splice(index, 1);
-            tasks[o]['initials'].splice(index, 1);
+            tasks[taskieLength]['assigned'].splice(index, 1);
+            tasks[taskieLength]['id'].splice(index, 1);
+            tasks[taskieLength]['initials'].splice(index, 1);
             assignbadge.remove();
             filterAccountsToAssign()
       }
@@ -228,7 +229,7 @@ function checkPriority (urgent, medium, low, prio){
 }
 
 function deletePriorityFromArray(urgent, medium, low){
-      tasks[o].priority.splice(0, 1);
+      tasks[taskieLength].priority.splice(0, 1);
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
       low.classList.remove("low-checked");
@@ -331,7 +332,7 @@ function setTaskCategory(category) {
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
-let subtaskCounter;
+
 let subtaskInput;
 async function openAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
@@ -345,7 +346,6 @@ async function openAddTaskOverlay(status) {
     }
     
 function addEventlistenerToSubtaskField (){
-      subtaskCounter = 0;
       subtaskInput = document.getElementById('subtask_input');
       subtaskInput.addEventListener('focus', showSubtaskInputIcons);
 }
@@ -390,20 +390,23 @@ function saveSubtaskInLi() {
       
 
       if (subtaskValue.trim() !== '') {
-            ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue);
             saveSubtaskToArray(subtaskValue);
+            let subtaskIndex = tasks[taskieLength].subtasks.length - 1;
+            ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex);
+            
             resetSubtaskInput();
             subtaskInput.focus();
+
       }
 }
 
-function htmlTemplateSaveSubtaskInLi(subtaskValue){
+function htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex){
       return /* html */`
-      <li class="li_subtask_task" id="li_subtask_task_${subtaskCounter}" onmouseenter="showSubtaskEditIcons(${subtaskCounter})" onmouseleave="hideSubtaskEditIcons(${subtaskCounter})" >
+      <li class="li_subtask_task" id="li_subtask_task_${subtaskIndex}" onmouseenter="showSubtaskEditIcons(${subtaskIndex})" onmouseleave="hideSubtaskEditIcons(${subtaskIndex})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskValue}</span>
-            <div class="li_subtask_icon d-none" id="li${subtaskCounter}">
-                  <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskCounter})">
+            <div class="li_subtask_icon d-none" id="li${subtaskIndex}">
+                  <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskIndex})">
                   <hr>
                   <img src="./assets/img/subtask_edit.svg" alt="">
             </div>
@@ -433,43 +436,40 @@ function resetSubtaskInput() {
 }
 
 function deleteSubtask(i) {
-      if (o < 0 || o >= tasks.length) {
-        // Überprüfe, ob o gültig ist
-        return;
-      }
+     
     
-      const subtasks = tasks[o].subtasks;
+      const subtasks = tasks[taskieLength].subtasks;
     
-      if (i < 0 || i >= subtasks.length) {
-        // Überprüfe, ob i gültig ist
-        return;
-      }
     
       // Verwende splice(), um das Subtask-Objekt zu löschen
-      subtasks.splice(i, 1);
+      if (i >= 0 && i < subtasks.length) {
+            subtasks.splice(i, 1); // Lösche das Subtask-Objekt an der Position i
+            renderSubtasks(); // Aktualisiere die Ansicht
+          }
       
       // Rufe renderSubtasks() auf, um die Ansicht zu aktualisieren
+      
       renderSubtasks();
     }
 function renderSubtasks(){
       let liSubtask = document.getElementById('ul_subtask_task');
       liSubtask.innerHTML = "";
-      const subtasks = tasks[o].subtasks;
-      for (let i = 0; i < subtaskCounter.length; i++) {
-            const subtaskenktry = tasks[o].subtasks[i];
-            const counter = tasks[o].subtasks[i].counter;
-            liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, counter)
+      const subtasks = tasks[taskieLength].subtasks;
+      for (let i = 0; i < subtasks.length; i++) {
+            const subtaskenktry = tasks[taskieLength].subtasks[i].subtask;
+            const counter = tasks[taskieLength].subtasks[i].counter;
+            liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, i)
             
       }
 }
 
-function renderSubtasksHtmlTemplate(subtaskentry, counter ){
+function renderSubtasksHtmlTemplate(subtaskentry, i ){
       return /* html */  `
-      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${counter})" onmouseleave="hideSubtaskEditIcons(${counter})" >
+      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${i})" onmouseleave="hideSubtaskEditIcons(${i})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskentry}</span>
-            <div class="li_subtask_icon d-none" id="li${counter}">
-            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${counter})">
+            <div class="li_subtask_icon d-none" id="li${i}">
+            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${i})">
             <hr>
             <img src="./assets/img/subtask_edit.svg" alt="">
             </div>
@@ -477,11 +477,12 @@ function renderSubtasksHtmlTemplate(subtaskentry, counter ){
 }
 
 function saveSubtaskToArray(subtaskValue) {
-      tasks[o].subtasks[subtaskCounter].counter = subtaskCounter;
-      tasks[o].subtasks[subtaskCounter].subtask = subtaskValue;
-      tasks[o].subtasks[subtaskCounter].completed = false;
-      
-      subtaskCounter++;
+      tasks[taskieLength].subtasks.push ({
+            completed: false,
+            subtask: subtaskValue
+
+      });
+           
 }
 
 
@@ -507,35 +508,35 @@ async function createTask() {
 }    
 
 function setTaskStatus(){
-      tasks[o].status.push(statusVar);
+      tasks[taskieLength].status.push(statusVar);
 }
 
 function saveFormInputToArray(){
       let input = document.getElementById('input_title')
       let inputValue = input.value;
-      tasks[o].title.push(inputValue);
+      tasks[taskieLength].title.push(inputValue);
 }
 
 function saveTextareaInputToArray(){
       let input = document.getElementById('textarea_description')
       let inputValue = input.value;
-      tasks[o].description.push(inputValue);
+      tasks[taskieLength].description.push(inputValue);
 }
 
 function savePriorityToArray(Prio){
-      tasks[o].priority.splice(0, 1)
-      tasks[o].priority.push(Prio);
+      tasks[taskieLength].priority.splice(0, 1)
+      tasks[taskieLength].priority.push(Prio);
 }
 
 function saveCategoryToArray(category) {
-      tasks[o].category.splice(0, 1)
-      tasks[o].category.push(category)
+      tasks[taskieLength].category.splice(0, 1)
+      tasks[taskieLength].category.push(category)
 
 }
 
 function saveTheDateToArray(){
       let dueDate = document.getElementById("date-picker").value
-      tasks[o].date.push(dueDate);
+      tasks[taskieLength].date.push(dueDate);
 }
 
 function closeAccountsInAssignDropdown() {
@@ -546,12 +547,12 @@ function closeAccountsInAssignDropdown() {
 }
 
 async function saveTaskToRemoteStorage(){
-      tasks[o].taskID = o;
+      tasks[taskieLength].taskID = taskieLength;
       await setItem('tasks', (JSON.stringify(tasks)))
-      o++;
-      await setItem('o', (JSON.stringify(o)))
+      taskieLength++;
+      await setItem('taskieLength', (JSON.stringify(taskieLength)))
 
-      await getItem('o', (JSON.parse(o)))
+      await getItem('taskieLength', (JSON.parse(taskieLength)))
      
       
       
@@ -562,7 +563,7 @@ async function saveTaskToRemoteStorage(){
 
 /* Datum aus Array ins date feld laden
 function loadTheDateFromArray(){
-      const dateArray = tasks[o].date;
+      const dateArray = tasks[taskieLength].date;
       const dateValue = dateArray[0];
       const dateInput = document.getElementById('date-picker');
       dateInput.value = dateValue;
