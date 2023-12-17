@@ -27,7 +27,7 @@
       <!-- <button onclick="closeAccountsinAssignDropdown(), loadTheDateFromArray()">Schließen</button> -->
       <div class="addtask_header">
             <h1 class="add-task">Add Task</h1>
-            <img src="./assets/img/Close.svg" alt="">
+            <img onclick="closeAndDeleteAddTask()" src="./assets/img/Close.svg" alt="">
       </div>
 
       <form class="form_container">
@@ -89,7 +89,7 @@
                               <h4>Due date<span class="required">*</span></h4>
                         </div>
 
-                        <input class="form_input_field date_field" type="date" id="date-picker" name="geburtstag"
+                        <input class="form_input_field date_field" type="date" id="date-picker" name="datum"
                               required="required">
 
                         <div class="form_input_notice">

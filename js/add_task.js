@@ -554,6 +554,13 @@ async function saveTaskToRemoteStorage(){
       
 }
 
+
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||| Delete Clear Tasks ||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
+
 async function deleteTask(){
       tasks.splice(taskIndex, 1)
       document.getElementById('input_title').value = "";
@@ -565,8 +572,8 @@ async function deleteTask(){
       document.getElementById('category_field_title').innerHTML = "Select task category";
       document.getElementById('ul_subtask_task').innerHTML = "";
       clearPriority();
-      await saveTaskToRemoteStorage()
       addToTasks()
+      await saveTaskToRemoteStorage()
 }
 
 function clearPriority (){
@@ -584,6 +591,23 @@ function clearPriority (){
 }
 
 
+async function closeAndDeleteAddTask(){
+      await deleteTask()
+      tasks.splice(taskIndex, 1)
+      await saveTaskToRemoteStorage()
+      await closeAddTaskOverlay(status);
+
+}
+
+
+
+async function closeAddTaskOverlay(status) {
+      let overlay = document.getElementById('add-task-overlay');
+      overlay.classList.add('d-none');
+      overlay.innerHTML = "";
+      statusVar = status;
+}
+
 /* Datum aus Array ins date feld laden
 function loadTheDateFromArray(){
       const dateArray = tasks[taskIndex].date;
@@ -593,8 +617,6 @@ function loadTheDateFromArray(){
 } */
 /*
 async function openAddTaskOverlay() {
-      
-      
     
     }
     */
