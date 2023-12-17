@@ -12,7 +12,6 @@ async function initAddTask(){
       addToTasks();
       addEventlistenerToSubtaskField ();
       createInitialsFromName()
-      console.log("Hello world!:", tasks.length);
       taskIndex = tasks.length - 1;
       
       
@@ -229,6 +228,7 @@ function checkPriority (urgent, medium, low, prio){
 }
 
 function deletePriorityFromArray(urgent, medium, low){
+      
       tasks[taskIndex].priority.splice(0, 1);
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
@@ -556,9 +556,32 @@ async function saveTaskToRemoteStorage(){
 
 async function deleteTask(){
       tasks.splice(taskIndex, 1)
+      document.getElementById('input_title').value = "";
+      document.getElementById('textarea_description').value = "";
+      document.getElementById('search_accounts_to_assign').value = "";
+      document.getElementById('date-picker').value = "";
+      document.getElementById('subtask_input').value = "";
+      document.getElementById('form_assign_badge').innerHTML = "";
+      document.getElementById('category_field_title').innerHTML = "Select task category";
+      document.getElementById('ul_subtask_task').innerHTML = "";
+      clearPriority();
       await saveTaskToRemoteStorage()
+      addToTasks()
 }
 
+function clearPriority (){
+      let urgent = document.getElementById('urgent');
+      let medium = document.getElementById('medium');
+      let low = document.getElementById('low');
+           
+            urgent.classList.remove("urgent-checked");
+            medium.classList.remove("medium-checked");
+            low.classList.remove("low-checked");
+            urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
+            medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
+            low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
+            currentPriority = 0;
+}
 
 
 /* Datum aus Array ins date feld laden
