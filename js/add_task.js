@@ -3,7 +3,7 @@
 
 // Die Variable soll den status auf dem Taskboard mitgeben, je nach dem welcher AddTask Button betätigt wird, wird der Task einem anderem Status zugeordnet
 let statusVar;
-let taskIndex
+let taskIndex;
 
 
 async function initAddTask(){
@@ -337,7 +337,9 @@ let subtaskInput;
 async function openAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
       overlay.classList.remove('d-none');
-      overlay.innerHTML = getAddTaskTemplate ();
+      let template = "add-task.html"
+      let elementID = "add-task-overlay-container"
+      overlay.innerHTML = getHtmlTemplate (template, elementID);
       statusVar = status;
       await includeHTML();
       addEventlistenerToSubtaskField ()
@@ -350,10 +352,10 @@ function addEventlistenerToSubtaskField (){
       subtaskInput.addEventListener('focus', showSubtaskInputIcons);
 }
 
-function getAddTaskTemplate (){
+function getHtmlTemplate (template, elementID){
       return /*html*/`
       
-        <div id="add-task-overlay-container" w3-include-html="add-task.html">
+        <div id=${elementID} w3-include-html=${template}>
       </div>`;
 }
 
