@@ -27,7 +27,7 @@
       <!-- <button onclick="closeAccountsinAssignDropdown(), loadTheDateFromArray()">Schließen</button> -->
       <div class="addtask_header">
             <h1 class="add-task">Add Task</h1>
-            <img onclick="closeAndDeleteAddTask()" src="./assets/img/Close.svg" alt="">
+            <img src="./assets/img/Close.svg" alt="">
       </div>
 
       <form class="form_container">
@@ -89,7 +89,7 @@
                               <h4>Due date<span class="required">*</span></h4>
                         </div>
 
-                        <input class="form_input_field date_field" type="date" id="date-picker" name="datum"
+                        <input class="form_input_field date_field" type="date" id="date-picker" name="geburtstag"
                               required="required">
 
                         <div class="form_input_notice">
@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="subtask_input_container" id="subtask_input_container">
-                              <input class="subtask_input" id="subtask_input" name="subtaskt_title" placeholder="Add subtask" id="subtask_input">
+                              <input class="subtask_input" name="subtaskt_title" placeholder="Add subtask" id="subtask_input">
                               <div id="subtask_input_icon" class="subtask_input_icon" >
                                     <img onclick="showSubtaskInputIcons()" src="./assets/img/subtask_add.svg" alt="">
                               </div>
@@ -163,7 +163,7 @@
       <div class="container-create-clear">
             <p><span class="required">*</span>This field is required.
       <div class="button-container-create-clear">
-            <button type="button" class="secondary-button" onclick="deleteTask()">Clear</button>
+            <button type="button" class="secondary-button" onclick="createTask()">Clear</button>
             <button type="button" class="primary-button" onclick="createTask()">Create Task</button>
       </div>
       </div>

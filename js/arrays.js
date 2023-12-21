@@ -2,21 +2,34 @@ let accounts = [
   {
     id: 1,
     name: "Siham El-Maimouni",
-    initials: "SE",
+    initials: []
   },
 
   {
     id: 2,
     name: "Pedro Göntürk",
-    initials: "PG",
+    initials: []
   },
 
   {
     id: 3,
     name: "Thorsten Puccini",
-    initials: "TP",
+    initials: []
   },
 ];
+
+
+function createInitialsFromName(){
+  for (let i = 0; i < accounts.length; i++) {
+    const fullName = accounts[i]['name'];
+    const initials = getInitials(fullName);
+    accounts[i]['initials'] = (initials);
+  }
+}
+
+function getInitials(name) {
+  return name.split(' ').map(word => word[0]).join('');
+}
 
 let tasks = [];
 

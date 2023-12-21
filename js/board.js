@@ -2,43 +2,45 @@
 
 
 async function initRenderAllTasksOnKanban() {
-  
+
   await loadTaskFromRemoteStorageToBoard();
   resetBoard();
+  for (let i = 0; i < tasks.length; i++) {
+    await renderTaskCardOnKanban(i);
+  }
+}
+
+async function loadTaskFromRemoteStorageToBoard() {
+  tasks = JSON.parse(await getItem('tasks'));
+}
+
+async function saveTaskToRemoteStorageFromBoard() {
+  await setItem('tasks', (JSON.stringify(tasks)))
+
+}
+
+function renderAllTasksOnKanban() {
   for (let i = 0; i < tasks.length; i++) {
     renderTaskCardOnKanban(i);
   }
 }
 
-async function loadTaskFromRemoteStorageToBoard(){
+async function loadTaskFromRemoteStorage() {
   tasks = JSON.parse(await getItem('tasks'));
 }
 
-async function saveTaskToRemoteStorageFromBoard(){
-  await setItem('tasks', (JSON.stringify(tasks)))
-  
-}
-
-function renderAllTasksOnKanban() {
-   for (let i = 0; i < tasks.length; i++) {
-    renderTaskCardOnKanban(i);
-  }
-}
-
-async function loadTaskFromRemoteStorage(){
-  tasks = JSON.parse(await getItem('tasks'));
-}
-
-function resetBoard(){
+function resetBoard() {
   document.getElementById("to-do-column").innerHTML = "";
   document.getElementById("in-progress-column").innerHTML = "";
   document.getElementById("await-feedback-column").innerHTML = "";
   document.getElementById("done-column").innerHTML = "";
 }
 
-function renderTaskCardOnKanban(i) {
+async function renderTaskCardOnKanban(i) {
   let status = getTaskStatus(i);
   status = document.getElementById(`${status}`);
+  
+  
   let category = getKanbanTaskCategory(i);
   let categoryclass = getKanbanTaskCategoryCSSClass(i);
   let title = getKanbanTaskTitle(i);
@@ -47,7 +49,7 @@ function renderTaskCardOnKanban(i) {
   let subtaskprogress = getKanbanSubtaskBar(i);
   let subtaskscompleted = getCompletedTasks(i);
   let prio = getPrioForKanban(i);
-  status.innerHTML += htmlTemplateRenderTaskCardOnKanban(
+  status.innerHTML += await htmlTemplateRenderTaskCardOnKanban(
     i,
     title,
     description,
@@ -57,11 +59,15 @@ function renderTaskCardOnKanban(i) {
     subtaskscompleted,
     subtaskprogress,
     prio
+    
   );
   getAssignBadgesInitials(i);
+  
 }
 
-function getTaskStatus(i){
+
+
+function getTaskStatus(i) {
   let taskStatus = tasks[i].status;
   return taskStatus
 
@@ -95,17 +101,20 @@ function getKanbanTaskDescription(i) {
 }
 
 function getLengthOfSubtasks(i) {
-  let task = tasks[i].subtasks.subtask;
+  let task = tasks[i].subtasks;
   let numberOfTasks = task.length;
   return numberOfTasks;
 }
 
 function getCompletedTasks(i) {
-  let completedArray = tasks[i].subtasks.completed;
-  let numberOfTrueValues = completedArray.filter(
-    (entity) => entity === true
-  ).length;
-  return numberOfTrueValues;
+  let subtasks = tasks[i].subtasks;
+  let completed = 0;
+  for (let j = 0; j < subtasks.length; j++) {
+    if (subtasks[j].complete === true) {
+      completed++;
+    }
+  }
+  return completed;
 }
 
 function getKanbanSubtaskBar(i) {
@@ -142,7 +151,7 @@ function getAssignBadgesInitials(i) {
   }
 }
 
-function htmlTemplateRenderTaskCardOnKanban(
+async function htmlTemplateRenderTaskCardOnKanban(
   i,
   title,
   description,
@@ -152,9 +161,11 @@ function htmlTemplateRenderTaskCardOnKanban(
   subtaskscompleted,
   subtaskprogress,
   prio
+  
+
 ) {
   return /*html*/ `
-  <div draggable="true" ondragstart="startDragging(${i})" id="kanban-card-${i}" class="kanban-card">
+  <div draggable="true" ondragstart="startDragging(${i})" id="kanban-card-${i}" class="kanban-card" onclick="loadTaskOverview(${i})">
     <div class="kanban-category-${categoryclass}">
       ${category}
     </div>
@@ -215,7 +226,7 @@ async function moveTo(status) {
 
 
 //Filterfunktion
-function filterTasks(){
+function filterTasks() {
   let search = document.getElementById('search-input').value;
   search = search.toLowerCase();
   console.log(search);
@@ -223,23 +234,13 @@ function filterTasks(){
     let kanbanCard = document.getElementById(`kanban-card-${j}`);
     let taskTitle = tasks[j].title.toString();
     let taskDescription = tasks[j].description.toString();
-    if (taskTitle.toLowerCase().includes(search) || taskDescription.toLowerCase().includes(search)){
+    if (taskTitle.toLowerCase().includes(search) || taskDescription.toLowerCase().includes(search)) {
       kanbanCard.classList.remove('d-none')
     }
     else {
-    kanbanCard.classList.add('d-none');
-  }}
+      kanbanCard.classList.add('d-none');
+    }
+  }
 }
 
-async function openAddTaskOverlay() {
-      
-  let overlay = document.getElementById('add-task-overlay');
-  overlay.innerHTML = /*html*/`
-  <div id="add-task-overlay-background">
-    <div id="add-task-overlay-container" w3-include-html="add-task.html">
-    </div>
-  </div>`;
-  await includeHTML();
 
-
-}

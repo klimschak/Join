@@ -1,20 +1,17 @@
-// taskIndex ist der Taskcounter
-
+// o ist der Taskcounter
+let o = 0;
 
 // Die Variable soll den status auf dem Taskboard mitgeben, je nach dem welcher AddTask Button betätigt wird, wird der Task einem anderem Status zugeordnet
 let statusVar;
-let taskIndex;
+
 
 
 async function initAddTask(){
       await loadTasksToAddTasksFromRemoteStorage();
-      
+      o = await getItem('o', (JSON.parse(o)))
       addToTasks();
       addEventlistenerToSubtaskField ();
       createInitialsFromName()
-      taskIndex = tasks.length - 1;
-      
-      
       
 }
 
@@ -24,10 +21,9 @@ async function loadTasksToAddTasksFromRemoteStorage() {
       } catch (e) {
         console.error("Loading error:", e);
       }
-      
     }
 
-    function addToTasks() {
+function addToTasks() {
       tasks.push({
         assigned: [],
         category: [],
@@ -37,14 +33,15 @@ async function loadTasksToAddTasksFromRemoteStorage() {
         initials: [],
         priority: [],
         status: [],
-        subtasks: [
-        
-        ],
-        
-        title: []
+        subtasks: {
+          subtask: [],
+          subtask_id: [],
+          completed: [],
+        },
+        title: [],
       });
-    }
-    
+      
+      }
 
 function filterAccountsToAssign() {
       let search = document.getElementById("search_accounts_to_assign").value
@@ -58,7 +55,7 @@ function filterAccountsToAssign() {
 function displayAccountsInAssignDropdown(search, assign) {
       for (let i = 0; i < accounts.length; i++) {
             const accountId = accounts[i]['id'];
-            const assignedIds = tasks[taskIndex]['id'];
+            const assignedIds = tasks[o]['id'];
             const accountName = accounts[i]['name'];
             if (document.getElementById("form_assign_error")) {
                   document.getElementById("form_assign_error").remove();
@@ -93,9 +90,9 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
 
 function checkIfAssigned(i) {
       const accountId = accounts[i]['id'];
-      const assignedIds = tasks[taskIndex]['id'];
+      const assignedIds = tasks[o]['id'];
       const accountName = `${accounts[i]['name']}`;
-      const index = tasks[taskIndex]['assigned'].indexOf(accountName);
+      const index = tasks[o]['assigned'].indexOf(accountName);
       let badge = document.getElementById('form_assign_badge')
       let assignbadge = document.getElementById(`assign_badge${i}`);
       ifAccountIsNotAssigned(i, accountId, assignedIds, badge)
@@ -106,9 +103,9 @@ function checkIfAssigned(i) {
 function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
-            tasks[taskIndex]['assigned'].push(accounts[i]['name']);
-            tasks[taskIndex]['initials'].push(accounts[i]['initials']);
-            tasks[taskIndex]['id'].push(accountId);
+            tasks[o]['assigned'].push(accounts[i]['name']);
+            tasks[o]['initials'].push(accounts[i]['initials']);
+            tasks[o]['id'].push(accountId);
             badge.innerHTML += /*html*/`
                   <div id="assign_badge${i}" class="form_assign_badge">${accounts[i]['initials']}</div>
                   `;
@@ -120,11 +117,11 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
 /*function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
-            tasks[taskIndex]['assigned'].push(accounts[i]['name']);
-            tasks[taskIndex]['id'].push(accountId);
+            tasks[o]['assigned'].push(accounts[i]['name']);
+            tasks[o]['id'].push(accountId);
             let fullname = accounts[i]['name'];
             initials = getInitials(fullname);
-            let initialsArray = tasks[taskIndex]['initials'];
+            let initialsArray = tasks[o]['initials'];
             initialsArray.push(initials);
             badge.innerHTML =''; 
 
@@ -141,9 +138,9 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
 function ifAccountIsAssigned(i, index) {
       let assignbadge = document.getElementById(`assign_badge${i}`);
       if (index !== -1) {
-            tasks[taskIndex]['assigned'].splice(index, 1);
-            tasks[taskIndex]['id'].splice(index, 1);
-            tasks[taskIndex]['initials'].splice(index, 1);
+            tasks[o]['assigned'].splice(index, 1);
+            tasks[o]['id'].splice(index, 1);
+            tasks[o]['initials'].splice(index, 1);
             assignbadge.remove();
             filterAccountsToAssign()
       }
@@ -228,8 +225,7 @@ function checkPriority (urgent, medium, low, prio){
 }
 
 function deletePriorityFromArray(urgent, medium, low){
-      
-      tasks[taskIndex].priority.splice(0, 1);
+      tasks[o].priority.splice(0, 1);
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
       low.classList.remove("low-checked");
@@ -337,9 +333,7 @@ let subtaskInput;
 async function openAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
       overlay.classList.remove('d-none');
-      let template = "add-task.html"
-      let elementID = "add-task-overlay-container"
-      overlay.innerHTML = getHtmlTemplate (template, elementID);
+      overlay.innerHTML = getAddTaskTemplate ();
       statusVar = status;
       await includeHTML();
       addEventlistenerToSubtaskField ()
@@ -348,14 +342,15 @@ async function openAddTaskOverlay(status) {
     }
     
 function addEventlistenerToSubtaskField (){
+
       subtaskInput = document.getElementById('subtask_input');
       subtaskInput.addEventListener('focus', showSubtaskInputIcons);
 }
 
-function getHtmlTemplate (template, elementID){
+function getAddTaskTemplate (){
       return /*html*/`
       
-        <div id=${elementID} w3-include-html=${template}>
+        <div id="add-task-overlay-container" w3-include-html="add-task.html">
       </div>`;
 }
 
@@ -392,23 +387,20 @@ function saveSubtaskInLi() {
       
 
       if (subtaskValue.trim() !== '') {
+            ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue);
             saveSubtaskToArray(subtaskValue);
-            let subtaskIndex = tasks[taskIndex].subtasks.length - 1;
-            ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex);
-            
             resetSubtaskInput();
             subtaskInput.focus();
-
       }
 }
 
-function htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex){
+function htmlTemplateSaveSubtaskInLi(subtaskValue){
       return /* html */`
-      <li class="li_subtask_task" id="li_subtask_task_${subtaskIndex}" onmouseenter="showSubtaskEditIcons(${subtaskIndex})" onmouseleave="hideSubtaskEditIcons(${subtaskIndex})" >
+      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${taskIndex})" onmouseleave="hideSubtaskEditIcons(${taskIndex})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskValue}</span>
-            <div class="li_subtask_icon d-none" id="li${subtaskIndex}">
-                  <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskIndex})">
+            <div class="li_subtask_icon d-none" id="li${taskIndexr}">
+                  <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${taskIndex})">
                   <hr>
                   <img src="./assets/img/subtask_edit.svg" alt="">
             </div>
@@ -437,41 +429,34 @@ function resetSubtaskInput() {
       `;
 }
 
-function deleteSubtask(i) {
-     
-    
-      const subtasks = tasks[taskIndex].subtasks;
-    
-    
-      // Verwende splice(), um das Subtask-Objekt zu löschen
-      if (i >= 0 && i < subtasks.length) {
-            subtasks.splice(i, 1); // Lösche das Subtask-Objekt an der Position i
-            renderSubtasks(); // Aktualisiere die Ansicht
+function deleteSubtask(i){
+      const subtaskIndexToDelete = tasks[o].subtasks.subtask_id.indexOf(i);
+      if (subtaskIndexToDelete !== -1) {
+            tasks[o].subtasks.subtask.splice(subtaskIndexToDelete, 1); // Lösche den Subtask
+            tasks[o].subtasks.subtask_id.splice(subtaskIndexToDelete, 1); // Lösche die subtask_id
           }
-      
-      // Rufe renderSubtasks() auf, um die Ansicht zu aktualisieren
-      
-      renderSubtasks();
-    }
+          renderSubtasks()
+}
+
 function renderSubtasks(){
       let liSubtask = document.getElementById('ul_subtask_task');
       liSubtask.innerHTML = "";
-      const subtasks = tasks[taskIndex].subtasks;
+      const subtasks = tasks[o].subtasks.subtask;
       for (let i = 0; i < subtasks.length; i++) {
-            const subtaskenktry = tasks[taskIndex].subtasks[i].subtask;
-            const counter = tasks[taskIndex].subtasks[i].counter;
-            liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, i)
+            const subtaskenktry = tasks[o].subtasks.subtask[i];
+            const subtaskId = tasks[o].subtasks.subtask_id[i];
+            liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, subtaskId)
             
       }
 }
 
-function renderSubtasksHtmlTemplate(subtaskentry, i ){
+function renderSubtasksHtmlTemplate(subtaskentry, subtaskId){
       return /* html */  `
-      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${i})" onmouseleave="hideSubtaskEditIcons(${i})" >
+      <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${subtaskId})" onmouseleave="hideSubtaskEditIcons(${subtaskId})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
             <span>${subtaskentry}</span>
-            <div class="li_subtask_icon d-none" id="li${i}">
-            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${i})">
+            <div class="li_subtask_icon d-none" id="li${subtaskId}">
+            <img src="./assets/img/delete.svg" alt="" onclick="deleteSubtask(${subtaskId})">
             <hr>
             <img src="./assets/img/subtask_edit.svg" alt="">
             </div>
@@ -479,12 +464,9 @@ function renderSubtasksHtmlTemplate(subtaskentry, i ){
 }
 
 function saveSubtaskToArray(subtaskValue) {
-      tasks[taskIndex].subtasks.push ({
-            completed: false,
-            subtask: subtaskValue
-
-      });
-           
+      tasks[o]['subtasks'].subtask.push(subtaskValue);
+      tasks[o]['subtasks'].subtask_id.push(subtaskCounter);
+      subtaskCounter++;
 }
 
 
@@ -510,35 +492,35 @@ async function createTask() {
 }    
 
 function setTaskStatus(){
-      tasks[taskIndex].status.push(statusVar);
+      tasks[o].status.push(statusVar);
 }
 
 function saveFormInputToArray(){
       let input = document.getElementById('input_title')
       let inputValue = input.value;
-      tasks[taskIndex].title.push(inputValue);
+      tasks[o].title.push(inputValue);
 }
 
 function saveTextareaInputToArray(){
       let input = document.getElementById('textarea_description')
       let inputValue = input.value;
-      tasks[taskIndex].description.push(inputValue);
+      tasks[o].description.push(inputValue);
 }
 
 function savePriorityToArray(Prio){
-      tasks[taskIndex].priority.splice(0, 1)
-      tasks[taskIndex].priority.push(Prio);
+      tasks[o].priority.splice(0, 1)
+      tasks[o].priority.push(Prio);
 }
 
 function saveCategoryToArray(category) {
-      tasks[taskIndex].category.splice(0, 1)
-      tasks[taskIndex].category.push(category)
+      tasks[o].category.splice(0, 1)
+      tasks[o].category.push(category)
 
 }
 
 function saveTheDateToArray(){
       let dueDate = document.getElementById("date-picker").value
-      tasks[taskIndex].date.push(dueDate);
+      tasks[o].date.push(dueDate);
 }
 
 function closeAccountsInAssignDropdown() {
@@ -550,75 +532,29 @@ function closeAccountsInAssignDropdown() {
 
 async function saveTaskToRemoteStorage(){
       await setItem('tasks', (JSON.stringify(tasks)))
-      
+      o++;
+      await setItem('o', (JSON.stringify(o)))
+
+      await getItem('o', (JSON.parse(o)))
      
       
       
 }
 
 
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||| Delete Clear Tasks ||||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-*/
 
-async function deleteTask(){
-      tasks.splice(taskIndex, 1)
-      document.getElementById('input_title').value = "";
-      document.getElementById('textarea_description').value = "";
-      document.getElementById('search_accounts_to_assign').value = "";
-      document.getElementById('date-picker').value = "";
-      document.getElementById('subtask_input').value = "";
-      document.getElementById('form_assign_badge').innerHTML = "";
-      document.getElementById('category_field_title').innerHTML = "Select task category";
-      document.getElementById('ul_subtask_task').innerHTML = "";
-      clearPriority();
-      addToTasks()
-      await saveTaskToRemoteStorage()
-}
-
-function clearPriority (){
-      let urgent = document.getElementById('urgent');
-      let medium = document.getElementById('medium');
-      let low = document.getElementById('low');
-           
-            urgent.classList.remove("urgent-checked");
-            medium.classList.remove("medium-checked");
-            low.classList.remove("low-checked");
-            urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
-            medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
-            low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
-            currentPriority = 0;
-}
-
-
-async function closeAndDeleteAddTask(){
-      await deleteTask()
-      tasks.splice(taskIndex, 1)
-      await saveTaskToRemoteStorage()
-      await closeAddTaskOverlay(status);
-
-}
-
-
-
-async function closeAddTaskOverlay(status) {
-      let overlay = document.getElementById('add-task-overlay');
-      overlay.classList.add('d-none');
-      overlay.innerHTML = "";
-      statusVar = status;
-}
 
 /* Datum aus Array ins date feld laden
 function loadTheDateFromArray(){
-      const dateArray = tasks[taskIndex].date;
+      const dateArray = tasks[o].date;
       const dateValue = dateArray[0];
       const dateInput = document.getElementById('date-picker');
       dateInput.value = dateValue;
 } */
 /*
 async function openAddTaskOverlay() {
+      
+      
     
     }
     */

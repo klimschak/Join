@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Drag and Drop Tutorial</title>
+    <style>
+        .drag-area {
+            border: 2px dashed #aaa;
+            min-height: 100px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .todo {
+            margin: 5px;
+            padding: 10px;
+            background-color: #ddd;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <div class="drag-area" id="open" ondragover="allowDrop(event)" ondrop="drop(event, 'open')"></div>
+    <div class="drag-area" id="closed" ondragover="allowDrop(event)" ondrop="drop(event, 'closed')"></div>
+
+    <script>
+        let todos = [
+            { id: 0, title: 'Putzen', category: 'open' },
+            { id: 1, title: 'Kochen', category: 'open' },
+            { id: 2, title: 'Einkaufen', category: 'closed' }
+        ];
+
+        let currentDraggedElement;
+        let dropTarget;
+
+        function updateHTML() {
+            document.getElementById('open').innerHTML = '';
+            document.getElementById('closed').innerHTML = '';
+
+            todos.forEach(todo => {
+                let todoDiv = document.createElement('div');
+                todoDiv.className = 'todo';
+                todoDiv.draggable = true;
+                todoDiv.ondragstart = function() { startDragging(todo.id); };
+                todoDiv.ondragover = function(event) { event.preventDefault(); };
+                todoDiv.ondrop = function(event) { dropOnTodo(event, todo.id); };
+                todoDiv.textContent = todo.title;
+
+                document.getElementById(todo.category).appendChild(todoDiv);
+            });
+        }
+
+        function startDragging(id) {
+            currentDraggedElement = id;
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function dropOnTodo(ev, targetId) {
+            ev.preventDefault();
+            dropTarget = targetId;
+            let draggedElementIndex = todos.findIndex(t => t.id === currentDraggedElement);
+            let targetElementIndex = todos.findIndex(t => t.id === dropTarget);
+
+            if (draggedElementIndex !== -1 && targetElementIndex !== -1) {
+                todos.splice(targetElementIndex, 0, todos.splice(draggedElementIndex, 1)[0]);
+                updateHTML();
+            }
+        }
+
+        function drop(ev, category) {
+            ev.preventDefault();
+            if (dropTarget === undefined) {
+                let draggedElement = todos.find(t => t.id === currentDraggedElement);
+                if (draggedElement) {
+                    draggedElement.category = category;
+                    updateHTML();
+                }
+            }
+            dropTarget = undefined;
+        }
+
+        window.onload = updateHTML;
+    </script>
+</body>
+</html>

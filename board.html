@@ -10,6 +10,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="./css/basic.css" />
   <link rel="stylesheet" href="./css/board.css" />
+<<<<<<< HEAD
   <link rel="stylesheet" href="css/footer.css">
   <script src="js/dragndrop.js"></script>
   <script defer src="./js/arrays.js"></script>
@@ -17,15 +18,35 @@
   <script defer src="./js/storage.js"></script>
   <script defer src="./js/register.js"></script>
   <script defer src="./js/html_templates.js"></script>
+=======
+  <link rel="stylesheet" href="./css/addtask.css" />
+  <link rel="stylesheet" href="./css/task-overview.css" />
+  <script src="js/dragndrop.js" type="text/javascript"></script>
+  <script defer src="js/arrays.js" type="text/javascript"></script>
+  <script defer src="js/board.js" type="text/javascript"></script>
+  <script defer src="js/storage.js" type="text/javascript"></script>
+  <script defer src="js/register.js" type="text/javascript"></script>
+  <script defer src="js/html_templates.js" type="text/javascript"></script>
+  <script defer src="js/task-overview.js" type="text/javascript"></script>
+  
+
+>>>>>>> e5fc40f13519e09a5b40a96851997b7042dea73d
   
 
   <title>Board</title>
 </head>
 
+<<<<<<< HEAD
 <body id="body" onload="initRenderAllTasksOnKanban(), includeHTML()">
   <div w3-include-html="footer.html" class="footer-body"></div>
   <div id="add-task-overlay"></div>
 
+=======
+<body id="body" onload="initRenderAllTasksOnKanban()">
+  <div id="add-task-overlay" class="add-task-overlay d-none"></div>
+  <div id="task-overview-overlay" class="task-overview-overlay d-none"></div>
+  
+>>>>>>> e5fc40f13519e09a5b40a96851997b7042dea73d
   <div id="header-kanban-container">
     <section id="header-container">
       <div id="board-title">
@@ -39,7 +60,7 @@
           <img src="./assets/img/search.svg" alt="">
         </div>
         <div class="board-add-button-container">
-          <button class="board-add-button" onclick="openAddTaskOverlay()" ><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+          <button class="board-add-button" onclick="openAddTaskOverlay('to-do-column')"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
         </div>
       </div>
   
@@ -49,7 +70,7 @@
     <div class="column">
       <div class="column-title">
         <h3>To-Do</h3>
-        <img src="./assets/img/plus-button.svg" alt="" />
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('to-do-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'to-do-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="to-do-column"></div>
@@ -58,7 +79,7 @@
     <div class="column">
       <div class="column-title">
         <h3>In Progress</h3>
-        <img src="./assets/img/plus-button.svg" alt="" />
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('in-progress-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'in-progress-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="in-progress-column"></div>
@@ -67,7 +88,7 @@
     <div class="column">
       <div class="column-title">
         <h3>Await Feedback</h3>
-        <img src="./assets/img/plus-button.svg" alt="" />
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('await-feedback-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'await-feedback-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="await-feedback-column"></div>
@@ -76,7 +97,7 @@
     <div class="column">
       <div class="column-title">
         <h3>Done</h3>
-        <img src="./assets/img/plus-button.svg" alt="" />
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('done-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'done-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="done-column"></div>
@@ -84,5 +105,6 @@
   </section>
   </div>
 </body>
-
+<script src="js/add_task.js" type="text/javascript"></script>
 </html>
+

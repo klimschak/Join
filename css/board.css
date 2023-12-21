@@ -13,6 +13,7 @@ body {
   hyphens: auto;
   display: flex;
   justify-content: center;
+  overflow: scroll;
 }
 
 div {
@@ -90,33 +91,7 @@ div {
    
 }
 
-.board-add-button {
-  color:#ffffff;
-  background-color: #2A3647;
-  border: none;
-  border-radius: 10px;
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  font-size: 21px;
-font-style: normal;
-font-weight: 700;
-line-height: 120%; /* 25.2px */
-width: 160px;
-height: 48px;
-gap: 4px;
-transition: 125ms;
-}
 
-.board-add-button:hover {
-background-color: #29ABE2;
-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.board-add-button:active {
-  background-color:#091931;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  }
   
 
 /*||||||||||||||||||||||||||||||||||||
@@ -194,6 +169,7 @@ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-style: normal;
   font-weight: 400;
   line-height: 120%;
+  
 }
 
 .kanban-title {
