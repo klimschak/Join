@@ -10,6 +10,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="./css/basic.css" />
   <link rel="stylesheet" href="./css/board.css" />
+  <link rel="stylesheet" href="css/footer.css">
   <script src="js/dragndrop.js"></script>
   <script defer src="./js/arrays.js"></script>
   <script defer src="./js/board.js"></script>
@@ -22,6 +23,7 @@
 </head>
 
 <body id="body" onload="initRenderAllTasksOnKanban(), includeHTML()">
+  <div w3-include-html="footer.html" class="footer-body"></div>
   <div id="add-task-overlay"></div>
 
   <div id="header-kanban-container">
@@ -81,7 +83,6 @@
     </div>
   </section>
   </div>
-  <div w3-include-html="footer.html"></div>
 </body>
 
 </html>
