@@ -1,6 +1,8 @@
+
+let task;
 async function loadTaskOverview(taskID) {
       let overlay = document.getElementById('task-overview-overlay');
-      let task = tasks[taskID];
+      task = tasks[taskID];
       overlay.classList.remove('d-none')
 
       console.log(
@@ -16,6 +18,7 @@ async function loadTaskOverview(taskID) {
       );
       overlay.innerHTML += await htmlTemplateLoadTaskOverview(task);
       await loadOverviewAssigned(task)
+      await loadSubtasksinOverview(task)
 }
 
 async function htmlTemplateLoadTaskOverview(task) {
@@ -27,9 +30,13 @@ async function htmlTemplateLoadTaskOverview(task) {
                   <div class="overview-description">${task.description}</div>
                   <div class="overview-date"><div>Due Date:</div><div>${task.date}</div></div>
                   <div class="overview-priority"><div>Priority:</div><div>${task.priority}</div></div>
-                  <div id="overview-assigned" class="overview-assigned" onload="">
+                  <div id="overview-assigned" class="overview-assigned">
                         <div class="overview-assigned-label">Assigned to:</div>
                         <div id="overview-assigned-label-badge-container" class="overview-assigned-label-badge-container"></div>
+                  </div>
+                  <div id="overview-subtasks-container" class="overview-subtasks-container">
+                        <div class="overview-subtasks-label">Subtasks:</div>
+                        <div id="overview-subtasks" class="overview-subtasks"></div>
                   </div>
             </div>
       
@@ -50,3 +57,31 @@ async function loadOverviewAssigned(task){
       }
 }
 
+
+async function loadSubtasksinOverview(){
+      let div = document.getElementById('overview-subtasks');
+      let subtasks = task.subtasks;
+      div.innerHTML = "";
+      for (let i = 0; i < subtasks.length; i++) {
+            const subtask = task.subtasks[i].subtask;
+            const state = task.subtasks[i].completed;
+
+            if (state === false) {
+                  div.innerHTML += /*html*/`
+                  <div class="overview-subtask-item" id="overview-subtask-item${i}" onclick="changeSubtaskStateinOverview(${i})"><img src="./assets/img/tick-box-false.svg" alt="">${subtask}</div>
+                  `  
+            }
+            if (state === true) {
+                  div.innerHTML += /*html*/`
+                  <div class="overview-subtask-item" id="overview-subtask-item${i}" onclick="changeSubtaskStateinOverview(${i})"><img src="./assets/img/tick-box-true.svg" alt="">${subtask}</div>
+                  `  
+            }
+            
+      }
+}
+
+async function changeSubtaskStateinOverview(subtaskID){
+      task.subtasks[subtaskID].completed = !task.subtasks[subtaskID].completed;
+      await saveTaskToRemoteStorage();
+      await loadSubtasksinOverview(task)
+}

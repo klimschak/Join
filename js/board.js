@@ -110,7 +110,7 @@ function getCompletedTasks(i) {
   let subtasks = tasks[i].subtasks;
   let completed = 0;
   for (let j = 0; j < subtasks.length; j++) {
-    if (subtasks[j].complete === true) {
+    if (subtasks[j].completed === true) {
       completed++;
     }
   }
