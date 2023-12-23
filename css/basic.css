@@ -117,7 +117,22 @@ p {
     .secondary-button:active {
       background-color:#091931;
       box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-      }   
+      }  
+
+.close-icon {
+      display: flex;
+      height: 36px;
+      width: 36px;
+}
+      
+.close-icon:hover{
+      background-color: #bcbcbc;
+      border-radius: 500px;
+      transition: 150ms ease-in;
+      height: 36px;
+      width: 36px;
+}      
+
 .d-none {
       display: none;
 }
