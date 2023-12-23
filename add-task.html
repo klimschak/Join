@@ -11,166 +11,82 @@
   <link rel="stylesheet" href="./css/basic.css" />
   <link rel="stylesheet" href="./css/board.css" />
   <link rel="stylesheet" href="./css/addtask.css" />
+  <link rel="stylesheet" href="./css/task-overview.css" />
   <script src="js/dragndrop.js" type="text/javascript"></script>
   <script defer src="js/arrays.js" type="text/javascript"></script>
   <script defer src="js/board.js" type="text/javascript"></script>
   <script defer src="js/storage.js" type="text/javascript"></script>
   <script defer src="js/register.js" type="text/javascript"></script>
   <script defer src="js/html_templates.js" type="text/javascript"></script>
+  <script defer src="js/task-overview.js" type="text/javascript"></script>
   
 
   
 
-  <title>addTask</title>
+  <title>Board</title>
 </head>
-<body onload="initAddTask()">
-      <!-- <button onclick="closeAccountsinAssignDropdown(), loadTheDateFromArray()">Schließen</button> -->
-      <div class="addtask_header">
-            <h1 class="add-task">Add Task</h1>
-            <img class="close-icon" onclick="closeAndDeleteAddTask()" src="./assets/img/Close.svg" alt="">
+
+<body id="body" onload="initRenderAllTasksOnKanban()">
+  <div id="add-task-overlay" class="add-task-overlay d-none"></div>
+  <div id="task-overview-overlay" class="task-overview-overlay d-none"></div>
+  
+  <div id="header-kanban-container">
+    <section id="header-container">
+      <div id="board-title">
+        <h1>Board</h1>
       </div>
-
-      <form class="form_container">
-      <div class="form-elements-container">
-            
-            <div class="addtask_left_form">
-                  <div class="form_input_container">
-                        <div class="form_input_label">
-                              <h4>Title<span class="required">*</span></h4>
-                        </div>
-                        <input class="form_input_field" id="input_title" name="addtask_title" placeholder="Enter a Title"
-                              required="required">
-                        <div class="form_input_notice">
-                              <p class="d-none">This field is required</p>
-                        </div>
-                  </div>
-
-                  <div class="form_textarea_container">
-                        <div class="form_textarea_label">
-                              <h4>Description<span class="required">*</span></h4>
-                        </div>
-                        <textarea class="form_textarea_field" id="textarea_description" name="addtask_description"
-                              placeholder="Enter a Description"></textarea>
-                        <div class="form_textarea_notice">
-                              <p class="d-none">This field is required</p>
-                        </div>
-                  </div>
-
-
-                  <div class="form_assign_container"  >
-                        <div class="form_assign_label">
-                              <h4>Assigned to</h4>
-                        </div>
-
-                        <div class="form_assign_field_list_container" id="form_assign_container">
-                              <div class="form_assign_field_container" onclick="toggleDropdown(), filterAccountsToAssign()">
-                                    <input class="form_assign_field " name="assign_title" id="search_accounts_to_assign"
-                                          placeholder="Select contacts" oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
-                                          src="./assets/img/arrow_drop_downaa.svg" alt="">
-                              </div>
-                              <ul id="assign_list" class="form_assign_dropdown "></ul>
-                        </div>
-
-                        <div id="form_assign_badge" class="form_assign_badge_container"></div>
-
-                        <div class="form_assign_notice">
-                              <p class="d-none">This field is required</p>
-                        </div>
-                  </div>
-
-            </div>
-            <div>
-                  <hr class="hr_line">
-            </div>
-
-            <div class="addtask_right_form">
-                  <div class="form_input_container">
-                        <div class="form_input_label">
-                              <h4>Due date<span class="required">*</span></h4>
-                        </div>
-
-                        <input class="form_input_field date_field" type="date" id="date-picker" name="datum"
-                              required="required">
-
-                        <div class="form_input_notice">
-                              <p class="d-none">This field is required</p>
-                        </div>
-                  </div>
-
-                  <div class="prio_container">
-                        <div class="prio_label">
-                              <h4>Priority</h4>
-                        </div>
-                        <div class="prio_button_container">
-                              <button class="prio_button" type="button" id="urgent" onclick="setPriority(1)">
-                                    <p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">
-                              </button>
-                              <button class="prio_button" type="button" id="medium" onclick="setPriority(2)">
-                                    <p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">
-                              </button>
-                              <button class="prio_button" type="button" id="low" onclick="setPriority(3)">
-                                    <p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">
-                              </button>
-
-                        </div>
-                  </div>
-
-                  <div class="category_container">
-                        <div class="category_label">
-                              <h4>Category<span class="required">*</span></h4>
-                        </div>
-
-                        <div class="category_field_dropdown_container" id="category_field_dropdown_container">
-                              <div class="category_field" onclick="toggleCategoryDropdown()">
-                                    <p id="category_field_title" class="category_field_title">Select task category</p>
-                                    <img src="./assets/img/arrow_drop_downaa.svg" alt="">
-                              </div>
-                              <ul id="category_dropdown" class="category_dropdown">
-
-                              </ul>
-                        </div>
-
-                        <div class="form_input_notice">
-                              <p class="d-none">This field is required</p>
-                        </div>
-                  </div>
-
-
-                  <div class="subtask_container">
-                        <div class="subtask_label">
-                              <h4>Subtasks</h4>
-                        </div>
-
-                        <div class="subtask_input_container" id="subtask_input_container">
-                              <input class="subtask_input" id="subtask_input" name="subtaskt_title" placeholder="Add subtask" id="subtask_input">
-                              <div id="subtask_input_icon" class="subtask_input_icon" >
-                                    <img onclick="showSubtaskInputIcons()" src="./assets/img/subtask_add.svg" alt="">
-                              </div>
-                        </div>
-
-                        <ul class="ul_subtask_task" id="ul_subtask_task">
-                             
-                        </ul>
-
-                        <div class="subtask_notice">
-                              <p class="d-none">This field is required</p>
-                        </div>
-                  </div>
-
-            </div>
+      <div class="search-addTask-container">
+        <div class="board-search-container" id="board-search-container">
+          <input class="search-input" id="search-input" name="search-input" placeholder="Find Task"
+            oninput="filterTasks()">
+          <hr>
+          <img src="./assets/img/search.svg" alt="">
+        </div>
+        <div class="board-add-button-container">
+          <button class="board-add-button" onclick="openAddTaskOverlay('to-do-column')"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+        </div>
       </div>
+  
+  </section>
 
-      <div class="container-create-clear">
-            <p><span class="required">*</span>This field is required.
-      <div class="button-container-create-clear">
-            <button type="button" class="secondary-button" onclick="deleteTask()">Clear</button>
-            <button type="button" class="primary-button" onclick="createTask()">Create Task</button>
+  <section id="kanban-container">
+    <div class="column">
+      <div class="column-title">
+        <h3>To-Do</h3>
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('to-do-column')" />
       </div>
+      <div ondrop="dropIntoColumn(event, 'to-do-column')" ondragover="allowDrop(event)" class="kanban-area"
+        id="to-do-column"></div>
+    </div>
+
+    <div class="column">
+      <div class="column-title">
+        <h3>In Progress</h3>
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('in-progress-column')" />
       </div>
-      </form>
-      
+      <div ondrop="dropIntoColumn(event, 'in-progress-column')" ondragover="allowDrop(event)" class="kanban-area"
+        id="in-progress-column"></div>
+    </div>
+
+    <div class="column">
+      <div class="column-title">
+        <h3>Await Feedback</h3>
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('await-feedback-column')" />
+      </div>
+      <div ondrop="dropIntoColumn(event, 'await-feedback-column')" ondragover="allowDrop(event)" class="kanban-area"
+        id="await-feedback-column"></div>
+    </div>
+
+    <div class="column">
+      <div class="column-title">
+        <h3>Done</h3>
+        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('done-column')" />
+      </div>
+      <div ondrop="dropIntoColumn(event, 'done-column')" ondragover="allowDrop(event)" class="kanban-area"
+        id="done-column"></div>
+    </div>
+  </section>
+  </div>
 </body>
-
-</html>
-
 <script src="js/add_task.js" type="text/javascript"></script>
+</html>
