@@ -163,6 +163,14 @@
       
 }
 
+.btn-tertiary:hover svg {
+      fill: aquamarine;
+}
+
+.btn-tertiary:hover {
+      color: aquamarine
+}
+
 
 .overview-button-container div {
       align-items: center;
