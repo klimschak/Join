@@ -163,12 +163,16 @@
       
 }
 
+.btn-tertiary, .btn-tertiary svg  {
+      transition: 125ms;
+}
+
 .btn-tertiary:hover svg {
-      fill: aquamarine;
+      fill: #29ABE2;
 }
 
 .btn-tertiary:hover {
-      color: aquamarine
+      color: #29ABE2
 }
 
 
@@ -191,14 +195,7 @@
       gap: 12px;
 }
 
-.edit {
-      fill: #0038ff;
-      
-}
 
-.edit:hover {
-      fill: pink
-}
 .d-none {
       display: none;
 }
