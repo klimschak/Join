@@ -21,6 +21,8 @@ async function loadTaskOverview(taskID) {
       await loadSubtasksinOverview(task)
 }
 
+
+
 async function htmlTemplateLoadTaskOverview(task) {
 
       return /*html*/`
@@ -32,7 +34,8 @@ async function htmlTemplateLoadTaskOverview(task) {
                   <div class="overview-title">${task.title}</div>
                   <div class="overview-description">${task.description}</div>
                   <div class="overview-date"><div>Due Date:</div><div>${task.date}</div></div>
-                  <div class="overview-priority"><div>Priority:</div><div>${task.priority}</div></div>
+                  <div class="overview-priority"><div>Priority:</div><div>
+                        <img class="overview-priority-image" src="./assets/img/${task.priority}.svg" alt=""><span class="overview-priority-label">${task.priority}</span></div></div>
                   <div id="overview-assigned" class="overview-assigned">
                         <div class="overview-assigned-label">Assigned to:</div>
                         <div id="overview-assigned-label-badge-container" class="overview-assigned-label-badge-container"></div>
@@ -127,4 +130,3 @@ async function closeTaskOverview() {
 
 
 
-fucˇ

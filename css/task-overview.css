@@ -82,6 +82,14 @@
       font-weight: 600;
 }
 
+.overview-priority-label {
+      margin-left: 24px;
+}
+
+.overview-priority-image {
+      margin-left: 4px;
+}
+
 .overview-assigned {
       display: flex;
       align-items: flex-start;
