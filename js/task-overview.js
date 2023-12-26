@@ -29,7 +29,7 @@ async function htmlTemplateLoadTaskOverview(task) {
             <div id="overview-container" class="overview-container">
                   <div class="overview-category-close">
                         <div id="overview-category">${task.category}</div>
-                        <div class="close-icon"><img  onclick="closeTaskOverview()" src="./assets/img/Close.svg" alt=""></div>
+                        <div class="close-icon overview-close pointer"><img  onclick="closeTaskOverview()" src="./assets/img/Close.svg" alt=""></div>
                   </div>
                   <div class="overview-title">${task.title}</div>
                   <div class="overview-description">${task.description}</div>
@@ -46,7 +46,7 @@ async function htmlTemplateLoadTaskOverview(task) {
                   </div>
                   <div class="overview-button-container">
                         <div>
-                              <div class="btn-tertiary">
+                              <div class="btn-tertiary pointer">
                                     <svg width="24" height="24" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_81758_217" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                                     <rect width="24" height="24"></rect>
@@ -58,7 +58,7 @@ async function htmlTemplateLoadTaskOverview(task) {
                                     <span>Delete</span>
                               </div>
                               <hr>
-                              <div>
+                              <div class="btn-tertiary pointer">
                                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                           <mask id="mask0_81758_502" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                                           <rect width="24" height="24"></rect>

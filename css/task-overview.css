@@ -28,7 +28,13 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
+      position: relative;
+}
 
+.overview-close {
+      position: absolute;
+      right: -16px;
+      top: 0px;
 }
 
 #overview-category {
@@ -172,11 +178,11 @@
 }
 
 .btn-tertiary:hover svg {
-      fill: aquamarine;
+      fill: #29ABE2;
 }
 
 .btn-tertiary:hover {
-      color: aquamarine
+      color: #29ABE2;
 }
 
 
@@ -200,7 +206,7 @@
 }
 
 .edit {
-      fill: #0038ff;
+      fill: #29ABE2;
       
 }
 

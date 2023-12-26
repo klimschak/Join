@@ -27,6 +27,10 @@ p {
       margin: 0;
 }
 
+button {
+      cursor: pointer;
+}
+
 
 .board-add-button {
       color: #ffffff;
@@ -135,6 +139,10 @@ p {
 
 .d-none {
       display: none;
+}
+
+.pointer {
+      cursor: pointer;
 }
 
 /* 2xl 	@media (min-width: 1536px) {  } */

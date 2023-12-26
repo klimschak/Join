@@ -43,7 +43,7 @@
           <img src="./assets/img/search.svg" alt="">
         </div>
         <div class="board-add-button-container">
-          <button class="board-add-button" onclick="openAddTaskOverlay('to-do-column')"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+          <button class="board-add-button pointer" onclick="openAddTaskOverlay('to-do-column')"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
         </div>
       </div>
   
@@ -53,7 +53,7 @@
     <div class="column">
       <div class="column-title">
         <h3>To-Do</h3>
-        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('to-do-column')" />
+        <img src="./assets/img/plus-button.svg" class="pointer" alt="" onclick="openAddTaskOverlay('to-do-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'to-do-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="to-do-column"></div>
@@ -62,7 +62,7 @@
     <div class="column">
       <div class="column-title">
         <h3>In Progress</h3>
-        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('in-progress-column')" />
+        <img src="./assets/img/plus-button.svg" class="pointer" alt="" onclick="openAddTaskOverlay('in-progress-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'in-progress-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="in-progress-column"></div>
@@ -71,7 +71,7 @@
     <div class="column">
       <div class="column-title">
         <h3>Await Feedback</h3>
-        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('await-feedback-column')" />
+        <img src="./assets/img/plus-button.svg" class="pointer" alt="" onclick="openAddTaskOverlay('await-feedback-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'await-feedback-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="await-feedback-column"></div>
@@ -80,7 +80,7 @@
     <div class="column">
       <div class="column-title">
         <h3>Done</h3>
-        <img src="./assets/img/plus-button.svg" alt="" onclick="openAddTaskOverlay('done-column')" />
+        <img src="./assets/img/plus-button.svg" class="pointer" alt="" onclick="openAddTaskOverlay('done-column')" />
       </div>
       <div ondrop="dropIntoColumn(event, 'done-column')" ondragover="allowDrop(event)" class="kanban-area"
         id="done-column"></div>

@@ -8,6 +8,7 @@ async function initRenderAllTasksOnKanban() {
   for (let i = 0; i < tasks.length; i++) {
     await renderTaskCardOnKanban(i);
   }
+  
 }
 
 async function loadTaskFromRemoteStorageToBoard() {
@@ -165,7 +166,7 @@ async function htmlTemplateRenderTaskCardOnKanban(
 
 ) {
   return /*html*/ `
-  <div draggable="true" ondragstart="startDragging(${i})" id="kanban-card-${i}" class="kanban-card" onclick="loadTaskOverview(${i})">
+  <div draggable="true" ondragstart="startDragging(${i})" id="kanban-card-${i}" class="kanban-card pointer" onclick="loadTaskOverview(${i})">
     <div class="kanban-category-${categoryclass}">
       ${category}
     </div>
