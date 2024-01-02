@@ -4,18 +4,6 @@ async function loadTaskOverview(taskID) {
       let overlay = document.getElementById('task-overview-overlay');
       task = tasks[taskID];
       overlay.classList.remove('d-none')
-
-      console.log(
-            `
-      TaskID: ${task.taskID}
-      Kategorie: ${task.category}
-      Title: ${task.title}
-      Description: ${task.description}
-      Priority: ${task.priority}
-      Assigned: ${task.assigned}
-      `
-
-      );
       overlay.innerHTML += await htmlTemplateLoadTaskOverview(task);
       await loadOverviewAssigned(task)
       await loadSubtasksinOverview(task)
