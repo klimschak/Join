@@ -334,31 +334,12 @@ function setTaskCategory(category) {
 
 
 let subtaskInput;
-async function openAddTaskOverlay(status) {
-      let overlay = document.getElementById('add-task-overlay');
-      overlay.classList.remove('d-none');
-      let template = "add-task.html"
-      let elementID = "add-task-overlay-container"
-      overlay.innerHTML = getHtmlTemplate (template, elementID);
-      statusVar = status;
-      await includeHTML();
-      addEventlistenerToSubtaskField ()
-      await initAddTask()
 
-    }
     
 function addEventlistenerToSubtaskField (){
       subtaskInput = document.getElementById('subtask_input');
       subtaskInput.addEventListener('focus', showSubtaskInputIcons);
 }
-
-function getHtmlTemplate (template, elementID){
-      return /*html*/`
-      
-        <div id=${elementID} w3-include-html=${template}>
-      </div>`;
-}
-
 
 
 function showSubtaskInputIcons() {
@@ -601,7 +582,24 @@ async function closeAndDeleteAddTask(){
 
 }
 
+/* 
+|||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||| ADD TASK OVERLAY|| ||||||||||||
+|||||||||||||||||||||||||||||||||||||||||||||  
+*/
 
+async function openAddTaskOverlay(status) {
+      let overlay = document.getElementById('add-task-overlay');
+      overlay.classList.remove('d-none');
+      let template = "add-task.html"
+      let elementID = "add-task-overlay-container"
+      overlay.innerHTML = getHtmlTemplate (template, elementID);
+      statusVar = status;
+      await includeHTML();
+      addEventlistenerToSubtaskField ()
+      await initAddTask()
+
+    }
 
 async function closeAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');

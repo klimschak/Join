@@ -19,6 +19,7 @@
   <script defer src="js/register.js" type="text/javascript"></script>
   <script defer src="js/html_templates.js" type="text/javascript"></script>
   <script defer src="js/task-overview.js" type="text/javascript"></script>
+  <script defer src="js/edit-task.js" type="text/javascript"></script>
   
 
   
@@ -28,6 +29,7 @@
 
 <body id="body" onload="initRenderAllTasksOnKanban()">
   <div id="add-task-overlay" class="add-task-overlay d-none"></div>
+  <div id="edit-task-overlay" class="edit-task-overlay d-none"></div>
   <div id="task-overview-overlay" class="task-overview-overlay d-none"></div>
   
   <div id="header-kanban-container">
@@ -43,7 +45,7 @@
           <img src="./assets/img/search.svg" alt="">
         </div>
         <div class="board-add-button-container">
-          <button class="board-add-button pointer" onclick="openAddTaskOverlay('to-do-column')"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
+          <button class="board-add-button pointer" onclick="('to-do-column')"><span>Add Task</span><img src="./assets/img/add-white.svg" alt=""></button>
         </div>
       </div>
   

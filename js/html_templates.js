@@ -20,4 +20,9 @@ async function init() {
       }
   }
 
-  
+  function getHtmlTemplate (template, elementID){
+    return /*html*/`
+    
+      <div id=${elementID} w3-include-html=${template}>
+    </div>`;
+}
