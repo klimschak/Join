@@ -9,6 +9,21 @@
       height: 100%;
 }
 
+.edit-task-container {
+      width: 440px;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      /* Stellt sicher, dass die Kinder vertikal angeordnet werden */
+      align-items: flex-start;
+      background-color: #f4f4f4;
+      padding: 40px;
+      border-radius: 30px;
+      overflow: scroll;
+      gap: 12px;
+
+}
+
 .d-none {
       display: none;
 }
