@@ -4,6 +4,7 @@
 async function loadTaskEdit(taskID) {
       let overlay = document.getElementById('edit-task-overlay');
       overlay.classList.remove('d-none');
+      document.getElementById('task-overview-overlay').classList.add('d-none')
       //addEventlistenerToSubtaskField ()
       console.log('Task ID:', taskID);
       task = tasks[taskID];

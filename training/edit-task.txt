@@ -1,0 +1,10 @@
+Klick auf KanbanCard
+Öffnen Card Overview
+Klick auf Edit Task
+Tasks(ID) wird übergeben
+Overlay wird geöffnet
+Category wird reingeladen von Task(ID)
+Title wird reingeladen via Task(ID)
+...
+...
+...
