@@ -6,7 +6,7 @@
 
 .contact-list {
   width: 456px;
-  height: 928px;
+  height: 100vh;
   flex-shrink: 0;
   background: var(--white, #fff);
   box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
@@ -37,6 +37,11 @@
   font-style: normal;
   font-weight: 700;
   line-height: 120%; /* 25.2px */
+  cursor: pointer;
+}
+
+.btn-contact-add:hover {
+  background-color: #29abe2;
 }
 
 .btn-img-contact {
