@@ -11,7 +11,7 @@ async function initAddTask(){
       
       addToTasks();
       addEventlistenerToSubtaskField ();
-      createInitialsFromName()
+      //createInitialsFromName()
       taskIndex = tasks.length - 1;
       
       
@@ -98,8 +98,9 @@ function checkIfAssigned(i) {
       const index = tasks[taskIndex]['assigned'].indexOf(accountName);
       let badge = document.getElementById('form_assign_badge')
       let assignbadge = document.getElementById(`assign_badge${i}`);
-      ifAccountIsNotAssigned(i, accountId, assignedIds, badge)
-      ifAccountIsAssigned(i, index)
+      ifAccountIsNotAssigned(i, accountId, assignedIds, badge);
+      ifAccountIsAssigned(i, index);
+      loadAssignedBadgesInEditTask(task)
 
 }
 
@@ -117,26 +118,7 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
 }
 
 
-/*function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
-      let assign = document.getElementById(`assign_list`);
-      if (!assignedIds.includes(accountId)) {
-            tasks[taskIndex]['assigned'].push(accounts[i]['name']);
-            tasks[taskIndex]['id'].push(accountId);
-            let fullname = accounts[i]['name'];
-            initials = getInitials(fullname);
-            let initialsArray = tasks[taskIndex]['initials'];
-            initialsArray.push(initials);
-            badge.innerHTML =''; 
 
-            for (let indexOfInitials = 0; indexOfInitials < initialsArray.length; indexOfInitials++) {
-                  let initialsIndex = initialsArray[indexOfInitials];
-                  badge.innerHTML += `
-                  <div id="assign_badge${i}" class="form_assign_badge">${initialsIndex}</div>
-                  `;
-            }
-            filterAccountsToAssign()
-      }
-} */
 
 function ifAccountIsAssigned(i, index) {
       let assignbadge = document.getElementById(`assign_badge${i}`);

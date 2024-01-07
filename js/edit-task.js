@@ -36,6 +36,8 @@ function renderEditTaskContent(taskID){
       loadDescriptionInEditTask(task, container);
       loadDateInEditTask(task, container);
       loadPriorityInEditTask(task, container);
+      loadAssignedInEditTask(task, container, taskID);
+      loadAssignedBadgesInEditTask(task);
 
 }
 
@@ -116,13 +118,13 @@ function loadPriorityInEditTask(task, container){
                         <h4>Priority</h4>
                   </div>
                   <div class="prio_button_container">
-                        <button class="prio_button" type="button" id="urgent-edit" onclick="setPriority(1)">
+                        <button class="prio_button" type="button" id="urgent-edit" onclick="setPriorityButtonInEdit('Urgent')">
                               <p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">
                         </button>
-                        <button class="prio_button" type="button" id="medium-edit" onclick="setPriority(2)">
+                        <button class="prio_button" type="button" id="medium-edit" onclick="setPriorityButtonInEdit('Medium')">
                               <p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">
                         </button>
-                        <button class="prio_button" type="button" id="low-edit" onclick="setPriority(3)">
+                        <button class="prio_button" type="button" id="low-edit" onclick="setPriorityButtonInEdit('Low')">
                               <p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">
                         </button>
 
@@ -157,7 +159,74 @@ function loadPriorityInEditTask(task, container){
             medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
             low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja_white.svg" alt="">`;
       }
-
-
 }
 
+function setPriorityButtonInEdit (priority){
+      let urgent = document.getElementById('urgent-edit');
+      let medium = document.getElementById('medium-edit');
+      let low = document.getElementById('low-edit');
+      if (priority == 'Urgent') {
+            urgent.classList.add("urgent-checked");
+            medium.classList.remove("medium-checked");
+            low.classList.remove("low-checked");
+            urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta_white.svg" alt="">`;
+            medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
+            low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`; 
+      }
+      if (priority == 'Medium') {
+            urgent.classList.remove("urgent-checked");
+            medium.classList.add("medium-checked");
+            low.classList.remove("low-checked");
+            urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
+            medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media_white.svg" alt="">`;
+            low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
+      }
+      if (priority == 'Low') {
+            urgent.classList.remove("urgent-checked");
+            medium.classList.remove("medium-checked");
+            low.classList.add("low-checked");
+            urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
+            medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
+            low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja_white.svg" alt="">`;
+      }
+      
+}
+
+function loadAssignedInEditTask(task, container, taskID){
+      taskIndex = taskID;
+      container.innerHTML += /*html*/`
+            <div class="form_assign_container"  >
+                  <div class="form_assign_label">
+                        <h4>Assigned to</h4>
+                  </div>
+
+                  <div class="form_assign_field_list_container" id="form_assign_container">
+                        <div class="form_assign_field_container" onclick="toggleDropdown(), filterAccountsToAssign()">
+                              <input class="form_assign_field " name="assign_title" id="search_accounts_to_assign"
+                                    placeholder="Select contacts" oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
+                                    src="./assets/img/arrow_drop_downaa.svg" class="pointer" alt="">
+                        </div>
+                        <ul id="assign_list" class="form_assign_dropdown "></ul>
+                  </div>
+
+                  <div id="form_assign_badge_edit" class="form_assign_badge_container"></div>
+
+                  <div class="form_assign_notice">
+                        <p class="d-none">This field is required</p>
+                  </div>
+            </div>
+      `
+}
+
+function loadAssignedBadgesInEditTask(task) {
+      let initials = task.initials;
+      let badgesDiv = document.getElementById('form_assign_badge_edit');
+      for (let i = 0; i < initials.length; i++) {
+            let initial = initials[i];
+            badgesDiv.innerHTML += /*html*/`
+            <div id="assign_badge_edit${i}" class="form_assign_badge">${initial}</div>
+            `
+
+            
+      }
+}

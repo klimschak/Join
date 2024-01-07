@@ -24,26 +24,6 @@
 
 }
 
-.urgent-checked {
-      color: #fff;
-      background-color: #FF3D00;
-      font-weight: 400;
-      transition: 75ms;
-}
-
-.medium-checked {
-      color: #fff;
-      background-color: #FFA800;
-      font-weight: 400;
-      transition: 75ms;
-}
-
-.low-checked {
-      color: #fff;
-      background-color: #7AE229;
-      font-weight: 400;
-      transition: 75ms;
-}
 
 
 .d-none {
