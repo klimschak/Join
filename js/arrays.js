@@ -2,19 +2,19 @@ let accounts = [
   {
     id: 1,
     name: "Siham El-Maimouni",
-    initials: []
+    initials: "SE"
   },
 
   {
     id: 2,
     name: "Pedro Göntürk",
-    initials: []
+    initials: "PG"
   },
 
   {
     id: 3,
     name: "Thorsten Puccini",
-    initials: []
+    initials: "TP"
   },
 ];
 

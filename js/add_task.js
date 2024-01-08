@@ -100,7 +100,7 @@ function checkIfAssigned(i) {
       let assignbadge = document.getElementById(`assign_badge${i}`);
       ifAccountIsNotAssigned(i, accountId, assignedIds, badge);
       ifAccountIsAssigned(i, index);
-      loadAssignedBadgesInEditTask(task)
+      
 
 }
 

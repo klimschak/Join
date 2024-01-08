@@ -38,6 +38,7 @@ function renderEditTaskContent(taskID){
       loadPriorityInEditTask(task, container);
       loadAssignedInEditTask(task, container, taskID);
       loadAssignedBadgesInEditTask(task);
+      loadSubtasksInEditTask(container, task);
 
 }
 
@@ -209,7 +210,7 @@ function loadAssignedInEditTask(task, container, taskID){
                         <ul id="assign_list" class="form_assign_dropdown "></ul>
                   </div>
 
-                  <div id="form_assign_badge_edit" class="form_assign_badge_container"></div>
+                  <div id="form_assign_badge" class="form_assign_badge_container"></div>
 
                   <div class="form_assign_notice">
                         <p class="d-none">This field is required</p>
@@ -220,13 +221,44 @@ function loadAssignedInEditTask(task, container, taskID){
 
 function loadAssignedBadgesInEditTask(task) {
       let initials = task.initials;
-      let badgesDiv = document.getElementById('form_assign_badge_edit');
+      let badgesDiv = document.getElementById('form_assign_badge');
       for (let i = 0; i < initials.length; i++) {
             let initial = initials[i];
             badgesDiv.innerHTML += /*html*/`
-            <div id="assign_badge_edit${i}" class="form_assign_badge">${initial}</div>
+            <div id="assign_badge${i}" class="form_assign_badge">${initial}</div>
             `
 
             
       }
 }
+function loadSubtasksInEditTask(container) {
+      
+      container.innerHTML += /*html*/`
+
+                  <div class="subtask_container">
+                        <div class="subtask_label">
+                              <h4>Subtasks</h4>
+                        </div>
+
+                        <div class="subtask_input_container" id="subtask_input_container">
+                              <input class="subtask_input" id="subtask_input" name="subtaskt_title" placeholder="Add subtask" id="subtask_input">
+                              <div id="subtask_input_icon" class="subtask_input_icon pointer" >
+                                    <img onclick="showSubtaskInputIcons()" src="./assets/img/subtask_add.svg" alt="">
+                              </div>
+                        </div>
+
+                        <ul class="ul_subtask_task" id="ul_subtask_task">
+                             
+                        </ul>
+
+                        <div class="subtask_notice">
+                              <p class="d-none">This field is required</p>
+                        </div>
+                  </div>
+            `
+
+            
+      }
+
+
+

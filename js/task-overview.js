@@ -98,7 +98,6 @@ async function loadSubtasksinOverview() {
                   <div class="overview-subtask-item" id="overview-subtask-item${i}" onclick="changeSubtaskStateinOverview(${i})"><img src="./assets/img/tick-box-true.svg" alt="">${subtask}</div>
                   `
             }
-
       }
 }
 
