@@ -194,6 +194,7 @@ function setPriorityButtonInEdit (priority){
 }
 
 function loadAssignedInEditTask(task, container, taskID){
+      
       taskIndex = taskID;
       container.innerHTML += /*html*/`
             <div class="form_assign_container"  >
@@ -256,6 +257,8 @@ function loadSubtasksInEditTask(container) {
                         </div>
                   </div>
             `
+            renderSubtasks()
+            addEventlistenerToSubtaskField ()
 
             
       }
