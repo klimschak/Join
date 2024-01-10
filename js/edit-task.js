@@ -31,6 +31,7 @@ function renderEditTaskContent(taskID){
       let container = document.getElementById('edit-task-container');
       let task = tasks[taskID];
       container.innerHTML = "";
+      loadOverlayHeader(container);
       loadCategoryInEditTask(task, container);
       loadTitleInEditTask(task, container);
       loadDescriptionInEditTask(task, container);
@@ -39,6 +40,18 @@ function renderEditTaskContent(taskID){
       loadAssignedInEditTask(task, container, taskID);
       loadAssignedBadgesInEditTask(task);
       loadSubtasksInEditTask(container, task);
+      loadOkButtonInEditTask(container);
+      
+
+}
+
+function loadOverlayHeader(container){
+      container.innerHTML += /*html*/`
+       <div class="overview-category-close">
+                        <h2>Edit Task</h2>
+                        <div class="close-icon overview-close pointer"><img  onclick="closeTaskOverview()" src="./assets/img/Close.svg" alt=""></div>
+                  </div>
+      `
 
 }
 
@@ -263,5 +276,11 @@ function loadSubtasksInEditTask(container) {
             
       }
 
-
+function loadOkButtonInEditTask(container){
+      container.innerHTML += /*html*/`
+      <div class="edit-button-container">
+      <button type="button" class="primary-button edit"><span>Save Task</span><img src="./assets/img/check.svg" alt=""></button>
+      </div>
+      `
+}
 

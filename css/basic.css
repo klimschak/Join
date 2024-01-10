@@ -15,6 +15,15 @@ h1 {
       margin: 0;
 }
 
+h2 {
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%;
+      color: #000000;
+      margin: 0;  
+}
+
 h4 {
       color: #2A3647;
       font-size: 16px;
@@ -75,7 +84,7 @@ button {
       line-height: 120%;
       /* 25.2px */
       width: 160px;
-      height: 48px;
+      height: 48px !important;
       gap: 4px;
       transition: 125ms;
 }
