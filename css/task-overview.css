@@ -19,9 +19,13 @@
       background-color: #f4f4f4;
       padding: 40px;
       border-radius: 30px;
-      overflow: hidden;
+      
       gap: 12px;
 
+}
+
+.overview-container:hover{
+      overflow-y: scroll;
 }
 
 .overview-category-close {

@@ -40,6 +40,12 @@ function renderEditTaskContent(taskID){
       loadAssignedInEditTask(task, container, taskID);
       loadAssignedBadgesInEditTask(task);
       loadSubtasksInEditTask(container, task);
+      loadOkButtonInEditTask(container, taskID);
+      renderSubtasks();
+      addEventlistenerToSubtaskField();
+      statusVar = task.status;
+      
+      
     
       
 
@@ -132,22 +138,22 @@ function loadPriorityInEditTask(task, container){
                         <h4>Priority</h4>
                   </div>
                   <div class="prio_button_container">
-                        <button class="prio_button" type="button" id="urgent-edit" onclick="setPriorityButtonInEdit('Urgent')">
+                        <button class="prio_button" type="button" id="urgent" onclick="setPriority(1)">
                               <p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">
                         </button>
-                        <button class="prio_button" type="button" id="medium-edit" onclick="setPriorityButtonInEdit('Medium')">
+                        <button class="prio_button" type="button" id="medium" onclick="setPriority(2)">
                               <p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">
                         </button>
-                        <button class="prio_button" type="button" id="low-edit" onclick="setPriorityButtonInEdit('Low')">
+                        <button class="prio_button" type="button" id="low" onclick="setPriority(3)">
                               <p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">
                         </button>
 
                   </div>
             </div>
       `
-            let urgent = document.getElementById('urgent-edit');
-            let medium = document.getElementById('medium-edit');
-            let low = document.getElementById('low-edit');
+            let urgent = document.getElementById('urgent');
+            let medium = document.getElementById('medium');
+            let low = document.getElementById('low');
    
       if (taskpriority == 'Urgent') {
             urgent.classList.add("urgent-checked");
@@ -270,18 +276,48 @@ function loadSubtasksInEditTask(container) {
                         </div>
                   </div>
             `
-            renderSubtasks();
-            addEventlistenerToSubtaskField();
-            renderSubtasks();
+            
+            
 
             
       }
 
-function loadOkButtonInEditTask(container){
+function loadOkButtonInEditTask(container, taskID){
       container.innerHTML += /*html*/`
       <div class="edit-button-container">
-      <button type="button" class="primary-button edit"><span>Save Task</span><img src="./assets/img/check.svg" alt=""></button>
+      <button type="button" onclick="saveEditTask(${taskID})" class="primary-button edit"><span>Save Task</span><img src="./assets/img/check.svg" alt=""></button>
       </div>
       `
 }
 
+
+async function saveEditTask(taskID) {
+      
+      saveEditFormInputToArray(taskID);
+      saveEditTextareaInputToArray(taskID);
+      saveEditTheDateToArray(taskID);
+      
+      
+      await saveTaskToRemoteStorage();
+}  
+
+function saveEditFormInputToArray(taskID){
+      let task = tasks[taskID];
+      let input = document.getElementById('input_title')
+      let inputValue = input.value;
+      task.title = inputValue
+}
+
+function saveEditTextareaInputToArray(taskID){
+      let task = tasks[taskID];
+      let input = document.getElementById('textarea_description')
+      let inputValue = input.value;
+      task.description = inputValue;
+}
+
+
+function saveEditTheDateToArray(taskID){
+      let task = tasks[taskID];
+      let dueDate = document.getElementById("date-picker").value
+      task.date = dueDate;
+}

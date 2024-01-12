@@ -39,6 +39,9 @@
 
 }
 
+.edit-close {
+      position: sticky;
+}
 
 .d-none {
       display: none;
