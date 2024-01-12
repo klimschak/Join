@@ -19,7 +19,7 @@
       background-color: #f4f4f4;
       padding: 40px;
       border-radius: 30px;
-      overflow: scroll;
+      overflow: hidden;
       gap: 12px;
 
 }

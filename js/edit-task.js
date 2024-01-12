@@ -40,7 +40,7 @@ function renderEditTaskContent(taskID){
       loadAssignedInEditTask(task, container, taskID);
       loadAssignedBadgesInEditTask(task);
       loadSubtasksInEditTask(container, task);
-      loadOkButtonInEditTask(container);
+    
       
 
 }
@@ -255,7 +255,7 @@ function loadSubtasksInEditTask(container) {
                         </div>
 
                         <div class="subtask_input_container" id="subtask_input_container">
-                              <input class="subtask_input" id="subtask_input" name="subtaskt_title" placeholder="Add subtask" id="subtask_input">
+                              <input class="subtask_input" id="subtask_input" name="subtaskt_title" placeholder="Add subtask">
                               <div id="subtask_input_icon" class="subtask_input_icon pointer" >
                                     <img onclick="showSubtaskInputIcons()" src="./assets/img/subtask_add.svg" alt="">
                               </div>
@@ -270,8 +270,9 @@ function loadSubtasksInEditTask(container) {
                         </div>
                   </div>
             `
-            renderSubtasks()
-            addEventlistenerToSubtaskField ()
+            renderSubtasks();
+            addEventlistenerToSubtaskField();
+            renderSubtasks();
 
             
       }
