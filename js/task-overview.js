@@ -4,7 +4,7 @@ async function loadTaskOverview(taskID) {
       let overlay = document.getElementById('task-overview-overlay');
       task = tasks[taskID];
       overlay.classList.remove('d-none')
-      overlay.innerHTML += await htmlTemplateLoadTaskOverview(task, taskID);
+      overlay.innerHTML = await htmlTemplateLoadTaskOverview(task, taskID);
       await loadOverviewAssigned(task)
       await loadSubtasksinOverview(task)
 }
@@ -34,7 +34,7 @@ async function htmlTemplateLoadTaskOverview(task, taskID) {
                   </div>
                   <div class="overview-button-container">
                         <div>
-                              <div class="btn-tertiary pointer">
+                              <div class="btn-tertiary pointer" onclick="deleteTask(${taskID})">
                                     <svg width="24" height="24" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_81758_217" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                                     <rect width="24" height="24"></rect>
@@ -117,3 +117,10 @@ async function closeTaskOverview() {
 
 
 
+async function deleteTask(taskID){
+      tasks.splice(taskID, 1);
+      await saveTaskToRemoteStorage();
+      closeTaskOverview();
+
+      
+}

@@ -8,16 +8,22 @@ async function loadTaskEdit(taskID) {
       //addEventlistenerToSubtaskField ()
       console.log('Task ID:', taskID);
       let task = tasks[taskID];
-      renderEditTaskBackground()
-      renderEditTaskContent(taskID)
+      renderEditTaskBackground();
+      renderEditTaskContent(taskID);
+      addEventlistenerToSubtaskField();
+      
       
       
 
     }
 
-// Funktion die die einzelnen Formularelemente rendert
-// Zuerst sollen die Formularelemente im Iniitalzustand erstellt werden
-// Funktion die die einzelnen Formularelemente mit den Inhalten aus dem Array befüllt
+    function closeEditOverlay(taskID){
+      let overlay = document.getElementById('edit-task-overlay');
+      loadTaskOverview(taskID);
+      overlay.classList.add('d-none');
+      
+    }
+
 
 function renderEditTaskBackground(){
   let overlay = document.getElementById('edit-task-overlay');
@@ -31,7 +37,7 @@ function renderEditTaskContent(taskID){
       let container = document.getElementById('edit-task-container');
       let task = tasks[taskID];
       container.innerHTML = "";
-      loadOverlayHeader(container);
+      loadOverlayHeader(container, taskID);
       loadCategoryInEditTask(task, container);
       loadTitleInEditTask(task, container);
       loadDescriptionInEditTask(task, container);
@@ -42,8 +48,8 @@ function renderEditTaskContent(taskID){
       loadSubtasksInEditTask(container, task);
       loadOkButtonInEditTask(container, taskID);
       renderSubtasks();
-      addEventlistenerToSubtaskField();
       statusVar = task.status;
+      addEventlistenerToSubtaskField();
       
       
     
@@ -51,15 +57,17 @@ function renderEditTaskContent(taskID){
 
 }
 
-function loadOverlayHeader(container){
+function loadOverlayHeader(container, taskID){
       container.innerHTML += /*html*/`
        <div class="overview-category-close">
                         <h2>Edit Task</h2>
-                        <div class="close-icon overview-close pointer"><img  onclick="closeTaskOverview()" src="./assets/img/Close.svg" alt=""></div>
+                        <div class="close-icon overview-close pointer"><img  onclick="closeEditOverlay(${taskID})" src="./assets/img/Close.svg" alt=""></div>
                   </div>
       `
 
 }
+
+
 
 function loadCategoryInEditTask(task, container){
   container.innerHTML += /*html*/`
@@ -276,6 +284,7 @@ function loadSubtasksInEditTask(container) {
                         </div>
                   </div>
             `
+
             
             
 
@@ -288,6 +297,7 @@ function loadOkButtonInEditTask(container, taskID){
       <button type="button" onclick="saveEditTask(${taskID})" class="primary-button edit"><span>Save Task</span><img src="./assets/img/check.svg" alt=""></button>
       </div>
       `
+  
 }
 
 
@@ -296,9 +306,8 @@ async function saveEditTask(taskID) {
       saveEditFormInputToArray(taskID);
       saveEditTextareaInputToArray(taskID);
       saveEditTheDateToArray(taskID);
-      
-      
       await saveTaskToRemoteStorage();
+      closeEditOverlay(taskID);
 }  
 
 function saveEditFormInputToArray(taskID){

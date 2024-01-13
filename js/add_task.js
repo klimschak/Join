@@ -24,6 +24,7 @@ async function loadTasksToAddTasksFromRemoteStorage() {
       } catch (e) {
         console.error("Loading error:", e);
       }
+      
     }
 
     function addToTasks() {
@@ -314,16 +315,20 @@ function setTaskCategory(category) {
 */
 
 
-let subtaskInput;
+
 
     
-function addEventlistenerToSubtaskField (){
-      subtaskInput = document.getElementById('subtask_input');
-      subtaskInput.addEventListener('focus', showSubtaskInputIcons);
-}
-
+function addEventlistenerToSubtaskField() {
+      let subtaskInput = document.getElementById('subtask_input');
+      if (subtaskInput) {
+          subtaskInput.addEventListener('focusin', showSubtaskInputIcons);
+      } else {
+          console.error("Element #subtask_input not found");
+      }
+  }
 
 function showSubtaskInputIcons() {
+      let subtaskInput = document.getElementById('subtask_input');
 
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
       subtaskInputIcon.innerHTML =
@@ -348,8 +353,9 @@ function showSubtaskInputIcons() {
 
 
 function saveSubtaskInLi() {
+      let subtaskInput = document.getElementById('subtask_input');
       let ul_subtask = document.getElementById('ul_subtask_task');
-      subtaskInput = document.getElementById('subtask_input');
+      
       let subtaskValue = subtaskInput.value;
       
 
@@ -390,6 +396,7 @@ function hideSubtaskEditIcons(i) {
 
 
 function resetSubtaskInput() {
+      let subtaskInput = document.getElementById('subtask_input');
       subtaskInput.blur();
       subtaskInput.value = '';
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
@@ -469,6 +476,7 @@ async function createTask() {
       setTaskStatus();
       
       await saveTaskToRemoteStorage();
+      closeAddTaskOverlay(status);
 }    
 
 function setTaskStatus(){
@@ -587,6 +595,8 @@ async function closeAddTaskOverlay(status) {
       overlay.classList.add('d-none');
       overlay.innerHTML = "";
       statusVar = status;
+      await initRenderAllTasksOnKanban();
+      
 }
 
 /* Datum aus Array ins date feld laden
