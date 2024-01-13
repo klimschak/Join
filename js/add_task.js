@@ -24,7 +24,6 @@ async function loadTasksToAddTasksFromRemoteStorage() {
       } catch (e) {
         console.error("Loading error:", e);
       }
-      
     }
 
     function addToTasks() {

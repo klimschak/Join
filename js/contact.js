@@ -1,6 +1,6 @@
+// register.js + storage.js einbinden die daten sind unter users gespeicher und alle kontakte visualisieren
 
 
-renderContacts();
 
 async function renderContacts() {
      document.getElementById('contacts').innerHTML = " ";
