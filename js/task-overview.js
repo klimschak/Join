@@ -34,7 +34,7 @@ async function htmlTemplateLoadTaskOverview(task, taskID) {
                   </div>
                   <div class="overview-button-container">
                         <div>
-                              <div class="btn-tertiary pointer" onclick="deleteTask(${taskID})">
+                              <div class="btn-tertiary pointer" onclick="deleteTaskFromOverview(${taskID})">
                                     <svg width="24" height="24" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_81758_217" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                                     <rect width="24" height="24"></rect>
@@ -117,7 +117,7 @@ async function closeTaskOverview() {
 
 
 
-async function deleteTask(taskID){
+async function deleteTaskFromOverview(taskID){
       tasks.splice(taskID, 1);
       await saveTaskToRemoteStorage();
       closeTaskOverview();
