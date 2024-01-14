@@ -1,6 +1,7 @@
 let users = [];
 
 async function init() {
+  console.log("Initializing...");
   loadUsers();
 }
 
