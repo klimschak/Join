@@ -31,38 +31,8 @@
 </head>
 
 
-<body>
-      <div class="summary-column">
-            <a class="summary-status" href="board.html">
-                  <div id="summary-tasks" class="summary-status-count">0</div>
-                  <div class="summary-status-title">Tasks in Board</div>
-            </a>
-            <a class="summary-status" href="board.html">
-                  <div id="summary-progress" class="summary-status-count">0</div>
-                  <div class="summary-status-title">Tasks in Progress</div>
-            </a>
-            <a class="summary-status" href="board.html">
-                  <div id="summary-feedback" class="summary-status-count">0</div>
-                  <div class="summary-status-title">Awaiting Feedback</div>
-            </a>
-      </div>
-      <div class="summary-column">
-            <a class="summary-status" href="board.html">
-                  <div class="summary-urgency-group">
-                        <div class="summary-icon"><img src="" alt=""></div>
-                        <div class="summary-div-group">
-                              <div id="summary-urgency-count" class="summary-status-count">0</div>
-                              <div class="summary-status-title">Urgent</div>
-                        </div>
-                  </div>
+<body onload="loadSummaryCount()">
 
-                  <hr>
-                  <div class="summary-div-group">
-                        <div class="summary-date" id="summary-date">October 23, 2024</div>
-                        <div class="summary-status-title">Upcoming Deadline</div>
-                  </div>
-            </a>
-      </div>
       <div class="summary-column">
             <a class="summary-status" href="board.html">
                   <div class="summary-icon"><img src="" alt=""></div>
@@ -77,6 +47,41 @@
                         <div id="summary-done" class="summary-status-count">0</div>
                         <div class="summary-status-title">Done</div>
                   </div>
+            </a>
+      </div>
+
+      <div class="summary-column">
+            <a class="summary-status" href="board.html">
+                  <div class="summary-urgency-group">
+                        <div class="summary-icon"><img src="" alt=""></div>
+                        <div class="summary-div-group">
+                              <div id="summary-urgency" class="summary-status-count">0</div>
+                              <div class="summary-status-title">Urgent</div>
+                        </div>
+                  </div>
+
+                  <hr>
+                  <div class="summary-div-group">
+                        <div class="summary-date" id="summary-date">October 23, 2024</div>
+                        <div class="summary-status-title">Upcoming Deadline</div>
+                  </div>
+            </a>
+      </div>
+
+
+
+      <div class="summary-column">
+            <a class="summary-status" href="board.html">
+                  <div id="summary-tasks" class="summary-status-count">0</div>
+                  <div class="summary-status-title">Tasks in Board</div>
+            </a>
+            <a class="summary-status" href="board.html">
+                  <div id="summary-progress" class="summary-status-count">0</div>
+                  <div class="summary-status-title">Tasks in Progress</div>
+            </a>
+            <a class="summary-status" href="board.html">
+                  <div id="summary-feedback" class="summary-status-count">0</div>
+                  <div class="summary-status-title">Awaiting Feedback</div>
             </a>
       </div>
 
