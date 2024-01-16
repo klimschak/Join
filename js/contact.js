@@ -2,18 +2,21 @@ let userContacts = [
   {
     id: 1,
     name: "Siham El-Maimouni",
+    mail: "siham@mail.com",
     initials: "SE",
   },
 
   {
     id: 2,
     name: "Pedro Göntürk",
+    mail: "predro@mail.com",
     initials: "PG",
   },
 
   {
     id: 3,
     name: "Thorsten Puccini",
+    mail: "thorsten.mail.com",
     initials: "TP",
   },
 ];
@@ -31,8 +34,11 @@ async function renderContacts() {
       // Beispielhaftes HTML für die Darstellung der Kontakte
       contactsContainer.innerHTML += `
           <div>
+          <p>Initials: ${contact.initials}</p>
+          <div>
             <p>Name: ${contact.name}</p>
-            <p>Initials: ${contact.initials}</p>
+            <p>Mail: ${contact.mail}</p>
+          </div>
           </div>
         `;
     }
