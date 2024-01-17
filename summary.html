@@ -31,14 +31,28 @@
 </head>
 
 
-<body onload="loadSummaryCount()">
+<body class="body-summary" onload="loadSummaryCount()">
       <div class="tile-group">
 
             <div class="summary-column">
 
                   <a class="summary-status" href="board.html">
                         <div class="summary-tile">
-                              <div class="summary-icon"><img src="" alt=""></div>
+                              <div class="summary-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33"
+                                          fill="none">
+                                          <mask id="mask0_89718_8807" style="mask-type:alpha" maskUnits="userSpaceOnUse"
+                                                x="0" y="0" width="33" height="33">
+                                                <rect x="0.582031" y="0.741211" width="32" height="32" fill="#D9D9D9" />
+                                          </mask>
+                                          <g mask="url(#mask0_89718_8807)">
+                                                <path
+                                                      d="M7.2487 26.0746H9.11536L20.6154 14.5746L18.7487 12.708L7.2487 24.208V26.0746ZM26.3154 12.6413L20.6487 7.04129L22.5154 5.17463C23.0265 4.66351 23.6543 4.40796 24.3987 4.40796C25.1431 4.40796 25.7709 4.66351 26.282 5.17463L28.1487 7.04129C28.6598 7.5524 28.9265 8.16907 28.9487 8.89129C28.9709 9.61351 28.7265 10.2302 28.2154 10.7413L26.3154 12.6413ZM24.382 14.608L10.2487 28.7413H4.58203V23.0746L18.7154 8.94129L24.382 14.608Z" />
+                                          </g>
+                                    </svg>
+
+                              </div>
+
                               <div class="summary-div-group">
                                     <div id="summary-to-do" class="summary-status-count">0</div>
                                     <div class="summary-status-title">To-Do</div>
@@ -58,24 +72,21 @@
             </div>
 
             <div class="summary-column">
-                  <a class="summary-status" href="board.html">
-                        <div class="urgent-date-tile">
-                              <div class="summary-urgency-group">
-                                    <div class="summary-tile">
-                                          <div class="summary-icon"><img src="" alt=""></div>
-                                          <div class="summary-div-group">
-                                                <div id="summary-urgency" class="summary-status-count">0</div>
-                                                <div class="summary-status-title">Urgent</div>
-                                          </div>
-                                    </div>
+                  <a class="summary-status urgent-date-container" href="board.html">
+                        <div class="summary-tile urgent-date-group">
+                              <div class="summary-icon"><img src="" alt=""></div>
+                              <div class="summary-div-group">
+                                    <div id="summary-urgency" class="summary-status-count">0</div>
+                                    <div class="summary-status-title">Urgent</div>
                               </div>
-
-
-                              <hr>
+                        </div>
+                              <hr class="summary-line">
+                        <div class="summary-tile urgent-date-group">
                               <div class="summary-div-group">
                                     <div class="summary-date" id="summary-date">October 23, 2024</div>
                                     <div class="summary-status-title">Upcoming Deadline</div>
                               </div>
+
                         </div>
                   </a>
             </div>
@@ -85,7 +96,7 @@
             <div class="summary-column">
                   <a class="summary-status" href="board.html">
                         <div class="summary-tile">
-                              <div class="summary-icon"><img src="" alt=""></div>
+                              
                               <div class="summary-div-group">
                                     <div id="summary-tasks" class="summary-status-count">0</div>
                                     <div class="summary-status-title">Tasks in Board</div>
@@ -94,7 +105,7 @@
                   </a>
                   <a class="summary-status" href="board.html">
                         <div class="summary-tile">
-                              <div class="summary-icon"><img src="" alt=""></div>
+                              
                               <div class="summary-div-group">
                                     <div id="summary-progress" class="summary-status-count">0</div>
                                     <div class="summary-status-title">Tasks in Progress</div>
@@ -103,7 +114,7 @@
                   </a>
                   <a class="summary-status" href="board.html">
                         <div class="summary-tile">
-                              <div class="summary-icon"><img src="" alt=""></div>
+                              
                               <div class="summary-div-group">
                                     <div id="summary-feedback" class="summary-status-count">0</div>
                                     <div class="summary-status-title">Awaiting Feedback</div>
