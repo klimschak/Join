@@ -29,18 +29,6 @@
       
 }
 
-.summary-tile {
-      display: flex;
-      height: 184px;
-      background-color: #fff;
-      align-items: center;
-      gap: 16px;
-      justify-content: center;
-      border-radius: 32px;
-      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
-}
-
-
 
 
 
@@ -52,6 +40,7 @@
       height: 64px;
       justify-content: center;
       align-items: center;
+      
 }
 
 
@@ -60,12 +49,23 @@
       font-size: 64px;
       color: #000000;
       font-weight: 600;
+      transition: 150ms ease-in;
       
 
 }
 
+.summary-tile:hover .summary-status-count,
+.summary-tile:hover .summary-status-title{
+      color:#fff;
+      transition: 150ms ease-out;
+}
+
 .summary-status-title{
       display: flex;
+      color:#2A3647;
+      font-size: 20px;
+      white-space: pre-wrap;
+      text-align: center;
 }
 
 
@@ -75,7 +75,42 @@
       width: 1px;
       flex-grow: 0;
       flex-shrink: 1;
+      width: 2px;
+      border: none;
+      background-color: #d1d1d1;
+      margin-top: 28px;
+      margin-bottom: 28px;
+      border-radius: 500px;
 }
+
+
+.summary-tile {
+      display: flex;
+      height: 160px;
+      background-color: #fff;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+      border-radius: 32px;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+      transition: 150ms ease-in;
+}
+
+.summary-tile:hover{
+      background-color: #2A3647;
+      transition: 150ms ease-out;
+}
+
+.summary-tile svg {
+      fill: white;
+      transition: 150ms ease-in;
+  }
+
+.summary-tile:hover svg {
+      fill: #2A3647;
+      transition: 150ms ease-out;
+  }
+
 
 
 .summary-icon {
@@ -88,25 +123,65 @@
       border-radius: 3000px;
       transition: 150ms ease-in;
   }
-  
-  .summary-icon:hover {
-      background-color: #fff;
-      transition: 150ms ease-out;
-      /* Ändere die Füllfarbe des SVGs beim Hover */
-  }
-  
-  .summary-icon:hover svg {
-      fill: #2A3647; /* Neue Füllfarbe für das SVG-Element beim Hover */
+
+
+
+  .summary-tile:hover .summary-icon {
+      background-color: #fff; 
       transition: 150ms ease-out;
   }
-  
-  .summary-icon > svg {
-      fill: white;
-      transition: 150ms ease-in;
-  }
+   
   
 
-  .urgent-date-group{
+
+
+
+  .urgent-date-container {
+      display: flex;
+      border-radius: 32px;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+      background-color: #fff;
+      border-radius: 32px;
+box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+transition: 150ms ease-in;
+
+}
+
+.urgent-date-container:hover {
+      background-color: #2A3647;
+      transition: 150ms ease-out;   
+}
+
+.urgent-date-container .summary-icon {
+      background-color: #ff3d00; 
+      transition: 150ms ease-in; 
+}
+
+.urgent-date-container:hover .summary-icon {
+      background-color: #fff; 
+      transition: 150ms ease-out; 
+}
+
+.urgent-date-container:hover .summary-status-count,
+.urgent-date-container:hover .summary-date,
+.urgent-date-container:hover .summary-status-title {
+      color: #fff; 
+      transition: 150ms ease-out; 
+}
+
+.urgent-date-container svg {
+      fill: #FFF;
+      
+      transition: 150ms ease-in; 
+}
+
+
+.urgent-date-container:hover svg {
+      fill: #FF3D00;
+      transition: 150ms ease-out; 
+}
+
+.urgent-date-group{
       display: flex;
       border: none;
       border-radius: 0;
@@ -116,10 +191,13 @@
       background-color: #ffffff00;
   }
 
-  .urgent-date-container {
-      display: flex;
-      border-radius: 32px;
-      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
-      background-color: #fff;
+  .urgent-date-group:hover {
+      background-color: #ffffff00;
+  }
 
-}
+  .summary-date {
+      color:#2A3647;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+  }
