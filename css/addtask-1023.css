@@ -59,7 +59,8 @@ margin-right: 10%
 
 .form-elements-container{
       display: flex;
-      gap: 32px;
+      flex-direction: column;
+      gap: 0px;
       align-self: stretch;
       
       
@@ -231,6 +232,7 @@ margin-right: 10%
       display: flex;
       flex-direction: column;
       align-self: stretch;
+
      
       
 }
@@ -409,12 +411,15 @@ margin-right: 10%
       justify-content: center;
       align-items: center;
       color: #fff;
+      margin-top: 8px;
 }
 
 .form_assign_badge_container {
       display: flex;
       gap: 15px;
-      margin-top:10px;
+      height: auto;
+      padding-top: 0px;
+      margin-top: 0px
 }
 
 
@@ -445,12 +450,9 @@ margin-right: 10%
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
-.hr_line {
-      height: 90%;
-      width: 1px;
-      background-color: #D1D1D1;
-      border: none;
-      border-radius: 50px;
+.hr_line_container {
+      
+      display: none;
 }
 
 

@@ -585,9 +585,14 @@ async function openAddTaskOverlay(status) {
       overlay.innerHTML = getHtmlTemplate (template, elementID);
       statusVar = status;
       await includeHTML();
-      addEventlistenerToSubtaskField ()
+      addEventlistenerToSubtaskField();
+      addCloseButtonToOverlay();
       await initAddTask()
 
+    }
+
+    function addCloseButtonToOverlay(){
+      document.getElementById('addtask_header').innerHTML += `<img class="pointer"  onclick="closeAndDeleteAddTask()" src="./assets/img/Close.svg" alt=""></img>`
     }
 
 async function closeAddTaskOverlay(status) {
