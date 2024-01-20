@@ -62,11 +62,11 @@ margin-right: 10%
       flex-direction: column;
       gap: 0px;
       align-self: stretch;
-      
-      
-     
-
+      overflow-y: scroll;
+      padding-right: 24px;
 }
+
+
 
 .addtask_left_form,
 .addtask_right_form {
@@ -822,6 +822,7 @@ margin-right: 10%
       display: flex;
       align-self: stretch;
       align-items: flex-end;
+      padding-right: 24px;
 
 }
 
