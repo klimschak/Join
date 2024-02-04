@@ -21,6 +21,7 @@ async function loadSummaryCount() {
       console.log('Anzahl In await:', awaitCount);
       console.log('Frühestes Datum:', earliestDate);
       placeDataInSummaryPage();
+      setGreetMessage()
 }
 
 function countUrgent() {
@@ -56,7 +57,7 @@ function countUrgent() {
       }
   }
 
-
+  
   function findEarliestDate() {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -94,3 +95,19 @@ function countUrgent() {
       document.getElementById('summary-feedback').innerHTML = awaitCount;
 
   }
+
+  function setGreetMessage() {
+    let container = document.getElementById('summary-greet');
+    let now = new Date();
+    let hour = now.getHours();
+    if (hour >= 6 && hour < 12) { // 6:00 - 11:59 Morning
+        container.innerHTML = 'Good Morning';
+      } else if (hour >= 12 && hour < 17) { // 12:00 - 16:59 Afternoon
+        container.innerHTML = 'Good Afternoon';
+      } else if (hour >= 17 && hour < 21) { // 17:00 - 20:59 Evening
+        container.innerHTML = 'Good Evening';
+      } else { // 21:00 - 5:59 Night
+        container.innerHTML = 'Good Night';
+      }
+    }
+  
