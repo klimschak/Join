@@ -8,6 +8,8 @@ async function initRenderAllTasksOnKanban() {
   for (let i = 0; i < tasks.length; i++) {
     await renderTaskCardOnKanban(i);
   }
+  await checkIfTaskColumnIsEmpty()
+  
   
 }
 
@@ -20,10 +22,11 @@ async function saveTaskToRemoteStorageFromBoard() {
 
 }
 
-function renderAllTasksOnKanban() {
+async function renderAllTasksOnKanban() {
   for (let i = 0; i < tasks.length; i++) {
     renderTaskCardOnKanban(i);
   }
+  await checkIfTaskColumnIsEmpty()
 }
 
 async function loadTaskFromRemoteStorage() {
@@ -36,6 +39,27 @@ function resetBoard() {
   document.getElementById("await-feedback-column").innerHTML = "";
   document.getElementById("done-column").innerHTML = "";
 }
+
+async function checkIfTaskColumnIsEmpty() {
+  let todoColumn = document.getElementById("to-do-column");
+  let progressColumn = document.getElementById("in-progress-column");
+  let feedbackColumn = document.getElementById("await-feedback-column");
+  let doneColumn = document.getElementById("done-column");
+
+  if (!todoColumn.innerHTML.trim()) {
+    todoColumn.innerHTML = `<div class="notasks">No To-Do Tasks</div>`;
+  }
+  if (!progressColumn.innerHTML.trim()) {
+    progressColumn.innerHTML = `<div class="notasks">No Progress Tasks</div>`;
+  }
+  if (!feedbackColumn.innerHTML.trim()) {
+    feedbackColumn.innerHTML = `<div class="notasks">No Await Tasks</div>`;
+  }
+  if (!doneColumn.innerHTML.trim()) {
+    doneColumn.innerHTML = `<div class="notasks">No Done Tasks</div>`;
+  }
+}
+
 
 async function renderTaskCardOnKanban(i) {
   let status = getTaskStatus(i);
@@ -192,6 +216,7 @@ async function htmlTemplateRenderTaskCardOnKanban(
     </div>
   </div>
   `;
+  
 }
 
 let currentDraggedElement;
