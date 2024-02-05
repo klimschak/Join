@@ -229,7 +229,7 @@ function startDragging(i) {
   currentDraggedElement = i;
 }
 
-function dropIntoColumn(ev, columnId) {
+async function dropIntoColumn(ev, columnId) {
   ev.preventDefault();
   const i = currentDraggedElement;
   const kanbanCard = document.getElementById(`kanban-card-${i}`);
@@ -237,10 +237,12 @@ function dropIntoColumn(ev, columnId) {
 
   if (kanbanCard && targetColumn) {
     // Hier wird der gesamte Container verschoben
+    deleteNoTasksStatus(columnId);
     kanbanCard.remove(); // Entferne das Element aus dem ursprünglichen Container
     targetColumn.appendChild(kanbanCard); // Füge es dem Zielcontainer hinzu
     moveTo(columnId);
   }
+  
 }
 
 async function moveTo(status) {
@@ -270,3 +272,11 @@ function filterTasks() {
 }
 
 
+function deleteNoTasksStatus(columnId){
+  const targetColumn = document.getElementById(columnId);
+  const elementsToRemove = targetColumn.querySelectorAll('.notasks');
+  elementsToRemove.forEach(function(element) {
+    element.remove();
+});
+
+}
