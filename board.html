@@ -28,7 +28,7 @@
   <title>Board</title>
 </head>
 
-<body id="body" onload="initRenderAllTasksOnKanban()">
+<body id="board-body" onload="initRenderAllTasksOnKanban()">
   <div w3-include-html="src/templates/footer.html"></div>
   <div id="add-task-overlay" class="add-task-overlay d-none"></div>
   <div id="edit-task-overlay" class="edit-task-overlay d-none"></div>
@@ -53,7 +53,7 @@
   
   </section>
 
-  <section id="kanban-container">
+  <section class="kanban-container">
     <div class="column">
       <div class="column-title">
         <h3>To-Do</h3>

@@ -2,10 +2,10 @@
   --form-field-focus-background: #deecf4;
 }
 
-body {
+#board-body {
   margin: 0;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 2vw;
+  margin-right: 2vw;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   -o-hyphens: auto;
@@ -25,7 +25,10 @@ div {
 }
 
 #header-kanban-container {
-  width: 90%;
+  width: 100%;
+  min-width: 900px;
+  max-width: 1280px;
+  
 }
 
 /*||||||||||||||||||||||||||||||||||||
@@ -111,10 +114,11 @@ div {
 }
   
   
-#kanban-container {
+.kanban-container {
   display: flex;
   gap: 32px;
   justify-content: center;
+  
 }
 
 .column-title {
@@ -139,6 +143,7 @@ div {
   height: 100%;
   background-color: #efefef;
   border-radius: 20px;
+  gap: 24px;
 }
 
 .notasks {
@@ -173,7 +178,7 @@ line-height: 120%; /* 19.2px */
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
   max-width: 100%;
   /* Hier wird die maximale Breite auf 100% des Elternelements (die Spalte) gesetzt */
-  margin: 16px;
+  
 
 }
 
@@ -287,3 +292,49 @@ line-height: 120%; /* 19.2px */
 .d-none{
   display: none;
 }
+
+
+/* xl  */
+@media (max-width: 1280px) {
+  .kanban-container {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-direction: column;
+    
+    
+  }
+
+  .kanban-area {
+    flex-direction: row;
+    align-self: stretch;
+    
+    overflow: scroll;
+    background-color: #2a364700;
+    align-items: center;
+    padding: 32px 8px 32px 8px
+
+    
+  }
+
+  .kanban-card{
+    height: 250px;
+    width: 250px;
+    min-width: 250px;
+  }
+  
+  .column {
+    height: auto;
+  }
+}
+
+/* lg  */
+@media (min-width: 1024px) {
+
+}
+
+/* md  */
+@media (min-width: 768px) {}
+
+/* sm  */
+@media (min-width: 640px) {}
