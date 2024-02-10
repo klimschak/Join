@@ -22,16 +22,16 @@ let userContacts = [
 ];
 
 async function includeHTML() {
-  let includeElements = document.querySelectorAll('[w3-include-html]');
+  let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
-      const element = includeElements[i];
-      file = element.getAttribute("w3-include-html"); 
-      let resp = await fetch(file);
-      if (resp.ok) {
-          element.innerHTML = await resp.text();
-      } else {
-          element.innerHTML = 'Page not found';
-      }
+    const element = includeElements[i];
+    file = element.getAttribute("w3-include-html");
+    let resp = await fetch(file);
+    if (resp.ok) {
+      element.innerHTML = await resp.text();
+    } else {
+      element.innerHTML = "Page not found";
+    }
   }
   changeClassToActive();
 }
@@ -48,11 +48,11 @@ async function renderContacts() {
 
       // Beispielhaftes HTML für die Darstellung der Kontakte
       contactsContainer.innerHTML += `
-          <div>
-          <p>Initials: ${contact.initials}</p>
-          <div>
-            <p>Name: ${contact.name}</p>
-            <p>Mail: ${contact.mail}</p>
+          <div class="userMainCase">
+          <p class="userInitials">${contact.initials}</p>
+          <div class="userCase">
+            <p class="userName">${contact.name}</p>
+            <p class="userMail">${contact.mail}</p>
           </div>
           </div>
         `;
