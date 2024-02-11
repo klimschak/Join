@@ -48,7 +48,7 @@ async function renderContacts() {
 
       // Beispielhaftes HTML für die Darstellung der Kontakte
       contactsContainer.innerHTML += `
-          <div class="userMainCase">
+          <div class="userMainCase" data-contact-id="${contact.id}" onclick="openContact(event)">
           <p class="userInitials">${contact.initials}</p>
           <div class="userCase">
             <p class="userName">${contact.name}</p>
@@ -60,4 +60,30 @@ async function renderContacts() {
   } else {
     contactsContainer.innerHTML = "Keine Kontakte gefunden.";
   }
+}
+
+function openContact(event) {
+  const contactElement = event.currentTarget;
+  const contactId = contactElement.getAttribute("data-contact-id");
+  showSelectedContact(contactId);
+  changeClassToActive(contactElement);
+}
+
+function showSelectedContact(contactId) {
+  const contact = userContacts.find((c) => c.id === parseInt(contactId));
+  if (contact) {
+    const contactInfo = document.getElementById("contact-info");
+    contactInfo.innerHTML = `
+      <p class="userName">${contact.name}</p>
+      <p class="userMail">${contact.mail}</p>
+    `;
+  }
+}
+
+function changeClassToActive(element) {
+  const activeElements = document.getElementsByClassName("active");
+  for (let i = 0; i < activeElements.length; i++) {
+    activeElements[i].classList.remove("active");
+  }
+  element.classList.add("active");
 }

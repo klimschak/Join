@@ -58,6 +58,7 @@
   gap: 35px;
   border-radius: 10px;
   background: #fff;
+  cursor: pointer;
 }
 
 .userIntials {
