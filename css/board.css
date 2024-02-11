@@ -26,7 +26,7 @@ div {
 
 #header-kanban-container {
   width: 100%;
-  min-width: 900px;
+  
   max-width: 1280px;
   
 }
@@ -79,7 +79,7 @@ div {
  }
 
  #board-title{
-  flex-basis: 703px;
+  flex-basis: 300px;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -146,11 +146,25 @@ div {
   font-size: 16px;
   height: 48px;
   align-items: center;
+  margin-bottom: 8px;
   
 }
 
 .column-title img {
-  height: 24px;
+  height: 32px;
+}
+
+.add-task-on-kanban {
+  stroke: #2A3647;
+  transition: 150ms ease-out;
+  
+  
+}
+
+.add-task-on-kanban:hover {
+  stroke: #29ABE2;
+  transition: 150ms ease-in;
+  
 }
 
 .kanban-area {
@@ -162,6 +176,8 @@ div {
   border-radius: 20px;
   gap: 24px;
 }
+
+
 
 .notasks {
   display: flex;
@@ -201,11 +217,25 @@ line-height: 120%; /* 19.2px */
 
 .kanban-category-user-story {
   display: flex;
-  padding: 4px 16px;
-  align-items: flex-start;
-  gap: 10px;
+  padding: 4px 12px;
+  
+  
   border-radius: 8px;
   background: #0038ff;
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  
+}
+
+.kanban-category-technical-task {
+  display: flex;
+  padding: 4px 12px;
+  
+  border-radius: 8px;
+  background: #1FD7C1;
   color: #fff;
   font-size: 16px;
   font-style: normal;
@@ -313,13 +343,63 @@ line-height: 120%; /* 19.2px */
 
 /* xl  */
 @media (max-width: 1280px) {
+    
+  
+  .kanban-container {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-direction: column;
+    
+    
+  }
+
+  .column-title {
+    margin-bottom: 0;
+    
+  }
+
+  .kanban-area {
+    flex-direction: row;
+    align-self: stretch;
+    
+    overflow: scroll;
+    background-color: #2a364700;
+    align-items: center;
+    padding: 8px;
+
+    
+  }
+
+  .kanban-card{
+    height: 250px;
+    width: 250px;
+    min-width: 250px;
+  }
+  
+  .column {
+    height: auto;
+  }
+
+  .notasks {
+    width: 100%;
+  }
+}
+
+/* lg  */
+@media (max-width: 1024px) {
   #board-title{
     flex-basis: 100%;
   }
 
+  #board-title h1{
+    font-size: 48px;
+  }
+
   .add-button-small{
     
-    width: 48px;
+    width: 40px;
+    height: 40px;
     display: flex;
   }
 
@@ -343,43 +423,6 @@ line-height: 120%; /* 19.2px */
     
     
   }
-  
-  
-  .kanban-container {
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    flex-direction: column;
-    
-    
-  }
-
-  .kanban-area {
-    flex-direction: row;
-    align-self: stretch;
-    
-    overflow: scroll;
-    background-color: #2a364700;
-    align-items: center;
-    padding: 32px 8px 32px 8px
-
-    
-  }
-
-  .kanban-card{
-    height: 250px;
-    width: 250px;
-    min-width: 250px;
-  }
-  
-  .column {
-    height: auto;
-  }
-}
-
-/* lg  */
-@media (min-width: 1024px) {
-
 }
 
 /* md  */
