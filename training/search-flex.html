@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale-1.0">
+      <title>Drag and Drop Tutorial</title>
+      <style>
+            .bar {
+                  display: flex;
+                  flex-wrap: wrap;
+                  /* Ermöglicht das Umbruchverhalten */
+            }
+
+            h1 {
+                  background-color: aqua;
+                  height: 40px;
+                  margin: 0;
+                  align-self: stretch;
+                  flex-grow: 1;
+                  flex-basis: 600px;
+                  /* Legt die Basisgröße des Elements fest, hier 100% der Containerbreite, um es zu zwingen, seine eigene Zeile einzunehmen */
+            }
+
+            .group {
+                  display: flex;
+                  flex-wrap: wrap;
+            }
+
+            .search {
+                  min-width: 200px;
+                  height: 40px;
+                  background-color: blueviolet;
+                  /* flex-wrap: wrap; Entfernen Sie diese Zeile, da sie hier nicht notwendig ist */
+                  flex-grow: 1;
+                  flex-basis: 80%;
+            }
+
+            button {
+                  height: 40px;
+            }
+
+
+            
+      </style>
+</head>
+
+<body>
+      <div class="bar">
+            <h1>Title</h1>
+            <div class="group"><div class="search"></div>
+            <button>ADD</button>
+            </div>
+      </div>
+
+</body>
+
+</html>
