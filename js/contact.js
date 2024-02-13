@@ -21,6 +21,10 @@ let userContacts = [
   },
 ];
 
+document.addEventListener("DOMContentLoaded", function() {
+  includeHTML();
+});
+
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
@@ -29,16 +33,20 @@ async function includeHTML() {
     let resp = await fetch(file);
     if (resp.ok) {
       element.innerHTML = await resp.text();
+      changeClassToActive(element); // Pass the element argument here
     } else {
       element.innerHTML = "Page not found";
     }
   }
-  changeClassToActive();
 }
 
 async function renderContacts() {
   console.log("Rendering contacts...");
   const contactsContainer = document.getElementById("contacts");
+  if (!contactsContainer) {
+    console.error("Contacts container not found!");
+    return;
+  }
   contactsContainer.innerHTML = "";
 
   // Überprüfen Sie, ob userContacts vorhanden sind
@@ -57,6 +65,13 @@ async function renderContacts() {
           </div>
         `;
     }
+
+    const contactDetailsContainer = document.getElementById("contact-details");
+    if (!contactDetailsContainer) {
+      console.error("Contact details container not found!");
+      return;
+    }
+    contactDetailsContainer.innerHTML = "";
   } else {
     contactsContainer.innerHTML = "Keine Kontakte gefunden.";
   }
@@ -70,17 +85,28 @@ function openContact(event) {
 }
 
 function showSelectedContact(contactId) {
+  // Find the selected contact
   const contact = userContacts.find((c) => c.id === parseInt(contactId));
   if (contact) {
-    const contactInfo = document.getElementById("contact-info");
+    // Show the contact details
+    const contactInfo = document.getElementById("contact-details");
+    if (!contactInfo) {
+      console.error("Contact info container not found!");
+      return;
+    }
     contactInfo.innerHTML = `
       <p class="userName">${contact.name}</p>
       <p class="userMail">${contact.mail}</p>
     `;
+    contactInfo.classList.add("show");
   }
 }
 
 function changeClassToActive(element) {
+  if (!element) {
+    console.error("Element is not defined!");
+    return;
+  }
   const activeElements = document.getElementsByClassName("active");
   for (let i = 0; i < activeElements.length; i++) {
     activeElements[i].classList.remove("active");
