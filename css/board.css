@@ -363,12 +363,17 @@ line-height: 120%; /* 19.2px */
     flex-direction: row;
     align-self: stretch;
     
-    overflow: scroll;
+    overflow-x: scroll;
     background-color: #2a364700;
     align-items: center;
     padding: 8px;
+    scrollbar-width: none;
 
     
+  }
+
+  .kanban-area::-webkit-scrollbar{
+    display: none;
   }
 
   .kanban-card{
