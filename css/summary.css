@@ -4,7 +4,8 @@
       align-items: center;
       justify-content: center;
       height: 100dvh;
-      gap: 80px;
+      gap: 4vw;
+      margin: 0;
 }
 
 .tile-group {
@@ -35,6 +36,10 @@
       width: 3px;
       background-color: #29ABE2;
       border-radius: 200px;
+}
+
+#hr-mobile {
+      display: none;
 }
 
 .summary-title-container span {
@@ -251,3 +256,121 @@ transform-origin: center;
       font-size: 64px;
       font-weight: normal;
   }
+
+
+  /* 2xl 	@media (min-width: 1536px) {  } */
+
+/* xl  */
+@media (max-width: 1280px) {
+
+}
+
+/* lg  */
+@media (max-width: 1024px) {
+      #summary-greet{
+            display: none;
+      }
+}
+
+/* md  */
+@media (max-width: 768px) {
+      
+      
+      .summary-title-container{
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 0px
+      }
+
+      .summary-title-container span {
+            font-size: 24px;
+      }
+
+      .summary-title-container hr {
+            display: none;
+      }
+
+      h1 {
+            font-size: 48px !important;
+      }
+      #hr-mobile {
+            display: flex;
+            border:none;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background-color: #29ABE2;
+            border-radius: 200px;
+            display: block;
+            height: 3px;
+            width: 120px !important;
+            margin: 0;
+            margin-top: 12px;
+
+      }
+      
+      .tile-group {
+            gap:24px;
+      }
+      .summary-status-count{
+            font-size: 48px;
+      }
+
+      .summary-icon{
+            width: 48px;
+            height: 48px;
+      }
+
+      .summary-icon svg{
+            width: 24px !important;
+            height: 24px !important;
+      }
+
+      .summary-status-title {
+            font-size: 14px;
+      }
+
+      .summary-tile {
+            height: 110px;
+            padding-left: 24px;
+            padding-right: 24px;
+            border-radius: 16px;
+      }
+      .summary-column{
+            gap: 24px;
+      }
+
+      .urgent-date-container {
+            border-radius: 16px;
+      }
+}
+
+/* sm  */
+@media (max-width: 480px) {
+      .summary-column, .tile-group{
+            gap: 12px;
+      }
+
+      .summary-tile {
+            height: 110px;
+            padding-left: 16px;
+            padding-right: 16px;
+            border-radius: 16px;
+            gap: 8px;
+            
+      }
+
+      .summary-icon{
+            width: 36px;
+            height: 36px;
+      }
+
+      .summary-icon svg{
+            width: 20px !important;
+            height: 20px !important;
+      }
+      .summary-status-count{
+            font-size: 32px;
+      }
+
+}
