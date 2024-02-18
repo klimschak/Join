@@ -856,6 +856,22 @@ margin-right: 10%
 }
 
 
+.add-task-page{
+      margin-left: 0px;
+}
+
+.page-margin-top {
+      margin-left: 0px ;
+}
+
+.secondary-button{
+      font-size: 16px;
+}
+
+.primary-button{
+      font-size: 16px;
+}
+
 /* 2xl @media (min-width: 1536px) {  } */
 
 /* xl  */

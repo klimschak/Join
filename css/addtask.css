@@ -2552,7 +2552,9 @@ margin-right: 10%
 }
 
 
-
+.add-task-page{
+      margin-left: 232px;
+}
 
 .d-none {
       display: none;

@@ -164,7 +164,9 @@ button {
 @media (min-width: 1280px) {}
 
 /* lg  */
-@media (min-width: 1024px) {}
+@media (min-width: 1024px) {
+      
+}
 
 /* md  */
 @media (min-width: 768px) {}

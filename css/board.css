@@ -4,7 +4,8 @@
 
 #board-body {
   margin: 0;
-  margin-left: 2vw;
+  margin-top: 96px;
+  margin-left: 300px;
   margin-right: 2vw;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
@@ -393,6 +394,11 @@ line-height: 120%; /* 19.2px */
 
 /* lg  */
 @media (max-width: 1024px) {
+
+  #board-body{
+    margin-right: 2vw;
+    margin-left: 2vw;
+  }
   #board-title{
     flex-basis: 100%;
   }
