@@ -26,3 +26,32 @@ async function init() {
       <div id=${elementID} w3-include-html=${template}>
     </div>`;
 }
+
+
+function showTopBarMenu() {
+    let element = document.getElementById("top-menu");
+    element.style.right = "48px";
+
+    // Füge eine Funktion hinzu, die als Event Listener verwendet wird
+    function handleClickOutside(event) {
+        if (!element.contains(event.target)) {
+            element.style.right = "-250px";
+            // Entferne den Event Listener, wenn das Menü ausgeblendet wird
+            document.removeEventListener("click", handleClickOutside);
+            // Entferne die Markierung, dass der Event Listener hinzugefügt wurde
+            element.classList.remove("event-listener-added");
+        }
+    }
+
+    // Überprüfe, ob der Event Listener schon hinzugefügt wurde
+    if (!element.classList.contains("event-listener-added")) {
+        setTimeout(() => {
+            document.addEventListener("click", handleClickOutside);
+            // Markiere das Element, um anzuzeigen, dass der Event Listener hinzugefügt wurde
+            element.classList.add("event-listener-added");
+        }, 10); // Kurze Verzögerung, um sofortiges Ausblenden zu verhindern
+    }
+}
+
+
+  
