@@ -1,11 +1,14 @@
 .body-summary {
       background-color: #F6F7F8;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       height: 100dvh;
       gap: 4vw;
       margin: 0;
+      margin-left: 300px;
+      flex-direction: column;
+      
 }
 
 .tile-group {
@@ -15,8 +18,16 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 32px;
+      width: 560px;
 
 }
+.tile-greet-container{
+      display: flex;
+      align-items: center;
+      gap: 2vw;
+      align-self: stretch;
+}
+
 
 .summary-title-container {
       display: flex;
@@ -269,6 +280,14 @@ transform-origin: center;
 @media (max-width: 1024px) {
       #summary-greet{
             display: none;
+      }
+      .body-summary {
+           margin-left:10vw;
+           margin-right: 10vw;
+            
+      }
+      .tile-group{
+            width: 100%;
       }
 }
 
