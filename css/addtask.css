@@ -841,7 +841,12 @@ margin-right: 10%
 /* 2xl @media (min-width: 1536px) {  } */
 
 /* xl  */
-@media (min-width: 1280px) {}
+@media (max-width: 1280px) {
+      .add-task-page{
+            margin-left: 200px !important;
+            margin-right: 0px !important;;
+      }
+}
 
 /* lg  */
 @media (max-width: 1024px) {
@@ -1684,6 +1689,12 @@ margin-right: 10%
       
            
       }
+
+      .add-task-page{
+            margin-left: 0px !important;
+            margin-right: 0px !important;;
+      }
+
       
  
 }
@@ -2551,6 +2562,14 @@ margin-right: 10%
       }
 }
 
+@media (max-width: 460px) {
+      .primary-button, .secondary-button{
+            font-size: 16px;
+      }
+
+}
+
+
 
 .add-task-page{
       margin-left: 232px;
@@ -2559,3 +2578,6 @@ margin-right: 10%
 .d-none {
       display: none;
 }
+
+
+
