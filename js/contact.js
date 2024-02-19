@@ -85,22 +85,19 @@ function openContact(event) {
 }
 
 function showSelectedContact(contactId) {
-  // Find the selected contact
-  const contact = userContacts.find((c) => c.id === parseInt(contactId));
+  const contact = userContacts.find(c => c.id === parseInt(contactId));
   if (contact) {
-    // Show the contact details
-    const contactInfo = document.getElementById("contact-details");
-    if (!contactInfo) {
-      console.error("Contact info container not found!");
-      return;
-    }
-    contactInfo.innerHTML = `
-      <p class="userName">${contact.name}</p>
-      <p class="userMail">${contact.mail}</p>
+    const contactDetailsContainer = document.getElementById("contact-details");
+    contactDetailsContainer.innerHTML = `
+      <div class="contact-info">
+        <p class="contact-name">${contact.name}</p>
+        <p class="contact-mail">${contact.mail}</p>
+      </div>
     `;
-    contactInfo.classList.add("show");
+    contactDetailsContainer.classList.add("show");
   }
 }
+
 
 function changeClassToActive(element) {
   if (!element) {
