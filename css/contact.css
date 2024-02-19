@@ -1,15 +1,18 @@
+body {
+  margin: 0;
+}
+
 .contact {
-  width: 100%;
+  width: 1440px;
   height: 100vh;
   background: #f6f7f8;
 }
 
 .contact-list {
-  width: 456px;
-  height: 100vh;
-  flex-shrink: 0;
-  background: var(--white, #fff);
-  box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  display: inline-flex;
+  padding: 32px 24px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .contact-list-inside {
@@ -54,7 +57,7 @@
   display: flex;
   width: 352px;
   padding: 15px 24px;
-  align-items: flex-start;
+  align-items: center;
   gap: 35px;
   border-radius: 10px;
   background: #fff;
@@ -65,20 +68,20 @@
   width: 42px;
   height: 42px;
   flex-shrink: 0;
-  fill: #ff7a00;
-  stroke-width: 2px;
-  stroke: var(--white, #fff);
 }
 
 .userCase {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 5px;
+  width: 352px;
+  padding: 15px 24px;
+  gap: 35px;
 }
 
 .userName {
   color: #000;
+
   /* Version 2/t6 */
   font-family: Inter;
   font-size: 20px;
@@ -104,63 +107,160 @@
   border-radius: 10px;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: none;
+.contact-info {
 }
 
-.overlay.show {
-  display: block;
+.contact-headline {
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
 }
 
-.add-contact-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+.contact-Titel-Open {
+  color: #000;
+
+  /* Version 2/t1 */
+  font-family: Inter;
+  font-size: 61px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 73.2px */
 }
 
-.overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
+.contact-Titel-Mid {
 }
 
-.modal {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.1);
-  padding: 32px;
-  width: 456px;
-  max-width: 100%;
+.contact-Titel-team {
+  color: #2a3647;
+
+  /* Version 2/t5 */
+  font-family: Inter;
+  font-size: 27px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 32.4px */
 }
 
-#add-contact-form-container {
+.contact-Open-Info {
+  display: flex;
+  align-items: center;
+  gap: 54px;
+}
+
+.contact-Open-Initials {
+  display: flex;
+  width: 80px;
+  height: 28.571px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  text-align: center;
+  /* Version 2/t2 */
+  font-family: Inter;
+  font-size: 47px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 56.4px */
+}
+
+.contact-name {
+  color: #000;
+
+  /* Version 2/t2 */
+  font-family: Inter;
+  font-size: 47px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 56.4px */
+}
+
+.contact-Titel-Edit-Delete {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.contact-Titel-edit-img {
+  width: 24px;
+  height: 24px;
+}
+.contact-Titel-edit-text {
+  color: var(--Version-2-main-color, #2a3647);
+
+  /* Version 2/body */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 19.2px */
+}
+
+.contact-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-Titel-delete-img {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-Titel-delete-text {
+  color: var(--Version-2-main-color, #2a3647);
+  /* Version 2/body */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 19.2px */
+}
+
+.contact-Titel-contactInformation {
+  display: flex;
+  align-items: center;
+  gap: 59px;
+  display: flex;
+  width: 207px;
+  height: 74px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-Titel-contactInformation-text {
+  color: #000;
+  /* Version 2/t6 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 24px */
+}
+
+.contact-Titel-phoneEmailAddresses {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
 }
-
-#add-contact-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-#add-contact-form label {
-  margin-bottom: 8px;
-}
-
-#add-contact-form input[type="text"],
-#add-contact-form input[type="email"] {
-  margin-bottom: 16px;
+.contact-mail {
+  color: #007cee;
+  /* Version 2/body */
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 19.2px */
 }

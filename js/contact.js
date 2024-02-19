@@ -19,9 +19,11 @@ let userContacts = [
     mail: "thorsten.mail.com",
     initials: "TP",
   },
+
+  { id: 4, name: "John Doe", mail: "john.doe@example.com", initials: "JD" },
 ];
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   includeHTML();
 });
 
@@ -57,10 +59,10 @@ async function renderContacts() {
       // Beispielhaftes HTML für die Darstellung der Kontakte
       contactsContainer.innerHTML += `
           <div class="userMainCase" data-contact-id="${contact.id}" onclick="openContact(event)">
-          <p class="userInitials">${contact.initials}</p>
+          <span class="userInitials">${contact.initials}</span>
           <div class="userCase">
-            <p class="userName">${contact.name}</p>
-            <p class="userMail">${contact.mail}</p>
+            <span class="userName">${contact.name}</span>
+            <span class="userMail">${contact.mail}</span>
           </div>
           </div>
         `;
@@ -85,19 +87,54 @@ function openContact(event) {
 }
 
 function showSelectedContact(contactId) {
-  const contact = userContacts.find(c => c.id === parseInt(contactId));
+  const contact = userContacts.find((c) => c.id === parseInt(contactId));
   if (contact) {
     const contactDetailsContainer = document.getElementById("contact-details");
-    contactDetailsContainer.innerHTML = `
+    contactDetailsContainer.innerHTML = /*html*/ `
+      
+    
       <div class="contact-info">
-        <p class="contact-name">${contact.name}</p>
-        <p class="contact-mail">${contact.mail}</p>
+      <div class="contact-headline">
+        <span class="contact-Titel-Open">Contacts</span>
+        <img
+        class="contact-Titel-Mid"
+        src="assets/img/contactTitelMid.svg"
+      />
+        <span class="contact-Titel-team">Better with a team</span>
+        </div>
+        <div class="contact-Open-Info">
+        <span class="contact-Open-Initials">${contact.initials}</span>
+        <span class="contact-name">${contact.name}</span>
+
+        <div class="contact-Titel-Edit-Delete">
+        <div class="contact-edit">
+        <img
+        class="contact-Titel-edit-img"
+        src="assets/img/contactEdit.svg"
+      />
+      <span class="contact-Titel-edit-text"> Edit </span>
+      </div>
+
+      <div class="contact-delete">
+      <img
+      class="contact-Titel-delete-img"
+      src="assets/img/contactDelete.svg"
+    />
+      <span class="contact-Titel-delete-text">Delete</span>
+       </div>
+        </div>
+          </div>
+        <div class="contact-Titel-contactInformation">
+          <span class="contact-Titel-contactInformation-text">Contact Information</span>
+          </div>
+          <div class="contact-Titel-phoneEmailAddresses">
+        <span class="contact-mail">${contact.mail}</span>
+      </div>
       </div>
     `;
     contactDetailsContainer.classList.add("show");
   }
 }
-
 
 function changeClassToActive(element) {
   if (!element) {
