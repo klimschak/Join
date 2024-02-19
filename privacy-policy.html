@@ -11,33 +11,49 @@
       <script src="js/storage.js"></script>
       <script src="js/register.js"></script>
       <script defer src="js/html_templates.js" type="text/javascript"></script>
-      <title>Sign up</title>
+      <title>Privacy Policy</title>
 </head>
 
 <body onload="makeJoinBlue(), includeHTML()">
       <div w3-include-html="top-bar.html"></div>
 
       <div class="side-content">
-            <div class="title-arrow-container"><h1>Privacy Policy</h1><img src="./assets/img/arrow-left-line.svg" alt=""></div>
+            <div class="title-arrow-container">
+                  <h1>Privacy Policy</h1><img onclick="returnToLastPage()" id="zurueckPfeil" src="./assets/img/arrow-left-line.svg" alt="">
+            </div>
             <h2>Subtitle</h2>
             <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis ipsum, condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim vitae, feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend. Praesent tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut massa
+                  eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla convallis.
+                  Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis ipsum,
+                  condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim vitae,
+                  feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend. Praesent
+                  tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
 
             </p>
             <h2>Subtitle</h2>
             <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis ipsum, condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim vitae, feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend. Praesent tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut massa
+                  eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla convallis.
+                  Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis ipsum,
+                  condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim vitae,
+                  feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend. Praesent
+                  tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
 
             </p>
 
-            
+
       </div>
       <div w3-include-html="footer.html"></div>
 </body>
 <script>
+function returnToLastPage(){
+      history.back()
+}
       function makeJoinBlue() {
             document.body.innerHTML = document.body.innerHTML.replace(/\bJoin \b/g, "<span style='color: #29ABE2;'>Join </span>");
       }
+
 </script>
 
 </html>

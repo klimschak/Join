@@ -11,14 +11,14 @@
       <script src="js/storage.js"></script>
       <script src="js/register.js"></script>
       <script defer src="js/html_templates.js" type="text/javascript"></script>
-      <title>Sign up</title>
+      <title>Legal Notice</title>
 </head>
 
 <body onload="makeJoinBlue(), includeHTML()">
       <div w3-include-html="top-bar.html"></div>
       <div class="side-content">
             <div class="title-arrow-container">
-                  <h1>Legal Notice</h1><img src="./assets/img/arrow-left-line.svg" alt="">
+                  <h1>Legal Notice</h1><img onclick="returnToLastPage()" src="./assets/img/arrow-left-line.svg" alt="">
             </div>
 
             <h2>Imprint</h2>
@@ -57,6 +57,9 @@
 
 </body>
 <script>
+      function returnToLastPage(){
+      history.back()
+}
       function makeJoinBlue() {
             document.body.innerHTML = document.body.innerHTML.replace(/\bJoin \b/g, "<span style='color: #29ABE2;'>Join </span>");
             document.body.innerHTML = document.body.innerHTML.replace(/\bDeveloper Akademie GmbH\b/g, "<span style='color: #29ABE2;'>Developer Akademie GmbH</span>");
