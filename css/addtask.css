@@ -915,7 +915,7 @@ margin-right: 10%
             gap: 0px;
             align-self: stretch;
             overflow-y: scroll;
-            padding-right: 24px;
+            
       }
       
       
@@ -1769,7 +1769,7 @@ margin-right: 10%
             gap: 0px;
             align-self: stretch;
             overflow-y: scroll;
-            padding-right: 24px;
+            
       }
       
       
@@ -2565,6 +2565,12 @@ margin-right: 10%
 @media (max-width: 460px) {
       .primary-button, .secondary-button{
             font-size: 16px;
+      }
+      .prio_button_container{
+            gap: 8px;
+      }
+      .prio_button p {
+            font-size: 14px;
       }
 
 }
