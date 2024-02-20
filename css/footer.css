@@ -95,6 +95,7 @@
   gap: 8px;
   color: var(--icon, #a8a8a8);
   transition: ease-in 125ms;
+  text-decoration: none;
 
 
   /* Version 2/body */

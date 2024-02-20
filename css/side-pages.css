@@ -3,6 +3,7 @@ body{
       overflow-y: scroll;
       scroll-behavior: smooth;
       margin-left: 232px;
+      margin-top: 140px;
 }
 .side-content {
       margin: 96px 8vw 400px 8vw;

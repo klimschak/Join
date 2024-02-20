@@ -4,7 +4,7 @@
 
 #board-body {
   margin: 0;
-  margin-top: 96px;
+  margin-top: 140px;
   margin-left: 300px;
   margin-right: 2vw;
   -moz-hyphens: auto;
@@ -173,7 +173,7 @@ div {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #efefef;
+  
   border-radius: 20px;
   gap: 24px;
 }
@@ -214,6 +214,11 @@ line-height: 120%; /* 19.2px */
   /* Hier wird die maximale Breite auf 100% des Elternelements (die Spalte) gesetzt */
   
 
+}
+
+.tilt {
+  transform: rotate(5deg);
+  opacity: 0.5;
 }
 
 .kanban-category-user-story {
@@ -365,7 +370,7 @@ line-height: 120%; /* 19.2px */
     align-self: stretch;
     
     overflow-x: scroll;
-    background-color: #2a364700;
+    
     align-items: center;
     padding: 8px;
     scrollbar-width: none;

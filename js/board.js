@@ -190,7 +190,7 @@ async function htmlTemplateRenderTaskCardOnKanban(
 
 ) {
   return /*html*/ `
-  <div draggable="true" ondragstart="startDragging(${i})" id="kanban-card-${i}" class="kanban-card pointer" onclick="loadTaskOverview(${i})">
+  <div draggable="true" ondragstart="startDragging(${i}), tiltCard(${i})" id="kanban-card-${i}" class="kanban-card pointer" onclick="loadTaskOverview(${i})">
     <div class="kanban-category-${categoryclass}">
       ${category}
     </div>
@@ -216,6 +216,12 @@ async function htmlTemplateRenderTaskCardOnKanban(
     </div>
   </div>
   `;
+  
+}
+
+function tiltCard(i){
+  let card = document.getElementById(`kanban-card-${i}`)
+  card.classList.add('tilt');
   
 }
 
