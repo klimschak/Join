@@ -27,6 +27,7 @@ margin-right: 10%
       position:fixed;
       width: 100%;
       height: 100%;
+      top:0;
       
 
       
@@ -35,12 +36,11 @@ margin-right: 10%
 
 
 #add-task-overlay-container {
-      width: 80%;
       max-width: 988px !important;
       height: 76%;
-      
+      width: 80dvw;
       background-color: #f4f4f4;
-      padding: 64px;
+      padding: 4vw;
       border-radius: 30px;
 }
 
@@ -841,7 +841,7 @@ margin-right: 10%
 /* 2xl @media (min-width: 1536px) {  } */
 
 /* xl  */
-@media (max-width: 1280px) {
+@media (max-width: 1600px) {
       .add-task-page{
             margin-left: 200px !important;
             margin-right: 0px !important;;
@@ -849,7 +849,7 @@ margin-right: 10%
 }
 
 /* lg  */
-@media (max-width: 1024px) {
+@media (max-width: 1600px) {
       :root {
             --form-field-focus-background: #DEECF4;
       }
@@ -887,7 +887,7 @@ margin-right: 10%
       
       
       #add-task-overlay-container {
-            width: 80%;
+            width: 60vw;
             max-width: 988px !important;
             height: 76%;
             
@@ -906,6 +906,7 @@ margin-right: 10%
             margin-top: 32px;
             height: 90%;
             align-items: flex-start;
+            padding-right: 16px;
             
       }
       
@@ -915,6 +916,7 @@ margin-right: 10%
             gap: 0px;
             align-self: stretch;
             overflow-y: scroll;
+            padding-right: 24px;
             
       }
       
@@ -1699,6 +1701,21 @@ margin-right: 10%
  
 }
 
+@media (max-width: 1024px){
+.add-task-overlay{
+      justify-content: center;
+      align-items: flex-start;
+ 
+}
+
+#add-task-overlay-container{
+      margin-top: 48px;
+      margin-left: 4vw;
+      margin-right: 4vw;
+      width: 80%;
+}
+}
+
 /* md  */
 @media (min-width: 768px) {}
 
@@ -1750,6 +1767,19 @@ margin-right: 10%
             border-radius: 30px;
       }
       
+
+      .add-task-overlay{
+            justify-content: center;
+            align-items: flex-start;
+       
+      }
+      
+      #add-task-overlay-container{
+            margin-top: 48px;
+            margin-left: 4vw;
+            margin-right: 4vw;
+            width: 80%;
+      }
        
       
       .form_container {
