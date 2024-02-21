@@ -190,7 +190,7 @@ async function htmlTemplateRenderTaskCardOnKanban(
 
 ) {
   return /*html*/ `
-  <div draggable="true" ondragstart="startDragging(${i}), tiltCard(${i})" id="kanban-card-${i}" class="kanban-card pointer" onclick="loadTaskOverview(${i})">
+  <div draggable="true" ondragend="resetCard(${i})" ondragstart="startDragging(${i}), tiltCard(${i})" id="kanban-card-${i}" class="kanban-card pointer" onclick="loadTaskOverview(${i})">
     <div class="kanban-category-${categoryclass}">
       ${category}
     </div>
@@ -223,6 +223,11 @@ function tiltCard(i){
   let card = document.getElementById(`kanban-card-${i}`)
   card.classList.add('tilt');
   
+}
+
+function resetCard(i) {
+  let card = document.getElementById(`kanban-card-${i}`)
+  card.classList.remove('tilt');
 }
 
 let currentDraggedElement;
@@ -286,3 +291,83 @@ function deleteNoTasksStatus(columnId){
 });
 
 }
+
+
+
+
+let autoScrollInterval;
+const scrollContainer = document.getElementById('to-do-column');
+
+
+document.getElementById('to-do-column').addEventListener('wheel', function(e) {
+  // Basierend auf der Erkennung der horizontalen Bewegung entscheiden
+  if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+    // Wenn eine signifikante horizontale Bewegung vorhanden ist, lassen Sie das normale Scrollen zu
+    // Dies ist besonders wichtig für Trackpads
+    e.stopPropagation(); // Verhindert, dass das Ereignis weiter nach oben im DOM propagiert wird
+  } else {
+    // Verhindert das Standardverhalten (Vertikales Scrollen) und erlaubt stattdessen horizontales Scrollen
+    e.preventDefault();
+    this.scrollLeft += e.deltaY + e.deltaX; // Nutzt sowohl vertikale als auch horizontale Bewegungen für das Scrollen
+  }
+}, {passive: false}); // `{passive: false}` ist notwendig, um `preventDefault` in modernen Browsern zu erlauben
+
+
+document.querySelectorAll('.draggable').forEach(item => {
+  item.addEventListener('dragstart', handleDragStart, false);
+  item.addEventListener('dragend', handleDragEnd, false);
+});
+
+scrollContainer.addEventListener('dragover', handleDragOver, false);
+
+function handleDragStart(e) {
+  this.style.opacity = '0.4';  // Optional: Elementtransparenz während des Drag-Vorgangs
+}
+
+function handleDragOver(e) {
+  e.preventDefault(); // Erlaubt das Droppen von Elementen
+  const scrollSpeed = 5;
+  const edgeMargin = 50; // Pixel vom Rand, bei denen das Scrollen beginnen soll
+  const containerRect = scrollContainer.getBoundingClientRect();
+  const containerLeftEdge = containerRect.left;
+  const containerRightEdge = containerRect.right;
+
+  // Startet das Scrollen, wenn sich die Maus am linken oder rechten Rand befindet
+  if (e.clientX - containerLeftEdge < edgeMargin) {
+    startAutoScroll(-scrollSpeed);
+  } else if (containerRightEdge - e.clientX < edgeMargin) {
+    startAutoScroll(scrollSpeed);
+  } else {
+    stopAutoScroll();
+  }
+}
+
+function handleDragEnd(e) {
+  this.style.opacity = '1'; // Stellt die Transparenz des Elements wieder her
+  stopAutoScroll();
+}
+
+function startAutoScroll(speed) {
+  stopAutoScroll(); // Stellt sicher, dass kein Intervall läuft
+  autoScrollInterval = setInterval(() => {
+    scrollContainer.scrollLeft += speed;
+  }, 20); // Passt die Geschwindigkeit und das Intervall des Scrollens an
+}
+
+function stopAutoScroll() {
+  clearInterval(autoScrollInterval);
+}
+
+
+document.getElementById('to-do-column').addEventListener('wheel', function(e) {
+  // Basierend auf der Erkennung der horizontalen Bewegung entscheiden
+  if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+    // Wenn eine signifikante horizontale Bewegung vorhanden ist, lassen Sie das normale Scrollen zu
+    // Dies ist besonders wichtig für Trackpads
+    e.stopPropagation(); // Verhindert, dass das Ereignis weiter nach oben im DOM propagiert wird
+  } else {
+    // Verhindert das Standardverhalten (Vertikales Scrollen) und erlaubt stattdessen horizontales Scrollen
+    e.preventDefault();
+    this.scrollLeft += e.deltaY + e.deltaX; // Nutzt sowohl vertikale als auch horizontale Bewegungen für das Scrollen
+  }
+}, {passive: false}); // `{passive: false}` ist notwendig, um `preventDefault` in modernen Browsern zu erlauben
