@@ -89,13 +89,13 @@ margin-right: 10%
       align-self: stretch;
       margin:0;
       flex-direction: column;
-      margin-left: 5vw;
+      margin-left: 232px;
       margin-right: 1vw;
-      
+
 }
 
 #add-task-page {
-      z-index: -2;
+      width: 70%;
 }
 
 
@@ -1708,10 +1708,12 @@ margin-right: 10%
 
       .add-task-page{
             margin-left: 0px !important;
-            margin-right: 0px !important;;
+            margin-right: 0px !important;
       }
 
-      
+      #add-task-page {
+            width: 94%;
+      }
  
 }
 
@@ -1727,6 +1729,10 @@ margin-right: 10%
       margin-left: 4vw;
       margin-right: 4vw;
       width: 80%;
+}
+
+#add-task-page-body{
+      margin-left: 16px;
 }
 
 #add-task-page{
@@ -1749,10 +1755,13 @@ margin-right: 10%
 
 /* sm  */
 @media (max-width: 640px) {
+      #add-task-page-body{
+            margin-left: 0px;
+      }
 
       #add-task-page{
-            margin-left: 3dvw !important;
-            margin-right: 1dvw !important;
+            margin-left: 40px !important;
+            margin-right: 32px !important;
       
       }
       :root {
@@ -2628,7 +2637,7 @@ margin-right: 10%
 
 @media (max-width: 460px) {
       #add-task-page{
-            margin-left: 16px !important;
+            margin-left: 32px !important;
             margin-right: 0px !important;
             margin-bottom: 160px;
       
