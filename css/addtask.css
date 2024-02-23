@@ -16,6 +16,7 @@ margin-right: 10%
 .add-task-body{
       display: flex;
       flex-direction: column;
+      justify-content: center;
 }
   
 .add-task-overlay {
@@ -82,7 +83,20 @@ margin-right: 10%
       width: 48px;
 }
 
+#add-task-page-body{
+     
+      display: flex;
+      align-self: stretch;
+      margin:0;
+      flex-direction: column;
+      margin-left: 5vw;
+      margin-right: 1vw;
+      
+}
 
+#add-task-page {
+      z-index: -2;
+}
 
 
 
@@ -842,9 +856,9 @@ margin-right: 10%
 
 /* xl  */
 @media (max-width: 1600px) {
-      .add-task-page{
-            margin-left: 200px !important;
-            margin-right: 0px !important;;
+      #add-task-page{
+            margin-left: 232px !important;
+            margin-right: 0vw !important;;
       }
 }
 
@@ -1714,13 +1728,33 @@ margin-right: 10%
       margin-right: 4vw;
       width: 80%;
 }
+
+#add-task-page{
+      margin-left: 5dvw !important;
+      margin-right: 5dvw !important;
+
+}
+
+
 }
 
 /* md  */
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+      #add-task-page{
+            margin-left: 4dvw !important;
+            margin-right: 3dvw !important;
+      
+      }
+}
 
 /* sm  */
 @media (max-width: 640px) {
+
+      #add-task-page{
+            margin-left: 3dvw !important;
+            margin-right: 1dvw !important;
+      
+      }
       :root {
             --form-field-focus-background: #DEECF4;
       }
@@ -2593,6 +2627,12 @@ margin-right: 10%
 }
 
 @media (max-width: 460px) {
+      #add-task-page{
+            margin-left: 16px !important;
+            margin-right: 0px !important;
+            margin-bottom: 160px;
+      
+      }
       .primary-button, .secondary-button{
             font-size: 16px;
       }
