@@ -6,45 +6,47 @@ let statusVar;
 let taskIndex;
 
 
-async function initAddTask(){
+async function initAddTask() {
       await loadTasksToAddTasksFromRemoteStorage();
-      
+
       addToTasks();
-      addEventlistenerToSubtaskField ();
+      addEventlistenerToSubtaskField();
       //createInitialsFromName()
       taskIndex = tasks.length - 1;
-      
-      
-      
+
+
+
 }
+
+
 
 async function loadTasksToAddTasksFromRemoteStorage() {
       try {
-        tasks = JSON.parse(await getItem("tasks"));
+            tasks = JSON.parse(await getItem("tasks"));
       } catch (e) {
-        console.error("Loading error:", e);
+            console.error("Loading error:", e);
       }
-      
-    }
 
-    function addToTasks() {
+}
+
+function addToTasks() {
       tasks.push({
-        assigned: [],
-        category: [],
-        date: [],
-        description: [],
-        id: [],
-        initials: [],
-        priority: [],
-        status: [],
-        subtasks: [
-        
-        ],
-        
-        title: []
+            assigned: [],
+            category: [],
+            date: [],
+            description: [],
+            id: [],
+            initials: [],
+            priority: [],
+            status: [],
+            subtasks: [
+
+            ],
+
+            title: []
       });
-    }
-    
+}
+
 
 function filterAccountsToAssign() {
       let search = document.getElementById("search_accounts_to_assign").value
@@ -80,12 +82,12 @@ function displayErrorIfNoResultsInAccountsToAssign(assign) {
 
 function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden */
-      if (!assignedIds.includes(accountId)) { 
+      if (!assignedIds.includes(accountId)) {
             assign.innerHTML += /*html*/`
             <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
       }
       /* Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden */
-      if (assignedIds.includes(accountId)) { 
+      if (assignedIds.includes(accountId)) {
             assign.innerHTML += /*html*/`
             <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
       }
@@ -100,7 +102,7 @@ function checkIfAssigned(i) {
       let assignbadge = document.getElementById(`assign_badge${i}`);
       ifAccountIsNotAssigned(i, accountId, assignedIds, badge);
       ifAccountIsAssigned(i, index);
-      
+
 
 }
 
@@ -133,39 +135,39 @@ function ifAccountIsAssigned(i, index) {
 
 let isDropdownOpen = false;
 
-function toggleDropdown(){
-const dropdown = document.getElementById('assign_list');
-  
-  if (isDropdownOpen) {
-    dropdown.classList.add('d-none');
-    isDropdownOpen = false;
-  } else {
-    dropdown.classList.remove('d-none');
-    isDropdownOpen = true;
-    document.addEventListener('click', closeDropdownOnClickOutside);
-  }
+function toggleDropdown() {
+      const dropdown = document.getElementById('assign_list');
+
+      if (isDropdownOpen) {
+            dropdown.classList.add('d-none');
+            isDropdownOpen = false;
+      } else {
+            dropdown.classList.remove('d-none');
+            isDropdownOpen = true;
+            document.addEventListener('click', closeDropdownOnClickOutside);
+      }
 }
 
 function closeDropdownOnClickOutside(event) {
       const dropdown = document.getElementById('assign_list');
       const container = document.getElementById('form_assign_container');
-    
+
       if (!container.contains(event.target)) {
-        // Klicken außerhalb des "form_assign_container" erkannt, schließe das Dropdown
-        dropdown.classList.add('d-none');
-        isDropdownOpen = false;
-        // Entfernen des "Klick außerhalb" Ereignisses
-        document.removeEventListener('click', closeDropdownOnClickOutside);
+            // Klicken außerhalb des "form_assign_container" erkannt, schließe das Dropdown
+            dropdown.classList.add('d-none');
+            isDropdownOpen = false;
+            // Entfernen des "Klick außerhalb" Ereignisses
+            document.removeEventListener('click', closeDropdownOnClickOutside);
       }
-    }
+}
 
 // Funktion, um das Klicken am <li> zu stoppen
 function stopClickPropagation(event) {
       event.stopPropagation();
-    }
+}
 
 
-function openDropdownOnInput (){
+function openDropdownOnInput() {
       const dropdown = document.getElementById('assign_list');
       dropdown.classList.remove('d-none');
       isDropdownOpen = true;
@@ -184,9 +186,9 @@ function setPriority(prio) {
       let urgent = document.getElementById('urgent');
       let medium = document.getElementById('medium');
       let low = document.getElementById('low');
-      
 
-      if (prio === 1 && prio != currentPriority || prio === 2 && prio != currentPriority  || prio === 3 && prio != currentPriority){
+
+      if (prio === 1 && prio != currentPriority || prio === 2 && prio != currentPriority || prio === 3 && prio != currentPriority) {
             checkPriority(urgent, medium, low, prio)
       }
       else {
@@ -194,23 +196,23 @@ function setPriority(prio) {
       }
 }
 
-function checkPriority (urgent, medium, low, prio){
+function checkPriority(urgent, medium, low, prio) {
       if (prio === 1) {
-            
+
             activatePrioUrgent(urgent, medium, low)
       }
       if (prio === 2) {
-           
+
             activatePrioMedium(urgent, medium, low)
       }
       if (prio === 3) {
-            
+
             activatePrioLow(urgent, medium, low)
       }
 }
 
-function deletePriorityFromArray(urgent, medium, low){
-      
+function deletePriorityFromArray(urgent, medium, low) {
+
       tasks[taskIndex].priority.splice(0, 1);
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
@@ -219,7 +221,7 @@ function deletePriorityFromArray(urgent, medium, low){
       medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
       currentPriority = 0;
-      
+
 }
 function activatePrioUrgent(urgent, medium, low) {
       urgent.classList.add("urgent-checked");
@@ -241,7 +243,7 @@ function activatePrioMedium(urgent, medium, low) {
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
       savePriorityToArray("Medium")
       currentPriority = 2;
-}     
+}
 
 function activatePrioLow(urgent, medium, low) {
       urgent.classList.remove("urgent-checked");
@@ -252,7 +254,7 @@ function activatePrioLow(urgent, medium, low) {
       low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja_white.svg" alt="">`;
       savePriorityToArray("Low")
       currentPriority = 3;
-}  
+}
 
 /* 
 |||||||||||||||||||||||||||||||||||||||||||||
@@ -267,35 +269,35 @@ function openCategoryDropdown() {
             <li class="category-list" onclick="setTaskCategory('Technical Task')">Technical Task</li>
             <li class="category-list" onclick="setTaskCategory('User Story')">User Story</li>
             `;
-      
+
 }
 
 function closeCategoryDropdownOnClickOutside(event) {
       const category = document.getElementById('category_dropdown');
       const container = document.getElementById('category_field_dropdown_container');
       if (!container.contains(event.target)) {
-        
-        // Entfernen des "Klick außerhalb" Ereignisses
-        document.removeEventListener('click', closeCategoryDropdownOnClickOutside);
-        isDropdownOpen = false;
-        category.innerHTML = "";
+
+            // Entfernen des "Klick außerhalb" Ereignisses
+            document.removeEventListener('click', closeCategoryDropdownOnClickOutside);
+            isDropdownOpen = false;
+            category.innerHTML = "";
       }
-    }
+}
 
-    let isCategoryDropdownOpen = false;
+let isCategoryDropdownOpen = false;
 
-    function toggleCategoryDropdown(){
-    const category = document.getElementById('category_dropdown');
-      
+function toggleCategoryDropdown() {
+      const category = document.getElementById('category_dropdown');
+
       if (isDropdownOpen) {
-        category.innerHTML = "";
-        isDropdownOpen = false;
+            category.innerHTML = "";
+            isDropdownOpen = false;
       } else {
-        document.addEventListener('click', closeCategoryDropdownOnClickOutside);
-        openCategoryDropdown();
-        isDropdownOpen = true;
+            document.addEventListener('click', closeCategoryDropdownOnClickOutside);
+            openCategoryDropdown();
+            isDropdownOpen = true;
       }
-    }
+}
 
 function setTaskCategory(category) {
       let title = document.getElementById('category_field_title');
@@ -303,8 +305,8 @@ function setTaskCategory(category) {
       saveCategoryToArray(category);
       let wipeCategoryDropdown = document.getElementById('category_dropdown');
       wipeCategoryDropdown.innerHTML = "";
-      
-      
+
+
 }
 
 
@@ -317,15 +319,15 @@ function setTaskCategory(category) {
 
 
 
-    
+
 function addEventlistenerToSubtaskField() {
       let subtaskInput = document.getElementById('subtask_input');
       if (subtaskInput) {
-          subtaskInput.addEventListener('focusin', showSubtaskInputIcons);
+            subtaskInput.addEventListener('focusin', showSubtaskInputIcons);
       } else {
-          console.error("Element #subtask_input not found");
+            console.error("Element #subtask_input not found");
       }
-  }
+}
 
 function showSubtaskInputIcons() {
       let subtaskInput = document.getElementById('subtask_input');
@@ -337,40 +339,40 @@ function showSubtaskInputIcons() {
               <hr>
               <img src="./assets/img/subtask_save.svg" alt="" onclick="saveSubtaskInLi()" >
       `;
-      
+
       subtaskInput.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                   saveSubtaskInLi();
             }
-          });
+      });
 
-          subtaskInput.addEventListener('keydown', function (event) {
+      subtaskInput.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                   resetSubtaskInput();
             }
-          });
+      });
 }
 
 
 function saveSubtaskInLi() {
       let subtaskInput = document.getElementById('subtask_input');
       let ul_subtask = document.getElementById('ul_subtask_task');
-      
+
       let subtaskValue = subtaskInput.value;
-      
+
 
       if (subtaskValue.trim() !== '') {
             saveSubtaskToArray(subtaskValue);
             let subtaskIndex = tasks[taskIndex].subtasks.length - 1;
             ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex);
-            
+
             resetSubtaskInput();
             subtaskInput.focus();
 
       }
 }
 
-function htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex){
+function htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex) {
       return /* html */`
       <li class="li_subtask_task" id="li_subtask_task_${subtaskIndex}" onmouseenter="showSubtaskEditIcons(${subtaskIndex})" onmouseleave="hideSubtaskEditIcons(${subtaskIndex})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
@@ -407,22 +409,22 @@ function resetSubtaskInput() {
 }
 
 function deleteSubtask(i) {
-     
-    
+
+
       const subtasks = tasks[taskIndex].subtasks;
-    
-    
+
+
       // Verwende splice(), um das Subtask-Objekt zu löschen
       if (i >= 0 && i < subtasks.length) {
             subtasks.splice(i, 1); // Lösche das Subtask-Objekt an der Position i
             renderSubtasks(); // Aktualisiere die Ansicht
-          }
-      
+      }
+
       // Rufe renderSubtasks() auf, um die Ansicht zu aktualisieren
-      
+
       renderSubtasks();
-    }
-function renderSubtasks(){
+}
+function renderSubtasks() {
       let liSubtask = document.getElementById('ul_subtask_task');
       liSubtask.innerHTML = "";
       const subtasks = tasks[taskIndex].subtasks;
@@ -430,11 +432,11 @@ function renderSubtasks(){
             const subtaskenktry = tasks[taskIndex].subtasks[i].subtask;
             const counter = tasks[taskIndex].subtasks[i].counter;
             liSubtask.innerHTML += renderSubtasksHtmlTemplate(subtaskenktry, i)
-            
+
       }
 }
 
-function renderSubtasksHtmlTemplate(subtaskentry, i ){
+function renderSubtasksHtmlTemplate(subtaskentry, i) {
       return /* html */  `
       <li class="li_subtask_task" onmouseenter="showSubtaskEditIcons(${i})" onmouseleave="hideSubtaskEditIcons(${i})" >
             <img src="./assets/img/bulletpoint.svg" alt="" class="bulletpoint">
@@ -448,12 +450,12 @@ function renderSubtasksHtmlTemplate(subtaskentry, i ){
 }
 
 function saveSubtaskToArray(subtaskValue) {
-      tasks[taskIndex].subtasks.push ({
+      tasks[taskIndex].subtasks.push({
             completed: false,
             subtask: subtaskValue
 
       });
-           
+
 }
 
 
@@ -468,34 +470,131 @@ function setToFocus(element) {
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
+function validateForm() {
+      
+      let title = document.getElementById('input_title')
+      
+      if (title.value.trim() === "") {
+            
+            document.getElementById('input-validation').classList.remove("d-none")
+            title.classList.add('form-error')
+
+      }
+      let description = document.getElementById('textarea_description')
+
+      if (description.value.trim() === "") {
+            
+            document.getElementById('textarea-validation').classList.remove("d-none")
+            description.classList.add('form-error')
+           
+
+      }
+
+      let date = document.getElementById('date-picker')
+
+      if (date.value.trim() === "") {
+            
+            document.getElementById('date-validation').classList.remove("d-none")
+            date.classList.add('form-error')
+
+      }
+
+
+      if (currentPriority === 0) {
+            
+            document.getElementById('prio-validation').classList.remove("d-none")
+            urgent.classList.add('form-error')
+            medium.classList.add('form-error')
+            low.classList.add('form-error')
+
+      }
+
+      let category = document.getElementById('category_field_title')
+
+      if (category.innerText === "Select task category") {
+            
+            document.getElementById('category-validation').classList.remove("d-none")
+            document.getElementById('category_field').classList.add('form-error')
+
+      }
+
+      if (title.value.trim() !== "" && description.value.trim() !== "" && date.value.trim() !== "" && currentPriority !== 0 && category.innerText !== "Select task category" ) 
+      {
+            alert('Dies ist eine Warnmeldung!');
+            createTask()
+}
+}
+
+
+
+
+function removeError(element) {
+      if (element === "title") {
+            document.getElementById('input_title').classList.remove('form-error')
+            document.getElementById('input-validation').classList.add("d-none")
+            
+      }
+
+      if (element === "description") {
+            document.getElementById('textarea_description').classList.remove('form-error')
+            document.getElementById('textarea-validation').classList.add("d-none")
+            
+            
+      }
+
+      if (element === "date") {
+            document.getElementById('date-picker').classList.remove('form-error')
+            document.getElementById('date-validation').classList.add("d-none")
+            
+      }
+      if (element === "prio") {
+            urgent.classList.remove('form-error')
+            medium.classList.remove('form-error')
+            low.classList.remove('form-error')
+            document.getElementById('prio-validation').classList.add("d-none")
+            
+      }
+
+      if (element === "category") {
+            document.getElementById('category_field').classList.remove('form-error')
+            document.getElementById('category-validation').classList.add("d-none")
+            
+      }
+
+
+}
+
 async function createTask() {
+      
       
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
       setTaskStatus();
-      
-      await saveTaskToRemoteStorage();
-      closeAddTaskOverlay(status);
-}    
 
-function setTaskStatus(){
+      await saveTaskToRemoteStorage();
+      if (window.location.pathname !== '/add-task-page.html') {
+            closeAddTaskOverlay();
+      }
+}
+
+function setTaskStatus() {
       tasks[taskIndex].status.push(statusVar);
 }
 
-function saveFormInputToArray(){
+function saveFormInputToArray() {
       let input = document.getElementById('input_title')
       let inputValue = input.value;
       tasks[taskIndex].title.push(inputValue);
 }
 
-function saveTextareaInputToArray(){
+function saveTextareaInputToArray() {
       let input = document.getElementById('textarea_description')
       let inputValue = input.value;
       tasks[taskIndex].description.push(inputValue);
 }
 
-function savePriorityToArray(Prio){
+function savePriorityToArray(Prio) {
       tasks[taskIndex].priority.splice(0, 1)
       tasks[taskIndex].priority.push(Prio);
 }
@@ -506,7 +605,7 @@ function saveCategoryToArray(category) {
 
 }
 
-function saveTheDateToArray(){
+function saveTheDateToArray() {
       let dueDate = document.getElementById("date-picker").value
       tasks[taskIndex].date.push(dueDate);
 }
@@ -518,12 +617,12 @@ function closeAccountsInAssignDropdown() {
       category.innerHTML = "";
 }
 
-async function saveTaskToRemoteStorage(){
+async function saveTaskToRemoteStorage() {
       await setItem('tasks', (JSON.stringify(tasks)))
-      
-     
-      
-      
+
+
+
+
 }
 
 
@@ -533,7 +632,7 @@ async function saveTaskToRemoteStorage(){
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
-async function deleteTask(){
+async function deleteTask() {
       tasks.splice(taskIndex, 1)
       document.getElementById('input_title').value = "";
       document.getElementById('textarea_description').value = "";
@@ -548,22 +647,22 @@ async function deleteTask(){
       await saveTaskToRemoteStorage()
 }
 
-function clearPriority (){
+function clearPriority() {
       let urgent = document.getElementById('urgent');
       let medium = document.getElementById('medium');
       let low = document.getElementById('low');
-           
-            urgent.classList.remove("urgent-checked");
-            medium.classList.remove("medium-checked");
-            low.classList.remove("low-checked");
-            urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
-            medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
-            low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
-            currentPriority = 0;
+
+      urgent.classList.remove("urgent-checked");
+      medium.classList.remove("medium-checked");
+      low.classList.remove("low-checked");
+      urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
+      medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
+      low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
+      currentPriority = 0;
 }
 
 
-async function closeAndDeleteAddTask(){
+async function closeAndDeleteAddTask() {
       await deleteTask()
       tasks.splice(taskIndex, 1)
       await saveTaskToRemoteStorage()
@@ -577,23 +676,32 @@ async function closeAndDeleteAddTask(){
 |||||||||||||||||||||||||||||||||||||||||||||  
 */
 
+
+
+async function openAddTaskPage() {
+      statusVar = "to-do-column";
+      //addEventlistenerToSubtaskField();
+      await initAddTask()
+
+}
 async function openAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
       overlay.classList.remove('d-none');
       let template = "add-task.html"
       let elementID = "add-task-overlay-container"
-      overlay.innerHTML = getHtmlTemplate (template, elementID);
+      overlay.innerHTML = getHtmlTemplate(template, elementID);
       statusVar = status;
       await includeHTML();
-      addEventlistenerToSubtaskField();
+      //addEventlistenerToSubtaskField();
       addCloseButtonToOverlay();
       await initAddTask()
 
-    }
+}
 
-    function addCloseButtonToOverlay(){
+
+function addCloseButtonToOverlay() {
       document.getElementById('addtask_header').innerHTML += `<img class="pointer"  onclick="closeAndDeleteAddTask()" src="./assets/img/Close.svg" alt=""></img>`
-    }
+}
 
 async function closeAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
@@ -601,7 +709,7 @@ async function closeAddTaskOverlay(status) {
       overlay.innerHTML = "";
       statusVar = status;
       await initRenderAllTasksOnKanban();
-      
+
 }
 
 /* Datum aus Array ins date feld laden
@@ -616,3 +724,8 @@ async function openAddTaskOverlay() {
     
     }
     */
+
+async function deleteTasksFromRemoteStorage() {
+      tasks = [];
+      await saveTaskToRemoteStorage()
+}
