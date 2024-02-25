@@ -69,29 +69,6 @@ function loadOverlayHeader(container, taskID){
 
 
 
-function loadCategoryInEditTask(task, container){
-  container.innerHTML += /*html*/`
-                        <div class="category_container">
-                              <div class="category_label">
-                                    <h4>Category<span class="required">*</span></h4>
-                              </div>
-
-                              <div class="category_field_dropdown_container pointer" id="category_field_dropdown_container">
-                                    <div class="category_field" onclick="toggleCategoryDropdown()">
-                                          <p id="category_field_title" class="category_field_title">${task.category}</p>
-                                          <img src="./assets/img/arrow_drop_downaa.svg" alt="">
-                                    </div>
-                                    <ul id="category_dropdown" class="category_dropdown">
-
-                                    </ul>
-                              </div>
-                              <div class="form_input_notice">
-                                    <p class="d-none">This field is required</p>
-                              </div>
-                        </div>
-    `
-}
-
 function loadTitleInEditTask(task, container){
       container.innerHTML += /*html*/`
             <div class="form_input_container">
@@ -99,9 +76,9 @@ function loadTitleInEditTask(task, container){
                          <h4>Title<span class="required">*</span></h4>
                   </div>
                   <input class="form_input_field" id="input_title" name="addtask_title" placeholder="Enter a Title"
-                        required="required" value="${task.title}">
+                  onclick="removeError('title')" required="required" value="${task.title}">
                   <div class="form_input_notice">
-                        <p class="d-none">This field is required</p>
+                        <p class="d-none" id="input-validation">This field is required</p>
                   </div>
             </div>
       `
@@ -113,14 +90,55 @@ function loadDescriptionInEditTask(task, container){
                   <div class="form_textarea_label">
                         <h4>Description<span class="required">*</span></h4>
                   </div>
-                  <textarea class="form_textarea_field" id="textarea_description" name="addtask_description"
+                  <textarea onclick="removeError('description')" class="form_textarea_field" id="textarea_description" name="addtask_description"
                         placeholder="Enter a Description">${task.description}</textarea>
                   <div class="form_textarea_notice">
+                        <p class="d-none" id="textarea-validation">This field is required</p>
+                  </div>
+            </div>
+      `
+}
+
+function loadAssignedInEditTask(task, container, taskID){
+      
+      taskIndex = taskID;
+      container.innerHTML += /*html*/`
+            <div class="form_assign_container"  >
+                  <div class="form_assign_label">
+                        <h4>Assigned to</h4>
+                  </div>
+
+                  <div class="form_assign_field_list_container" id="form_assign_container">
+                        <div class="form_assign_field_container" onclick="toggleDropdown(), filterAccountsToAssign()">
+                              <input class="form_assign_field " name="assign_title" id="search_accounts_to_assign"
+                                    placeholder="Select contacts" oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
+                                    src="./assets/img/arrow_drop_downaa.svg" class="pointer" alt="">
+                        </div>
+                        <ul id="assign_list" class="form_assign_dropdown "></ul>
+                  </div>
+
+                  <div id="form_assign_badge" class="form_assign_badge_container"></div>
+
+                  <div class="form_assign_notice">
                         <p class="d-none">This field is required</p>
                   </div>
             </div>
       `
 }
+
+function loadAssignedBadgesInEditTask(task) {
+      let initials = task.initials;
+      let badgesDiv = document.getElementById('form_assign_badge');
+      for (let i = 0; i < initials.length; i++) {
+            let initial = initials[i];
+            badgesDiv.innerHTML += /*html*/`
+            <div id="assign_badge${i}" class="form_assign_badge">${initial}</div>
+            `
+
+            
+      }
+}
+
 function loadDateInEditTask(task, container){
       container.innerHTML += /*html*/`
             <div class="form_input_container">
@@ -128,11 +146,11 @@ function loadDateInEditTask(task, container){
                         <h4>Due date<span class="required">*</span></h4>
                   </div>
 
-                  <input class="form_input_field date_field pointer" type="date" id="date-picker" name="datum"
+                  <input onclick="removeError('date')" class="form_input_field date_field pointer" type="date" id="date-picker" name="datum"
                         required="required" value="${task.date}">
 
                   <div class="form_input_notice">
-                        <p class="d-none">This field is required</p>
+                        <p id="date-validation" class="d-none">This field is required</p>
                   </div>
             </div>
       `
@@ -145,7 +163,7 @@ function loadPriorityInEditTask(task, container){
                   <div class="prio_label">
                         <h4>Priority</h4>
                   </div>
-                  <div class="prio_button_container">
+                  <div class="prio_button_container" onclick="removeError('prio')">
                         <button class="prio_button" type="button" id="urgent" onclick="setPriority(1)">
                               <p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">
                         </button>
@@ -157,6 +175,9 @@ function loadPriorityInEditTask(task, container){
                         </button>
 
                   </div>
+                  <div class="form_input_notice">
+                                    <p class="d-none" id="prio-validation">Select a Priority</p>
+                              </div>
             </div>
       `
             let urgent = document.getElementById('urgent');
@@ -220,45 +241,32 @@ function setPriorityButtonInEdit (priority){
       
 }
 
-function loadAssignedInEditTask(task, container, taskID){
-      
-      taskIndex = taskID;
+
+
+function loadCategoryInEditTask(task, container){
       container.innerHTML += /*html*/`
-            <div class="form_assign_container"  >
-                  <div class="form_assign_label">
-                        <h4>Assigned to</h4>
-                  </div>
+                            <div class="category_container">
+                                  <div class="category_label">
+                                        <h4>Category<span class="required">*</span></h4>
+                                  </div>
+    
+                                  <div class="category_field_dropdown_container pointer"  id="category_field_dropdown_container">
+                                        <div class="category_field" onclick="toggleCategoryDropdown()">
+                                              <p id="category_field_title" class="category_field_title">${task.category}</p>
+                                              <img src="./assets/img/arrow_drop_downaa.svg" alt="">
+                                        </div>
+                                        <ul id="category_dropdown" class="category_dropdown">
+    
+                                        </ul>
+                                  </div>
+                                  <div class="form_input_notice">
+                                        <p id="category-validation" class="d-none">This field is required</p>
+                                  </div>
+                            </div>
+        `
+    }
 
-                  <div class="form_assign_field_list_container" id="form_assign_container">
-                        <div class="form_assign_field_container" onclick="toggleDropdown(), filterAccountsToAssign()">
-                              <input class="form_assign_field " name="assign_title" id="search_accounts_to_assign"
-                                    placeholder="Select contacts" oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
-                                    src="./assets/img/arrow_drop_downaa.svg" class="pointer" alt="">
-                        </div>
-                        <ul id="assign_list" class="form_assign_dropdown "></ul>
-                  </div>
 
-                  <div id="form_assign_badge" class="form_assign_badge_container"></div>
-
-                  <div class="form_assign_notice">
-                        <p class="d-none">This field is required</p>
-                  </div>
-            </div>
-      `
-}
-
-function loadAssignedBadgesInEditTask(task) {
-      let initials = task.initials;
-      let badgesDiv = document.getElementById('form_assign_badge');
-      for (let i = 0; i < initials.length; i++) {
-            let initial = initials[i];
-            badgesDiv.innerHTML += /*html*/`
-            <div id="assign_badge${i}" class="form_assign_badge">${initial}</div>
-            `
-
-            
-      }
-}
 function loadSubtasksInEditTask(container) {
       
       container.innerHTML += /*html*/`
@@ -294,7 +302,7 @@ function loadSubtasksInEditTask(container) {
 function loadOkButtonInEditTask(container, taskID){
       container.innerHTML += /*html*/`
       <div class="edit-button-container">
-      <button type="button" onclick="saveEditTask(${taskID})" class="primary-button edit"><span>Save Task</span><img src="./assets/img/check.svg" alt=""></button>
+      <button type="button" onclick="validateEditForm(${taskID})" class="primary-button edit"><span>Save Task</span><img src="./assets/img/check.svg" alt=""></button>
       </div>
       `
   
@@ -329,4 +337,100 @@ function saveEditTheDateToArray(taskID){
       let task = tasks[taskID];
       let dueDate = document.getElementById("date-picker").value
       task.date = dueDate;
+}
+
+
+function validateEditForm(taskID) {
+      
+      let title = document.getElementById('input_title')
+      let task = tasks[taskID];
+      
+
+      
+      if (title.value.trim() === "") {
+            
+            document.getElementById('input-validation').classList.remove("d-none")
+            title.classList.add('form-error')
+
+      }
+      let description = document.getElementById('textarea_description')
+
+      if (description.value.trim() === "") {
+            
+            document.getElementById('textarea-validation').classList.remove("d-none")
+            description.classList.add('form-error')
+           
+
+      }
+
+      let date = document.getElementById('date-picker')
+
+      if (date.value.trim() === "") {
+            
+            document.getElementById('date-validation').classList.remove("d-none")
+            date.classList.add('form-error')
+
+      }
+
+
+      if (currentPriority === 0 || !task.priority) {
+            
+            document.getElementById('prio-validation').classList.remove("d-none")
+            urgent.classList.add('form-error')
+            medium.classList.add('form-error')
+            low.classList.add('form-error')
+
+      }
+
+      let category = document.getElementById('category_field_title')
+
+      if (category.innerText === "Select task category") {
+            
+            document.getElementById('category-validation').classList.remove("d-none")
+            document.getElementById('category_field').classList.add('form-error')
+
+      }
+
+      if (title.value.trim() !== "" && description.value.trim() !== "" && date.value.trim() !== "" && currentPriority !== 0 && category.innerText !== "Select task category" ) 
+      {
+            alert('Dies ist eine Warnmeldung!');
+            saveEditTask(taskID)
+}
+
+}
+
+function removeEditError(element) {
+      if (element === "title") {
+            document.getElementById('input_title').classList.remove('form-error')
+            document.getElementById('input-validation').classList.add("d-none")
+            
+      }
+
+      if (element === "description") {
+            document.getElementById('textarea_description').classList.remove('form-error')
+            document.getElementById('textarea-validation').classList.add("d-none")
+            
+            
+      }
+
+      if (element === "date") {
+            document.getElementById('date-picker').classList.remove('form-error')
+            document.getElementById('date-validation').classList.add("d-none")
+            
+      }
+      if (element === "prio") {
+            urgent.classList.remove('form-error')
+            medium.classList.remove('form-error')
+            low.classList.remove('form-error')
+            document.getElementById('prio-validation').classList.add("d-none")
+            
+      }
+
+      if (element === "category") {
+            document.getElementById('category_field').classList.remove('form-error')
+            document.getElementById('category-validation').classList.add("d-none")
+            
+      }
+
+
 }
