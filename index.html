@@ -10,9 +10,10 @@
     <script src="js/logIn.js"></script>
     <title>Join</title>
   </head>
-  <body>
+  <body onload="animateLogo()">
+    <div id="start-background"></div>
     <div class="headLogIn">
-      <img src="assets/img/JoinLogo.svg" alt="" />
+      <img id="start-logo" class="start-logo" src="assets/img/JoinLogo.svg" alt="" />
       <div class="headSignUp">
         <p class="textNau">Not a Join user?</p>
         <button onclick="goToSignUp()" class="btnSignUp">Sign up</button>

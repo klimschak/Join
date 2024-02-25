@@ -10,7 +10,8 @@
 body {
 margin: 0;
 margin-left: 10%;
-margin-right: 10%
+margin-right: 10%;
+margin-bottom: 100px !important
 }
 
 h4 {
@@ -20,18 +21,21 @@ h4 {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
 }
   
 .add-task-overlay {
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       backdrop-filter: blur(5px);
       background-color: #575757d1;
       position:fixed;
-      width: 100%;
+      width: calc(100% - 232px);
       height: 100%;
       top:0;
+      left:232px
       
 
       
@@ -51,6 +55,7 @@ h4 {
       background-color: #f4f4f4;
       padding: 4vw;
       border-radius: 30px;
+      
 }
 
  
@@ -70,6 +75,7 @@ h4 {
       display: flex;
       gap: 32px;
       align-self: stretch;
+      
       
       
 }
@@ -889,7 +895,8 @@ h4 {
       body {
       margin: 0;
       margin-left: 10%;
-      margin-right: 10%
+      margin-right: 10%;
+      margin-bottom: 10px
       }
       
       .add-task-body{
@@ -904,9 +911,11 @@ h4 {
             backdrop-filter: blur(5px);
             background-color: #575757d1;
             position:fixed;
-            width: 100%;
+
+            width: calc(100% - 232px);
             height: 100%;
-            
+            top:0;
+            left:232px
       
             
       }
@@ -1731,9 +1740,17 @@ h4 {
 }
 
 @media (max-width: 1024px){
+
+      body {
+            margin-bottom: 160px !important;
+      }
 .add-task-overlay{
       justify-content: center;
       align-items: flex-start;
+      width: 100%;
+      height: 100%;
+      top:0;
+      left:0;
  
 }
 
@@ -1742,6 +1759,7 @@ h4 {
       margin-left: 4vw;
       margin-right: 4vw;
       width: 80%;
+     
 }
 
 #add-task-page-body{
@@ -1759,6 +1777,9 @@ h4 {
 
 /* md  */
 @media (min-width: 768px) {
+      body {
+            margin-bottom: 160px !important;
+      }
       #add-task-page{
             margin-left: 4dvw !important;
             margin-right: 3dvw !important;
@@ -1768,6 +1789,9 @@ h4 {
 
 /* sm  */
 @media (max-width: 640px) {
+      body {
+            margin-bottom: 160px !important;
+      }
       #add-task-page-body{
             margin-left: 0px;
       }
@@ -1847,6 +1871,7 @@ h4 {
             height: 90%;
             align-items: flex-start;
             
+            
       }
       
       .form-elements-container{
@@ -1855,6 +1880,7 @@ h4 {
             gap: 0px;
             align-self: stretch;
             overflow-y: scroll;
+            
             
       }
       

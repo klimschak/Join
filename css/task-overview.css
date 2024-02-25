@@ -5,9 +5,10 @@
       backdrop-filter: blur(5px);
       background-color: #575757d1;
       position: fixed;
-      width: 100%;
+      width: calc(100% - 232px);
       height: 100%;
-      top:0
+      top:0;
+      left: 232px;
 }
 
 .overview-container {
@@ -226,7 +227,13 @@
 
 /* lg  */
 @media (max-width: 1024px) {
-      
+      .task-overview-overlay {
+
+            width: 100%;
+            height: 100%;
+            top:0;
+            left:0;
+      }
     }
     
     /* md  */

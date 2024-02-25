@@ -29,3 +29,14 @@ function login() {
 function goToSignUp() {
   window.location.href = "signup.html";
 }
+
+
+function animateLogo(){
+  const logo = document.getElementById('start-logo');
+  const bg = document.getElementById('start-background');
+  logo.classList.add('small');
+  bg.classList.add('opak')
+}
+
+
+

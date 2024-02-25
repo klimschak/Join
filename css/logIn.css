@@ -170,6 +170,34 @@
   flex-direction: column;
   align-items: center;
 }
+
+#start-background{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #F6F7F8;
+  pointer-events: none;
+  opacity: 1; 
+  transition: opacity 2s ease 1s; /* Animation der Opazität über 2 Sekunden mit 1 Sekunde Verzögerung */
+}
+
+#start-logo {
+  position: absolute;
+  top: 40%; /* Startposition in der Mitte */
+  left: 50%; /* Startposition in der Mitte */
+  transform: translate(-50%, -50%) scale(3); /* Zentriert das Logo und behält die ursprüngliche Größe bei */
+  transition: all 1500ms ease-in-out 300ms; /* Glatter Übergang von 2 Sekunden */
+}
+
+#start-logo.small {
+  top: 80px;
+  left: 80px;
+  transform: translate(0, 0) scale(1); /* Bewegt das Logo und verkleinert es auf 50% */
+}
+
+#start-background.opak{
+  opacity: 0;
+}
 /* 2xl 	@media (min-width: 1536px) {  } */
 
 /* xl  */
