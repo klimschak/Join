@@ -1,3 +1,12 @@
+.login-body{
+  display: flex;
+  flex-direction: column;
+  background: #F6F7F8;
+  
+  min-height: 100dvh;
+  
+}
+
 .formLogIn {
   display: inline-flex;
   padding: 48px 115px;
@@ -11,7 +20,9 @@
 
 .headLogIn {
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-end;
+  margin-top: 64px;
+  margin-right: 80px;
 }
 
 .headSignUp {
@@ -149,7 +160,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
-  margin-top: 130px;
+  margin-top: 80px;
 }
 
 .footLogInText {
@@ -169,6 +180,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-self: stretch;
+  margin-top: 10%;
 }
 
 #start-background{
@@ -178,7 +191,7 @@
   background: #F6F7F8;
   pointer-events: none;
   opacity: 1; 
-  transition: opacity 2s ease 1s; /* Animation der Opazität über 2 Sekunden mit 1 Sekunde Verzögerung */
+  transition: opacity 2s ease 400ms; /* Animation der Opazität über 2 Sekunden mit 1 Sekunde Verzögerung */
 }
 
 #start-logo {
