@@ -17,13 +17,13 @@
     <script src="js/storage.js"></script>
     <title>Contact</title>
   </head>
-  <body onload="includeHTML(), renderContacts()">
+  <body onload="includeHTML(), renderContacts(), loadContacts()">
     <!--  <div w3-include-html="footer.html"></div> -->
     <div class="contact">
 
       <div class="contact-list">
         <div class="contact-list-inside">
-          <button class="btn-contact-add">
+          <button class="btn-contact-add" onclick="addNewContact()">
             Add new contact
             <img
               class="btn-img-contact"
@@ -31,6 +31,17 @@
               alt=""
             />
           </button>
+<div id="newContactForm" class="overlay">
+  <div class="overlay-content">
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="E-Mail">
+    <input type="text" id="initials" placeholder="Initialen">
+    <button onclick="saveNewContact()">Speichern</button>
+    <button onclick="closeForm()">Abbrechen</button>
+  </div>
+</div>
+
+
           <div class="contacts" id="contacts"></div>
         </div>
       </div>

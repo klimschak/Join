@@ -147,3 +147,51 @@ function changeClassToActive(element) {
   }
   element.classList.add("active");
 }
+
+function addNewContact() {
+  document.getElementById("newContactForm").style.display = "flex"; // Ändern Sie "none" zu "flex", um das Formular anzuzeigen
+}
+
+function closeForm() {
+  document.getElementById("newContactForm").style.display = "none"; // Versteckt das Formular wieder
+}
+
+function saveNewContact() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const initials = document.getElementById("initials").value;
+
+  // Erstellen eines neuen Kontaktobjekts
+  const newContact = {
+    id: userContacts.length + 1, // Einfache Methode zur ID-Erzeugung
+    name: name,
+    mail: email,
+    initials: initials,
+  };
+
+  // Hinzufügen des neuen Kontakts zum Array
+  userContacts.push(newContact);
+
+  // Kontakte im Local Storage speichern
+  localStorage.setItem('userContacts', JSON.stringify(userContacts));
+
+  // Formular verstecken und Felder leeren
+  document.getElementById("newContactForm").style.display = "none";
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("initials").value = "";
+
+  // Kontaktliste neu rendern
+  renderContacts();
+}
+
+
+function loadContacts() {
+  // Prüfen, ob Kontakte im Local Storage gespeichert sind
+  const storedContacts = localStorage.getItem('userContacts');
+  if (storedContacts) {
+    userContacts = JSON.parse(storedContacts); // Konvertiert den String zurück in ein Array
+    renderContacts(); // Kontaktliste mit den geladenen Kontakten rendern
+  }
+}
+
