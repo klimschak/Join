@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/contact.css" />
-    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/contact.css"/>
+    <link rel="stylesheet" href="css/footer.css"/>
     <script src="js/arrays.js"></script>
     <script src="js/contact.js"></script>
     <script src="js/register.js"></script>
     <script src="js/storage.js"></script>
     <title>Contact</title>
-  </head>
-  <body onload="includeHTML(), renderContacts(), loadContacts()">
-    <!--  <div w3-include-html="footer.html"></div> -->
-    <div class="contact">
+</head>
+<body onload="includeHTML(), renderContacts(), loadContacts()">
+<!--  <div w3-include-html="footer.html"></div> -->
+<div class="contact">
 
-      <div class="contact-list">
+    <div class="contact-list">
         <div class="contact-list-inside">
-          <button class="btn-contact-add" onclick="addNewContact()">
-            Add new contact
-            <img
-              class="btn-img-contact"
-              src="assets/img/person_add.svg"
-              alt=""
-            />
-          </button>
-<div id="newContactForm" class="overlay">
-  <div class="overlay-content">
-    <input type="text" id="name" placeholder="Name">
-    <input type="email" id="email" placeholder="E-Mail">
-    <input type="text" id="initials" placeholder="Initialen">
-    <button onclick="saveNewContact()">Speichern</button>
-    <button onclick="closeForm()">Abbrechen</button>
-  </div>
-</div>
+            <button class="btn-contact-add" onclick="addNewContact()">
+                Add new contact
+                <img
+                        class="btn-img-contact"
+                        src="assets/img/person_add.svg"
+                        alt=""
+                />
+            </button>
 
+            <div id="newContactForm" class="overlay">
+                <div class="overlay-content">
+                    <input type="text" id="name" placeholder="Name">
+                    <input type="email" id="email" placeholder="E-Mail">
+                    <input type="text" id="initials" placeholder="Initialen">
+                    <button onclick="saveNewContact()">Speichern</button>
+                    <button onclick="closeForm()">Abbrechen</button>
+                </div>
+            </div>
 
-          <div class="contacts" id="contacts"></div>
+            <div class="contacts" id="contacts"></div>
         </div>
-      </div>
-      <div class="contact-details" id="contact-details"></div>
     </div>
-  </body>
+    <div class="contact-details" id="contact-details"></div>
+</div>
+</body>
 </html>

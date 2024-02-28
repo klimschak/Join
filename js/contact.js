@@ -1,63 +1,52 @@
-let userContacts = [
-  {
-    id: 1,
-    name: "Siham El-Maimouni",
-    mail: "siham@mail.com",
-    initials: "SE",
-  },
+let userContacts = [{
+    id: 1, name: "Siham El-Maimouni", mail: "siham@mail.com", initials: "SE",
+},
 
-  {
-    id: 2,
-    name: "Pedro Göntürk",
-    mail: "predro@mail.com",
-    initials: "PG",
-  },
+    {
+        id: 2, name: "Pedro Göntürk", mail: "predro@mail.com", initials: "PG",
+    },
 
-  {
-    id: 3,
-    name: "Thorsten Puccini",
-    mail: "thorsten.mail.com",
-    initials: "TP",
-  },
+    {
+        id: 3, name: "Thorsten Puccini", mail: "thorsten.mail.com", initials: "TP",
+    },
 
-  { id: 4, name: "John Doe", mail: "john.doe@example.com", initials: "JD" },
-];
+    {id: 4, name: "John Doe", mail: "john.doe@example.com", initials: "JD"},];
 
 document.addEventListener("DOMContentLoaded", function () {
-  includeHTML();
+    includeHTML();
 });
 
 async function includeHTML() {
-  let includeElements = document.querySelectorAll("[w3-include-html]");
-  for (let i = 0; i < includeElements.length; i++) {
-    const element = includeElements[i];
-    file = element.getAttribute("w3-include-html");
-    let resp = await fetch(file);
-    if (resp.ok) {
-      element.innerHTML = await resp.text();
-      changeClassToActive(element); // Pass the element argument here
-    } else {
-      element.innerHTML = "Page not found";
+    let includeElements = document.querySelectorAll("[w3-include-html]");
+    for (let i = 0; i < includeElements.length; i++) {
+        const element = includeElements[i];
+        file = element.getAttribute("w3-include-html");
+        let resp = await fetch(file);
+        if (resp.ok) {
+            element.innerHTML = await resp.text();
+            changeClassToActive(element); // Pass the element argument here
+        } else {
+            element.innerHTML = "Page not found";
+        }
     }
-  }
 }
 
 async function renderContacts() {
-  console.log("Rendering contacts...");
-  const contactsContainer = document.getElementById("contacts");
-  if (!contactsContainer) {
-    console.error("Contacts container not found!");
-    return;
-  }
-  contactsContainer.innerHTML = "";
+    console.log("Rendering contacts...");
+    const contactsContainer = document.getElementById("contacts");
+    if (!contactsContainer) {
+        console.error("Contacts container not found!");
+        return;
+    }
+    contactsContainer.innerHTML = "";
 
-  // Überprüfen Sie, ob userContacts vorhanden sind
-  if (userContacts && userContacts.length > 0) {
-    for (let i = 0; i < userContacts.length; i++) {
-      const contact = userContacts[i];
+    // Überprüfen Sie, ob userContacts vorhanden sind
+    if (userContacts && userContacts.length > 0) {
+        for (let i = 0; i < userContacts.length; i++) {
+            const contact = userContacts[i];
 
-      // Beispielhaftes HTML für die Darstellung der Kontakte
-      contactsContainer.innerHTML += `
+            // Beispielhaftes HTML für die Darstellung der Kontakte
+            contactsContainer.innerHTML += `
           <div class="userMainCase" data-contact-id="${contact.id}" onclick="openContact(event)">
           <span class="userInitials">${contact.initials}</span>
           <div class="userCase">
@@ -66,31 +55,31 @@ async function renderContacts() {
           </div>
           </div>
         `;
-    }
+        }
 
-    const contactDetailsContainer = document.getElementById("contact-details");
-    if (!contactDetailsContainer) {
-      console.error("Contact details container not found!");
-      return;
+        const contactDetailsContainer = document.getElementById("contact-details");
+        if (!contactDetailsContainer) {
+            console.error("Contact details container not found!");
+            return;
+        }
+        contactDetailsContainer.innerHTML = "";
+    } else {
+        contactsContainer.innerHTML = "Keine Kontakte gefunden.";
     }
-    contactDetailsContainer.innerHTML = "";
-  } else {
-    contactsContainer.innerHTML = "Keine Kontakte gefunden.";
-  }
 }
 
 function openContact(event) {
-  const contactElement = event.currentTarget;
-  const contactId = contactElement.getAttribute("data-contact-id");
-  showSelectedContact(contactId);
-  changeClassToActive(contactElement);
+    const contactElement = event.currentTarget;
+    const contactId = contactElement.getAttribute("data-contact-id");
+    showSelectedContact(contactId);
+    changeClassToActive(contactElement);
 }
 
 function showSelectedContact(contactId) {
-  const contact = userContacts.find((c) => c.id === parseInt(contactId));
-  if (contact) {
-    const contactDetailsContainer = document.getElementById("contact-details");
-    contactDetailsContainer.innerHTML = /*html*/ `
+    const contact = userContacts.find((c) => c.id === parseInt(contactId));
+    if (contact) {
+        const contactDetailsContainer = document.getElementById("contact-details");
+        contactDetailsContainer.innerHTML = /*html*/ `
       
     
       <div class="contact-info">
@@ -132,66 +121,64 @@ function showSelectedContact(contactId) {
       </div>
       </div>
     `;
-    contactDetailsContainer.classList.add("show");
-  }
+        contactDetailsContainer.classList.add("show");
+    }
 }
 
 function changeClassToActive(element) {
-  if (!element) {
-    console.error("Element is not defined!");
-    return;
-  }
-  const activeElements = document.getElementsByClassName("active");
-  for (let i = 0; i < activeElements.length; i++) {
-    activeElements[i].classList.remove("active");
-  }
-  element.classList.add("active");
+    if (!element) {
+        console.error("Element is not defined!");
+        return;
+    }
+    const activeElements = document.getElementsByClassName("active");
+    for (let i = 0; i < activeElements.length; i++) {
+        activeElements[i].classList.remove("active");
+    }
+    element.classList.add("active");
 }
 
 function addNewContact() {
-  document.getElementById("newContactForm").style.display = "flex"; // Ändern Sie "none" zu "flex", um das Formular anzuzeigen
+    document.getElementById("newContactForm").style.display = "flex"; // Ändern Sie "none" zu "flex", um das Formular anzuzeigen
 }
 
 function closeForm() {
-  document.getElementById("newContactForm").style.display = "none"; // Versteckt das Formular wieder
+    document.getElementById("newContactForm").style.display = "none"; // Versteckt das Formular wieder
 }
 
 function saveNewContact() {
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const initials = document.getElementById("initials").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const initials = document.getElementById("initials").value;
 
-  // Erstellen eines neuen Kontaktobjekts
-  const newContact = {
-    id: userContacts.length + 1, // Einfache Methode zur ID-Erzeugung
-    name: name,
-    mail: email,
-    initials: initials,
-  };
+    // Erstellen eines neuen Kontaktobjekts
+    const newContact = {
+        id: userContacts.length + 1, // Einfache Methode zur ID-Erzeugung
+        name: name, mail: email, initials: initials,
+    };
 
-  // Hinzufügen des neuen Kontakts zum Array
-  userContacts.push(newContact);
+    // Hinzufügen des neuen Kontakts zum Array
+    userContacts.push(newContact);
 
-  // Kontakte im Local Storage speichern
-  localStorage.setItem('userContacts', JSON.stringify(userContacts));
+    // Kontakte im Local Storage speichern
+    localStorage.setItem('userContacts', JSON.stringify(userContacts));
 
-  // Formular verstecken und Felder leeren
-  document.getElementById("newContactForm").style.display = "none";
-  document.getElementById("name").value = "";
-  document.getElementById("email").value = "";
-  document.getElementById("initials").value = "";
+    // Formular verstecken und Felder leeren
+    document.getElementById("newContactForm").style.display = "none";
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("initials").value = "";
 
-  // Kontaktliste neu rendern
-  renderContacts();
+    // Kontaktliste neu rendern
+    renderContacts();
 }
 
 
 function loadContacts() {
-  // Prüfen, ob Kontakte im Local Storage gespeichert sind
-  const storedContacts = localStorage.getItem('userContacts');
-  if (storedContacts) {
-    userContacts = JSON.parse(storedContacts); // Konvertiert den String zurück in ein Array
-    renderContacts(); // Kontaktliste mit den geladenen Kontakten rendern
-  }
+    // Prüfen, ob Kontakte im Local Storage gespeichert sind
+    const storedContacts = localStorage.getItem('userContacts');
+    if (storedContacts) {
+        userContacts = JSON.parse(storedContacts); // Konvertiert den String zurück in ein Array
+        renderContacts(); // Kontaktliste mit den geladenen Kontakten rendern
+    }
 }
 

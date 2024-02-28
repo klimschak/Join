@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/signup.css" />
-    <link rel="stylesheet" href="css/fonts.css" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="css/signup.css"/>
+    <link rel="stylesheet" href="css/fonts.css"/>
     <script src="js/storage.js"></script>
     <script src="js/register.js"></script>
     <title>Sign up</title>
-  </head>
+</head>
 
-  <body onload="init()">
-    <div class="signUP-center">
-      <form onsubmit="register(); return false;" class="sign-up">
+<body onload="init()">
+<div class="signUP-center">
+    <form onsubmit="register(); return false;" class="sign-up">
         <h2 class="header-signup">Sign up</h2>
         <div class="inputs-signup">
-          <input
-            required
-            type="text"
-            id="username"
-            placeholder="Name"
-            class="input-signup input-Text"
-          />
-          <input
-            required
-            type="email"
-            id="email"
-            placeholder="Email"
-            class="input-signup input-Text"
-          />
-          <input
-            required
-            type="password"
-            id="password"
-            placeholder="Password"
-            class="input-signup input-Text"
-          />
-          <input
-            required
-            type="password"
-            id="password"
-            placeholder="Confirm Password"
-            class="input-signup input-Text"
-          />
+            <input
+                    required
+                    type="text"
+                    id="username"
+                    placeholder="Name"
+                    class="input-signup input-Text"
+            />
+            <input
+                    required
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    class="input-signup input-Text"
+            />
+            <input
+                    required
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    class="input-signup input-Text"
+            />
+            <input
+                    required
+                    type="password"
+                    id="password2"
+                    placeholder="Confirm Password"
+                    class="input-signup input-Text"
+            />
         </div>
-        <div><input type="checkbox" />I accept the Privacy policy</div>
+        <div><input type="checkbox" id="privacyPolicy"/>Ich akzeptiere die Datenschutzrichtlinie</div>
+
         <button id="registerBtn" class="signup-btn">Sign up</button>
-      </form>
-    </div>
-  </body>
+    </form>
+</div>
+</body>
 </html>

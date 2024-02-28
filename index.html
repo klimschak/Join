@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/logIn.css" />
-    <link rel="stylesheet" href="css/fonts.css" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="css/logIn.css"/>
+    <link rel="stylesheet" href="css/fonts.css"/>
     <script src="js/storage.js"></script>
     <script src="js/register.js"></script>
     <script src="js/logIn.js"></script>
     <title>Join</title>
-  </head>
-  <body class="login-body" onload="animateLogo()">
-    <div id="start-background"></div>
-    <div class="headLogIn">
-      <img id="start-logo" class="start-logo" src="assets/img/JoinLogo.svg" alt="" />
-      <div class="headSignUp">
+</head>
+<body class="login-body" onload="animateLogo()">
+<div id="start-background"></div>
+<div class="headLogIn">
+    <img id="start-logo" class="start-logo" src="assets/img/JoinLogo.svg" alt=""/>
+    <div class="headSignUp">
         <p class="textNau">Not a Join user?</p>
         <button onclick="goToSignUp()" class="btnSignUp">Sign up</button>
-      </div>
     </div>
-    <div class="logIN-Center">
-      <form onsubmit="login(); return false;" class="formLogIn">
+</div>
+<div class="logIN-Center">
+    <form onsubmit="login(); return false;" class="formLogIn">
         <h2 class="headerText">Log in</h2>
         <div class="logInField">
-          <input
-            required
-            type="email"
-            id="emailLogIn"
-            placeholder="Email"
-            class="inputLogIn"
-          />
-          <input
-            required
-            type="password"
-            id="passwordLogIn"
-            placeholder="Password"
-            class="inputLogIn"
-          />
+            <input
+                    required
+                    type="email"
+                    id="emailLogIn"
+                    placeholder="Email"
+                    class="inputLogIn"
+            />
+            <input
+                    required
+                    type="password"
+                    id="passwordLogIn"
+                    placeholder="Password"
+                    class="inputLogIn"
+            />
         </div>
         <div class="checkboxLogIn">
-          <input type="checkbox" />
-          <p>Remember me</p>
+            <input type="checkbox"/>
+            <p>Remember me</p>
         </div>
         <div class="btnFormLogIn">
-          <button class="btnLogIn">Log in</button>
-          <button class="btnGuestLogIn">Guest Log in</button>
+            <button class="btnLogIn">Log in</button>
+            <button class="btnGuestLogIn">Guest Log in</button>
         </div>
-      </form>
-      <div id="msgBox"></div>
-      <footer class="footLogIn">
+    </form>
+    <div id="msgBox"></div>
+    <footer class="footLogIn">
         <p class="footLogInText">Privacy Policy</p>
         <p class="footLogInText">Legal notice</p>
-      </footer>
-    </div>
-  </body>
+    </footer>
+</div>
+</body>
 </html>
