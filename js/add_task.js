@@ -1,23 +1,14 @@
-// taskIndex ist der Taskcounter
-
-
-// Die Variable soll den status auf dem Taskboard mitgeben, je nach dem welcher AddTask Button betätigt wird, wird der Task einem anderem Status zugeordnet
 let statusVar;
 let taskIndex;
 
 
 async function initAddTask() {
       await loadTasksToAddTasksFromRemoteStorage();
-
       addToTasks();
       addEventlistenerToSubtaskField();
       //createInitialsFromName()
       taskIndex = tasks.length - 1;
-
-
-
 }
-
 
 
 async function loadTasksToAddTasksFromRemoteStorage() {
@@ -26,7 +17,6 @@ async function loadTasksToAddTasksFromRemoteStorage() {
       } catch (e) {
             console.error("Loading error:", e);
       }
-
 }
 
 function addToTasks() {
@@ -39,10 +29,7 @@ function addToTasks() {
             initials: [],
             priority: [],
             status: [],
-            subtasks: [
-
-            ],
-
+            subtasks: [],
             title: []
       });
 }
@@ -54,8 +41,13 @@ function filterAccountsToAssign() {
       console.log(search)
       let assign = document.getElementById(`assign_list`);
       assign.innerHTML = "";
-      displayAccountsInAssignDropdown(search, assign)
+      displayAccountsInAssignDropdown(search, assign);
+
+
 }
+
+
+
 
 function displayAccountsInAssignDropdown(search, assign) {
       for (let i = 0; i < accounts.length; i++) {
@@ -74,11 +66,13 @@ function displayAccountsInAssignDropdown(search, assign) {
       }
 }
 
+
 function displayErrorIfNoResultsInAccountsToAssign(assign) {
       assign.innerHTML = /*html*/`
       <li class="assign_li" id="form_assign_error"><div class="form_assign_name form_assign_error">No results. Please modify your search. </div></li>
       `;
 }
+
 
 function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden */
@@ -93,6 +87,7 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       }
 }
 
+
 function checkIfAssigned(i) {
       const accountId = accounts[i]['id'];
       const assignedIds = tasks[taskIndex]['id'];
@@ -102,9 +97,8 @@ function checkIfAssigned(i) {
       let assignbadge = document.getElementById(`assign_badge${i}`);
       ifAccountIsNotAssigned(i, accountId, assignedIds, badge);
       ifAccountIsAssigned(i, index);
-
-
 }
+
 
 function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
       let assign = document.getElementById(`assign_list`);
@@ -120,8 +114,6 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
 }
 
 
-
-
 function ifAccountIsAssigned(i, index) {
       let assignbadge = document.getElementById(`assign_badge${i}`);
       if (index !== -1) {
@@ -133,11 +125,11 @@ function ifAccountIsAssigned(i, index) {
       }
 }
 
+
 let isDropdownOpen = false;
 
 function toggleDropdown() {
-      const dropdown = document.getElementById('assign_list');
-
+      const dropdown = document.getElementById('assign_list_container');
       if (isDropdownOpen) {
             dropdown.classList.add('d-none');
             isDropdownOpen = false;
@@ -148,10 +140,10 @@ function toggleDropdown() {
       }
 }
 
-function closeDropdownOnClickOutside(event) {
-      const dropdown = document.getElementById('assign_list');
-      const container = document.getElementById('form_assign_container');
 
+function closeDropdownOnClickOutside(event) {
+      const dropdown = document.getElementById('assign_list_container');
+      const container = document.getElementById('form_assign_container');
       if (!container.contains(event.target)) {
             // Klicken außerhalb des "form_assign_container" erkannt, schließe das Dropdown
             dropdown.classList.add('d-none');
@@ -161,7 +153,7 @@ function closeDropdownOnClickOutside(event) {
       }
 }
 
-// Funktion, um das Klicken am <li> zu stoppen
+
 function stopClickPropagation(event) {
       event.stopPropagation();
 }
@@ -173,12 +165,6 @@ function openDropdownOnInput() {
       isDropdownOpen = true;
 }
 
-//subtaskInput.addEventListener('blur', showSubtaskInputIcons);
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||||| Priorities ||||||||||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-*/
 
 let currentPriority = 0;
 
@@ -196,23 +182,21 @@ function setPriority(prio) {
       }
 }
 
+
 function checkPriority(urgent, medium, low, prio) {
       if (prio === 1) {
-
             activatePrioUrgent(urgent, medium, low)
       }
       if (prio === 2) {
-
             activatePrioMedium(urgent, medium, low)
       }
       if (prio === 3) {
-
             activatePrioLow(urgent, medium, low)
       }
 }
 
-function deletePriorityFromArray(urgent, medium, low) {
 
+function deletePriorityFromArray(urgent, medium, low) {
       tasks[taskIndex].priority.splice(0, 1);
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
@@ -223,6 +207,8 @@ function deletePriorityFromArray(urgent, medium, low) {
       currentPriority = 0;
 
 }
+
+
 function activatePrioUrgent(urgent, medium, low) {
       urgent.classList.add("urgent-checked");
       medium.classList.remove("medium-checked");
@@ -233,6 +219,7 @@ function activatePrioUrgent(urgent, medium, low) {
       savePriorityToArray("Urgent")
       currentPriority = 1;
 }
+
 
 function activatePrioMedium(urgent, medium, low) {
       urgent.classList.remove("urgent-checked");
@@ -245,6 +232,7 @@ function activatePrioMedium(urgent, medium, low) {
       currentPriority = 2;
 }
 
+
 function activatePrioLow(urgent, medium, low) {
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
@@ -256,11 +244,6 @@ function activatePrioLow(urgent, medium, low) {
       currentPriority = 3;
 }
 
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||||| Categories ||||||||||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-*/
 
 function openCategoryDropdown() {
       let category = document.getElementById('category_dropdown');
@@ -269,14 +252,13 @@ function openCategoryDropdown() {
             <li class="category-list" onclick="setTaskCategory('Technical Task')">Technical Task</li>
             <li class="category-list" onclick="setTaskCategory('User Story')">User Story</li>
             `;
-
 }
+
 
 function closeCategoryDropdownOnClickOutside(event) {
       const category = document.getElementById('category_dropdown');
       const container = document.getElementById('category_field_dropdown_container');
       if (!container.contains(event.target)) {
-
             // Entfernen des "Klick außerhalb" Ereignisses
             document.removeEventListener('click', closeCategoryDropdownOnClickOutside);
             isDropdownOpen = false;
@@ -284,11 +266,11 @@ function closeCategoryDropdownOnClickOutside(event) {
       }
 }
 
+
 let isCategoryDropdownOpen = false;
 
 function toggleCategoryDropdown() {
       const category = document.getElementById('category_dropdown');
-
       if (isDropdownOpen) {
             category.innerHTML = "";
             isDropdownOpen = false;
@@ -299,25 +281,14 @@ function toggleCategoryDropdown() {
       }
 }
 
+
 function setTaskCategory(category) {
       let title = document.getElementById('category_field_title');
       title.innerHTML = /*html*/ `${category}`;
       saveCategoryToArray(category);
       let wipeCategoryDropdown = document.getElementById('category_dropdown');
       wipeCategoryDropdown.innerHTML = "";
-
-
 }
-
-
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||||||| Subtasks ||||||||||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-*/
-
-
-
 
 
 function addEventlistenerToSubtaskField() {
@@ -329,9 +300,9 @@ function addEventlistenerToSubtaskField() {
       }
 }
 
+
 function showSubtaskInputIcons() {
       let subtaskInput = document.getElementById('subtask_input');
-
       let subtaskInputIcon = document.getElementById('subtask_input_icon');
       subtaskInputIcon.innerHTML =
       /*html*/`                              
@@ -339,13 +310,11 @@ function showSubtaskInputIcons() {
               <hr>
               <img src="./assets/img/subtask_save.svg" alt="" onclick="saveSubtaskInLi()" >
       `;
-
       subtaskInput.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                   saveSubtaskInLi();
             }
       });
-
       subtaskInput.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                   resetSubtaskInput();
@@ -357,20 +326,16 @@ function showSubtaskInputIcons() {
 function saveSubtaskInLi() {
       let subtaskInput = document.getElementById('subtask_input');
       let ul_subtask = document.getElementById('ul_subtask_task');
-
       let subtaskValue = subtaskInput.value;
-
-
       if (subtaskValue.trim() !== '') {
             saveSubtaskToArray(subtaskValue);
             let subtaskIndex = tasks[taskIndex].subtasks.length - 1;
             ul_subtask.innerHTML += htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex);
-
             resetSubtaskInput();
             subtaskInput.focus();
-
       }
 }
+
 
 function htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex) {
       return /* html */`
@@ -384,6 +349,7 @@ function htmlTemplateSaveSubtaskInLi(subtaskValue, subtaskIndex) {
             </div>
       </li>`;
 }
+
 
 function showSubtaskEditIcons(i) {
       let subtask = document.getElementById(`li${i}`);
@@ -408,22 +374,17 @@ function resetSubtaskInput() {
       `;
 }
 
+
 function deleteSubtask(i) {
-
-
       const subtasks = tasks[taskIndex].subtasks;
-
-
-      // Verwende splice(), um das Subtask-Objekt zu löschen
       if (i >= 0 && i < subtasks.length) {
             subtasks.splice(i, 1); // Lösche das Subtask-Objekt an der Position i
             renderSubtasks(); // Aktualisiere die Ansicht
       }
-
-      // Rufe renderSubtasks() auf, um die Ansicht zu aktualisieren
-
       renderSubtasks();
 }
+
+
 function renderSubtasks() {
       let liSubtask = document.getElementById('ul_subtask_task');
       liSubtask.innerHTML = "";
@@ -435,6 +396,7 @@ function renderSubtasks() {
 
       }
 }
+
 
 function renderSubtasksHtmlTemplate(subtaskentry, i) {
       return /* html */  `
@@ -448,6 +410,7 @@ function renderSubtasksHtmlTemplate(subtaskentry, i) {
             </div>
       </li>`
 }
+
 
 function saveSubtaskToArray(subtaskValue) {
       tasks[taskIndex].subtasks.push({
@@ -464,60 +427,36 @@ function setToFocus(element) {
       focusElement.focus();
 }
 
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||| Save Tasks to Arrays|||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-*/
 
 function validateForm() {
-      
       let title = document.getElementById('input_title')
-      
       if (title.value.trim() === "") {
-            
             document.getElementById('input-validation').classList.remove("d-none")
             title.classList.add('form-error')
-
       }
       let description = document.getElementById('textarea_description')
-
       if (description.value.trim() === "") {
-            
             document.getElementById('textarea-validation').classList.remove("d-none")
             description.classList.add('form-error')
-           
-
       }
-
       let date = document.getElementById('date-picker')
-
       if (date.value.trim() === "") {
             
             document.getElementById('date-validation').classList.remove("d-none")
             date.classList.add('form-error')
-
       }
-
-
       if (currentPriority === 0) {
-            
             document.getElementById('prio-validation').classList.remove("d-none")
             urgent.classList.add('form-error')
             medium.classList.add('form-error')
             low.classList.add('form-error')
-
       }
-
       let category = document.getElementById('category_field_title')
-
       if (category.innerText === "Select task category") {
-            
             document.getElementById('category-validation').classList.remove("d-none")
             document.getElementById('category_field').classList.add('form-error')
 
       }
-
       if (title.value.trim() !== "" && description.value.trim() !== "" && date.value.trim() !== "" && currentPriority !== 0 && category.innerText !== "Select task category" ) 
       {
             alert('Dies ist eine Warnmeldung!');
@@ -526,61 +465,48 @@ function validateForm() {
 }
 
 
-
-
 function removeError(element) {
       if (element === "title") {
             document.getElementById('input_title').classList.remove('form-error')
             document.getElementById('input-validation').classList.add("d-none")
-            
       }
-
       if (element === "description") {
             document.getElementById('textarea_description').classList.remove('form-error')
             document.getElementById('textarea-validation').classList.add("d-none")
-            
-            
       }
-
       if (element === "date") {
             document.getElementById('date-picker').classList.remove('form-error')
             document.getElementById('date-validation').classList.add("d-none")
-            
       }
       if (element === "prio") {
             urgent.classList.remove('form-error')
             medium.classList.remove('form-error')
             low.classList.remove('form-error')
             document.getElementById('prio-validation').classList.add("d-none")
-            
       }
-
       if (element === "category") {
             document.getElementById('category_field').classList.remove('form-error')
             document.getElementById('category-validation').classList.add("d-none")
-            
       }
-
-
 }
 
+
 async function createTask() {
-      
-      
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
       setTaskStatus();
-
       await saveTaskToRemoteStorage();
       if (window.location.pathname !== '/add-task-page.html') {
             closeAddTaskOverlay();
       }
 }
 
+
 function setTaskStatus() {
       tasks[taskIndex].status.push(statusVar);
 }
+
 
 function saveFormInputToArray() {
       let input = document.getElementById('input_title')
@@ -588,21 +514,23 @@ function saveFormInputToArray() {
       tasks[taskIndex].title.push(inputValue);
 }
 
+
 function saveTextareaInputToArray() {
       let input = document.getElementById('textarea_description')
       let inputValue = input.value;
       tasks[taskIndex].description.push(inputValue);
 }
 
+
 function savePriorityToArray(Prio) {
       tasks[taskIndex].priority.splice(0, 1)
       tasks[taskIndex].priority.push(Prio);
 }
 
+
 function saveCategoryToArray(category) {
       tasks[taskIndex].category.splice(0, 1)
       tasks[taskIndex].category.push(category)
-
 }
 
 function saveTheDateToArray() {
@@ -610,27 +538,19 @@ function saveTheDateToArray() {
       tasks[taskIndex].date.push(dueDate);
 }
 
+
 function closeAccountsInAssignDropdown() {
-      let assign = document.getElementById(`assign_list`);
+      let assign = document.getElementById(`assign_list_container`);
       assign.innerHTML = "";
       let category = document.getElementById('category_dropdown');
       category.innerHTML = "";
 }
 
+
 async function saveTaskToRemoteStorage() {
       await setItem('tasks', (JSON.stringify(tasks)))
-
-
-
-
 }
 
-
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||| Delete Clear Tasks ||||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-*/
 
 async function deleteTask() {
       tasks.splice(taskIndex, 1)
@@ -647,11 +567,11 @@ async function deleteTask() {
       await saveTaskToRemoteStorage()
 }
 
+
 function clearPriority() {
       let urgent = document.getElementById('urgent');
       let medium = document.getElementById('medium');
       let low = document.getElementById('low');
-
       urgent.classList.remove("urgent-checked");
       medium.classList.remove("medium-checked");
       low.classList.remove("low-checked");
@@ -667,23 +587,15 @@ async function closeAndDeleteAddTask() {
       tasks.splice(taskIndex, 1)
       await saveTaskToRemoteStorage()
       await closeAddTaskOverlay(status);
-
 }
-
-/* 
-|||||||||||||||||||||||||||||||||||||||||||||
-||||||||||||| ADD TASK OVERLAY|| ||||||||||||
-|||||||||||||||||||||||||||||||||||||||||||||  
-*/
-
 
 
 async function openAddTaskPage() {
       statusVar = "to-do-column";
-      //addEventlistenerToSubtaskField();
       await initAddTask()
-
 }
+
+
 async function openAddTaskOverlay(status) {
       let overlay = document.getElementById('add-task-overlay');
       overlay.classList.remove('d-none');
@@ -692,10 +604,8 @@ async function openAddTaskOverlay(status) {
       overlay.innerHTML = getHtmlTemplate(template, elementID);
       statusVar = status;
       await includeHTML();
-      //addEventlistenerToSubtaskField();
       addCloseButtonToOverlay();
       await initAddTask()
-
 }
 
 
@@ -712,18 +622,6 @@ async function closeAddTaskOverlay(status) {
 
 }
 
-/* Datum aus Array ins date feld laden
-function loadTheDateFromArray(){
-      const dateArray = tasks[taskIndex].date;
-      const dateValue = dateArray[0];
-      const dateInput = document.getElementById('date-picker');
-      dateInput.value = dateValue;
-} */
-/*
-async function openAddTaskOverlay() {
-    
-    }
-    */
 
 async function deleteTasksFromRemoteStorage() {
       tasks = [];

@@ -50,10 +50,6 @@ function renderEditTaskContent(taskID){
       renderSubtasks();
       statusVar = task.status;
       addEventlistenerToSubtaskField();
-      
-      
-    
-      
 
 }
 
@@ -66,7 +62,6 @@ function loadOverlayHeader(container, taskID){
       `
 
 }
-
 
 
 function loadTitleInEditTask(task, container){

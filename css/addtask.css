@@ -342,6 +342,8 @@ h4 {
       position: relative;
 }
 
+
+
 .form_assign_field_container {
       display: flex;
       border-radius: 10px;
@@ -359,24 +361,87 @@ h4 {
       
 }
 
+.assign_list_container {
+      position: relative;
+      
+      display: flex;
+      flex-direction: column; /* Kinder (ul und button) vertikal anordnen */
+      align-items: center; /* Zentriert die Kinder horizontal */
+      justify-content: start; /* Ausrichtung der Kinder am Anfang des Containers */
+      z-index: 10;
+}
+
+
+
+
+.form-add-task-btn {
+      color: #ffffff;
+      background-color: #2A3647;
+      border: none;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 120%;
+      /* 25.2px */
+      width: 96%;
+      
+      height: 48px !important;
+      gap: 12px;
+      transition: 125ms;
+      margin: 16px 16px 16px 16px;
+}
+
+.form-add-task-btn:hover {
+      background-color: #29ABE2;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form-add-task-btn:active {
+      background-color: #091931;
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.assign_ul_button{
+      position: absolute;
+      width: 100%;
+      background-color: #fff;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04); 
+}
+
+.assign_add_contact{
+      z-index: 10;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      height: 80px;
+}
+
 .form_assign_dropdown{
       background-color: #FFF;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
-      box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04); 
+      
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      gap: 4px;
+      gap: 2px;
       margin: 0;
       margin-top: -10px;
       padding: 0px 0px 0px 0px;
-     
-      position: absolute;
+      max-height: 380px;
       width: 100%;
-      z-index: 1 !important;
-      overflow: hidden;
+      z-index: 10 !important;
+      overflow: scroll;
 }
 
 .form_assign_dropdown li {
@@ -387,7 +452,7 @@ h4 {
       gap:16px;
       align-items: center;
       padding: 0px 16px 0px 16px;
-      height: 64px;
+      height: 52px;
       transition: 125ms ease-out;
 }
 
@@ -414,6 +479,13 @@ h4 {
 }
 
 
+.add-contact {
+      display: flex;
+      width: auto;
+      height: 40px;
+      margin: 8px 16px 8px 16px;
+}
+
 
 .form_assign_name {
       flex-grow: 1;
@@ -428,11 +500,11 @@ h4 {
 }
 
 .form_assign_badge {
-      height: 42px;
-      width: 42px;
+      height: 36px !important;
+      width: 36px !important;
       border-radius: 200px;
       border-style: solid;
-      border-width: 2px;
+      border-width: 1px;
       border-color: #fff;
       fill: #00BEE8;
       stroke-width: 2px;
@@ -1218,50 +1290,6 @@ h4 {
             
       }
       
-      .form_assign_dropdown{
-            background-color: #FFF;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04); 
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            gap: 4px;
-            margin: 0;
-            margin-top: -10px;
-            padding: 0px 0px 0px 0px;
-           
-            position: absolute;
-            width: 100%;
-            z-index: 1 !important;
-            overflow: hidden;
-      }
-      
-      .form_assign_dropdown li {
-            display: flex;
-            align-self: stretch;
-            flex-grow: 1;
-            justify-content: space-between;
-            gap:16px;
-            align-items: center;
-            padding: 0px 16px 0px 16px;
-            height: 64px;
-            transition: 125ms ease-out;
-      }
-      
-      
-      .form_assign_dropdown li:first-child {
-            margin-top: 16px;
-            
-      
-      }
-      
-      .form_assign_dropdown li:hover {
-            background-color:var(--form-field-focus-background);
-            transition: 125ms ease-in;
-            
-      }
       
       .selected {
             background-color:#2A3647;
@@ -1286,23 +1314,7 @@ h4 {
             font-weight: 500;
       }
       
-      .form_assign_badge {
-            height: 42px;
-            width: 42px;
-            border-radius: 200px;
-            border-style: solid;
-            border-width: 2px;
-            border-color: #fff;
-            fill: #00BEE8;
-            stroke-width: 2px;
-            stroke: #FFF;
-            background-color: #00BEE8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            margin-top: 8px;
-      }
+     
       
       .form_assign_badge_container {
             display: flex;
@@ -2146,50 +2158,7 @@ h4 {
             
       }
       
-      .form_assign_dropdown{
-            background-color: #FFF;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04); 
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            gap: 4px;
-            margin: 0;
-            margin-top: -10px;
-            padding: 0px 0px 0px 0px;
-           
-            position: absolute;
-            width: 100%;
-            z-index: 1 !important;
-            overflow: hidden;
-      }
-      
-      .form_assign_dropdown li {
-            display: flex;
-            align-self: stretch;
-            flex-grow: 1;
-            justify-content: space-between;
-            gap:16px;
-            align-items: center;
-            padding: 0px 16px 0px 16px;
-            height: 64px;
-            transition: 125ms ease-out;
-      }
-      
-      
-      .form_assign_dropdown li:first-child {
-            margin-top: 16px;
-            
-      
-      }
-      
-      .form_assign_dropdown li:hover {
-            background-color:var(--form-field-focus-background);
-            transition: 125ms ease-in;
-            
-      }
+
       
       .selected {
             background-color:#2A3647;
@@ -2214,23 +2183,7 @@ h4 {
             font-weight: 500;
       }
       
-      .form_assign_badge {
-            height: 42px;
-            width: 42px;
-            border-radius: 200px;
-            border-style: solid;
-            border-width: 2px;
-            border-color: #fff;
-            fill: #00BEE8;
-            stroke-width: 2px;
-            stroke: #FFF;
-            background-color: #00BEE8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            margin-top: 8px;
-      }
+      
       
       .form_assign_badge_container {
             display: flex;

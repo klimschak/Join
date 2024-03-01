@@ -26,7 +26,8 @@
                               <div class="form_textarea_label">
                                     <h4>Description<span class="required">*</span></h4>
                               </div>
-                              <textarea onclick="removeError('description')" class="form_textarea_field" id="textarea_description" name="addtask_description"
+                              <textarea onclick="removeError('description')" class="form_textarea_field"
+                                    id="textarea_description" name="addtask_description"
                                     placeholder="Enter a Description"></textarea>
                               <div class="form_textarea_notice">
                                     <p class="d-none" id="textarea-validation">Please add a description</p>
@@ -47,7 +48,15 @@
                                                 oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
                                                 src="./assets/img/arrow_drop_downaa.svg" class="pointer" alt="">
                                     </div>
-                                    <ul id="assign_list" class="form_assign_dropdown "></ul>
+                                    <div id="assign_list_container" class="d-none">
+                                          <div class="assign_ul_button">
+                                                <ul id="assign_list" class="form_assign_dropdown "></ul>
+                                                <div class="assign_add_contact"><button class="form-add-task-btn"><span>Add New Contact</span><img src="./assets/img/person_add.svg" alt=""></button></div>
+                                                
+                                          </div>
+                                    </div>
+
+
                               </div>
 
                               <div id="form_assign_badge" class="form_assign_badge_container"></div>
@@ -68,8 +77,8 @@
                                     <h4>Due date<span class="required">*</span></h4>
                               </div>
 
-                              <input onclick="removeError('date')" class="form_input_field date_field pointer" type="date" id="date-picker"
-                                    name="datum" required="required">
+                              <input onclick="removeError('date')" class="form_input_field date_field pointer"
+                                    type="date" id="date-picker" name="datum" required="required">
 
                               <div class="form_input_notice">
                                     <p class="d-none" id="date-validation">This field is required</p>
@@ -150,8 +159,8 @@
                   <p><span class="required">*</span>This field is required.
                   <div class="button-container-create-clear">
                         <button type="button" class="secondary-button add-task" onclick="deleteTask()">Clear</button>
-                        <button type="button" class="primary-button add-task" 
-                              onclick="validateForm()">Create Task</button>
+                        <button type="button" class="primary-button add-task" onclick="validateForm()">Create
+                              Task</button>
                   </div>
             </div>
       </form>
