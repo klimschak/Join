@@ -33,12 +33,13 @@
             </button>
 
             <div id="newContactForm" class="overlay">
-                <div class="overlay-content">
-                    <input type="text" id="name" placeholder="Name">
-                    <input type="email" id="email" placeholder="E-Mail">
-                    <input type="text" id="initials" placeholder="Initialen">
-                    <button onclick="saveNewContact()">Speichern</button>
-                    <button onclick="closeForm()">Abbrechen</button>
+                <div class="overlay-left-side">
+                    <div class="overlay-content">
+                        <input class="overlay-name" type="text" id="name" placeholder="Name">
+                        <input class="overlay-email" type="email" id="email" placeholder="E-Mail">
+                        <button class="overlay-btn-close" onclick="closeForm()">Cancel X</button>
+                        <button class="overlay-btn-save" onclick="saveNewContact()">Create contact</button>
+                    </div>
                 </div>
             </div>
 

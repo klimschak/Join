@@ -1,3 +1,12 @@
+/**
+ * Represents a collection of user contacts.
+ *
+ * @typedef {Object[]} UserContact[]
+ * @property {number} id - The unique identifier of the user contact.
+ * @property {string} name - The full name of the user contact.
+ * @property {string} mail - The email address of the user contact.
+ * @property {string} initials - The initials of the user contact.
+ */
 let userContacts = [{
     name: "Jürgen Meier", mail: "siham@mail.com", initials: "SE",
 },
@@ -16,6 +25,12 @@ document.addEventListener("DOMContentLoaded", function () {
     includeHTML();
 });
 
+/**
+ * Fetches HTML content from a specified file and includes it in the current document.
+ * If the fetch is successful, the fetched content will be inserted into elements with the attribute 'w3-include-html'.
+ *
+ * @return {Promise<void>} A Promise that resolves once all include elements have been processed.
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
     for (let i = 0; i < includeElements.length; i++) {
@@ -31,6 +46,13 @@ async function includeHTML() {
     }
 }
 
+/**
+ * Renders the contacts on the page.
+ *
+ * @async
+ * @function renderContacts
+ * @returns {void}
+ */
 async function renderContacts() {
     console.log("Rendering contacts...");
     const contactsContainer = document.getElementById("contacts");
@@ -68,6 +90,12 @@ async function renderContacts() {
     }
 }
 
+/**
+ * Opens a contact when clicked.
+ *
+ * @param {Event} event - The event triggered when the contact is clicked.
+ * @returns {void}
+ */
 function openContact(event) {
     const contactElement = event.currentTarget;
     const contactId = contactElement.getAttribute("data-contact-id");
@@ -75,6 +103,13 @@ function openContact(event) {
     changeClassToActive(contactElement);
 }
 
+/**
+ * Display the details of a selected contact.
+ *
+ * @param {number} contactId - The ID of the contact to display.
+ *
+ * @return {void} - This method does not return any value.
+ */
 function showSelectedContact(contactId) {
     const contact = userContacts.find((c) => c.id === parseInt(contactId));
     if (contact) {
@@ -125,6 +160,14 @@ function showSelectedContact(contactId) {
     }
 }
 
+/**
+ * Changes the CSS class of an element to "active" and removes the "active" class from all other elements.
+ *
+ * @param {HTMLElement} element - The element whose class is to be changed to "active".
+ *
+ * @returns {void}
+ * @throws {Error} If element is not defined.
+ */
 function changeClassToActive(element) {
     if (!element) {
         console.error("Element is not defined!");
@@ -137,14 +180,29 @@ function changeClassToActive(element) {
     element.classList.add("active");
 }
 
+/**
+ * Shows the new contact form.
+ *
+ * @return {void}
+ */
 function addNewContact() {
     document.getElementById("newContactForm").style.display = "flex"; // Ändern Sie "none" zu "flex", um das Formular anzuzeigen
 }
 
+/**
+ * Hides the specified form.
+ *
+ * @param {string} formId - The ID of the form element to be hidden.
+ */
 function closeForm() {
     document.getElementById("newContactForm").style.display = "none"; // Versteckt das Formular wieder
 }
 
+/**
+ * Saves a new contact to the user contacts list.
+ *
+ * @returns {void}
+ */
 function saveNewContact() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -173,6 +231,11 @@ function saveNewContact() {
 }
 
 
+/**
+ * Load contacts from local storage and render them on the contact list if available.
+ * @function loadContacts
+ * @returns {void}
+ */
 function loadContacts() {
     // Prüfen, ob Kontakte im Local Storage gespeichert sind
     const storedContacts = localStorage.getItem('userContacts');
