@@ -68,7 +68,14 @@
                                           placeholder="Select contacts" oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
                                           src="./assets/img/arrow_drop_downaa.svg" alt="">
                               </div>
-                              <ul id="assign_list" class="form_assign_dropdown "></ul>
+                              <div id="assign_list_container" class="d-none">
+                                    <div class="assign_ul_button">
+                                          <ul id="assign_list" class="form_assign_dropdown "></ul>
+                                          <div class="assign_add_contact">
+                                                <button type="button" class="form-add-task-btn"><span>Add New Contact</span><img src="./assets/img/person_add.svg" alt=""></button></div>
+                                          
+                                    </div>
+                              </div>
                         </div>
 
                         <div id="form_assign_badge" class="form_assign_badge_container"></div>

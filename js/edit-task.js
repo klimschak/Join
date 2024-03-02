@@ -51,6 +51,8 @@ function renderEditTaskContent(taskID){
       statusVar = task.status;
       addEventlistenerToSubtaskField();
 
+
+
 }
 
 function loadOverlayHeader(container, taskID){
@@ -109,7 +111,14 @@ function loadAssignedInEditTask(task, container, taskID){
                                     placeholder="Select contacts" oninput="openDropdownOnInput(), filterAccountsToAssign()"><img
                                     src="./assets/img/arrow_drop_downaa.svg" class="pointer" alt="">
                         </div>
-                        <ul id="assign_list" class="form_assign_dropdown "></ul>
+                        <div id="assign_list_container" class="d-none">
+                                          <div class="assign_ul_button">
+                                                <ul id="assign_list" class="form_assign_dropdown "></ul>
+                                                <div class="assign_add_contact">
+                                                      <button type="button" class="form-add-task-btn"><span>Add New Contact</span><img src="./assets/img/person_add.svg" alt=""></button></div>
+                                                
+                                          </div>
+                                    </div>
                   </div>
 
                   <div id="form_assign_badge" class="form_assign_badge_container"></div>
@@ -186,6 +195,7 @@ function loadPriorityInEditTask(task, container){
             urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta_white.svg" alt="">`;
             medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
             low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
+            currentPriority = 3
       }
       if (taskpriority == 'Medium') {
             urgent.classList.remove("urgent-checked");
@@ -194,6 +204,7 @@ function loadPriorityInEditTask(task, container){
             urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
             medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media_white.svg" alt="">`;
             low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja.svg" alt="">`;
+            currentPriority = 2
       }
       if (taskpriority == 'Low') {
             urgent.classList.remove("urgent-checked");
@@ -202,6 +213,7 @@ function loadPriorityInEditTask(task, container){
             urgent.innerHTML = /*html*/ `<p>Urgent</p><img src="./assets/img/Prio_alta.svg" alt="">`;
             medium.innerHTML = /*html*/ `<p>Medium</p><img src="./assets/img/Prio_media.svg" alt="">`;
             low.innerHTML = /*html*/ `<p>Low</p><img src="./assets/img/Prio_baja_white.svg" alt="">`;
+            currentPriority = 1
       }
 }
 
@@ -368,7 +380,7 @@ function validateEditForm(taskID) {
       }
 
 
-      if (currentPriority === 0 || !task.priority) {
+      if (currentPriority === 0) {
             
             document.getElementById('prio-validation').classList.remove("d-none")
             urgent.classList.add('form-error')

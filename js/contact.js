@@ -1,16 +1,16 @@
 let userContacts = [{
-    id: 1, name: "Siham El-Maimouni", mail: "siham@mail.com", initials: "SE",
+    name: "Jürgen Meier", mail: "siham@mail.com", initials: "SE",
 },
 
     {
-        id: 2, name: "Pedro Göntürk", mail: "predro@mail.com", initials: "PG",
+        name: "Florence Nouvelle", mail: "predro@mail.com", initials: "PG",
     },
 
     {
-        id: 3, name: "Thorsten Puccini", mail: "thorsten.mail.com", initials: "TP",
+        name: "Treugott Fettkother", mail: "thorsten.mail.com", initials: "TP",
     },
 
-    {id: 4, name: "John Doe", mail: "john.doe@example.com", initials: "JD"},];
+    {name: "John Doe", mail: "john.doe@example.com", initials: "JD"},];
 
 document.addEventListener("DOMContentLoaded", function () {
     includeHTML();

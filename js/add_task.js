@@ -6,6 +6,7 @@ async function initAddTask() {
       await loadTasksToAddTasksFromRemoteStorage();
       addToTasks();
       addEventlistenerToSubtaskField();
+      loadUsers()
       //createInitialsFromName()
       taskIndex = tasks.length - 1;
 }
@@ -46,6 +47,29 @@ function filterAccountsToAssign() {
 
 }
 
+
+function copyContactsToAccounts(){
+let maxId = 0;
+for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i].id > maxId) {
+        maxId = accounts[i].id;
+    }
+}
+
+// Übertrage die Einträge aus `userContacts` auf `accounts`
+for (let i = 0; i < userContacts.length; i++) {
+    maxId++; // Inkrementiere die ID für jeden neuen Kontakt
+    let newContact = {
+        id: maxId,
+        name: userContacts[i].name,
+        initials: userContacts[i].initials,
+        type: "Contact" // Setze den Typ auf "Contact" für neue Einträge
+    };
+    accounts.push(newContact);
+}
+
+console.log(accounts);
+}
 
 
 
