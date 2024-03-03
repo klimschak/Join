@@ -33,15 +33,23 @@
             </button>
 
             <div id="newContactForm" class="overlay">
-                <div class="overlay-left-side">
-                    <div class="overlay-content">
-                        <input class="overlay-name" type="text" id="name" placeholder="Name">
-                        <input class="overlay-email" type="email" id="email" placeholder="E-Mail">
-                        <button class="overlay-btn-close" onclick="closeForm()">Cancel X</button>
-                        <button class="overlay-btn-save" onclick="saveNewContact()">Create contact</button>
+                <div class="overlay-left">
+                    <div class="overlay-left-div">
+                        <div class="overlay-left-text">
+                            <span>Add contact</span>
+                            <span>Tasks are better with a team!</span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="overlay-input">
+                    <input class="overlay-name" type="text" id="name" placeholder="Name">
+                    <input class="overlay-email" type="email" id="email" placeholder="E-Mail">
+                    <button class="overlay-btn-close" onclick="closeForm()">Cancel X</button>
+                    <button class="overlay-btn-save" onclick="saveNewContact()">Create contact</button>
+                </div>
             </div>
+
 
             <div class="contacts" id="contacts"></div>
         </div>
