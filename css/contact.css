@@ -100,6 +100,10 @@ body {
     line-height: 120%; /* 19.2px */
 }
 
+.contacts {
+    
+}
+
 .contact-details {
     margin-top: 16px;
     padding: 16px;
@@ -283,13 +287,16 @@ body {
 
 .overlay-left {
     display: inline-flex;
-    height: 594px;
+    height: 460px;
+    width: 572px;
     padding: 66px 48px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     gap: 12px;
     flex-shrink: 0;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
     background: var(--Version-2-main-color, #2A3647);
 }
 
@@ -307,4 +314,131 @@ body {
     justify-content: center;
     align-items: flex-start;
     gap: 8px;
+}
+
+.overlay-left-text-first {
+    color: var(--white, #FFF);
+
+    /* Version 2/t1 */
+    font-family: Inter;
+    font-size: 61px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 73.2px */
+}
+
+.overlay-left-text-second {
+    color: var(--white, #FFF);
+
+    /* Version 2/t5 */
+    font-family: Inter;
+    font-size: 27px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 32.4px */
+}
+
+.overlay-img-div {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 70px;
+    border: 3px solid var(--white, #FFF);
+    background-color: grey;
+    /* nuevo */
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+}
+
+#newContactForm.overlay {
+    position: fixed; /* Positioned relative to the viewport */
+    left: 50%; /* Positioned in the center horizontally */
+    top: 50%; /* Positioned in the center vertically */
+    transform: translate(-50%, -50%); /* Offset for the top and left values */
+    /* Weitere Stile für das Overlay */
+}
+
+.overlay-input {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.overlay-name {
+    display: flex;
+    width: 422px;
+    padding: 13px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--Style, #D1D1D1);
+    background: #FFF;
+    color: var(--Style, #D1D1D1);
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 24px */
+}
+
+.overlay-email {
+    display: flex;
+    width: 422px;
+    padding: 13px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--Style, #D1D1D1);
+    background: #FFF;
+    color: var(--Style, #D1D1D1);
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 24px */
+}
+
+.overlay-buttons {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.overlay-btn-close {
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 10px;
+    border: 1px solid var(--Version-2-main-color, #2A3647);
+    color: var(--Version-2-main-color, #2A3647);
+    cursor: pointer;
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 24px */
+}
+
+.overlay-btn-save {
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: #2A3647;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 25.2px */
 }

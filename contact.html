@@ -35,18 +35,27 @@
             <div id="newContactForm" class="overlay">
                 <div class="overlay-left">
                     <div class="overlay-left-div">
+                        <img src="assets/img/Capa-2.svg">
                         <div class="overlay-left-text">
-                            <span>Add contact</span>
-                            <span>Tasks are better with a team!</span>
+                            <span class="overlay-left-text-first">Add contact</span>
+                            <span class="overlay-left-text-second">Tasks are better with a team!</span>
                         </div>
                     </div>
                 </div>
+                <div class="overlay-img-div">
+                    <img src="assets/img/person.svg">
+                </div>
+                <div class="overlay-right-side">
+                    <div class="overlay-input">
+                        <input class="overlay-name" type="text" id="name" placeholder="Name">
+                        <input class="overlay-email" type="email" id="email" placeholder="E-Mail">
+                        <div class="overlay-buttons">
+                            <button class="overlay-btn-close" onclick="closeForm()">Cancel X</button>
+                            <button class="overlay-btn-save" onclick="saveNewContact()">Create contact</button>
+                        </div>
+                    </div>
 
-                <div class="overlay-input">
-                    <input class="overlay-name" type="text" id="name" placeholder="Name">
-                    <input class="overlay-email" type="email" id="email" placeholder="E-Mail">
-                    <button class="overlay-btn-close" onclick="closeForm()">Cancel X</button>
-                    <button class="overlay-btn-save" onclick="saveNewContact()">Create contact</button>
+
                 </div>
             </div>
 
