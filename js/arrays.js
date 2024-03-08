@@ -1,21 +1,24 @@
 let accounts = [
-  {
+/*   {
     id: 1,
     name: "Siham El-Maimouni",
-    initials: "SE"
+    initials: "SE",
+    type: "Account"
   },
 
   {
     id: 2,
     name: "Pedro Göntürk",
-    initials: "PG"
+    initials: "PG",
+    type: "Account"
   },
 
   {
     id: 3,
     name: "Thorsten Puccini",
-    initials: "TP"
-  },
+    initials: "TP",
+    type: "Account"
+  }, */
 ];
 
 

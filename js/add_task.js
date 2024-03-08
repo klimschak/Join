@@ -1,12 +1,18 @@
 let statusVar;
 let taskIndex;
 
+async function deleteUserArray() {
+
+      users = [];
+      await setItem("users", JSON.stringify(users)); // Speichere die aktualisierte Benutzerliste.
+      await loadUsers();
+}
 
 async function initAddTask() {
       await loadTasksToAddTasksFromRemoteStorage();
       addToTasks();
       addEventlistenerToSubtaskField();
-      loadUsers()
+
       //createInitialsFromName()
       taskIndex = tasks.length - 1;
 }
@@ -48,28 +54,67 @@ function filterAccountsToAssign() {
 }
 
 
-function copyContactsToAccounts(){
-let maxId = 0;
-for (let i = 0; i < accounts.length; i++) {
-    if (accounts[i].id > maxId) {
-        maxId = accounts[i].id;
-    }
+async function copyUsersToAccounts() {
+      await loadUsers();
+      let maxId = accounts.length;
+      for (let i = 0; i < accounts.length; i++) {
+            if (accounts[i].id > maxId) {
+                  maxId = accounts[i].id;
+            }
+      }
+
+      for (let i = 0; i < users.length; i++) {
+            maxId++; // Inkrementiere die ID für jeden neuen Kontakt
+            let newContact = {
+                  id: maxId,
+                  name: users[i].username,
+                  //initials: userContacts[i].initials,
+                  type: "Account" // Setze den Typ auf "Contact" für neue Einträge
+            };
+            accounts.push(newContact);
+      }
+
+      console.log(accounts);
+      copyContactsToAccounts()
+
 }
 
-// Übertrage die Einträge aus `userContacts` auf `accounts`
-for (let i = 0; i < userContacts.length; i++) {
-    maxId++; // Inkrementiere die ID für jeden neuen Kontakt
-    let newContact = {
-        id: maxId,
-        name: userContacts[i].name,
-        initials: userContacts[i].initials,
-        type: "Contact" // Setze den Typ auf "Contact" für neue Einträge
-    };
-    accounts.push(newContact);
+function copyContactsToAccounts() {
+      let maxId = accounts.length;
+      for (let i = 0; i < accounts.length; i++) {
+            if (accounts[i].id > maxId) {
+                  maxId = accounts[i].id;
+            }
+      }
+
+      for (let i = 0; i < userContacts.length; i++) {
+            maxId++; // Inkrementiere die ID für jeden neuen Kontakt
+            let newContact = {
+                  id: maxId,
+                  name: userContacts[i].name,
+                  //initials: userContacts[i].initials,
+                  type: "Contact" // Setze den Typ auf "Contact" für neue Einträge
+            };
+            accounts.push(newContact);
+      }
+
+      accounts.sort((a, b) => a.name.localeCompare(b.name, 'de', { sensitivity: 'base' }));
+
+      accounts = accounts.map(account => {
+            // Namen in Vor- und Nachnamen (oder weitere Namensteile) zerlegen
+            const nameParts = account.name.split(' ');
+            // Anfangsbuchstaben extrahieren und zusammenfügen
+            const initials = nameParts.map(part => part[0]).join('');
+            // Das aktualisierte Objekt mit dem neuen 'initials'-Eintrag zurückgeben
+            return { ...account, initials };
+          });
+          console.log(accounts);
+
+
+
 }
 
-console.log(accounts);
-}
+
 
 
 
@@ -465,7 +510,7 @@ function validateForm() {
       }
       let date = document.getElementById('date-picker')
       if (date.value.trim() === "") {
-            
+
             document.getElementById('date-validation').classList.remove("d-none")
             date.classList.add('form-error')
       }
@@ -481,11 +526,10 @@ function validateForm() {
             document.getElementById('category_field').classList.add('form-error')
 
       }
-      if (title.value.trim() !== "" && description.value.trim() !== "" && date.value.trim() !== "" && currentPriority !== 0 && category.innerText !== "Select task category" ) 
-      {
+      if (title.value.trim() !== "" && description.value.trim() !== "" && date.value.trim() !== "" && currentPriority !== 0 && category.innerText !== "Select task category") {
             alert('Dies ist eine Warnmeldung!');
             createTask()
-}
+      }
 }
 
 

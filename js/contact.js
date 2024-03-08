@@ -16,7 +16,7 @@ let userContacts = [{
     },
 
     {
-        name: "Treugott Fettkother", mail: "thorsten.mail.com", initials: "TP",
+        name: "Treugott Dickkother", mail: "thorsten.mail.com", initials: "TP",
     },
 
     {name: "John Doe", mail: "john.doe@example.com", initials: "JD"},];
