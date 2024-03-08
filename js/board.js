@@ -2,7 +2,7 @@
 
 
 async function initRenderAllTasksOnKanban() {
-
+  await copyUsersToAccounts()
   await loadTaskFromRemoteStorageToBoard();
   resetBoard();
   for (let i = 0; i < tasks.length; i++) {
@@ -172,7 +172,7 @@ function getAssignBadgesInitials(i) {
   for (let j = 0; j < initials.length; j++) {
     const initial = initials[j];
     const color = colorId[j];
-    // Finde das Objekt mit der id 3
+    // Finde das Objekt mit der id 
     const accountWithColorId = accounts.find(account => account.id === color);
     // Überprüfe, ob das Objekt gefunden wurde, und extrahiere den color Wert
     const colorValue = accountWithColorId ? accountWithColorId.color : 'Nicht gefunden';
