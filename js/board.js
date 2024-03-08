@@ -1,8 +1,12 @@
+async function initBoard(){
+  await copyUsersToAccounts()
+  await initRenderAllTasksOnKanban()
+}
 
 
 
 async function initRenderAllTasksOnKanban() {
-  await copyUsersToAccounts()
+  
   await loadTaskFromRemoteStorageToBoard();
   resetBoard();
   for (let i = 0; i < tasks.length; i++) {
