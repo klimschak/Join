@@ -9,8 +9,8 @@ async function initRenderAllTasksOnKanban() {
     await renderTaskCardOnKanban(i);
   }
   await checkIfTaskColumnIsEmpty()
-  
-  
+
+
 }
 
 async function loadTaskFromRemoteStorageToBoard() {
@@ -64,8 +64,8 @@ async function checkIfTaskColumnIsEmpty() {
 async function renderTaskCardOnKanban(i) {
   let status = getTaskStatus(i);
   status = document.getElementById(`${status}`);
-  
-  
+
+
   let category = getKanbanTaskCategory(i);
   let categoryclass = getKanbanTaskCategoryCSSClass(i);
   let title = getKanbanTaskTitle(i);
@@ -84,10 +84,10 @@ async function renderTaskCardOnKanban(i) {
     subtaskscompleted,
     subtaskprogress,
     prio
-    
+
   );
   getAssignBadgesInitials(i);
-  
+
 }
 
 
@@ -166,12 +166,19 @@ function getPrioForKanban(i) {
 
 function getAssignBadgesInitials(i) {
   let initials = tasks[i].initials;
+  let colorId = tasks[i].id;
   let assignedTo = document.getElementById(`kanban-assign-to-${i}`);
   assignedTo.innerHTML = ``;
   for (let j = 0; j < initials.length; j++) {
     const initial = initials[j];
+    const color = colorId[j];
+    // Finde das Objekt mit der id 3
+    const accountWithColorId = accounts.find(account => account.id === color);
+    // Überprüfe, ob das Objekt gefunden wurde, und extrahiere den color Wert
+    const colorValue = accountWithColorId ? accountWithColorId.color : 'Nicht gefunden';
+
     assignedTo.innerHTML += /*html*/ `
-    <div class="kanban-assign-badge">${initial}</div> 
+    <div class="kanban-assign-badge" style="background-color: ${colorValue};">${initial}</div> 
     `;
   }
 }
@@ -186,7 +193,7 @@ async function htmlTemplateRenderTaskCardOnKanban(
   subtaskscompleted,
   subtaskprogress,
   prio
-  
+
 
 ) {
   return /*html*/ `
@@ -209,20 +216,20 @@ async function htmlTemplateRenderTaskCardOnKanban(
     </div>
     <div class="kanban-badge-prio-container">
       <div class="kanban-assign-prio-container">
-        <div class="kanban-assign-badge-container" id="kanban-assign-to-${i}"></div>
+        <div class="kanban-assign-badge-container" id="kanban-assign-to-${i}" ></div>
         <div class="kanban-prio"></div>
       </div>
       <div class="kanban-prio">${prio}</div>
     </div>
   </div>
   `;
-  
+
 }
 
-function tiltCard(i){
+function tiltCard(i) {
   let card = document.getElementById(`kanban-card-${i}`)
   card.classList.add('tilt');
-  
+
 }
 
 function resetCard(i) {
@@ -253,7 +260,7 @@ async function dropIntoColumn(ev, columnId) {
     targetColumn.appendChild(kanbanCard); // Füge es dem Zielcontainer hinzu
     moveTo(columnId);
   }
-  
+
 }
 
 async function moveTo(status) {
@@ -283,12 +290,12 @@ function filterTasks() {
 }
 
 
-function deleteNoTasksStatus(columnId){
+function deleteNoTasksStatus(columnId) {
   const targetColumn = document.getElementById(columnId);
   const elementsToRemove = targetColumn.querySelectorAll('.notasks');
-  elementsToRemove.forEach(function(element) {
+  elementsToRemove.forEach(function (element) {
     element.remove();
-});
+  });
 
 }
 
@@ -299,7 +306,7 @@ let autoScrollInterval;
 const scrollContainer = document.getElementById('to-do-column');
 
 
-document.getElementById('to-do-column').addEventListener('wheel', function(e) {
+document.getElementById('to-do-column').addEventListener('wheel', function (e) {
   // Basierend auf der Erkennung der horizontalen Bewegung entscheiden
   if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
     // Wenn eine signifikante horizontale Bewegung vorhanden ist, lassen Sie das normale Scrollen zu
@@ -310,7 +317,7 @@ document.getElementById('to-do-column').addEventListener('wheel', function(e) {
     e.preventDefault();
     this.scrollLeft += e.deltaY + e.deltaX; // Nutzt sowohl vertikale als auch horizontale Bewegungen für das Scrollen
   }
-}, {passive: false}); // `{passive: false}` ist notwendig, um `preventDefault` in modernen Browsern zu erlauben
+}, { passive: false }); // `{passive: false}` ist notwendig, um `preventDefault` in modernen Browsern zu erlauben
 
 
 document.querySelectorAll('.draggable').forEach(item => {
@@ -359,7 +366,7 @@ function stopAutoScroll() {
 }
 
 
-document.getElementById('to-do-column').addEventListener('wheel', function(e) {
+document.getElementById('to-do-column').addEventListener('wheel', function (e) {
   // Basierend auf der Erkennung der horizontalen Bewegung entscheiden
   if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
     // Wenn eine signifikante horizontale Bewegung vorhanden ist, lassen Sie das normale Scrollen zu
@@ -370,4 +377,4 @@ document.getElementById('to-do-column').addEventListener('wheel', function(e) {
     e.preventDefault();
     this.scrollLeft += e.deltaY + e.deltaX; // Nutzt sowohl vertikale als auch horizontale Bewegungen für das Scrollen
   }
-}, {passive: false}); // `{passive: false}` ist notwendig, um `preventDefault` in modernen Browsern zu erlauben
+}, { passive: false }); // `{passive: false}` ist notwendig, um `preventDefault` in modernen Browsern zu erlauben

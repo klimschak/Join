@@ -88,12 +88,11 @@ function copyContactsToAccounts() {
       }
 
       for (let i = 0; i < userContacts.length; i++) {
-            maxId++; // Inkrementiere die ID für jeden neuen Kontakt
+            maxId++; 
             let newContact = {
                   id: maxId,
                   name: userContacts[i].name,
-                  //initials: userContacts[i].initials,
-                  type: "Contact" // Setze den Typ auf "Contact" für neue Einträge
+                  type: "Contact" 
             };
             accounts.push(newContact);
       }
@@ -101,19 +100,31 @@ function copyContactsToAccounts() {
       accounts.sort((a, b) => a.name.localeCompare(b.name, 'de', { sensitivity: 'base' }));
 
       accounts = accounts.map(account => {
-            // Namen in Vor- und Nachnamen (oder weitere Namensteile) zerlegen
             const nameParts = account.name.split(' ');
-            // Anfangsbuchstaben extrahieren und zusammenfügen
             const initials = nameParts.map(part => part[0]).join('');
-            // Das aktualisierte Objekt mit dem neuen 'initials'-Eintrag zurückgeben
             return { ...account, initials };
           });
           console.log(accounts);
+          addColorsToAccounts();
 
 
 
 }
 
+const hex_colors = ['#990000', '#992d00', '#995b00', '#998900', '#7a9900', '#4c9900', '#1e9900', '#00990f', '#00993d', '#00996b', '#009899', '#006b99', '#003d99', '#000f99', '#1e0099', '#4c0099', '#7a0099', '#990089', '#99005b', '#99002d'];
+
+
+function addColorsToAccounts(){
+
+
+// Farben den Accounts zuweisen
+accounts = accounts.map((account, index) => {
+  const colorIndex = index % hex_colors.length; // Stellt sicher, dass bei Überschreitung der Farbliste von vorne begonnen wird
+  return { ...account, color: hex_colors[colorIndex] };
+});
+
+console.log(accounts);
+}
 
 
 
@@ -147,12 +158,12 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden */
       if (!assignedIds.includes(accountId)) {
             assign.innerHTML += /*html*/`
-            <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+            <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
       }
       /* Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden */
       if (assignedIds.includes(accountId)) {
             assign.innerHTML += /*html*/`
-            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
+            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
       }
 }
 
@@ -176,7 +187,7 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
             tasks[taskIndex]['initials'].push(accounts[i]['initials']);
             tasks[taskIndex]['id'].push(accountId);
             badge.innerHTML += /*html*/`
-                  <div id="assign_badge${i}" class="form_assign_badge">${accounts[i]['initials']}</div>
+                  <div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div>
                   `;
             filterAccountsToAssign()
       }

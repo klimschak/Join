@@ -121,7 +121,7 @@ function loadAssignedInEditTask(task, container, taskID){
                                     </div>
                   </div>
 
-                  <div id="form_assign_badge" class="form_assign_badge_container"></div>
+                  <div id="form_assign_badge" class="form_assign_badge_container" ></div>
 
                   <div class="form_assign_notice">
                         <p class="d-none">This field is required</p>
@@ -136,7 +136,7 @@ function loadAssignedBadgesInEditTask(task) {
       for (let i = 0; i < initials.length; i++) {
             let initial = initials[i];
             badgesDiv.innerHTML += /*html*/`
-            <div id="assign_badge${i}" class="form_assign_badge">${initial}</div>
+            <div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${initial}</div>
             `
 
             

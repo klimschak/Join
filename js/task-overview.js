@@ -74,7 +74,7 @@ async function loadOverviewAssigned(task) {
             const initials = task.initials[i];
             const name = task.assigned[i];
             div.innerHTML += /*html*/`
-            <div class="overview-assign-badge-container"><div class="overview-assign-badge">${initials}</div> <div>${name}</div></div>
+            <div class="overview-assign-badge-container"><div class="overview-assign-badge" style="background-color: ${accounts[i].color};">${initials}</div> <div>${name}</div></div>
             `
       }
 }
