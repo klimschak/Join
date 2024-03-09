@@ -512,12 +512,13 @@ h4 {
       justify-content: center;
       align-items: center;
       color: #fff;
+      
 }
 
 .form_assign_badge_container {
       display: flex;
-      gap: 15px;
-      margin-top:10px;
+      gap: 8px;
+      margin-top:8px;
 }
 
 
@@ -1316,10 +1317,10 @@ h4 {
       
       .form_assign_badge_container {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             height: auto;
             padding-top: 0px;
-            margin-top: 0px
+            margin-top: 8px
       }
       
       
@@ -2185,10 +2186,10 @@ h4 {
       
       .form_assign_badge_container {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             height: auto;
             padding-top: 0px;
-            margin-top: 0px
+            margin-top: 8px
       }
       
       

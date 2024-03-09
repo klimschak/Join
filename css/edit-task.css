@@ -26,6 +26,25 @@
 
 }
 
+.category-note{
+      color: #6a6a6a !important;
+}
+
+.category-edit-task{
+      background-color: #eeeeee;
+      color: #6a6a6a;
+      cursor: not-allowed;
+}
+
+.category-edit-task:hover{
+      border-color: #D1D1D1;
+}
+
+.category-label-edit{
+      color: #6a6a6a !important;
+}
+
+
 .edit-button-container {
       display: flex;
       justify-content: flex-end;

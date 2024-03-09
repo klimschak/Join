@@ -258,20 +258,20 @@ function loadCategoryInEditTask(task, container){
       container.innerHTML += /*html*/`
                             <div class="category_container">
                                   <div class="category_label">
-                                        <h4>Category<span class="required">*</span></h4>
+                                        <h4 class="category-label-edit">Category</h4>
                                   </div>
     
                                   <div class="category_field_dropdown_container pointer"  id="category_field_dropdown_container">
-                                        <div class="category_field" onclick="toggleCategoryDropdown()">
+                                        <div class="category_field category-edit-task">
                                               <p id="category_field_title" class="category_field_title">${task.category}</p>
-                                              <img src="./assets/img/arrow_drop_downaa.svg" alt="">
+                                              
                                         </div>
                                         <ul id="category_dropdown" class="category_dropdown">
     
                                         </ul>
                                   </div>
                                   <div class="form_input_notice">
-                                        <p id="category-validation" class="d-none">This field is required</p>
+                                        <p id="category-validation" class="category-note">Category can't be changed.</p>
                                   </div>
                             </div>
         `

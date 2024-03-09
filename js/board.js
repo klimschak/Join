@@ -176,11 +176,8 @@ function getAssignBadgesInitials(i) {
   for (let j = 0; j < initials.length; j++) {
     const initial = initials[j];
     const color = colorId[j];
-    // Finde das Objekt mit der id 
     const accountWithColorId = accounts.find(account => account.id === color);
-    // Überprüfe, ob das Objekt gefunden wurde, und extrahiere den color Wert
     const colorValue = accountWithColorId ? accountWithColorId.color : 'Nicht gefunden';
-
     assignedTo.innerHTML += /*html*/ `
     <div class="kanban-assign-badge" style="background-color: ${colorValue};">${initial}</div> 
     `;

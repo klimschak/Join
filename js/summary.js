@@ -6,6 +6,11 @@ let doneCount = 0;
 let awaitCount = 0;
 let earliestDate = null;
 
+async function loadTaskFromRemoteStorage() {
+    tasks = JSON.parse(await getItem('tasks'));
+  }
+  
+
 async function loadSummaryCount() {
       await loadTaskFromRemoteStorage()
       countUrgent();
