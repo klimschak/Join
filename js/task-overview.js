@@ -69,15 +69,22 @@ async function htmlTemplateLoadTaskOverview(task, taskID) {
 
 async function loadOverviewAssigned(task) {
       let div = document.getElementById('overview-assigned-label-badge-container');
+      let colorId = task.id;
       assigned = task.assigned;
       for (let i = 0; i < assigned.length; i++) {
             const initials = task.initials[i];
             const name = task.assigned[i];
+            const color = colorId[i];
+            const accountWithColorId = accounts.find(account => account.id === color);
+            const colorValue = accountWithColorId ? accountWithColorId.color : 'Nicht gefunden';
             div.innerHTML += /*html*/`
-            <div class="overview-assign-badge-container"><div class="overview-assign-badge" style="background-color: ${accounts[i].color};">${initials}</div> <div>${name}</div></div>
+            <div class="overview-assign-badge-container"><div class="overview-assign-badge" style="background-color: ${colorValue};">${initials}</div> <div>${name}</div></div>
             `
       }
 }
+
+
+
 
 
 async function loadSubtasksinOverview() {

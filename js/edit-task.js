@@ -132,11 +132,15 @@ function loadAssignedInEditTask(task, container, taskID){
 
 function loadAssignedBadgesInEditTask(task) {
       let initials = task.initials;
+      let colorId = task.id;
       let badgesDiv = document.getElementById('form_assign_badge');
       for (let i = 0; i < initials.length; i++) {
             let initial = initials[i];
+            const color = colorId[i];
+            const accountWithColorId = accounts.find(account => account.id === color);
+            const colorValue = accountWithColorId ? accountWithColorId.color : 'Nicht gefunden';
             badgesDiv.innerHTML += /*html*/`
-            <div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${initial}</div>
+            <div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${colorValue};">${initial}</div>
             `
 
             
