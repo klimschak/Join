@@ -10,11 +10,13 @@ async function deleteUserArray() {
 
 async function initAddTask() {
       await loadTasksToAddTasksFromRemoteStorage();
+      await loadLoginData();
       addToTasks();
       addEventlistenerToSubtaskField();
 
       //createInitialsFromName()
       taskIndex = tasks.length - 1;
+      putInitialInTopBar()
 }
 
 

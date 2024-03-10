@@ -1,6 +1,13 @@
 async function initBoard(){
   await copyUsersToAccounts()
   await initRenderAllTasksOnKanban()
+  await loadLoginData();
+  putInitialInTopBar()
+  
+  
+  
+
+
 }
 
 
@@ -13,6 +20,8 @@ async function initRenderAllTasksOnKanban() {
     await renderTaskCardOnKanban(i);
   }
   await checkIfTaskColumnIsEmpty()
+  
+  
 
 
 }

@@ -1,7 +1,8 @@
 let users = [];
 
-async function init() {
+async function initRegister() {
     console.log("Initializing...");
+    logout();
     loadUsers();
 }
 

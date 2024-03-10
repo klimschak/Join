@@ -13,6 +13,10 @@ async function loadTaskFromRemoteStorage() {
 
 async function loadSummaryCount() {
       await loadTaskFromRemoteStorage()
+      await loadLoginData()
+      await loadUsers()
+      putInitialInTopBar()
+      
       countUrgent();
       countTasks();
       countToDo();
@@ -27,6 +31,8 @@ async function loadSummaryCount() {
       console.log('Frühestes Datum:', earliestDate);
       placeDataInSummaryPage();
       setGreetMessage()
+      greetedUser()
+      
 }
 
 function countUrgent() {
@@ -102,7 +108,7 @@ function countUrgent() {
   }
 
   function setGreetMessage() {
-    let container = document.getElementById('summary-greet');
+    let container = document.getElementById('greet');
     let now = new Date();
     let hour = now.getHours();
     if (hour >= 6 && hour < 12) { // 6:00 - 11:59 Morning
@@ -116,3 +122,13 @@ function countUrgent() {
       }
     }
   
+    function greetedUser() {
+        let container = document.getElementById('summary-user');
+        if (loggedInUser != "Guest") {
+            container.innerHTML = loggedInUser;
+        }
+        if (loggedInUser == "Guest") {
+            container.innerHTML = "";
+        }
+        }
+      

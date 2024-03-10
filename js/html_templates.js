@@ -18,6 +18,8 @@ async function init() {
               element.innerHTML = 'Page not found';
           }
       }
+      await putInitialInTopBar()
+      
   }
 
   function getHtmlTemplate (template, elementID){
@@ -51,7 +53,13 @@ function showTopBarMenu() {
             element.classList.add("event-listener-added");
         }, 10); // Kurze Verzögerung, um sofortiges Ausblenden zu verhindern
     }
+
+    
+    
 }
 
+async function putInitialInTopBar(){
+    document.getElementById('top-bar-button').innerHTML = loggedInitials
+}
 
   
