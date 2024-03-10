@@ -132,3 +132,20 @@ function countUrgent() {
         }
         }
       
+
+        function onWidth1024OrLess() {
+            console.log("Die Bildschirmbreite ist 1024px oder weniger.");
+        }
+        
+        // Funktion zum Überprüfen der Breite und Ausführen der Zielfunktion
+        function checkWidthAndTrigger() {
+            if (window.innerWidth <= 1024) {
+                onWidth1024OrLess();
+            }
+        }
+        
+        // Füge den Event-Listener für das Resize-Event hinzu
+        window.addEventListener('resize', checkWidthAndTrigger);
+        
+        // Führe die Überprüfung auch beim ersten Laden der Seite aus
+        checkWidthAndTrigger();
