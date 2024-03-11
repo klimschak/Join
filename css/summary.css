@@ -8,13 +8,13 @@
       margin: 0;
       margin-left: 300px;
       flex-direction: column;
-      
-      
+
+
 }
 
 .tile-group {
       display: flex;
-      
+
       justify-content: center;
       flex-direction: column;
       align-items: flex-start;
@@ -22,7 +22,8 @@
       width: 560px;
 
 }
-.tile-greet-container{
+
+.tile-greet-container {
       display: flex;
       align-items: center;
       gap: 2vw;
@@ -44,7 +45,7 @@
 
 .summary-title-container hr {
       align-self: stretch;
-      border:none;
+      border: none;
       width: 3px;
       background-color: #29ABE2;
       border-radius: 200px;
@@ -64,52 +65,52 @@
       align-items: flex-start;
       gap: 32px;
       align-self: stretch;
-      
+
 }
 
-.summary-status{
-     
+.summary-status {
+
       flex: 1 0 0;
       text-decoration: none;
-     
-      
-      
+
+
+
 }
 
 
 
 
-.summary-div-group{
+.summary-div-group {
       display: flex;
-      
+
       flex-direction: column;
-      
+
       height: 64px;
       justify-content: center;
       align-items: center;
-      
+
 }
 
 
-.summary-status-count{
+.summary-status-count {
       text-decoration: none;
       font-size: 64px;
       color: #000000;
       font-weight: 600;
       transition: 150ms ease-in;
-      
+
 
 }
 
 .summary-tile:hover .summary-status-count,
-.summary-tile:hover .summary-status-title{
-      color:#fff;
+.summary-tile:hover .summary-status-title {
+      color: #fff;
       transition: 150ms ease-out;
 }
 
-.summary-status-title{
+.summary-status-title {
       display: flex;
-      color:#2A3647;
+      color: #2A3647;
       font-size: 20px;
       white-space: pre-wrap;
       text-align: center;
@@ -145,22 +146,22 @@
 
 }
 
-.summary-tile:hover{
+.summary-tile:hover {
       background-color: #2A3647;
       transition: 150ms ease-out;
       transform: scale(1.05);
-      
+
 }
 
 .summary-tile svg {
       fill: white;
       transition: 150ms ease-in;
-  }
+}
 
 .summary-tile:hover svg {
       fill: #2A3647;
       transition: 150ms ease-out;
-  }
+}
 
 
 
@@ -173,29 +174,29 @@
       align-items: center;
       border-radius: 3000px;
       transition: 150ms ease-in;
-  }
+}
 
 
 
-  .summary-tile:hover .summary-icon {
-      background-color: #fff; 
+.summary-tile:hover .summary-icon {
+      background-color: #fff;
       transition: 150ms ease-out;
-  }
-   
-  
+}
 
 
 
 
-  .urgent-date-container {
+
+
+.urgent-date-container {
       display: flex;
       border-radius: 32px;
       box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
       background-color: #fff;
       border-radius: 32px;
-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
-transition: 150ms ease-in;
-transform-origin: center;
+      box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+      transition: 150ms ease-in;
+      transform-origin: center;
 
 }
 
@@ -206,35 +207,35 @@ transform-origin: center;
 }
 
 .urgent-date-container .summary-icon {
-      background-color: #ff3d00; 
-      transition: 150ms ease-in; 
+      background-color: #ff3d00;
+      transition: 150ms ease-in;
 }
 
 .urgent-date-container:hover .summary-icon {
-      background-color: #fff; 
-      transition: 150ms ease-out; 
+      background-color: #fff;
+      transition: 150ms ease-out;
 }
 
 .urgent-date-container:hover .summary-status-count,
 .urgent-date-container:hover .summary-date,
 .urgent-date-container:hover .summary-status-title {
-      color: #fff; 
-      transition: 150ms ease-out; 
+      color: #fff;
+      transition: 150ms ease-out;
 }
 
 .urgent-date-container svg {
       fill: #FFF;
-      
-      transition: 150ms ease-in; 
+
+      transition: 150ms ease-in;
 }
 
 
 .urgent-date-container:hover svg {
       fill: #FF3D00;
-      transition: 150ms ease-out; 
+      transition: 150ms ease-out;
 }
 
-.urgent-date-group{
+.urgent-date-group {
       display: flex;
       border: none;
       border-radius: 0;
@@ -242,63 +243,112 @@ transform-origin: center;
       box-shadow: 0;
       box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
       background-color: #ffffff00;
-  }
+}
 
-  .urgent-date-group:hover {
+.urgent-date-group:hover {
       background-color: #ffffff00;
-  }
+}
 
-  .summary-date {
-      color:#2A3647;
+.summary-date {
+      color: #2A3647;
       font-size: 16px;
       font-weight: 700;
       margin-bottom: 10px;
       text-align: center;
-  }
+}
 
 
-  #summary-greet {
+#summary-greet {
       color: #2A3647;
       font-size: 42px;
       font-weight: 500px;
       line-height: 120%;
-  }
+}
+.summary-greet {
+      color: #2A3647;
+      font-size: 42px;
+      font-weight: 500px;
+      line-height: 120%;
+}
 
-  .summary-user {
+.summary-user {
       color: #29ABE2;
       font-size: 60px;
       font-weight: 500;
       margin-top: 4px;
-  }
+}
 
 
-  /* 2xl 	@media (min-width: 1536px) {  } */
+
+/* 2xl 	@media (min-width: 1536px) {  } */
 
 /* xl  */
-@media (max-width: 1280px) {
-
-}
+@media (max-width: 1280px) {}
 
 /* lg  */
 @media (max-width: 1024px) {
-      #summary-greet{
+      #summary-greet {
             display: none;
       }
+
       .body-summary {
-           margin-left:10vw;
-           margin-right: 10vw;
-            
+            margin-left: 10vw;
+            margin-right: 10vw;
+
       }
-      .tile-group{
+
+      .tile-group {
             width: 100%;
       }
 }
 
+
+.start-background {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: #F6F7F8;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 4s ease 800ms;
+      /* Animation der Opazität über 2 Sekunden mit 1 Sekunde Verzögerung */
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+ 
+            flex-direction: column;
+            
+
+
+      
+}
+
+.start-background.opak {
+      opacity: 0;
+}
+
+
+.greet-user-mobile {
+      opacity: 1;
+      transition: opacity 0s ease 800ms;
+      /* Animation der Opazität über 2 Sekunden mit 1 Sekunde Verzögerung */
+      color: var(--Ligth-blue, #29ABE2);
+      font-family: Inter;
+      font-size: 47px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 120%;
+      /* 56.4px */
+
+}
+
 /* md  */
 @media (max-width: 840px) {
-      
-      
-      .summary-title-container{
+
+
+      .summary-title-container {
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
@@ -316,9 +366,10 @@ transform-origin: center;
       h1 {
             font-size: 48px !important;
       }
+
       #hr-mobile {
             display: flex;
-            border:none;
+            border: none;
             justify-content: flex-start;
             align-items: flex-start;
             background-color: #29ABE2;
@@ -330,20 +381,21 @@ transform-origin: center;
             margin-top: 12px;
 
       }
-      
+
       .tile-group {
-            gap:24px;
+            gap: 24px;
       }
-      .summary-status-count{
+
+      .summary-status-count {
             font-size: 48px;
       }
 
-      .summary-icon{
+      .summary-icon {
             width: 48px;
             height: 48px;
       }
 
-      .summary-icon svg{
+      .summary-icon svg {
             width: 24px !important;
             height: 24px !important;
       }
@@ -358,7 +410,8 @@ transform-origin: center;
             padding-right: 24px;
             border-radius: 16px;
       }
-      .summary-column{
+
+      .summary-column {
             gap: 24px;
       }
 
@@ -369,7 +422,9 @@ transform-origin: center;
 
 /* sm  */
 @media (max-width: 480px) {
-      .summary-column, .tile-group{
+
+      .summary-column,
+      .tile-group {
             gap: 12px;
       }
 
@@ -379,20 +434,25 @@ transform-origin: center;
             padding-right: 16px;
             border-radius: 16px;
             gap: 8px;
-            
+
       }
 
-      .summary-icon{
+      .summary-icon {
             width: 36px;
             height: 36px;
       }
 
-      .summary-icon svg{
+      .summary-icon svg {
             width: 20px !important;
             height: 20px !important;
       }
-      .summary-status-count{
+
+      .summary-status-count {
             font-size: 32px;
       }
 
+}
+
+.d-none {
+      display: none;
 }
