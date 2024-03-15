@@ -100,8 +100,17 @@ async function renderTaskCardOnKanban(i) {
 
   );
   getAssignBadgesInitials(i);
+  checkIfSubtaskIsEmpty(i, subtasks);
 
 }
+
+function checkIfSubtaskIsEmpty(i, subtasks) {
+  if (subtasks === 0) {
+    let subtask = document.getElementById(`kanban-subtask-${i}`)
+    subtask.innerHTML = ''
+  }
+}
+
 
 
 
@@ -217,12 +226,12 @@ async function htmlTemplateRenderTaskCardOnKanban(
     <div class="kanban-description">
       ${description}
     </div>
-    <div class="kanban-subtask">
-      <div class="kanban-subtask-progress-container">
-        <div class="kanban-subtask-progress-bar" style="width: ${subtaskprogress}">
+    <div class="kanban-subtask" id="kanban-subtask-${i}">
+      <div class="kanban-subtask-progress-container" id="kanban-subtask-progress-container-${i}">
+        <div class="kanban-subtask-progress-bar" id="kanban-subtask-progress-bar-${i}" style="width: ${subtaskprogress}">
         </div>
       </div>
-      <div class="kanban-subtask-counter">${subtaskscompleted}/${subtasks} Subtasks</div>
+      <div class="kanban-subtask-counter" id="kanban-subtask-counter-${i}">${subtaskscompleted}/${subtasks} Subtasks</div>
     </div>
     <div class="kanban-badge-prio-container">
       <div class="kanban-assign-prio-container">
@@ -235,6 +244,8 @@ async function htmlTemplateRenderTaskCardOnKanban(
   `;
 
 }
+
+
 
 function tiltCard(i) {
   let card = document.getElementById(`kanban-card-${i}`)

@@ -326,6 +326,7 @@ async function saveEditTask(taskID) {
       saveEditTextareaInputToArray(taskID);
       saveEditTheDateToArray(taskID);
       await saveTaskToRemoteStorage();
+      await toggleNotification();
       closeEditOverlay(taskID);
 }  
 
@@ -404,7 +405,7 @@ function validateEditForm(taskID) {
 
       if (title.value.trim() !== "" && description.value.trim() !== "" && date.value.trim() !== "" && currentPriority !== 0 && category.innerText !== "Select task category" ) 
       {
-            alert('Dies ist eine Warnmeldung!');
+            
             saveEditTask(taskID)
 }
 
