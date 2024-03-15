@@ -20,7 +20,7 @@ async function initRenderAllTasksOnKanban() {
     await renderTaskCardOnKanban(i);
   }
   await checkIfTaskColumnIsEmpty()
-  
+  activateEventListeners()
   
 
 
@@ -388,3 +388,46 @@ document.getElementById('to-do-column').addEventListener('wheel', function (e) {
     this.scrollLeft += e.deltaY + e.deltaX; // Nutzt sowohl vertikale als auch horizontale Bewegungen für das Scrollen
   }
 }, { passive: false }); // `{passive: false}` ist notwendig, um `preventDefault` in modernen Browsern zu erlauben
+
+
+function clampText(selector, maxLines) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(el => {
+    const lineHeight = parseInt(window.getComputedStyle(el).lineHeight);
+    const maxHeight = lineHeight * maxLines;
+    
+    // Nur fortsetzen, wenn das Element höher ist als das Maximum
+    if (el.scrollHeight > maxHeight) {
+      let text = el.innerText;
+      while (el.scrollHeight > maxHeight) {
+        text = text.substr(0, text.length - 1);
+        el.innerText = text + '...';
+      }
+    }
+  });
+}
+
+
+
+function addEllipsisToElements(selector, maxLines) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(element => {
+    const lineHeight = parseInt(window.getComputedStyle(element).lineHeight, 10);
+    const maxHeight = lineHeight * maxLines;
+
+    let text = element.innerText;
+    while (element.scrollHeight > maxHeight && text.length > 0) {
+      text = text.slice(0, -1);
+      element.innerText = text + '...';
+    }
+  });
+}
+
+
+
+function activateEventListeners() {
+  // Direkt aufrufen ohne auf DOMContentLoaded zu warten
+  addEllipsisToElements('.kanban-description', 4); // Angenommen, 3 Zeilen ist das Maximum
+  // alert("active") zum Testen, ob die Funktion aufgerufen wird
+  
+}

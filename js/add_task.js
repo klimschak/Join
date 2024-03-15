@@ -547,7 +547,6 @@ function validateForm() {
 
       }
       if (title.value.trim() !== "" && description.value.trim() !== "" && date.value.trim() !== "" && currentPriority !== 0 && category.innerText !== "Select task category") {
-            alert('Dies ist eine Warnmeldung!');
             createTask()
       }
 }
@@ -580,14 +579,19 @@ function removeError(element) {
 
 
 async function createTask() {
+      
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
       setTaskStatus();
       await saveTaskToRemoteStorage();
+      await toggleNotification();
       if (window.location.pathname !== '/add-task-page.html') {
             closeAddTaskOverlay();
       }
+      
+      jumpToBoard();
+      
 }
 
 
@@ -715,3 +719,27 @@ async function deleteTasksFromRemoteStorage() {
       tasks = [];
       await saveTaskToRemoteStorage()
 }
+
+
+function toggleNotification() {
+      return new Promise((resolve) => {
+        const notificationElement = document.querySelector('.add-task-success');
+        // Meldung einblenden
+        notificationElement.classList.add('add-task-opak');
+    
+        // Warte die Zeit des Einblendens plus 2 Sekunden Sichtbarkeit
+        setTimeout(() => {
+          // Meldung ausblenden
+          notificationElement.classList.remove('add-task-opak');
+    
+          // Weitere 0.5 Sekunden warten, um das Ausblenden abzuschließen
+          setTimeout(resolve, 500);
+        }, 2500); // 2000 Millisekunden für das Sichtbarsein
+      });
+    }
+
+    function jumpToBoard() {
+      if (window.location.pathname === '/add-task-page.html') {
+        window.location.href = '/board.html';
+      }
+    }
