@@ -58,6 +58,7 @@ function filterAccountsToAssign() {
 
 async function copyUsersToAccounts() {
       await loadUsers();
+      await loadContactsOnAddTask()
       let maxId = accounts.length;
       for (let i = 0; i < accounts.length; i++) {
             if (accounts[i].id > maxId) {
@@ -90,11 +91,11 @@ function copyContactsToAccounts() {
       }
 
       for (let i = 0; i < userContacts.length; i++) {
-            maxId++; 
+            maxId++;
             let newContact = {
                   id: maxId,
                   name: userContacts[i].name,
-                  type: "Contact" 
+                  type: "Contact"
             };
             accounts.push(newContact);
       }
@@ -105,34 +106,34 @@ function copyContactsToAccounts() {
             const nameParts = account.name.split(' ');
             const initials = nameParts.map(part => part[0]).join('');
             return { ...account, initials };
-          });
-          console.log(accounts);
-          addColorsToAccounts();
+      });
+      console.log(accounts);
+      addColorsToAccounts();
 
 
 
 }
 
 const hex_colors = [
-      '#E6194B', '#3CB44B', '#E0C112', '#4363D8', '#F58231', 
-      '#911EB4', '#46F0F0', '#F032E6', '#BCF60C', '#FAA0BE', 
-      '#008080', '#E6BEFF', '#9A6324', '#F0E68C', '#800000', 
-      '#AAFFC3', '#808000', '#FFD8B1', '#000075', 
-      '#469990', '#fabebe', '#e6beff', '#9A6324', '#F0E68C', 
+      '#E6194B', '#3CB44B', '#E0C112', '#4363D8', '#F58231',
+      '#911EB4', '#46F0F0', '#F032E6', '#BCF60C', '#FAA0BE',
+      '#008080', '#E6BEFF', '#9A6324', '#F0E68C', '#800000',
+      '#AAFFC3', '#808000', '#FFD8B1', '#000075',
+      '#469990', '#fabebe', '#e6beff', '#9A6324', '#F0E68C',
       '#800000', '#aaffc3', '#808000', '#ffd8b1', '#000075',
       '#ff69b4', '#1e90ff'
-    ];
+];
 
-function addColorsToAccounts(){
+function addColorsToAccounts() {
 
 
-// Farben den Accounts zuweisen
-accounts = accounts.map((account, index) => {
-  const colorIndex = index % hex_colors.length; // Stellt sicher, dass bei Überschreitung der Farbliste von vorne begonnen wird
-  return { ...account, color: hex_colors[colorIndex] };
-});
+      // Farben den Accounts zuweisen
+      accounts = accounts.map((account, index) => {
+            const colorIndex = index % hex_colors.length; // Stellt sicher, dass bei Überschreitung der Farbliste von vorne begonnen wird
+            return { ...account, color: hex_colors[colorIndex] };
+      });
 
-console.log(accounts);
+      console.log(accounts);
 }
 
 
@@ -166,13 +167,26 @@ function displayErrorIfNoResultsInAccountsToAssign(assign) {
 function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task NICHT zugeordnet wurde, soll dies ausgeführt werden */
       if (!assignedIds.includes(accountId)) {
-            assign.innerHTML += /*html*/`
-            <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+            if (accounts[i].type !== 'Account') {
+                  assign.innerHTML += /*html*/`
+                  <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+
+            }
+            if (accounts[i].type === 'Account') {
+                  assign.innerHTML += /*html*/`
+                  <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']} (User)</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+
+            }
       }
       /* Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden */
       if (assignedIds.includes(accountId)) {
-            assign.innerHTML += /*html*/`
+            if (accounts[i].type !== 'Account') {assign.innerHTML += /*html*/`
             <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
+            }
+            if (accounts[i].type === 'Account') {assign.innerHTML += /*html*/`
+            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']} (User)</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
+            }
+
       }
 }
 
@@ -198,6 +212,8 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
             badge.innerHTML += /*html*/`
                   <div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div>
                   `;
+
+
             filterAccountsToAssign()
       }
 }
@@ -210,6 +226,7 @@ function ifAccountIsAssigned(i, index) {
             tasks[taskIndex]['id'].splice(index, 1);
             tasks[taskIndex]['initials'].splice(index, 1);
             assignbadge.remove();
+
             filterAccountsToAssign()
       }
 }
@@ -579,7 +596,7 @@ function removeError(element) {
 
 
 async function createTask() {
-      
+
       saveFormInputToArray();
       saveTextareaInputToArray();
       saveTheDateToArray();
@@ -589,9 +606,9 @@ async function createTask() {
       if (window.location.pathname !== '/add-task-page.html') {
             closeAddTaskOverlay();
       }
-      
+
       jumpToBoard();
-      
+
 }
 
 
@@ -723,23 +740,23 @@ async function deleteTasksFromRemoteStorage() {
 
 function toggleNotification() {
       return new Promise((resolve) => {
-        const notificationElement = document.querySelector('.add-task-success');
-        // Meldung einblenden
-        notificationElement.classList.add('add-task-opak');
-    
-        // Warte die Zeit des Einblendens plus 2 Sekunden Sichtbarkeit
-        setTimeout(() => {
-          // Meldung ausblenden
-          notificationElement.classList.remove('add-task-opak');
-    
-          // Weitere 0.5 Sekunden warten, um das Ausblenden abzuschließen
-          setTimeout(resolve, 500);
-        }, 2500); // 2000 Millisekunden für das Sichtbarsein
-      });
-    }
+            const notificationElement = document.querySelector('.add-task-success');
+            // Meldung einblenden
+            notificationElement.classList.add('add-task-opak');
 
-    function jumpToBoard() {
+            // Warte die Zeit des Einblendens plus 2 Sekunden Sichtbarkeit
+            setTimeout(() => {
+                  // Meldung ausblenden
+                  notificationElement.classList.remove('add-task-opak');
+
+                  // Weitere 0.5 Sekunden warten, um das Ausblenden abzuschließen
+                  setTimeout(resolve, 500);
+            }, 2500); // 2000 Millisekunden für das Sichtbarsein
+      });
+}
+
+function jumpToBoard() {
       if (window.location.pathname === '/add-task-page.html') {
-        window.location.href = '/board.html';
+            window.location.href = '/board.html';
       }
-    }
+}

@@ -7,19 +7,7 @@
  * @property {string} mail - The email address of the user contact.
  * @property {string} initials - The initials of the user contact.
  */
-let userContacts = [{
-    name: "Jürgen Meier", mail: "siham@mail.com", initials: "SE",
-},
-
-    {
-        name: "Florence Nouvelle", mail: "predro@mail.com", initials: "PG",
-    },
-
-    {
-        name: "Treugott Dickkother", mail: "thorsten.mail.com", initials: "TP",
-    },
-
-    {name: "John Doe", mail: "john.doe@example.com", initials: "JD"},];
+let userContacts = [];
 
 document.addEventListener("DOMContentLoaded", function () {
     includeHTML();
@@ -88,6 +76,12 @@ async function renderContacts() {
     } else {
         contactsContainer.innerHTML = "Keine Kontakte gefunden.";
     }
+
+    
+}
+
+async function onLoadContacts(){
+    await copyUsersToAccounts();
 }
 
 /**
@@ -245,3 +239,10 @@ function loadContacts() {
     }
 }
 
+
+async function loadContactsOnAddTask(){
+    const storedContacts = localStorage.getItem('userContacts');
+    if (storedContacts) {
+        userContacts = JSON.parse(storedContacts); // Konvertiert den String zurück in ein Array
+    }
+}
