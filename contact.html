@@ -19,6 +19,7 @@
 </head>
 <body onload="includeHTML(), renderContacts(), loadContacts()">
 <!--  <div w3-include-html="footer.html"></div> -->
+<div w3-include-html="top-bar.html"></div>
 <div class="contact">
 
     <div class="contact-list">
@@ -54,16 +55,13 @@
                             <button class="overlay-btn-save" onclick="saveNewContact()">Create contact</button>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
-
             <div class="contacts" id="contacts"></div>
         </div>
     </div>
     <div class="contact-details" id="contact-details"></div>
 </div>
+<div w3-include-html="footer.html"></div>
 </body>
 </html>
