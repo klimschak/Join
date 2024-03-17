@@ -58,61 +58,56 @@ function filterAccountsToAssign() {
 
 async function copyUsersToAccounts() {
       await loadUsers();
-      await loadContactsOnAddTask()
-      let maxId = accounts.length;
-      for (let i = 0; i < accounts.length; i++) {
-            if (accounts[i].id > maxId) {
-                  maxId = accounts[i].id;
-            }
-      }
-
-      for (let i = 0; i < users.length; i++) {
-            maxId++; // Inkrementiere die ID für jeden neuen Kontakt
-            let newContact = {
-                  id: maxId,
-                  name: users[i].username,
-                  //initials: userContacts[i].initials,
-                  type: "Account" // Setze den Typ auf "Contact" für neue Einträge
-            };
-            accounts.push(newContact);
-      }
-
+      await loadContactsOnAddTask();
+      let maxId = accounts.reduce((max, { id }) => Math.max(max, id), 0);
+  
+      users.forEach(user => {
+          if (!accounts.some(account => account.name === user.username)) {
+              accounts.push({
+                  id: ++maxId,
+                  name: user.username,
+                  email: user.email, // Hinzufügen der E-Mail-Adresse aus `users`
+                  type: "Account"
+              });
+          }
+      });
+  
       console.log(accounts);
-      copyContactsToAccounts()
-
-}
-
-function copyContactsToAccounts() {
-      let maxId = accounts.length;
-      for (let i = 0; i < accounts.length; i++) {
-            if (accounts[i].id > maxId) {
-                  maxId = accounts[i].id;
-            }
-      }
-
-      for (let i = 0; i < userContacts.length; i++) {
-            maxId++;
-            let newContact = {
-                  id: maxId,
-                  name: userContacts[i].name,
+      copyContactsToAccounts();
+  }
+  
+  async function copyContactsToAccounts() {
+      // Identifiziere alle 'Contact'-Einträge in 'accounts', die nicht in 'userContacts' existieren.
+      const existingContactNames = userContacts.map(contact => contact.name);
+      const accountsToRemove = accounts.filter(account => account.type === "Contact" && !existingContactNames.includes(account.name));
+  
+      // Entferne diese Einträge aus 'accounts'.
+      accounts = accounts.filter(account => !accountsToRemove.includes(account));
+  
+      let maxId = accounts.reduce((max, { id }) => Math.max(max, id), 0);
+  
+      userContacts.forEach(contact => {
+          if (!accounts.some(account => account.name === contact.name)) {
+              accounts.push({
+                  id: ++maxId,
+                  name: contact.name,
+                  email: contact.mail, // Hinzufügen der E-Mail-Adresse aus 'userContacts'
                   type: "Contact"
-            };
-            accounts.push(newContact);
-      }
-
+              });
+          }
+      });
+  
+      // Sortiere und aktualisiere die Initialen wie zuvor
       accounts.sort((a, b) => a.name.localeCompare(b.name, 'de', { sensitivity: 'base' }));
-
       accounts = accounts.map(account => {
-            const nameParts = account.name.split(' ');
-            const initials = nameParts.map(part => part[0]).join('');
-            return { ...account, initials };
+          const initials = account.name.split(' ').map(part => part[0]).join('');
+          return { ...account, initials };
       });
       console.log(accounts);
       addColorsToAccounts();
-
-
-
-}
+  }
+ 
+  
 
 const hex_colors = [
       '#E6194B', '#3CB44B', '#E0C112', '#4363D8', '#F58231',

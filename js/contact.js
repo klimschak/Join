@@ -77,7 +77,7 @@ async function renderContacts() {
         contactsContainer.innerHTML = "Keine Kontakte gefunden.";
     }
 
-    
+    await copyUsersToAccounts();
 }
 
 async function onLoadContacts(){
