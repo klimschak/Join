@@ -389,6 +389,24 @@ body {
     line-height: 120%; /* 24px */
 }
 
+.overlay-initials {
+    display: flex;
+    width: 422px;
+    padding: 13px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--Style, #D1D1D1);
+    background: #FFF;
+    color: var(--Style, #D1D1D1);
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 24px */
+}
+
 .overlay-email {
     display: flex;
     width: 422px;
