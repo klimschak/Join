@@ -164,12 +164,12 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       if (!assignedIds.includes(accountId)) {
             if (accounts[i].type !== 'Account') {
                   assign.innerHTML += /*html*/`
-                  <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+                  <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
 
             }
             if (accounts[i].type === 'Account') {
                   assign.innerHTML += /*html*/`
-                  <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']} (User)</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
+                  <li class="assign_li" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']} (User)</div><img id="assigncheck${i}" src="./assets/img/checkbutton_default.svg" alt=""></li>`;
 
             }
       }
@@ -184,6 +184,7 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
 
 }
       }
+}
 
 function checkIfAssigned(i) {
       const accountId = accounts[i]['id'];
@@ -193,6 +194,8 @@ function checkIfAssigned(i) {
       let badge = document.getElementById('form_assign_badge')
       let assignbadge = document.getElementById(`assign_badge${i}`);
       ifAccountIsNotAssigned(i, accountId, assignedIds, badge, index, assignbadge);
+      loadAssignedBadgesInEditTask(task);
+      
       
 }
 
@@ -222,9 +225,11 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge, index, assignb
             }
 
       }
+      
       filterAccountsToAssign()
+      
 }
-}
+
 
 
 
@@ -240,7 +245,9 @@ function toggleDropdown() {
             dropdown.classList.remove('d-none');
             isDropdownOpen = true;
             document.addEventListener('click', closeDropdownOnClickOutside);
+            
       }
+      
 }
 
 
@@ -253,11 +260,15 @@ function closeDropdownOnClickOutside(event) {
             isDropdownOpen = false;
             // Entfernen des "Klick außerhalb" Ereignisses
             document.removeEventListener('click', closeDropdownOnClickOutside);
+            
       }
+      
+
 }
 
 
 function stopClickPropagation(event) {
+      
       event.stopPropagation();
 }
 

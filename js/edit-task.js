@@ -134,6 +134,7 @@ function loadAssignedBadgesInEditTask(task) {
       let initials = task.initials;
       let colorId = task.id;
       let badgesDiv = document.getElementById('form_assign_badge');
+      badgesDiv.innerHTML = "";
       for (let i = 0; i < initials.length; i++) {
             let initial = initials[i];
             const color = colorId[i];
