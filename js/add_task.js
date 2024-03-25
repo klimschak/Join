@@ -73,7 +73,7 @@ async function copyUsersToAccounts() {
       });
   
       console.log(accounts);
-      copyContactsToAccounts();
+      await copyContactsToAccounts();
   }
   
   async function copyContactsToAccounts() {
@@ -176,10 +176,10 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden */
       if (assignedIds.includes(accountId)) {
             if (accounts[i].type !== 'Account') {assign.innerHTML += /*html*/`
-            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
+            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
             }
             if (accounts[i].type === 'Account') {assign.innerHTML += /*html*/`
-            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']} (User)</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
+            <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']} (User)</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
             }
 
       }
@@ -193,12 +193,12 @@ function checkIfAssigned(i) {
       const index = tasks[taskIndex]['assigned'].indexOf(accountName);
       let badge = document.getElementById('form_assign_badge')
       let assignbadge = document.getElementById(`assign_badge${i}`);
-      ifAccountIsNotAssigned(i, accountId, assignedIds, badge);
-      ifAccountIsAssigned(i, index);
+      ifAccountIsNotAssigned(i, accountId, assignedIds, badge, index, assignbadge);
+      
 }
 
 
-function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
+function ifAccountIsNotAssigned(i, accountId, assignedIds, badge, index, assignbadge) {
       let assign = document.getElementById(`assign_list`);
       if (!assignedIds.includes(accountId)) {
             tasks[taskIndex]['assigned'].push(accounts[i]['name']);
@@ -209,22 +209,25 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge) {
                   `;
 
 
-            filterAccountsToAssign()
+            
       }
+      else {
+            
+            if (index !== -1) {
+                  tasks[taskIndex]['assigned'].splice(index, 1);
+                  tasks[taskIndex]['id'].splice(index, 1);
+                  tasks[taskIndex]['initials'].splice(index, 1);
+                  assignbadge.remove();
+      
+                  
+            }
+
+      }
+      filterAccountsToAssign()
 }
 
 
-function ifAccountIsAssigned(i, index) {
-      let assignbadge = document.getElementById(`assign_badge${i}`);
-      if (index !== -1) {
-            tasks[taskIndex]['assigned'].splice(index, 1);
-            tasks[taskIndex]['id'].splice(index, 1);
-            tasks[taskIndex]['initials'].splice(index, 1);
-            assignbadge.remove();
 
-            filterAccountsToAssign()
-      }
-}
 
 
 let isDropdownOpen = false;
@@ -755,3 +758,26 @@ function jumpToBoard() {
             window.location.href = '/board.html';
       }
 }
+
+
+function aktualisiereTasks(tasks, accounts) {
+      // Erstelle ein Set aus allen Namen in `accounts`, um die Überprüfung effizient durchzuführen.
+      const gueltigeNamen = new Set(accounts.map(account => account.name));
+  
+      tasks.forEach(task => {
+          // Filtere die `assigned` Namen und behalte die Indizes der gültigen Namen.
+          const gueltigeIndizes = [];
+          task.assigned = task.assigned.filter((name, index) => {
+              const isValid = gueltigeNamen.has(name);
+              if (isValid) {
+                  gueltigeIndizes.push(index);
+              }
+              return isValid;
+          });
+  
+          // Filtere `initials` basierend auf den gültigen Indizes.
+          task.initials = task.initials.filter((_, index) => gueltigeIndizes.includes(index));
+      });
+  
+      return tasks;
+  }

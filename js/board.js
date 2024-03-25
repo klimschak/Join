@@ -1,8 +1,12 @@
+
 async function initBoard(){
   await copyUsersToAccounts()
+  tasks = await aktualisiereTasks(tasks, accounts);
   await initRenderAllTasksOnKanban()
   await loadLoginData();
   putInitialInTopBar()
+ 
+
   
   
   
@@ -436,7 +440,7 @@ function addEllipsisToElements(selector, maxLines) {
 
 
 
-function activateEventListeners() {
+async function activateEventListeners() {
   // Direkt aufrufen ohne auf DOMContentLoaded zu warten
   addEllipsisToElements('.kanban-description', 4); // Angenommen, 3 Zeilen ist das Maximum
   // alert("active") zum Testen, ob die Funktion aufgerufen wird
