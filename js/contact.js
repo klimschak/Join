@@ -49,12 +49,10 @@ async function renderContacts() {
         return;
     }
     contactsContainer.innerHTML = "";
-
-    // Überprüfen Sie, ob userContacts vorhanden sind
-    if (userContacts && userContacts.length > 0) {
-        for (let i = 0; i < userContacts.length; i++) {
-            const contact = userContacts[i];
-
+    // Überprüfen Sie, ob accounts vorhanden sind
+    if (accounts && accounts.length > 0) {
+        for (let i = 0; i < accounts.length; i++) {
+            const contact = accounts[i];
             // Beispielhaftes HTML für die Darstellung der Kontakte
             contactsContainer.innerHTML += `
           <div class="userMainCase" data-contact-id="${contact.id}" onclick="openContact(event)">
@@ -66,7 +64,6 @@ async function renderContacts() {
           </div>
         `;
         }
-
         const contactDetailsContainer = document.getElementById("contact-details");
         if (!contactDetailsContainer) {
             console.error("Contact details container not found!");
@@ -76,11 +73,10 @@ async function renderContacts() {
     } else {
         contactsContainer.innerHTML = "Keine Kontakte gefunden.";
     }
-
     await copyUsersToAccounts();
 }
 
-async function onLoadContacts(){
+async function onLoadContacts() {
     await copyUsersToAccounts();
 }
 
@@ -240,7 +236,7 @@ function loadContacts() {
 }
 
 
-async function loadContactsOnAddTask(){
+async function loadContactsOnAddTask() {
     const storedContacts = localStorage.getItem('userContacts');
     if (storedContacts) {
         userContacts = JSON.parse(storedContacts); // Konvertiert den String zurück in ein Array
