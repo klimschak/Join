@@ -33,6 +33,22 @@ async function init() {
 function showTopBarMenu() {
     let element = document.getElementById("top-menu");
     element.style.right = "48px";
+    if (loggedInUser === 'Guest') {
+        element.innerHTML = /*html*/`
+        <a class="top-menu-link pointer" href="">Legal Notice</a>
+        <a class="top-menu-link pointer" href="">Privacy Policy</a>
+        <a class="top-menu-link pointer" href="./index.html">Log in</a>
+        `
+        
+    }
+    if (loggedInUser !== 'Guest') {
+        element.innerHTML = /*html*/`
+        <a class="top-menu-link pointer" href="">Legal Notice</a>
+        <a class="top-menu-link pointer" href="">Privacy Policy</a>
+        <a class="top-menu-link pointer" href="./index.html" onclick="logUserOut()">Log out</a>
+        `
+        
+    }
 
     // Füge eine Funktion hinzu, die als Event Listener verwendet wird
     function handleClickOutside(event) {
@@ -53,9 +69,12 @@ function showTopBarMenu() {
             element.classList.add("event-listener-added");
         }, 10); // Kurze Verzögerung, um sofortiges Ausblenden zu verhindern
     }
+}
 
-    
-    
+
+
+function logUserOut(){
+        loggedInUser = 'Guest'
 }
 
 async function putInitialInTopBar(){

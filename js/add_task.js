@@ -176,15 +176,14 @@ function setStateOfAccountInAssignDropdown(assign, i, accountId, assignedIds) {
       /* Falls dem Account i der Task zugeordnet wurde, soll dies ausgeführt werden */
       if (assignedIds.includes(accountId)) {
             if (accounts[i].type !== 'Account') {assign.innerHTML += /*html*/`
+
             <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']}</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
             }
             if (accounts[i].type === 'Account') {assign.innerHTML += /*html*/`
             <li class="assign_li selected" id="assignaccount${i}" onclick="checkIfAssigned(${i}), stopClickPropagation(event)"><div id="assign_badge${i}" class="form_assign_badge" style="background-color: ${accounts[i].color};">${accounts[i]['initials']}</div><div class="form_assign_name">${accounts[i]['name']} (User)</div><img id="assigncheck${i}" src="./assets/img/checkbutton_checked.svg" alt=""></li>`;
-            }
 
-      }
 }
-
+      }
 
 function checkIfAssigned(i) {
       const accountId = accounts[i]['id'];
@@ -225,7 +224,7 @@ function ifAccountIsNotAssigned(i, accountId, assignedIds, badge, index, assignb
       }
       filterAccountsToAssign()
 }
-
+}
 
 
 
