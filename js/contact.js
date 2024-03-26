@@ -42,6 +42,7 @@ async function includeHTML() {
  * @returns {void}
  */
 async function renderContacts() {
+    await copyUsersToAccounts();
     console.log("Rendering contacts...");
     const contactsContainer = document.getElementById("contacts");
     if (!contactsContainer) {
@@ -73,7 +74,7 @@ async function renderContacts() {
     } else {
         contactsContainer.innerHTML = "Keine Kontakte gefunden.";
     }
-    await copyUsersToAccounts();
+    
 }
 
 async function onLoadContacts() {
