@@ -77,6 +77,7 @@ async function copyUsersToAccounts() {
   }
   
   async function copyContactsToAccounts() {
+      
       // Identifiziere alle 'Contact'-Einträge in 'accounts', die nicht in 'userContacts' existieren.
       const existingContactNames = userContacts.map(contact => contact.name);
       const accountsToRemove = accounts.filter(account => account.type === "Contact" && !existingContactNames.includes(account.name));
@@ -96,6 +97,7 @@ async function copyUsersToAccounts() {
               });
           }
       });
+      addColorsToAccounts();
   
       // Sortiere und aktualisiere die Initialen wie zuvor
       accounts.sort((a, b) => a.name.localeCompare(b.name, 'de', { sensitivity: 'base' }));
@@ -104,7 +106,7 @@ async function copyUsersToAccounts() {
           return { ...account, initials };
       });
       console.log(accounts);
-      addColorsToAccounts();
+      
   }
  
   

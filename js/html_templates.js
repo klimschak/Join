@@ -18,7 +18,7 @@ async function init() {
               element.innerHTML = 'Page not found';
           }
       }
-      await putInitialInTopBar()
+      
       
   }
 
@@ -30,7 +30,7 @@ async function init() {
 }
 
 
-function showTopBarMenu() {
+async function showTopBarMenu() {
     let element = document.getElementById("top-menu");
     element.style.right = "48px";
     if (loggedInUser === 'Guest') {
@@ -49,6 +49,8 @@ function showTopBarMenu() {
         `
         
     }
+
+    await putInitialInTopBar()
 
     // Füge eine Funktion hinzu, die als Event Listener verwendet wird
     function handleClickOutside(event) {
@@ -69,6 +71,7 @@ function showTopBarMenu() {
             element.classList.add("event-listener-added");
         }, 10); // Kurze Verzögerung, um sofortiges Ausblenden zu verhindern
     }
+    
 }
 
 

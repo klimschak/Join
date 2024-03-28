@@ -8,6 +8,7 @@
       margin: 0;
       margin-left: 300px;
       flex-direction: column;
+      position: fixed;
 
 
 }

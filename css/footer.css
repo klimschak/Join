@@ -182,7 +182,7 @@
 }
 
 .top-menu {
-  position: absolute;
+  position: fixed;
   top: 80px;
   
   display: flex;
